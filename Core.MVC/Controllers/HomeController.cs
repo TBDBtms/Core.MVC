@@ -12,6 +12,7 @@ namespace Core.MVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        public int MyProperty { get; set; }
 
         public HomeController(ILogger<HomeController> logger)
         {
