@@ -37,7 +37,7 @@ namespace Core.MVC
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-
+             
             app.UseRouting();
 
             app.UseAuthorization();
@@ -46,7 +46,7 @@ namespace Core.MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=MBY}/{action=Index}/{id?}");
             });
         }
     }
