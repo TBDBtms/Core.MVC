@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewData["Title"] = "Show";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<body>
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">附加费用设置</li>
+            <li>诊疗费设置</li>
+            <li>挂号费设置</li>
+            <li>支付方式</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div>
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">处方类别</label>
+                            <div style="width:300px">
+                                <div class="layui-input-block">
+                                    <select name="interest" lay-filter="aihao" id="LeiBie">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <input type="text" placeholder="附加费名称" id="cc" value="" />
+
+                </div>
+                <div>
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="150">
+                            <col width="200">
+                            <col>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>附加费用名称</th>
+                                <th>处方类型</th>
+                                <th>金额</th>
+                                <th>成本价</th>
+                                <th>创建时间</th>
+                                <th>创建人员</th>
+                                <th>允许会员折扣</th>
+                                <th>费用状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_id">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="layui-tab-item">内容2</div>
+            <div class="layui-tab-item">内容3</div>
+            <div class="layui-tab-item">内容4</div>
+            <div class="layui-tab-item">内容5</div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    $(function () {
+        //Demo
+        layui.use('form', function () {
+            form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+        ShowPrescriptionInfos();
+    });
+    function CX(name) {
+
+    }
+
+    function ShowPrescriptionInfos() {
+        $.ajax({
+            url: "http://localhost:4965/api/DLH_Fee/GetPrescriptionInfos",
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                console.log(d);
+                $(d).each(function () {
+                    var html = "<option value='" + this.recipeId + "'>" + this.recipeName + "</option>";
+                    console.log(html);
+                    $("#LeiBie").append(html);
+                    form.render('select');
+                });
+            },
+            complete: function () {
+                Showfujiafeiyong();
+            }
+        })
+    }
+
+    function Showfujiafeiyong() {
+        $.ajax({
+            url: "http://localhost:4965/api/DLH_Fee/GetCostsInfos",
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $("#tbody_id").empty();
+                $(d).each(function () {
+                    var str = "<tr>" +
+                        "<td>" + this.sequenceId + "</td>" +
+                        "<td>" + this.additional + "</td>" +
+                        "<td>" + this.recipeKey + "</td>" +
+                        "<td>" + this.moneyInfn + "</td>" +
+                        "<td>" + this.cost + "</td>" +
+                        "<td>" + this.createTime + "</td>" +
+                        "<td>" + this.createpersonKey + "</td>" +
+                        "<td>" + this.vip + "</td>" +
+                        "<td>" + this.cState + "</td>" +
+                        "<td></td></tr>";
+                    $("#tbody_id").append(str);
+                })
+            }
+        })
+    }
+</script>
+
+
