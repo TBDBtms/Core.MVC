@@ -3,28 +3,26 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-
+    <link href="~/layui-v2.4.5/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
 </head>
 <body>
-    <div>
         <ul class="layui-nav layui-bg-cyan" lay-filter="">
             <li class="layui-nav-item"><a href="">我</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">个人中心</a>
                 <dl class="layui-nav-child">
-                    <!-- 二级菜单 -->
+                     二级菜单 
                     <dd><a href="">修改密码</a></dd>
                     <dd><a href="">找回密码</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item"><a href="">社区</a></li>
         </ul>
-    </div>
-    <div>
-        <div style="float:left;background-color:black;height:910px;width:210px;overflow:scroll;" >
-            <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test">
+    <div style="float:left;margin-top:0px">
+        <div @*style="float:left;background-color:black;height:910px;width:210px;overflow:scroll;"*@ style="float:left">
+            <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test" style="overflow: scroll;height:910px;width:210px;">
                 <li class="layui-nav-item"><a href="">门诊管理</a></li>
                 <li class="layui-nav-item"><a onclick="location.href='/ZHQ_First/Index'">首页</a></li>
                 <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
@@ -217,7 +215,7 @@
                 </li>
             </ul>
         </div>
-        <div style="float:left;width:1693px;height:910px">
+        <div style="float:left;">
             @RenderBody()
         </div>
     </div>
