@@ -46,7 +46,7 @@ namespace Core.MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=MBY}/{action=Index}/{id?}");
+                    pattern: "{controller=ZHQ_First}/{action=Index}/{id?}");
             });
         }
     }
