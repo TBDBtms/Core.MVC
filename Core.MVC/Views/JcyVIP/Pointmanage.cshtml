@@ -1,50 +1,50 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Pointmanage";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
 
-<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
-<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<h1></h1>
 <script src="~/js/site.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
     $(function () {
-        Selx();
+        Sels();
     })
-    function Selx() {
+
+    function Sels() {
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetVIPgrades",
             dataType: "json",
             type: "get",
             async: false,
             success: function (data) {
-                $("#dj").empty();
-                $("#dj").append("<option value=0>==请选择==</option>");
+                $("#dj2").empty();
+                $("#dj2").append("<option value=0>==请选择==</option>");
                 $(data).each(function () {
-                    $("#dj").append("<option value=" + this.vGradeId + ">" + this.vGradeName + "</option>");
+                    $("#dj2").append("<option value=" + this.vGradeId + ">" + this.vGradeName + "</option>");
                 })
             },
             complete: function () {
-                ShowInfo();
+                ShowInfothree();
             }
         })
     }
-    function ShowInfo() {
-        var stime = $("#stime").val();
-        var etime = $("#stime").val();
-        var id = $("#dj").val();
+
+
+    function ShowInfothree() {
+        var id = $("#dj2").val();
         var name = $("#name").val();
         var phone = $("#name").val();
         var Card = $("#IdCard").val();
         $.ajax({
-            url: "http://localhost:4965/api/JcyVIP/GetVIPInfos",
+            url: "http://localhost:4965/api/JcyVIP/GetJF",
             dataType: "json",
             type: "get",
-            data: { stime: stime, etime: etime, id: id, name: name, phone, phone, Card: Card },
+            data: { id: id, name: name, phone, phone, Card: Card},
             async: false,
             success: function (data) {
-                $("#list").empty();
+                $("#list2").empty();
                 $(data).each(function () {
                     var htmls = "<tr>" +
                         "<td>" + this.id + "</td>" +
@@ -53,37 +53,25 @@
                         "<td style='color:#ffd800;font-weight:bold'>" + this.vGradeName + "</td>" +
                         "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.vIPName + '</a>' +"</td>" +
                         "<td>" + this.phone + "</td>" +
-                        "<td>" + this.amassPrice + "</td>" +
-                        "<td>" + this.svalueMoney + "</td>" +
-                        "<td>" + this.amassSvalue + "</td>" +
                         "<td>" + this.integral + "</td>" +
-                        "<td>" + this.startTime + "</td>" +
-                        "<td>" + this.endTime + "</td>" +
-                        "<td>" + this.vIPState + "</td>" +
                         "<td>操作</td></tr>";
-                    $("#list").append(htmls);
+                    $("#list2").append(htmls);
                 })
             }
         })
     }
-    function one() {
-        ShowInfo();
-    }
-</script>
-<script>
 </script>
 <div>
     <div style="margin-top:1px;">
-        会员等级: <select name="interest" lay-filter="会员等级" id="dj" style="width:100px;height:38px;">
-            <option></option>
+        会员等级:
+        <select name="interest" lay-filter="会员等级" id="dj2" style="width:100px;height:38px;">
         </select>
-        创建时间: <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" style="width:150px;height:33px;">
         <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
-        <button type="button" style="margin-left:auto" onclick="one()" class="layui-btn">
+        <button type="button" style="margin-left:auto" onclick="ShowInfothree()" class="layui-btn">
             <i class="layui-icon">&#xe615;</i>
         </button>
-        <input type="checkbox" name="name" value="" /> 会员到期预警
     </div>
+   
     <table class="layui-table">
         <thead style="background-color:darkslateblue;">
             <tr>
@@ -93,19 +81,11 @@
                 <td>会员等级</td>
                 <td>会员姓名</td>
                 <td>手机号码</td>
-                <td>积累消费(元)</td>
-                <td>储值余额(元)</td>
-                <td>累计储值</td>
                 <td>积分</td>
-                <td>开卡时间</td>
-                <td>到期时间</td>
-                <td>会员状态</td>
                 <td>操作</td>
             </tr>
         </thead>
-        <tbody id="list">
+        <tbody id="list2">
         </tbody>
     </table>
 </div>
-
-

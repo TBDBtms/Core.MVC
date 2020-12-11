@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "MemberSet";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h1></h1>
+<script src="~/js/site.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(function () {
+        ShowInfofour();
+    })
+    function ShowInfofour() {
+        $.ajax({
+            url: "http://localhost:4965/api/JcyVIP/GetMemberSet",
+            dataType: "json",
+            type: "get",
+            data: {},
+            async: false,
+            success: function (data) {
+                $("#list3").empty();
+                $(data).each(function () {
+                    var htmls = "<tr>" +
+                        "<td>" + this.id + "</td>" +
+                        "<td style='color:#ffd800;font-weight:bold'>" + this.vGradeName + "</td>" +
+                        "<td>" + '<a href="javascript:;" style="color:darkslateblue">'+this.vIPName+'</a>'+"</td>" +
+                        "<td>" + this.vIPReset +"</td>" +
+                        "<td>" + this.minIntegral + "</td>" +
+                        "<td>" + this.upgrade + "</td>" +
+                        "<td>" + this.remark + "</td>" +
+                        "<td>" + this.states + "</td>" +
+                        "<td><input type='button' onclick='Showform()' class='layui - btn layui - btn - warm' value='会员条件设置'><input type='button' onclick='form2()' class='layui - btn layui - btn - warm' value='新增会员类型'></td></tr>";
+                    $("#list3").append(htmls);
+                })
+            }
+        })
+    }
+</script>
+<div>
+    <table class="layui-table">
+        <thead style="background-color:darkslateblue;">
+            <tr>
+                <td>序号</td>
+                <td>会员等级</td>
+                <td>会员姓名</td>
+                <td>折扣</td>
+                <td>最低积分</td>
+                <td>升级所需积分</td>
+                <td>备注</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody id="list3">
+        </tbody>
+    </table>
+</div>
+
