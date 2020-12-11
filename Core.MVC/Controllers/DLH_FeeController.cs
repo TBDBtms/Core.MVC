@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace Core.MVC.Controllers
 {
-    public class Zzh_PatientController : Controller
+    public class DLH_FeeController : Controller
     {
-        public IActionResult GetPatient()
+        public IActionResult Show()
         {
             return View();
         }
-        public IActionResult AddPatient()
-        {
-            return View();
-        }
-
     }
 }

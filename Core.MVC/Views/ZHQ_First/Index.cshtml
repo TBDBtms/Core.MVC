@@ -31,29 +31,180 @@
             stroke-width: 2px;
         }
     </style>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
     <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
     <script src="https://code.highcharts.com.cn/highcharts/modules/oldie.js"></script>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="https://code.highcharts.com.cn/highcharts/themes/dark-unica.js"></script>
 </body>
-<div style="background-color:gainsboro;width:1400px;height:910px;margin-left:136px;">
-    <div style="float:left;height:438px;width:840px;margin-top:208px">
-
+<div style="height:40px;">
+    @*<div style="font-size: 25px;margin-top:10px">经营概况</div>*@
+</div>
+<div style="height:122px;width:1300px;margin-left:122px;margin-top:10px">
+    <div style="height:122px;width:246px;background-color:ghostwhite;float:left;border-radius:28px">
+        <div style="font-size:60px;margin-left:88px;margin-top:10px">56</div>
+        <div style="margin-left:76px;color:darkgray;font-size:15px">今日就诊人数</div>
     </div>
-    <div style="float:left;height:438px;width:485px;margin-top:208px;margin-left:45px;background-color:darkgrey" id="container">
+    <div style="height:122px;width:250px;background-color:ghostwhite;float:left;margin-left:78px;border-radius:28px">
+        <div style="font-size:60px;margin-left:88px;margin-top:10px">78</div>
+        <div style="margin-left:76px;color:darkgray;font-size:15px">今日挂号人数</div>
+    </div>                                                              
+    <div style="height:122px;width:250px;background-color:ghostwhite;float:left;margin-left:78px;border-radius:28px">
+        <div style="font-size:60px;margin-left:88px;margin-top:10px">32</div>
+        <div style="margin-left:76px;color:darkgray;font-size:15px">近一周新增会员人数</div>
+    </div>                                                              
+    <div style="height:122px;width:250px;background-color:ghostwhite;float:left;margin-left:78px;border-radius:28px">
+        <div style="font-size:60px;margin-left:88px;margin-top:10px">3500</div>
+        <div style="margin-left:76px;color:darkgray;font-size:15px">今日收费总金额</div>
+    </div>
+</div>
+
+<div style="float:left;height:438px;width:800px;margin-top:80px;margin-left:100px">
+    <div style="width:180px;margin-left:15px;">
+        <div style="border-radius:20px;background-color:gainsboro;height:25px;width:65px;float:left;margin-top:10px" align="center" onclick="ZXShow(1)" onmouseover="hg1()" onmouseout="hg2()"  id="g1">近一周</div>
+        <div style="border-radius:20px;background-color:gainsboro;height:25px;width:65px;float:left;margin-top:10px" align="center" onclick="ZXShow(2)" id="g2" onmouseover="hg3()" onmouseout="hg4()">近二周</div>
+        @*<select id="sel" onchange="ZXShow()" class="layui-select">
+            <option value="0">查看近一周/近两周数据</option>
+            <option value="1">查看近一周数据</option>
+            <option value="2">查看近二周数据</option>
+        </select>*@
+    </div>
+    <div style="float:left;height:400px;width:700px;" id="container2">
 
     </div>
 </div>
+<div style="float:left;height:438px;width:485px;margin-top:40px;margin-left:45px;background-color:darkgrey" id="container">
+
+</div>
+
 <script>
 
+
     $(function () {
+        setTimeout(function () {
+            layer.closeAll('loading');
+        }, 2000);
         showYU();
-
+        ZXShow();
     })
+    function hg1() {
+        $("#g1").css("background-color", "lightcoral");
+    }
+    function hg2() {
+       
+        $("#g1").css("background-color", "gainsboro");
+    }
+    function hg3() {
+        $("#g2").css("background-color", "lightcoral");
+    }
+    function hg4() {
 
-    function ZX() {
+        $("#g2").css("background-color", "gainsboro");
+    }
+    function ZXShow(d=0) {
+       
+        var month = [];
+        var renshu = [];
+        if (d == 1) {
+            month.push('星期一');
+            month.push('星期二');
+            month.push('星期三');
+            month.push('星期四');
+            month.push('星期五');
+            month.push('星期六');
+            month.push('星期日');
+            renshu.push(20);
+            renshu.push(15);
+            renshu.push(2);
+            renshu.push(7);
+            renshu.push(9);
+            renshu.push(11);
+            renshu.push(30);
+        } else if (d == 2) {
+            month.push('星期一');
+            month.push('星期二');
+            month.push('星期三');
+            month.push('星期四');
+            month.push('星期五');
+            month.push('星期六');
+            month.push('星期日');
+            month.push('星期一');
+            month.push('星期二');
+            month.push('星期三');
+            month.push('星期四');
+            month.push('星期五');
+            month.push('星期六');
+            month.push('星期日');
+            renshu.push(40);
+            renshu.push(16);
+            renshu.push(2);
+            renshu.push(7);
+            renshu.push(9);
+            renshu.push(2);
+            renshu.push(30);
+            renshu.push(6);
+            renshu.push(12);
+            renshu.push(2);
+            renshu.push(21);
+            renshu.push(9);
+            renshu.push(11);
+            renshu.push(23);
+        } else if (d == 0) {
+            month.push('星期一');
+            month.push('星期二');
+            month.push('星期三');
+            month.push('星期四');
+            month.push('星期五');
+            month.push('星期六');
+            month.push('星期日');
+            renshu.push(20);
+            renshu.push(15);
+            renshu.push(2);
+            renshu.push(7);
+            renshu.push(9);
+            renshu.push(11);
+            renshu.push(30);
+        }
+        ZX(month, renshu);
+    }
+    function ZX(month, renshu) {
+
+        var chart = Highcharts.chart('container2', {
+            chart: {
+                // type: 'line'
+            },
+            title: {
+                text: '周数据统计'
+            },
+            subtitle: {
+                text: '数据来源: ZHQ著'
+            },
+            xAxis: {
+                categories: month
+            },
+            yAxis: {
+                title: {
+                    text: '数据统计'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        // 开启数据标签
+                        enabled: true
+                    },
+                    // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+                    enableMouseTracking: false
+                }
+            },
+            series: [{
+                name: '收费记录',
+                data: [50, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+            }, {
+                name: '病人人数',
+                data: renshu
+            }]
+        });
 
     }
     function showYU() {
@@ -99,5 +250,6 @@
                 showInLegend: true
             }]
         });
+
     }
 </script>

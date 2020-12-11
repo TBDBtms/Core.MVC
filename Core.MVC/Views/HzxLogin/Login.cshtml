@@ -1,0 +1,124 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+</head>
+<body>
+    <style>
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-style: initial;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Open Sans',sans-serif;
+            margin: 0;
+            background-color: #4A374A;
+        }
+
+        #login {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -150px 0 0 -150px;
+            width: 300px;
+            height: 300px;
+        }
+
+            #login h1 {
+                color: #fff;
+                text-shadow: 0 0 10px;
+                letter-spacing: 1px;
+                text-align: center;
+            }
+
+        h1 {
+            font-size: 2em;
+            margin: 0.67em 0;
+        }
+
+        input {
+            width: 278px;
+            height: 18px;
+            margin-bottom: 10px;
+            outline: none;
+            padding: 10px;
+            font-size: 13px;
+            color: #fff;
+            text-shadow: 1px 1px 1px;
+            border-top: 1px solid #312E3D;
+            border-left: 1px solid #312E3D;
+            border-right: 1px solid #312E3D;
+            border-bottom: 1px solid #56536A;
+            border-radius: 4px;
+            background-color: #2D2D3F;
+        }
+
+        .but {
+            width: 300px;
+            min-height: 20px;
+            display: block;
+            background-color: #4a77d4;
+            border: 1px solid #3762bc;
+            color: #fff;
+            padding: 9px 14px;
+            font-size: 15px;
+            line-height: normal;
+            border-radius: 5px;
+            margin: 0;
+        }
+    </style>
+    <div id="login">
+        <h1>Login</h1>
+        <form method="post">
+            <input type="text" id="Uiphone" required="required" placeholder="手机号" name="u">
+            <input type="password" id="Upass" required="required" placeholder="密码" name="p">
+            <button class="but" type="button" onclick="Deng()">登录</button>
+        </form>
+    </div>
+</body>
+</html>
+<script>
+    function Deng() {
+
+        var Uiphone = $("#Uiphone").val();
+        var Upass = $("#Upass").val();
+
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/Login",
+            data: { Uiphone: Uiphone, Upass: Upass },
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                if (d != null) {
+                    alert('登录成功');
+                    sessionStorage.setItem("Uname", d.uname);
+                    sessionStorage.setItem("Qma", d.qma);
+                    sessionStorage.setItem("Rname", d.rname);
+                    location.href = "/HzxLogin/Index";
+
+                } else {
+                    alert('登录失败');
+                }
+            }
+        })
+
+    }
+
+</script>
+
