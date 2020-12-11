@@ -12,6 +12,10 @@ namespace Core.MVC.Controllers
         {
             return View();
         }
+        public IActionResult AddPatient()
+        {
+            return View();
+        }
 
     }
 }
