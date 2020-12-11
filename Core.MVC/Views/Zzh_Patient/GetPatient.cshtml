@@ -9,7 +9,7 @@
 
 <div>
     <div>
-        <button type="button" class="layui-btn" style="float:right" onclick="location.href ='/Zzh_Patient/AddPatient'">
+        <button type="button" class="layui-btn" style="float:right;margin-right:50px;margin-top:30px;" onclick="location.href ='/Zzh_Patient/AddPatient'">
             <i class="layui-icon">&#xe608;</i> 添加患者
         </button>
     </div>
@@ -82,10 +82,8 @@
             type: "get",
             dataType: "json",
             success: function (d) {
-                console.log(d);
                 $(d).each(function () {
                     var html = "<option value='" + this.vGradeId + "'>" + this.vGradeName + "</option>";
-                    console.log(html);
                     $("#VIPgrade").append(html);
                     form.render('select');
                 });
@@ -108,7 +106,7 @@
                         "<td>" + this.patientId + "</td>" +
                         "<td>" + this.patientCode + "</td>" +
                         "<td>" + this.patientName + "</td>" +
-                        "<td>" + this.patientSexId + "</td>" +
+                        "<td>" + (this.patientSex?"男":"女") + "</td>" +
                         "<td>" + this.patientAge + "</td>" +
                         "<td>" + this.patientPhone + "</td>" +
                         "<td style='color:orange'>" + this.vGradeName + "</td>" +
