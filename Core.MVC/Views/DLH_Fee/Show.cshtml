@@ -5,7 +5,6 @@
 }
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/layui-v2.4.5/layui/layui.js"></script>
 <body>
     <div class="layui-tab">
         <ul class="layui-tab-title">
@@ -20,17 +19,22 @@
                     <form class="layui-form">
                         <div class="layui-form-item">
                             <label class="layui-form-label">处方类别</label>
-                            <div style="width:300px">
+                            <div style="width:300px;float:left;margin-left:-110px">
                                 <div class="layui-input-block">
                                     <select name="interest" lay-filter="aihao" id="LeiBie">
                                         <option></option>
                                     </select>
                                 </div>
                             </div>
+                            <div class="layui-input-block" style="width:300px;float:left">
+                                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="附加费查询" class="layui-input">
+                                
+                            </div>
+                            <div class="layui-input-block" style="width:300px;float:right">
+                                <input type="button" class="layui-btn" value="新增附加费用" onclick="FJAdd()" style="background-color:#C2C5F6;font-weight:bold;color:black" />
+                            </div>
                         </div>
                     </form>
-                    <input type="text" placeholder="附加费名称" id="cc" value="" />
-
                 </div>
                 <div>
                     <table class="layui-table">
@@ -40,17 +44,17 @@
                             <col>
                         </colgroup>
                         <thead>
-                            <tr>
-                                <th>序号</th>
-                                <th>附加费用名称</th>
-                                <th>处方类型</th>
-                                <th>金额</th>
-                                <th>成本价</th>
-                                <th>创建时间</th>
-                                <th>创建人员</th>
-                                <th>允许会员折扣</th>
-                                <th>费用状态</th>
-                                <th>操作</th>
+                            <tr style="background-color:#C2C5F6">
+                                <th style="font-weight:bold">序号</th>
+                                <th style="font-weight:bold">附加费用名称</th>
+                                <th style="font-weight:bold">处方类型</th>
+                                <th style="font-weight:bold">金额</th>
+                                <th style="font-weight:bold">成本价</th>
+                                <th style="font-weight:bold">创建时间</th>
+                                <th style="font-weight:bold">创建人员</th>
+                                <th style="font-weight:bold">允许会员折扣</th>
+                                <th style="font-weight:bold">费用状态</th>
+                                <th style="font-weight:bold">操作</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_id">
@@ -67,9 +71,15 @@
 
 </body>
 
+<style>
+    th{
+        color:black;
+        font-weight:bold;
+    }
+</style>
+
 <script>
     $(function () {
-        //Demo
         layui.use('form', function () {
             form = layui.form;
 
@@ -81,9 +91,7 @@
         });
         ShowPrescriptionInfos();
     });
-    function CX(name) {
 
-    }
 
     function ShowPrescriptionInfos() {
         $.ajax({
@@ -96,7 +104,6 @@
                     var html = "<option value='" + this.recipeId + "'>" + this.recipeName + "</option>";
                     console.log(html);
                     $("#LeiBie").append(html);
-                    form.render('select');
                 });
             },
             complete: function () {
@@ -104,8 +111,9 @@
             }
         })
     }
-
+  
     function Showfujiafeiyong() {
+        var i = 1;
         $.ajax({
             url: "http://localhost:4965/api/DLH_Fee/GetCostsInfos",
             type: "get",
@@ -114,21 +122,51 @@
                 $("#tbody_id").empty();
                 $(d).each(function () {
                     var str = "<tr>" +
-                        "<td>" + this.sequenceId + "</td>" +
+                        "<td>" + i + "</td>" +
                         "<td>" + this.additional + "</td>" +
-                        "<td>" + this.recipeKey + "</td>" +
+                        "<td>" + this.recipeName + "</td>" +
                         "<td>" + this.moneyInfn + "</td>" +
                         "<td>" + this.cost + "</td>" +
                         "<td>" + this.createTime + "</td>" +
-                        "<td>" + this.createpersonKey + "</td>" +
-                        "<td>" + this.vip + "</td>" +
-                        "<td>" + this.cState + "</td>" +
-                        "<td></td></tr>";
+                        "<td>" + this.uname + "</td>" +
+                        "<td>" + (this.vip ? "是" : "否") + "</td>" +
+                        "<td>" + (this.cState ? "启用" : "未启用") + "</td>" +
+                        "<td><a onclick='Update(" + this.sequenceId + ")' style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='Del(" + this.sequenceId + ")'>删除</a></td></tr>";
                     $("#tbody_id").append(str);
+                    i++;
                 })
             }
         })
     }
+
+
+    function Del(id) {
+        if (confirm("确认删除吗?")) {
+            $.ajax({
+                url: "http://localhost:4965/api/DLH_Fee/DelCost?cid=" + id,
+                type: "post",
+                dataType: "json",
+                success: function (d) {
+                    if (d > 0) {
+                        alert("删除成功");
+                        Showfujiafeiyong();
+                    } else {
+                        alert("删除失败");
+                    }
+                }
+            });
+        }
+    }
+
+    function Update(id) {
+        location.href = ""
+    }
+    function FJAdd() {
+        location.href = "/DLH_Fee/FJAdd";
+    }
+
 </script>
+
+
 
 
