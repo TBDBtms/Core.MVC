@@ -13,57 +13,68 @@
             <i class="layui-icon">&#xe608;</i> 添加患者
         </button>
     </div>
-    <form class="layui-form">
-        <div class="layui-form-item">
-            <label class="layui-form-label">会员类型</label>
-            <div style="width:300px">
-                <div class="layui-input-block">
-                    <select name="interest" lay-filter="aihao" id="VIPgrade">
-                        <option></option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </form>
+    </div>
+    <div>
         <div>
-            <table class="layui-table">
-                <colgroup>
-                    <col width="150">
-                    <col width="200">
-                    <col>
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>序号</th>
-                        <th>患者编码</th>
-                        <th>患者姓名</th>
-                        <th>性别</th>
-                        <th>年龄</th>
-                        <th>手机号码</th>
-                        <th>会员等级</th>
-                        <th>创建时间</th>
-                        <th>操作人员</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody id="GetPat">
-                </tbody>
-            </table>
+            <form class="layui-form">
+                <div class="layui-form-item" style="float:left">
+                    <label class="layui-form-label">会员类型</label>
+                    <div style="width:300px">
+                        <div class="layui-input-block">
+                            <select name="interest" lay-filter="aihao" id="VIPgrade">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
+        <div class="layui-input-block" style="width:300px;float:left">
+            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="患者姓名/手机号" class="layui-input">
+        </div>
+        <div style="float:left">
+            <button type="button" class="layui-btn">查询</button>
+        </div>
+    </div>
+    <div>
+        <table class="layui-table" style="text-align:center;margin-left:30px">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead style="background-color:lavender">
+            <tr style="background-color: lavender">
+                <th style="text-align:center">序号</th>
+                <th style="text-align:center">患者编码</th>
+                <th style="text-align:center">患者姓名</th>
+                <th style="text-align:center">性别</th>
+                <th style="text-align:center">年龄</th>
+                <th style="text-align:center">手机号码</th>
+                <th style="text-align:center">会员等级</th>
+                <th style="text-align:center">创建时间</th>
+                <th style="text-align:center">操作人员</th>
+                <th style="text-align:center">操作</th>
+            </tr>
+        </thead>
+        <tbody id="GetPat">
+        </tbody>
+      </table>
 </div>
+               
 <script>
     var form;
     $(function () {
         layui.use('form', function () {
             form = layui.form;
-            
+    
             //监听提交
             form.on('submit(formDemo)', function (data) {
                 layer.msg(JSON.stringify(data.field));
                 return false;
             });
         });
-        ShowVIPType();    
+        ShowVIPType();
     })
     function ShowVIPType() {
         $.ajax({
@@ -84,6 +95,7 @@
             }
         })
     }
+   
     function ShowPatient() {
         $.ajax({
             url: "http://localhost:4965/api/Zzh_Patient/GetPatients",
@@ -99,16 +111,14 @@
                         "<td>" + this.patientSexId + "</td>" +
                         "<td>" + this.patientAge + "</td>" +
                         "<td>" + this.patientPhone + "</td>" +
-                        "<td>" + this.vGradeName + "</td>" +
+                        "<td style='color:orange'>" + this.vGradeName + "</td>" +
                         "<td>" + this.createTime + "</td>" +
                         "<td>" + this.caoPeople + "</td>" +
-                        "<td></td></tr>";
+                        "<td><a href=''  style='margin-left:10px' onclick=''>接诊</a><a href='' style='margin-left:15px' onclick=''>编辑</a><a href='' style='margin-left:15px' onclick=''>设置会员</a><a href='' style='margin-left:15px' onclick=''>删除</a></td></tr>";
                     $("#GetPat").append(str);
                 })
             }
         })
     }
-    //Demo
-    
 </script>
 
