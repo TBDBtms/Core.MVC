@@ -7,11 +7,11 @@
 <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
 <script src="~/layui-v2.4.5/layui/layui.js"></script>
 <script src="~/js/site.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function () {
         var element = layui.element;
-
         //…
     });
 </script>
@@ -60,20 +60,80 @@
 </script>
 <script>
     $(function () {
-
+        ShowInfo();
+        Sels();
     })
+    function Sels() {
+        $.ajax({
+            url: "http://localhost:4965/api/JcyVIP/GetVIPgrades",
+            dataType: "json",
+            type: "get",
+            async: false,
+            success: function (data) {
+                $("#dj").empty();
+                $("#dj").append("<option value=0>==请选择==</option>");
+                $(data).each(function () {
+                    $("#dj").append("<option value=" + this.vGradeId + ">" + this.vGradeName+"</option>");
+                })
+            }
+        })
+    }
+    function ShowInfo() {
+        $.ajax({
+            url: "http://localhost:4965/api/JcyVIP/GetVIPInfos",
+            dataType: "json",
+            type: "get",
+            data: {},
+            async: false,
+            success: function (data) {
+                $("#list").empty();
+                $(data).each(function () {
+                    var htmls = "<tr>" +
+                        "<td>" + this.idCard + "</td>" +
+                        "<td>" + this.vTypeName + "</td>" +
+                        "<td>" + this.vGradeName + "</td>" +
+                        "<td>" + this.vIPName + "</td>" +
+                        "<td>" + this.phone + "</td>" +
+                        "<td>" + this.amassPrice + "</td>" +
+                        "<td>" + this.svalueMoney + "</td>" +
+                        "<td>" + this.amassSvalue + "</td>" +
+                        "<td>" + this.integral + "</td>" +
+                        "<td>" + this.startTime + "</td>" +
+                        "<td>" + this.endTime + "</td>" +
+                        "<td>" + this.vIPState + "</td>" +
+                        "<td>操作</td></tr>";
+                    $("#list").append(htmls);
+                })
+            }
+        })
+    }
 </script>
-<div>
-    <div class="layui-table" style="text-align:center" >
+<div style="text-align:center;">
+    <div class="layui-tab">
         <ul class="layui-tab-title">
-            <li class="layui-this">会员列表</li>
-            <li>储值管理</li>
-            <li>积分管理</li>
-            <li>会员设置</li>
+            <li>用户管理</li>
+            <li>权限分配</li>
+            <li>商品管理</li>
+            <li>订单管理</li>
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <table style="background-color:darkslateblue;text-align:center"  class="layui-table">
+                会员等级:
+                <select id="dj">
+                    
+                </select>
+                创建时间:   
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="stime" placeholder=" - ">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <table style="background-color:darkslateblue;" class="layui-table">
                     <thead>
                         <tr>
                             <td>序号</td>
@@ -92,20 +152,20 @@
                         </tr>
                     </thead>
                     <tbody id="list">
-
                     </tbody>
                 </table>
             </div>
             <div class="layui-tab-item">
-                
+
             </div>
             <div class="layui-tab-item">
-                
+
             </div>
             <div class="layui-tab-item">
-                
+
             </div>
         </div>
     </div>
 </div>
+
 
