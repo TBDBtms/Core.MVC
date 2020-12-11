@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<script src="~/js/site.js"></script>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+
+        //…
+    });
+</script>
+<script>
+    layui.use('element', function () {
+        var $ = layui.jquery
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        var active = {
+            tabAdd: function () {
+                //新增一个Tab项
+                element.tabAdd('demo', {
+                    title: '新选项' + (Math.random() * 1000 | 0) //用于演示
+                    , content: '内容' + (Math.random() * 1000 | 0)
+                    , id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+                })
+            }
+            , tabDelete: function (othis) {
+                //删除指定Tab项
+                element.tabDelete('demo', '44'); //删除：“商品管理”
+
+
+                othis.addClass('layui-btn-disabled');
+            }
+            , tabChange: function () {
+                //切换到指定Tab项
+                element.tabChange('demo', '22'); //切换到：用户管理
+            }
+        };
+
+        $('.site-demo-active').on('click', function () {
+            var othis = $(this), type = othis.data('type');
+            active[type] ? active[type].call(this, othis) : '';
+        });
+
+        //Hash地址的定位
+        var layid = location.hash.replace(/^#test=/, '');
+        element.tabChange('test', layid);
+
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
+        });
+
+    });
+</script>
+<script>
+    $(function () {
+
+    })
+</script>
+<div>
+    <div class="layui-table" style="text-align:center" >
+        <ul class="layui-tab-title">
+            <li class="layui-this">会员列表</li>
+            <li>储值管理</li>
+            <li>积分管理</li>
+            <li>会员设置</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <table style="background-color:darkslateblue;text-align:center"  class="layui-table">
+                    <thead>
+                        <tr>
+                            <td>序号</td>
+                            <td>卡号</td>
+                            <td>会员类型</td>
+                            <td>会员等级</td>
+                            <td>会员姓名</td>
+                            <td>手机号码</td>
+                            <td>积累消费(元)</td>
+                            <td>储值余额(元)</td>
+                            <td>积分</td>
+                            <td>开卡时间</td>
+                            <td>到期时间</td>
+                            <td>会员状态</td>
+                            <td>操作</td>
+                        </tr>
+                    </thead>
+                    <tbody id="list">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="layui-tab-item">
+                
+            </div>
+            <div class="layui-tab-item">
+                
+            </div>
+            <div class="layui-tab-item">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
