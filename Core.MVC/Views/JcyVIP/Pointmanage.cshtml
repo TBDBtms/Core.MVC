@@ -4,9 +4,7 @@
     Layout = "~/Views/Home/_Layout.cshtml";
 }
 
-<h1>Pointmanage</h1>
-<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
-<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<h1></h1>
 <script src="~/js/site.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
@@ -46,8 +44,8 @@
                         "<td>" + this.id + "</td>" +
                         "<td>" + this.idCard + "</td>" +
                         "<td>" + this.vTypeName + "</td>" +
-                        "<td>" + this.vGradeName + "</td>" +
-                        "<td>" + this.vIPName + "</td>" +
+                        "<td style='color:#ffd800;font-weight:bold'>" + this.vGradeName + "</td>" +
+                        "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.vIPName + '</a>' +"</td>" +
                         "<td>" + this.phone + "</td>" +
                         "<td>" + this.integral + "</td>" +
                         "<td>操作</td></tr>";
@@ -58,15 +56,16 @@
     }
 </script>
 <div>
-    会员等级:
-    <select id="dj2" class="layui-select">
-    </select>
-    <div class="layui-input-inline" style="margin-left:-100px">
-        <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input-block">
+    <div style="margin-top:1px;">
+        会员等级:
+        <select name="interest" lay-filter="会员等级" id="dj2" style="width:100px;height:38px;">
+        </select>
+        <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
+        <button type="button" style="margin-left:auto" onclick="one()" class="layui-btn">
+            <i class="layui-icon">&#xe615;</i>
+        </button>
     </div>
-    <button type="button" class="layui-btn" style="margin-left:-4px;" onclick="ShowInfothree()">
-        <i class="layui-icon">&#xe615;</i>
-    </button>
+   
     <table class="layui-table">
         <thead style="background-color:darkslateblue;">
             <tr>
@@ -81,7 +80,6 @@
             </tr>
         </thead>
         <tbody id="list2">
-
         </tbody>
     </table>
 </div>
