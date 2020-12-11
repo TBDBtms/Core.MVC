@@ -117,9 +117,9 @@
                         "<td><a href=''  style='margin-left:10px' onclick=''>接诊</a><a href='' style='margin-left:15px' onclick=''>编辑</a><a href='' style='margin-left:15px' onclick=''>设置会员</a><a href='' style='margin-left:15px' onclick=''>删除</a></td></tr>";
                         "<td><a href=''  style='margin-left:10px' onclick=''>接诊</a><a href='' style='margin-left:15px' onclick=''>编辑</a><a href='' style='margin-left:15px' onclick=''>设置会员</a><a href='' style='margin-left:15px' onclick='Del(" + this.patientId + ")'>删除</a></td></tr>";
                     $("#GetPat").append(str);
-                })
+                });
             }
-        })
+        });
     }
     function Del(id) {
         $.ajax({

@@ -1,0 +1,181 @@
+﻿@using Core.MVC.Models;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+    string Qma = ViewData["Qma"] as string;
+}
+<html>
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <div>
+            <form class="layui-form">
+                <div class="layui-form-item" style="float:left">
+                    <label class="layui-form-label">选择框</label>
+                    <div class="layui-input-block" style="width:300px">
+                        <select name="city" lay-verify="required" id="keshi">
+                            <option value="0">全科</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div style="float:left">
+            <input type="text" name="title" id="txt_name" required lay-verify="required" placeholder="请输入员工姓名" autocomplete="off" class="layui-input" onchange="Shows()">
+        </div>
+        <div><input id="Button1" type="button" class="layui-btn layui-btn-radius" value="搜索" style="background-color:aqua" onclick=" Shows()" /></div>
+
+    </div>
+    <div>
+        <table class="layui-table" style="text-align:center;margin-left:30px">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead style="background-color:aqua" >
+                <tr style="background-color:aqua">
+                    <th style="text-align:center">员工编号</th>
+                    <th style="text-align:center">员工姓名</th>
+                    <th style="text-align:center">员工性别</th>
+                    <th style="text-align:center">员工年龄</th>
+                    <th style="text-align:center">员工手机号</th>
+                    <th style="text-align:center">所属科室</th>
+                    <th style="text-align:center">入职时间</th>
+                    <th style="text-align:center">操作人</th>
+                    <th style="text-align:center">员工状态</th>
+                    <th style="text-align:center">员工账号</th>
+                    <th style="text-align:center">员工密码</th>
+                    <th style="text-align:center">员工职位</th>
+                    <th style="text-align:center">员工血型</th>
+                    <th style="text-align:center">员工籍贯</th>
+                    <th style="text-align:center">员工权限</th>
+                    <th style="text-align:center">操作</th>
+                </tr>
+            </thead>
+            <tbody id="tb">
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
+<script>
+    var name = sessionStorage.getItem("Uname");
+    var Qma = sessionStorage.getItem("Qma");
+    var form;
+    $().ready(function () {
+        //显示
+        Shows();
+        keshi();
+
+
+
+    });
+    function keshi()
+    {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetKeshis",
+            type: "get",
+            dataType: "json",
+            success: function (d)
+            {
+                $("#keshi").empty();
+                $("#keshi").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='"+ this.kid + "'>" + this.kname + "</option>";
+                    $("#keshi").append(str);
+
+                });
+
+                form.render('select');
+
+
+
+
+            }
+        });
+
+    }
+    function Shows()
+    {
+
+        var Uname = $("#txt_name").val();
+        var kid = $("#keshi").val();
+        var qma = Qma;
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetUserinfos",
+            data: {Ukeids:kid,Uname:Uname},
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (d)
+            {
+                $("#tb").empty();
+                $(d).each(function () {
+                    $("#tb").append("<tr>" +
+                 "<td style='color:aqua'>" + this.uno + "</td>" +
+                 "<td style='text - align: center'>"+this.uname+"</td >"+
+                "<td style='text - align: center'>"+(this.usex?"男":"女")+"</td>"+
+                "<td style='text - align: center'>"+this.uage+"</td>"+
+                "<td style='text - align: center'>"+this.uiphone+"</td>"+
+                "<td style='text - align: center'>"+this.ukeids+"</td>"+
+                "<td style='text - align: center'>" +this.createTime+"</td>"+
+                "<td style='text - align: center'>" + this.creatName+"</td>"+
+                "<td style='text - align: center'>"+this.uissale+"</td>"+
+                "<td style='text - align: center'>"+this.uzhanghao+"</td>"+
+                "<td style='text - align: center'>"+this.upass+"</td>"+
+                "<td style='text - align: center'>"+this.rname+"</td>"+
+                "<td style='text - align: center'>"+this.uxue+"</td>"+
+                "<td style='text - align: center'>"+this.cname+"</td>"+
+                "<td style='text - align: center'>" + this.qremark + "</td>" +
+                      "<td style='text - align: center'>" + (qma == "ABCD" ? "<input id='Button1' type='button' value='删除' onclick='DelUser("+ this.uid+")'/><input id='Button1' type='button' value='修改' onclick='UpdUser('" + this.uid + "')' />" : qma == "A" ? "" : qma == "Yi" ? "":"") + "</td>" +
+            "</tr>");
+                });
+            }
+        });
+    }
+    function DelUser(uid)
+    {
+        if (confirm("确认删除吗？")) {
+
+
+
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/DelUserinfo?Uid="+uid,
+            type: "post",
+            dataType: "json",
+            success: function (d)
+            {
+                if (d > 0)
+                {
+                    alert("删除成功");
+                    location.reload();
+                }
+                else {
+                    alert("删除失败");
+
+                }
+            }
+
+        });
+        }
+    }
+
+    //Demo
+    layui.use('form', function () {
+        form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
+
+

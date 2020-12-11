@@ -1,5 +1,9 @@
 ﻿<!DOCTYPE html>
+@{ 
 
+    
+
+}
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -8,6 +12,9 @@
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
 </head>
 <body>
+    <div>
+        欢迎登录 <span id="sp1"></span>
+    </div>
     <div>
         <ul class="layui-nav layui-bg-cyan" lay-filter="">
             <li class="layui-nav-item"><a href="">我</a></li>
@@ -184,9 +191,11 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">员工管理</a>
+                    <a href="javascript:;">员工管理集合</a>
                     <dl class="layui-nav-child">
+                        <dd><a href="javascript:location.href='/HzxLogin/Index';">员工管理</a></dd>
                         <dd><a href="">新增员工信息</a></dd>
+
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -202,7 +211,7 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">费用设置</a>
+                    <a href="javascript:location.href='/DLH_Fee/Show';">费用设置</a>
                     <dl class="layui-nav-child">
                         <dd><a href="">新增附加费</a></dd>
                         <dd><a href="">新增诊疗费</a></dd>
@@ -230,5 +239,11 @@
         var element = layui.element;
 
         //…
+    });
+    $().ready(function () {
+        var Uname = sessionStorage.getItem("Uname");
+        var Rname = sessionStorage.getItem("Rname");
+
+        $("#sp1").text(Uname+""+Rname);
     });
 </script>
