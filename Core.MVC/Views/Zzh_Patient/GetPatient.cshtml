@@ -3,44 +3,87 @@
     ViewData["Title"] = "GetPatient";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
+
 <script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+
 <div>
     <div>
-    <button type="button" class="layui-btn" style="float:right">
-    <i class="layui-icon">&#xe608;</i> 添加患者
-    </button>
+        <button type="button" class="layui-btn" style="float:right">
+            <i class="layui-icon">&#xe608;</i> 添加患者
+        </button>
     </div>
-    <div></div>
-    <div>
-        <table class="layui-table">
-            <colgroup>
-                <col width="150">
-                <col width="200">
-                <col>
-            </colgroup>
-            <thead>
-                <tr>
-                    <th>序号</th>
-                    <th>患者编码</th>
-                    <th>患者姓名</th>
-                    <th>性别</th>
-                    <th>年龄</th>
-                    <th>手机号码</th>
-                    <th>会员等级</th>
-                    <th>创建时间</th>
-                    <th>操作人员</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody id="GetPat">
-            </tbody>
-        </table>
-    </div>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">会员类型</label>
+            <div style="width:300px">
+                <div class="layui-input-block">
+                    <select name="interest" lay-filter="aihao" id="VIPgrade">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+        <div>
+            <table class="layui-table">
+                <colgroup>
+                    <col width="150">
+                    <col width="200">
+                    <col>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>患者编码</th>
+                        <th>患者姓名</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                        <th>手机号码</th>
+                        <th>会员等级</th>
+                        <th>创建时间</th>
+                        <th>操作人员</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="GetPat">
+                </tbody>
+            </table>
+        </div>
 </div>
 <script>
+    var form;
     $(function () {
-        ShowPatient();
+        layui.use('form', function () {
+            form = layui.form;
+            
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+        ShowVIPType();    
     })
+    function ShowVIPType() {
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/ZGetVIPgrade",
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                console.log(d);
+                $(d).each(function () {
+                    var html = "<option value='" + this.vGradeId + "'>" + this.vGradeName + "</option>";
+                    console.log(html);
+                    $("#VIPgrade").append(html);
+                    form.render('select');
+                });
+            },
+            complete: function () {
+                ShowPatient();
+            }
+        })
+    }
     function ShowPatient() {
         $.ajax({
             url: "http://localhost:4965/api/Zzh_Patient/GetPatients",
@@ -56,7 +99,7 @@
                         "<td>" + this.patientSexId + "</td>" +
                         "<td>" + this.patientAge + "</td>" +
                         "<td>" + this.patientPhone + "</td>" +
-                        "<td>" + this.memberId + "</td>" +
+                        "<td>" + this.vGradeName + "</td>" +
                         "<td>" + this.createTime + "</td>" +
                         "<td>" + this.caoPeople + "</td>" +
                         "<td>操作</td></tr>";
@@ -65,5 +108,7 @@
             }
         })
     }
+    //Demo
+    
 </script>
 

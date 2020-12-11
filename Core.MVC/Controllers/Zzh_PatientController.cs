@@ -12,5 +12,9 @@ namespace Core.MVC.Controllers
         {
             return View();
         }
+        public IActionResult Drop()
+        {
+            return View();
+        }
     }
 }
