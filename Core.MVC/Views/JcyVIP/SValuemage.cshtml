@@ -10,7 +10,6 @@
 <script>
     $(function () {
         Selc();
-        ShowInfotwo();
     })
     function Selc() {
         $.ajax({
@@ -24,12 +23,15 @@
                 $(data).each(function () {
                     $("#dj1").append("<option value=" + this.vGradeId + ">" + this.vGradeName + "</option>");
                 })
+            },
+            complete: function () {
+                ShowInfotwo();
             }
         })
     }
 
     function ShowInfotwo() {
-        var id = $("#dj").val();
+        var id = $("#dj1").val();
         var name = $("#name").val();
         var phone = $("#name").val();
         var Card = $("#IdCard").val();
@@ -66,7 +68,7 @@
         <select name="interest" lay-filter="会员等级" id="dj1" style="width:100px;height:38px;">
         </select>
         <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
-        <button type="button" style="margin-left:auto" onclick="one()" class="layui-btn">
+        <button type="button" style="margin-left:auto" onclick="ShowInfotwo()" class="layui-btn">
             <i class="layui-icon">&#xe615;</i>
         </button>
     </div>

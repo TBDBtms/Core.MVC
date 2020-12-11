@@ -10,7 +10,6 @@
 <script>
     $(function () {
         Sels();
-        ShowInfothree();
     })
 
     function Sels() {
@@ -25,17 +24,24 @@
                 $(data).each(function () {
                     $("#dj2").append("<option value=" + this.vGradeId + ">" + this.vGradeName + "</option>");
                 })
+            },
+            complete: function () {
+                ShowInfothree();
             }
         })
     }
 
 
     function ShowInfothree() {
+        var id = $("#dj2").val();
+        var name = $("#name").val();
+        var phone = $("#name").val();
+        var Card = $("#IdCard").val();
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetJF",
             dataType: "json",
             type: "get",
-            data: {},
+            data: { id: id, name: name, phone, phone, Card: Card},
             async: false,
             success: function (data) {
                 $("#list2").empty();
@@ -61,7 +67,7 @@
         <select name="interest" lay-filter="会员等级" id="dj2" style="width:100px;height:38px;">
         </select>
         <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
-        <button type="button" style="margin-left:auto" onclick="one()" class="layui-btn">
+        <button type="button" style="margin-left:auto" onclick="ShowInfothree()" class="layui-btn">
             <i class="layui-icon">&#xe615;</i>
         </button>
     </div>
