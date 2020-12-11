@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "Pointmanage";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h1>Pointmanage</h1>
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<script src="~/js/site.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(function () {
+        Sels();
+        ShowInfothree();
+    })
+
+    function Sels() {
+        $.ajax({
+            url: "http://localhost:4965/api/JcyVIP/GetVIPgrades",
+            dataType: "json",
+            type: "get",
+            async: false,
+            success: function (data) {
+                $("#dj2").empty();
+                $("#dj2").append("<option value=0>==请选择==</option>");
+                $(data).each(function () {
+                    $("#dj2").append("<option value=" + this.vGradeId + ">" + this.vGradeName + "</option>");
+                })
+            }
+        })
+    }
+
+
+    function ShowInfothree() {
+        $.ajax({
+            url: "http://localhost:4965/api/JcyVIP/GetJF",
+            dataType: "json",
+            type: "get",
+            data: {},
+            async: false,
+            success: function (data) {
+                $("#list2").empty();
+                $(data).each(function () {
+                    var htmls = "<tr>" +
+                        "<td>" + this.id + "</td>" +
+                        "<td>" + this.idCard + "</td>" +
+                        "<td>" + this.vTypeName + "</td>" +
+                        "<td>" + this.vGradeName + "</td>" +
+                        "<td>" + this.vIPName + "</td>" +
+                        "<td>" + this.phone + "</td>" +
+                        "<td>" + this.integral + "</td>" +
+                        "<td>操作</td></tr>";
+                    $("#list2").append(htmls);
+                })
+            }
+        })
+    }
+</script>
+<div>
+    会员等级:
+    <select id="dj2" class="layui-select">
+    </select>
+    <div class="layui-input-inline" style="margin-left:-100px">
+        <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input-block">
+    </div>
+    <button type="button" class="layui-btn" style="margin-left:-4px;" onclick="ShowInfothree()">
+        <i class="layui-icon">&#xe615;</i>
+    </button>
+    <table class="layui-table">
+        <thead style="background-color:darkslateblue;">
+            <tr>
+                <td>序号</td>
+                <td>卡号</td>
+                <td>会员类型</td>
+                <td>会员等级</td>
+                <td>会员姓名</td>
+                <td>手机号码</td>
+                <td>积分</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody id="list2">
+
+        </tbody>
+    </table>
+</div>

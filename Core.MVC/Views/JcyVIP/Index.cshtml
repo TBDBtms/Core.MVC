@@ -9,66 +9,19 @@
 <script src="~/js/site.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
-    //注意：导航 依赖 element 模块，否则无法进行功能性操作
-    layui.use('element', function () {
-        var element = layui.element;
-        //…
-    });
-</script>
-<script>
-    layui.use('element', function () {
-        var $ = layui.jquery
-            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
-
-        //触发事件
-        var active = {
-            tabAdd: function () {
-                //新增一个Tab项
-                element.tabAdd('demo', {
-                    title: '新选项' + (Math.random() * 1000 | 0) //用于演示
-                    , content: '内容' + (Math.random() * 1000 | 0)
-                    , id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
-                })
-            }
-            , tabDelete: function (othis) {
-                //删除指定Tab项
-                element.tabDelete('demo', '44'); //删除：“商品管理”
-
-
-                othis.addClass('layui-btn-disabled');
-            }
-            , tabChange: function () {
-                //切换到指定Tab项
-                element.tabChange('demo', '22'); //切换到：用户管理
-            }
-        };
-
-        $('.site-demo-active').on('click', function () {
-            var othis = $(this), type = othis.data('type');
-            active[type] ? active[type].call(this, othis) : '';
-        });
-
-        //Hash地址的定位
-        var layid = location.hash.replace(/^#test=/, '');
-        element.tabChange('test', layid);
-
-        element.on('tab(test)', function (elem) {
-            location.hash = 'test=' + $(this).attr('lay-id');
-        });
-
-    });
-</script>
-<script>
+    var form;
     $(function () {
-        ShowInfo();
-        ShowInfotwo();
-        ShowInfothree();
-        ShowInfofour();
-        Selx();
-        Selc();
-        Sels();
-    })
+        layui.use('form', function () {
+            form = layui.form;
 
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+        Selx();
+    })
     function Selx() {
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetVIPgrades",
@@ -81,124 +34,24 @@
                 $(data).each(function () {
                     $("#dj").append("<option value=" + this.vGradeId + ">" + this.vGradeName + "</option>");
                 })
-            }
-        })
-    }
-
-    function Selc() {
-        $.ajax({
-            url: "http://localhost:4965/api/JcyVIP/GetVIPgrades",
-            dataType: "json",
-            type: "get",
-            async: false,
-            success: function (data) {
-                $("#dj1").empty();
-                $("#dj1").append("<option value=0>==请选择==</option>");
-                $(data).each(function () {
-                    $("#dj1").append("<option value=" + this.vGradeId + ">" + this.vGradeName + "</option>");
-                })
-            }
-        })
-    }
-
-    function Sels() {
-        $.ajax({
-            url: "http://localhost:4965/api/JcyVIP/GetVIPgrades",
-            dataType: "json",
-            type: "get",
-            async: false,
-            success: function (data) {
-                $("#dj2").empty();
-                $("#dj2").append("<option value=0>==请选择==</option>");
-                $(data).each(function () {
-                    $("#dj2").append("<option value=" + this.vGradeId + ">" + this.vGradeName + "</option>");
-                })
-            }
-        })
-    }
-   
-    function ShowInfotwo() {
-        $.ajax({
-            url: "http://localhost:4965/api/JcyVIP/GetCZ",
-            dataType: "json",
-            type: "get",
-            data: {},
-            async: false,
-            success: function (data) {
-                $("#list1").empty();
-                $(data).each(function () {
-                    var htmls = "<tr>" +
-                        "<td>" + this.id + "</td>" +
-                        "<td>" + this.idCard + "</td>" +
-                        "<td>" + this.vTypeName + "</td>" +
-                        "<td>" + this.vGradeName + "</td>" +
-                        "<td>" + this.vIPName + "</td>" +
-                        "<td>" + this.phone + "</td>" +
-                        "<td>" + this.amassSvalue + "</td>" +
-                        "<td>" + this.addGiveMoney + "</td>" +
-                        "<td>" + this.svalueMoney + "</td>" +
-                        "<td>" + this.amassPrice + "</td>" +
-                        "<td>操作</td></tr>";
-                    $("#list1").append(htmls);
-                })
-            }
-        })
-    }
-    function ShowInfothree() {
-        $.ajax({
-            url: "http://localhost:4965/api/JcyVIP/GetJF",
-            dataType: "json",
-            type: "get",
-            data: {},
-            async: false,
-            success: function (data) {
-                $("#list2").empty();
-                $(data).each(function () {
-                    var htmls = "<tr>" +
-                        "<td>" + this.id + "</td>" +
-                        "<td>" + this.idCard + "</td>" +
-                        "<td>" + this.vTypeName + "</td>" +
-                        "<td>" + this.vGradeName + "</td>" +
-                        "<td>" + this.vIPName + "</td>" +
-                        "<td>" + this.phone + "</td>" +
-                        "<td>" + this.integral + "</td>" +
-                        "<td>操作</td></tr>";
-                    $("#list2").append(htmls);
-                })
-            }
-        })
-    }
-    function ShowInfofour() {
-        $.ajax({
-            url: "http://localhost:4965/api/JcyVIP/GetMemberSet",
-            dataType: "json",
-            type: "get",
-            data: {},
-            async: false,
-            success: function (data) {
-                $("#list3").empty();
-                $(data).each(function () {
-                    var htmls = "<tr>" +
-                        "<td>" + this.id + "</td>" +
-                        "<td>" + this.vGradeName + "</td>" +
-                        "<td>" + this.vIPName + "</td>" +
-                        "<td>" + this.vIPReset + "</td>" +
-                        "<td>" + this.minIntegral + "</td>" +
-                        "<td>" + this.upgrade + "</td>" +
-                        "<td>" + this.remark + "</td>" +
-                        "<td>" + this.states + "</td>" +
-                        "<td>操作</td></tr>";
-                    $("#list3").append(htmls);
-                })
+            },
+            complete: function () {
+                ShowInfo();
             }
         })
     }
     function ShowInfo() {
+        var stime = $("#stime").val();
+        var etime = $("#stime").val();
+        var id = $("#dj").val();
+        var name = $("#name").val();
+        var phone = $("#name").val();
+        var Card = $("#IdCard").val();
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetVIPInfos",
             dataType: "json",
             type: "get",
-            data: {},
+            data: {stime: stime, etime: etime, id: id, name: name, phone, phone, Card: Card},
             async: false,
             success: function (data) {
                 $("#list").empty();
@@ -223,138 +76,60 @@
             }
         })
     }
+    function one() {
+        ShowInfo();
+    }
 </script>
 <script>
 </script>
-<div style="text-align:center;">
-    <div class="layui-tab">
-        <ul class="layui-tab-title">
-            <li>用户管理</li>
-            <li>权限分配</li>
-            <li>商品管理</li>
-            <li>订单管理</li>
-        </ul>
-        <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
-                会员等级:
-                <select id="dj" class="layui-select">
-                </select>
-                &nbsp;
-                创建时间:
-                <div class="layui-input-inline">
-                    <input type="text" class="layui-input" id="stime" placeholder="yyyy-MM-dd HH:mm:ss">
+<div>
+    <form class="layui-form">
+        <div class="layui-form-item" style="float:left">
+            <label class="layui-form-label">会员等级</label>
+            <div style="width:300px">
+                <div class="layui-input-block">
+                    <select name="interest" lay-filter="aihao" id="dj">
+                        <option></option>
+                    </select>
                 </div>
-                <div class="layui-input-inline" style="margin-left:-100px">
-                    <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input-block">
-                </div>
-                <button type="button" class="layui-btn" style="margin-left:-4px;" onclick="one()">
-                    <i class="layui-icon">&#xe615;</i>
-                </button>
-                &emsp;
-                <input type="checkbox" name="name" value="" /> 会员到期预警
-                <table class="layui-table">
-                    <thead style="background-color:darkslateblue;">
-                        <tr>
-                            <td>序号</td>
-                            <td>卡号</td>
-                            <td>会员类型</td>
-                            <td>会员等级</td>
-                            <td>会员姓名</td>
-                            <td>手机号码</td>
-                            <td>积累消费(元)</td>
-                            <td>储值余额(元)</td>
-                            <td>累计储值</td>
-                            <td>积分</td>
-                            <td>开卡时间</td>
-                            <td>到期时间</td>
-                            <td>会员状态</td>
-                            <td>操作</td>
-                        </tr>
-                    </thead>
-                    <tbody id="list">
-                    </tbody>
-                </table>
-            </div>
-            <div class="layui-tab-item">
-                会员等级:
-                <select id="dj1" class="layui-select">
-
-                </select>
-                <div class="layui-input-inline" style="margin-left:-100px">
-                    <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input-block">
-                </div>
-                <button type="button" class="layui-btn" style="margin-left:-4px;" onclick="one()">
-                    <i class="layui-icon">&#xe615;</i>
-                </button>
-                <table class="layui-table">
-                    <thead style="background-color:darkslateblue;">
-                        <tr>
-                            <td>序号</td>
-                            <td>卡号</td>
-                            <td>会员类型</td>
-                            <td>会员等级</td>
-                            <td>会员姓名</td>
-                            <td>手机号码</td>
-                            <td>累计储值(元)</td>
-                            <td>累计赠送(元)</td>
-                            <td>余额(元)</td>
-                            <td>储值累计消费(元)</td>
-                            <td>操作</td>
-                        </tr>
-                    </thead>
-                    <tbody id="list1">
-                    </tbody>
-                </table>
-            </div>
-            <div class="layui-tab-item">
-                会员等级:
-                <select id="dj2" class="layui-select">
-
-                </select>
-                <div class="layui-input-inline" style="margin-left:-100px">
-                    <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input-block">
-                </div>
-                <button type="button" class="layui-btn" style="margin-left:-4px;" onclick="one()">
-                    <i class="layui-icon">&#xe615;</i>
-                </button>
-                <table class="layui-table">
-                    <thead style="background-color:darkslateblue;">
-                        <tr>
-                            <td>序号</td>
-                            <td>卡号</td>
-                            <td>会员类型</td>
-                            <td>会员等级</td>
-                            <td>会员姓名</td>
-                            <td>手机号码</td>
-                            <td>积分</td>
-                            <td>操作</td>
-                        </tr>
-                    </thead>
-                    <tbody id="list2">
-                    </tbody>
-                </table>
-            </div>
-            <div class="layui-tab-item">
-                <table class="layui-table">
-                    <thead style="background-color:darkslateblue;">
-                        <tr>
-                            <td>序号</td>
-                            <td>会员等级</td>
-                            <td>会员姓名</td>
-                            <td>折扣</td>
-                            <td>最低积分</td>
-                            <td>升级所需积分</td>
-                            <td>备注</td>
-                            <td>状态</td>
-                            <td>操作</td>
-                        </tr>
-                    </thead>
-                    <tbody id="list3">
-                    </tbody>
-                </table>
             </div>
         </div>
+    </form>
+    &nbsp;
+    创建时间:
+    <div class="layui-input-inline">
+        <input type="text" class="layui-input" id="stime" placeholder="yyyy-MM-dd HH:mm:ss">
     </div>
+    <div class="layui-input-inline" style="margin-left:-100px">
+        <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input-block">
+    </div>
+    <button type="button" class="layui-btn" style="margin-left:-4px;" onclick="one()">
+        <i class="layui-icon">&#xe615;</i>
+    </button>
+    &emsp;
+    <input type="checkbox" name="name" value="" /> 会员到期预警
+    <table class="layui-table">
+        <thead style="background-color:darkslateblue;">
+            <tr>
+                <td>序号</td>
+                <td>卡号</td>
+                <td>会员类型</td>
+                <td>会员等级</td>
+                <td>会员姓名</td>
+                <td>手机号码</td>
+                <td>积累消费(元)</td>
+                <td>储值余额(元)</td>
+                <td>累计储值</td>
+                <td>积分</td>
+                <td>开卡时间</td>
+                <td>到期时间</td>
+                <td>会员状态</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody id="list">
+        </tbody>
+    </table>
 </div>
 
 

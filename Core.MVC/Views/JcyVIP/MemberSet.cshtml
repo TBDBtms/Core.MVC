@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "MemberSet";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<h1>MemberSet</h1>
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<script src="~/js/site.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(function () {
+        ShowInfofour();
+    })
+    function ShowInfofour() {
+        $.ajax({
+            url: "http://localhost:4965/api/JcyVIP/GetMemberSet",
+            dataType: "json",
+            type: "get",
+            data: {},
+            async: false,
+            success: function (data) {
+                $("#list3").empty();
+                $(data).each(function () {
+                    var htmls = "<tr>" +
+                        "<td>" + this.id + "</td>" +
+                        "<td>" + this.vGradeName + "</td>" +
+                        "<td>" + this.vIPName + "</td>" +
+                        "<td>" + this.vIPReset + "</td>" +
+                        "<td>" + this.minIntegral + "</td>" +
+                        "<td>" + this.upgrade + "</td>" +
+                        "<td>" + this.remark + "</td>" +
+                        "<td>" + this.states + "</td>" +
+                        "<td>操作</td></tr>";
+                    $("#list3").append(htmls);
+                })
+            }
+        })
+    }
+</script>
+<div>
+    <table class="layui-table">
+        <thead style="background-color:darkslateblue;">
+            <tr>
+                <td>序号</td>
+                <td>会员等级</td>
+                <td>会员姓名</td>
+                <td>折扣</td>
+                <td>最低积分</td>
+                <td>升级所需积分</td>
+                <td>备注</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody id="list3">
+        </tbody>
+    </table>
+</div>
+
