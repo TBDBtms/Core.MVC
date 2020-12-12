@@ -52,11 +52,11 @@
         </div>
         <div style="float:left;margin-top:10px;">
             <h3 style="margin-top:5px;margin-left:85px;float:left;">手机号码</h3>
-            <input type="text" name="title" style="width:200px;margin-left:20px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者姓名" class="layui-input">
+            <input type="text" name="title" style="width:200px;margin-left:20px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者手机号" class="layui-input">
         </div>
         <div style="float:left;margin-top:10px;">
             <h3 style="margin-top:5px;margin-left:80px;float:left">证件号码</h3>
-            <input type="text" name="title" style="width:200px;margin-left:25px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者姓名" class="layui-input">
+            <input type="text" name="title" style="width:200px;margin-left:25px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者证件号码" class="layui-input">
         </div>
         <div style="float:left;margin-top:10px;">
             <div style="float:left">
@@ -94,7 +94,7 @@
                     <h3 style="margin-left:80px;margin-top:10px;float:left">到期时间</h3>
                 </div>
                 <div class="layui-input-inline" style="margin-left:25px;">
-                    <input type="text" name="date" id="date" style="width:200px" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    <input type="text" name="date" id="date1" style="width:200px" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div>
@@ -102,7 +102,7 @@
                     <h3 style="margin-top:5px;margin-left:120px;float:left;border-radius:10px">民族</h3>
                 </div>
                 <div style="margin-top:5px">
-                    <input type="text" name="title" style="width:200px;margin-left:20px;float:left;" lay-verify="title" autocomplete="off" placeholder="请填写患者姓名" class="layui-input">
+                    <input type="text" name="title" style="width:200px;margin-left:20px;border-radius:10px;float:left;" lay-verify="title" autocomplete="off" placeholder="请填写民族" class="layui-input">
                 </div>
             </div>
             <div style="float:left">
@@ -190,20 +190,16 @@
                     </div>
                 </div>
             </div>
-            <div  style="float:left;margin-left:70px;">
+            <div style="float:left;">
                 <div style="margin-top:5px">
-                    <h3 style="margin-top:5px;margin-left:120px;float:left;border-radius:10px">工作单位</h3>
-                </div>
-                <div style="margin-top:5px">
-                    <input type="text" name="title" style="width:200px;margin-left:20px;float:left;" lay-verify="title" autocomplete="off" placeholder="请填写患者姓名" class="layui-input">
+                    <h3 style="margin-top:5px;margin-left:85px;float:left;border-radius:10px">工作单位</h3>
+                    <input type="text" name="title" style="width:200px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者工作单位" class="layui-input">
                 </div>
             </div>
-            <div  style="float:left;margin-left:70px;">
+            <div  style="float:left;">
                 <div style="margin-top:5px">
-                    <h3 style="margin-top:5px;margin-left:120px;float:left;border-radius:10px">备注</h3>
-                </div>
-                <div style="margin-top:5px">
-                    <input type="text" name="title" style="width:200px;margin-left:20px;float:left;" lay-verify="title" autocomplete="off" placeholder="请填写患者姓名" class="layui-input">
+                    <h3 style="margin-top:5px;margin-left:125px;float:left;border-radius:10px">备注</h3>
+                    <input type="text" name="title" style="width:200px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者备注" class="layui-input">
                 </div>
             </div>
         </div>
@@ -221,6 +217,9 @@
         //日期
         laydate.render({
             elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
         });
             //监听提交
             form.on('submit(formDemo)', function (data) {
