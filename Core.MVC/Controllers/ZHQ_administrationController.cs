@@ -9,10 +9,18 @@ namespace Core.MVC.Controllers
     public class ZHQ_administrationController : Controller
     {
         /// <summary>
-        /// 查询所有药品
+        /// 查询所有药品视图
         /// </summary>
         /// <returns></returns>
         public IActionResult Showadministration()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 新增药品视图
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Addadministration()
         {
             return View();
         }

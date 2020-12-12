@@ -8,6 +8,7 @@
 <h1></h1>
 <script src="~/js/site.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
 <script>
     $(function () {
         Sels();
@@ -42,7 +43,7 @@
             url: "http://localhost:4965/api/JcyVIP/GetJF",
             dataType: "json",
             type: "get",
-            data: { id: id, name: name, phone, phone, Card: Card},
+            data: { id: id, name: name, phone, phone, Card: Card },
             async: false,
             success: function (data) {
                 $("#list2").empty();
@@ -52,7 +53,7 @@
                         "<td>" + this.idCard + "</td>" +
                         "<td>" + this.vTypeName + "</td>" +
                         "<td style='color:#ffd800;font-weight:bold'>" + this.vGradeName + "</td>" +
-                        "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.vIPName + '</a>' +"</td>" +
+                        "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.vIPName + '</a>' + "</td>" +
                         "<td>" + this.phone + "</td>" +
                         "<td>" + this.integral + "</td>" +
                         "<td>操作</td></tr>";
@@ -72,7 +73,7 @@
             <i class="layui-icon">&#xe615;</i>
         </button>
     </div>
-   
+
     <table class="layui-table">
         <thead style="background-color:darkslateblue;">
             <tr>
