@@ -11,13 +11,13 @@
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
 </head>
+
 <body>
-        <ul class="layui-nav layui-bg-cyan" lay-filter="">
+        <ul class="layui-nav layui-bg-cyan" lay-filter="" style="background-color:aqua">
             <li class="layui-nav-item"><a href="">我</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">个人中心</a>
                 <dl class="layui-nav-child">
-                     二级菜单 
                     <dd><a href="">修改密码</a></dd>
                     <dd><a href="">找回密码</a></dd>
                 </dl>
@@ -221,7 +221,7 @@
                 </li>
             </ul>
         </div>
-        <div style="float:left;width:1693px;height:910px">
+        <div style="float:left">
             @RenderBody()
         </div>
     </div>

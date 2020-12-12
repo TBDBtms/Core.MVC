@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Showadministration";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div style="width:1400px;height:910px;margin-left:150px">
+    <table class="layui-table" lay-skin="line" >
+        <tr style="background-color:deepskyblue">
+            <th>序号</th>
+            <th>药品编号</th>
+            <th>药品通用名</th>
+            <th>药品分类</th>
+            <th>药品规格</th>
+            <th>药品发票</th>
+            <th>生产厂家</th>
+            <th>采购价</th>
+            <th>零售价</th>
+            <th>有效期</th>
+            <th>药品说明</th>
+            <th>销售数量</th>
+            <th>盘点状态</th>
+            <th>药品状态</th>
+        </tr>
+        <tbody id="tb">
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(function () {
+        LoadTable();
+    })
+
+    function LoadTable() {
+        var i = 1;
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_administration/Getadministration",
+            data: {},
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $("#tb").empty();
+                $(d).each(function () {
+                    var str = "<tr>" +
+                        "<td>" + i + "</td>" +
+                        "<td>" + this.drugBM + "</td>" +
+                        "<td>" + this.drugTYM + "</td>" +
+                        "<td>" + this.drugFL + "</td>" +
+                        "<td>" + this.drugGG + "</td>" +
+                        "<td>" + this.drugFP + "</td>" +
+                        "<td>" + this.drugCJ + "</td>" +
+                        "<td>" + this.drugCGJ + "</td>" +
+                        "<td>" + this.drugLSJ + "</td>" +
+                        "<td>" + this.drugYXQ + "</td>" +
+                        "<td>" + this.drugSM + "</td>" +
+                        "<td>" + this.drugXSNum + "</td>" +
+                        "<td>" + this.drupPDState + "</td>" +
+                        "<td>" + this.drugState + "</td>" +
+                        "</tr>";
+                    $("#tb").append(str);
+                    i++;
+                })
+            }
+        })
+    }
+</script>
