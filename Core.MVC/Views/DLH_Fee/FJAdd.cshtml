@@ -72,8 +72,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="width:150px;font-size: 20px;font-weight: bold;">项目启用：</label>
                     <div class="layui-input-block" style="float:left;margin-left:20px">
-                        <input type="radio" name="sex" value="True" title="启用" checked="">
-                        <input type="radio" name="sex" value="False" title="不启用">
+                        <input type="radio" name="shi" value="True" title="启用" checked="">
+                        <input type="radio" name="shi" value="False" title="不启用">
                     </div>
                 </div>
             </form>
@@ -153,18 +153,32 @@
 
     function FJAddFJ() {
 
-        //var str = {
-        //    additional=$("#text_Name").val(),
-        //    recipeKey=$("#LeiBie").val(),
-        //    moneyInfn=$("#text_Money").val(),
-        //    cost=$("#text_Money1").val(),
-        //    createTime=new Date().toLocaleDateString(),
-        //    CreatepersonKey=uid,
+        var str = {
+            additional=$("#text_Name").val(),
+            recipeKey=$("#LeiBie").val(),
+            moneyInfn=$("#text_Money").val(),
+            cost=$("#text_Money1").val(),
+            createTime=new Date().toLocaleDateString(),
+            createpersonKey=uid,
+            vip=$("[name=sex]:checked").val(),
+            cState=$("[name=shi]:checked").val()
+        };
+        console.log(str);
 
-
-        //};
-
-
+        $.ajax({
+            url: "http://localhost:4965/api/DLH_Fee/AddCost",
+            type: "post",
+            dataType: "json",
+            data: str,
+            success: function (date) {
+                if (date > 0) {
+                    alert("添加成功");
+                }
+                else {
+                    alert("添加失败");
+                }
+            }
+        });
     }
 </script>
 
