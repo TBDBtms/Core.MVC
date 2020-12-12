@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewData["Title"] = "FJAdd";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<h2 style="height:50px;font-size:30px;color:black;padding-left:35px;padding-top:20px;padding-bottom:20px">新增附加费</h2>
+<body>
+    @*<div style="width:250px;height:50px;margin-left;background-color:red"></div>*@
+    <div class="layui-tab-content">
+            <div style="width:500px;height:80px;">
+                <div style="width:80px;float:left">
+                    <label class="layui-form-label">费用名称<span>*</span></label>
+                </div>
+                <div style="float:left;margin-left:10px">
+                    <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" style="width:300px;margin-left:10px" class="layui-input">
+                </div>
+            </div>
+            <div style="float:left;width:450px;height:80px;">
+                <div style="float:left;margin-left:-6px;width:350px;">
+                    <form class="layui-form">
+                        <div class="layui-form-item" style="float:left">
+                            <label class="layui-form-label">处方类别</label>
+                            <div style="width:300px;margin-left:15px;">
+                                <div class="layui-input-block">
+                                    <select name="interest" lay-filter="aihao" id="LeiBie" style="margin-left:-20px">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                </div>
+     
+                <div>
+                    <label class="layui-form-label">金额 &nbsp;&nbsp;&nbsp;&nbsp;<span>*</span>(元)</label>
+                    <input type="number" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" style="width:300px" class="layui-input">
+                </div>
+                <div>
+                    <label class="layui-form-label">成本价&nbsp;&nbsp;&nbsp;&nbsp; (元)</label>
+                    <input type="number" name="title" required lay-verify="required" placeholder="0.00" autocomplete="off" style="width:300px" class="layui-input">
+                </div>
+                <div>
+                    <label class="layui-form-label">允许会员折扣：&nbsp;&nbsp;&nbsp;&nbsp; (元)</label>
+                    <input type="radio" name="sex" value="True" title="是">是
+                    <input type="radio" name="sex" value="False" title="否" checked>否
+                </div>
+                <div>
+                    <label class="layui-form-label">项目状态：&nbsp;&nbsp;&nbsp;&nbsp; (元)</label>
+                    <input type="radio" name="shi" value="True" title="启用">启用
+                    <input type="radio" name="shi" value="False" title="禁用" checked>禁用
+                </div>
+            </div>
+</body>
+
+<style>
+    span {
+        margin-left: 10px;
+        color: red;
+    }
+
+
+    input {
+        margin-left: 30px;
+    }
+</style>
+<script>
+    var from;
+    $().ready(function () {
+        layui.use('form', function () {
+            form = layui.form;
+
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
+        ShowPrescriptionInfos();
+    })
+
+    function ShowPrescriptionInfos() {
+        $.ajax({
+            url: "http://localhost:4965/api/DLH_Fee/GetPrescriptionInfos",
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                console.log(d);
+                $("#LeiBie").empty();
+                $(d).each(function () {
+
+                    var html = "<option value='" + this.recipeId + "'>" + this.recipeName + "</option>";
+                    console.log(html);
+                    $("#LeiBie").append(html);
+                    form.render('select');
+                });
+            }
+        })
+    }
+</script>
+
+

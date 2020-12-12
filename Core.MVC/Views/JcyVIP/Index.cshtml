@@ -7,17 +7,7 @@
 <script src="~/js/site.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
-    var form;
     $(function () {
-        layui.use('form', function () {
-            form = layui.form;
-
-            //监听提交
-            form.on('submit(formDemo)', function (data) {
-                layer.msg(JSON.stringify(data.field));
-                return false;
-            });
-        });
         Selx();
     })
     function Selx() {
@@ -49,7 +39,7 @@
             url: "http://localhost:4965/api/JcyVIP/GetVIPInfos",
             dataType: "json",
             type: "get",
-            data: {stime: stime, etime: etime, id: id, name: name, phone, phone, Card: Card},
+            data: { stime: stime, etime: etime, id: id, name: name, phone, phone, Card: Card },
             async: false,
             success: function (data) {
                 $("#list").empty();
@@ -58,8 +48,8 @@
                         "<td>" + this.id + "</td>" +
                         "<td>" + this.idCard + "</td>" +
                         "<td>" + this.vTypeName + "</td>" +
-                        "<td>" + this.vGradeName + "</td>" +
-                        "<td>" + this.vIPName + "</td>" +
+                        "<td style='color:#ffd800;font-weight:bold'>" + this.vGradeName + "</td>" +
+                        "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.vIPName + '</a>' +"</td>" +
                         "<td>" + this.phone + "</td>" +
                         "<td>" + this.amassPrice + "</td>" +
                         "<td>" + this.svalueMoney + "</td>" +
@@ -81,31 +71,17 @@
 <script>
 </script>
 <div>
-    <form class="layui-form">
-        <div class="layui-form-item" style="float:left">
-            <label class="layui-form-label">会员等级</label>
-            <div style="width:300px">
-                <div class="layui-input-block">
-                    <select name="interest" lay-filter="aihao" id="dj">
-                        <option></option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </form>
-    &nbsp;
-    创建时间:
-    <div class="layui-input-inline">
-        <input type="text" class="layui-input" id="stime" placeholder="yyyy-MM-dd HH:mm:ss">
+    <div style="margin-top:1px;">
+        会员等级: <select name="interest" lay-filter="会员等级" id="dj" style="width:100px;height:38px;">
+            <option></option>
+        </select>
+        创建时间: <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" style="width:150px;height:33px;">
+        <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
+        <button type="button" style="margin-left:auto" onclick="one()" class="layui-btn">
+            <i class="layui-icon">&#xe615;</i>
+        </button>
+        <input type="checkbox" name="name" value="" /> 会员到期预警
     </div>
-    <div class="layui-input-inline" style="margin-left:-100px">
-        <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input-block">
-    </div>
-    <button type="button" class="layui-btn" style="margin-left:-4px;" onclick="one()">
-        <i class="layui-icon">&#xe615;</i>
-    </button>
-    &emsp;
-    <input type="checkbox" name="name" value="" /> 会员到期预警
     <table class="layui-table">
         <thead style="background-color:darkslateblue;">
             <tr>
