@@ -13,7 +13,6 @@
         </button>
     </div>
     </div>
-    <div>
         <div>
             <form class="layui-form">
                 <div class="layui-form-item" style="float:left">
@@ -27,15 +26,38 @@
                     </div>
                 </div>
             </form>
+            <div style="float:left">
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+                    <div class="layui-form-item" style="width:300px">
+                        <label class="layui-form-label">开始时间：</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="sTime" name="sTime" model="datetime"
+                                   format="yyyy-MM-dd" placeholder="yyyy-MM-dd" autocomplete="off"
+                                   class="layui-input test-item" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="float:left">
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+                    <div class="layui-form-item" style="width:300px">
+                        <label class="layui-form-label">结束时间：</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="eTime" name="eTime" model="datetime"
+                                   format="yyyy-MM-dd" placeholder="yyyy-MM-dd" autocomplete="off"
+                                   class="layui-input test-item" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-input-block" style="width:300px;float:left">
+                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="患者姓名/手机号" class="layui-input">
+            </div>
+            <div style="float:left">
+                <button type="button" class="layui-btn">查询</button>
+            </div>
         </div>
-        <div class="layui-input-block" style="width:300px;float:left">
-            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="患者姓名/手机号" class="layui-input">
-        </div>
-        <div style="float:left">
-            <button type="button" class="layui-btn">查询</button>
-        </div>
-    </div>
-    <div>
+    <div align="center" style="width:1650px;height:1000px">
         <table class="layui-table" style="text-align:center;margin-left:30px">
             <colgroup>
                 <col width="150">
@@ -63,15 +85,26 @@
                
 <script>
     var form;
+    var laydate;
     $(function () {
         layui.use('form', function () {
             form = layui.form;
-    
+            var layData = ['form', 'laydate'];
+            layui.use(layData, function () {
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '#sTime'
+                });
+                laydate.render({
+                    elem: '#eTime'
+                });
+            });
             //监听提交
             form.on('submit(formDemo)', function (data) {
                 layer.msg(JSON.stringify(data.field));
                 return false;
             });
+
         });
         ShowVIPType();
     })
@@ -111,7 +144,6 @@
                         "<td style='color:orange'>" + this.vGradeName + "</td>" +
                         "<td>" + this.createTime + "</td>" +
                         "<td>" + this.caoPeople + "</td>" +
-                        "<td><a href=''  style='margin-left:10px' onclick=''>接诊</a><a href='' style='margin-left:15px' onclick=''>编辑</a><a href='' style='margin-left:15px' onclick=''>设置会员</a><a href='' style='margin-left:15px' onclick=''>删除</a></td></tr>";
                         "<td><a href=''  style='margin-left:10px' onclick=''>接诊</a><a href='' style='margin-left:15px' onclick=''>编辑</a><a href='' style='margin-left:15px' onclick=''>设置会员</a><a href='' style='margin-left:15px' onclick='Del(" + this.patientId + ")'>删除</a></td></tr>";
                     $("#GetPat").append(str);
                 });
@@ -119,20 +151,23 @@
         });
     }
     function Del(id) {
-        $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/DelPatient?id=" + id,
-            type: "post",
-            dataType: "json",
-            success: function (d) {
-                if (d > 0) {
-                    alert("删除成功");
-                    location.href = '/Zzh_Patient/GetPatient';
+        confirm("确定要删除吗?")
+        {
+            $.ajax({
+                url: "http://localhost:4965/api/Zzh_Patient/DelPatient?id=" + id,
+                type: "post",
+                dataType: "json",
+                success: function (d) {
+                    if (d > 0) {
+                        alert("删除成功");
+                        location.href = '/Zzh_Patient/GetPatient';
+                    }
+                    else {
+                        alert("删除失败");
+                    }
                 }
-                else {
-                    alert("删除失败");
-                }
-            }
-        })
+            })
+        }
     }
 </script>
 
