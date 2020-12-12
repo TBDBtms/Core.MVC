@@ -1,7 +1,6 @@
 ﻿<!DOCTYPE html>
 @{ 
 
-    
 
 }
 <html>
@@ -13,6 +12,7 @@
 </head>
 
 <body>
+    <span id="sp1"></span>
         <ul class="layui-nav layui-bg-cyan" lay-filter="" style="background-color:aqua">
             <li class="layui-nav-item"><a href="">我</a></li>
             <li class="layui-nav-item">
@@ -238,7 +238,8 @@
     $().ready(function () {
         var Uname = sessionStorage.getItem("Uname");
         var Rname = sessionStorage.getItem("Rname");
+        var Uid = sessionStorage.getItem("Uid");
 
-        $("#sp1").text(Uname+""+Rname);
+        $("#sp1").text(Uname + "" + Rname + "" + Uid);
     });
 </script>
