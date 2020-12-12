@@ -1,7 +1,6 @@
 ﻿<!DOCTYPE html>
 @{ 
 
-    
 
 }
 <html>
@@ -11,13 +10,14 @@
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
 </head>
+
 <body>
-        <ul class="layui-nav layui-bg-cyan" lay-filter="">
+    <span id="sp1"></span>
+        <ul class="layui-nav layui-bg-cyan" lay-filter="" style="background-color:aqua">
             <li class="layui-nav-item"><a href="">我</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">个人中心</a>
                 <dl class="layui-nav-child">
-                     二级菜单 
                     <dd><a href="">修改密码</a></dd>
                     <dd><a href="">找回密码</a></dd>
                 </dl>
@@ -68,7 +68,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">药品管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">药品信息维护</a></dd>
+                        <dd><a href="javascript:location.href='/ZHQ_administration/Showadministration';">药品信息维护</a></dd>
                         <dd><a href="">新增药品</a></dd>
                     </dl>
                 </li>
@@ -221,7 +221,7 @@
                 </li>
             </ul>
         </div>
-        <div style="float:left;width:1693px;height:910px">
+        <div style="float:left">
             @RenderBody()
         </div>
     </div>
@@ -238,7 +238,8 @@
     $().ready(function () {
         var Uname = sessionStorage.getItem("Uname");
         var Rname = sessionStorage.getItem("Rname");
+        var Uid = sessionStorage.getItem("Uid");
 
-        $("#sp1").text(Uname+""+Rname);
+        $("#sp1").text(Uname + "" + Rname + "" + Uid);
     });
 </script>
