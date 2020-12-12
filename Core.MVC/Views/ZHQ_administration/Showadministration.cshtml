@@ -3,20 +3,34 @@
     ViewData["Title"] = "Showadministration";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
+<style>
+    table tr td {
+        width:50px;
+        height:20px;
+        color:black;
+        font-size:5px
+    }
+
+</style>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <div style="width:1400px;height:910px;margin-left:150px">
-    <table class="layui-table" lay-skin="line" >
-        <tr style="background-color:deepskyblue">
+    <div style="width:209px;float:left;margin-top:15px">
+        <input type="text" id="txtName" placeholder="请输入药品名称/药品编号" class="layui-input"/>
+    </div>
+    <div style="width:50px;float:left;margin-top:15px">
+        <input type="button" value="查询" id="btnCX" class="layui-btn" />
+    </div>
+    <table class="layui-table" style="text-align:center">
+        <tr style="background-color:lavender">
             <th>序号</th>
             <th>药品编号</th>
+            <th>创建时间</th>
             <th>药品通用名</th>
             <th>药品分类</th>
             <th>药品规格</th>
-            <th>药品发票</th>
             <th>生产厂家</th>
             <th>采购价</th>
             <th>零售价</th>
-            <th>有效期</th>
             <th>药品说明</th>
             <th>销售数量</th>
             <th>盘点状态</th>
@@ -32,11 +46,17 @@
         LoadTable();
     })
 
+    $("#btnCX").click(function () {
+        LoadTable();
+
+    })
+
     function LoadTable() {
+        var name = $("#txtName").val();
         var i = 1;
         $.ajax({
             url: "http://localhost:4965/api/ZHQ_administration/Getadministration",
-            data: {},
+            data: { name: name },
             type: "get",
             dataType: "json",
             success: function (d) {
@@ -45,18 +65,17 @@
                     var str = "<tr>" +
                         "<td>" + i + "</td>" +
                         "<td>" + this.drugBM + "</td>" +
+                        "<td>" + this.drugctime + "</td>" +
                         "<td>" + this.drugTYM + "</td>" +
-                        "<td>" + this.drugFL + "</td>" +
+                        "<td>" + this.drugClassName + "</td>" +
                         "<td>" + this.drugGG + "</td>" +
-                        "<td>" + this.drugFP + "</td>" +
-                        "<td>" + this.drugCJ + "</td>" +
+                        "<td>" + this.manufacturerName + "</td>" +
                         "<td>" + this.drugCGJ + "</td>" +
                         "<td>" + this.drugLSJ + "</td>" +
-                        "<td>" + this.drugYXQ + "</td>" +
                         "<td>" + this.drugSM + "</td>" +
                         "<td>" + this.drugXSNum + "</td>" +
-                        "<td>" + this.drupPDState + "</td>" +
-                        "<td>" + this.drugState + "</td>" +
+                        "<td>" + (this.drugPDState == 1 ? "<span style='color:blue'>已盘点</span>" : "<span style='color:red'>正在盘点</span>") + "</td>" +
+                        "<td>" + (this.drugState==1?"<span style='color:blue'>启用</span>":"<span style='color:red'>停用</span>") + "</td>" +
                         "</tr>";
                     $("#tb").append(str);
                     i++;
