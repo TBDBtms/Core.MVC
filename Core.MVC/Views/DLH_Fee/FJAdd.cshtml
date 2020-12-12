@@ -3,71 +3,115 @@
     ViewData["Title"] = "FJAdd";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
+<style>
+    .layui-input, select {
+        height: 50px;
+    }
+</style>
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<h2 style="height:50px;font-size:30px;color:black;padding-left:35px;padding-top:20px;padding-bottom:20px">新增附加费</h2>
-<body>
-    @*<div style="width:250px;height:50px;margin-left;background-color:red"></div>*@
-    <div class="layui-tab-content">
-            <div style="width:500px;height:80px;">
-                <div style="width:80px;float:left">
-                    <label class="layui-form-label">费用名称<span>*</span></label>
+
+<div style="width:1600px;height:1000px;margin-left:30px">
+    <div style="width:1600px;height:150px;">
+        <div style="float:left;margin-left:60px;margin-top:50px">
+            <h1 style="font-weight: bold;">新增附加费</h1>
+        </div>
+        <div style="float:right">
+            <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:100px;background-color:#FFFFFF; float:right;color:black;font-weight: bold;" onclick="location.href='/DLH_Fee/Show'">返回</button>
+            <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:30px;background-color:#C2C5F6;float:right;color:black;font-weight: bold;" onclick="FJAddFJ()">保存</button>
+        </div>
+    </div>
+    <div style="width:1600px;height:30px;">
+        <div style="float:left;margin-left:150px">
+            <label style="font-size: 20px;font-weight: bold;">费用名称<span>*</span></label>
+        </div>
+        <div style="float:left;margin-left:250px;">
+            <label style="font-size: 20px;font-weight: bold;">处方类型</label>
+        </div>
+        <div style="float:left;margin-left:250px">
+            <label style="font-size: 20px;font-weight: bold;">金额<span>*</span>（元）</label>
+        </div>
+        <div style="float:left;margin-left:250px">
+            <label style="font-size: 20px;font-weight: bold;">成本价（元）</label>
+        </div>
+    </div>
+    <div style="width:1600px;height:60px;">
+        <div style="margin-left:130px;float:left;margin-top:0px">
+            <input type="text" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增附加费用名称" class="layui-input" id="text_Name">
+        </div>
+        <div style="margin-left:80px;float:left;height:70px">
+            <form class="layui-form">
+                <div style="width:300px;height:75px;">
+                    <div class="layui-input-block;" style="width:250px;height:70px;">
+                        <select name="interest" lay-filter="aihao" id="LeiBie">
+                        </select>
+                    </div>
                 </div>
-                <div style="float:left;margin-left:10px">
-                    <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" style="width:300px;margin-left:10px" class="layui-input">
+            </form>
+        </div>
+        <div style="margin-left:20px;float:left">
+            <input type="number" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增金额" class="layui-input" id="text_Money">
+        </div>
+        <div style="margin-left:80px;float:left">
+            <input type="number" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增成本价" class="layui-input" id="text_Money1">
+        </div>
+    </div>
+    <div style="width:1600px;height:60px;">
+        <div style="margin-left:-650px;float:left">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:150px;font-size: 20px;font-weight: bold;">允许会员折扣：</label>
+                    <div class="layui-input-block" style="float:left;margin-left:20px">
+                        <input type="radio" name="sex" value="True" title="是" checked="">
+                        <input type="radio" name="sex" value="False" title="否">
+                    </div>
                 </div>
-            </div>
-            <div style="float:left;width:450px;height:80px;">
-                <div style="float:left;margin-left:-6px;width:350px;">
-                    <form class="layui-form">
-                        <div class="layui-form-item" style="float:left">
-                            <label class="layui-form-label">处方类别</label>
-                            <div style="width:300px;margin-left:15px;">
-                                <div class="layui-input-block">
-                                    <select name="interest" lay-filter="aihao" id="LeiBie" style="margin-left:-20px">
-                                        <option></option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+            </form>
+        </div>
+        <div style="margin-left:120px;float:left">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:150px;font-size: 20px;font-weight: bold;">项目启用：</label>
+                    <div class="layui-input-block" style="float:left;margin-left:20px">
+                        <input type="radio" name="sex" value="True" title="启用" checked="">
+                        <input type="radio" name="sex" value="False" title="不启用">
+                    </div>
                 </div>
-                </div>
-     
-                <div>
-                    <label class="layui-form-label">金额 &nbsp;&nbsp;&nbsp;&nbsp;<span>*</span>(元)</label>
-                    <input type="number" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" style="width:300px" class="layui-input">
-                </div>
-                <div>
-                    <label class="layui-form-label">成本价&nbsp;&nbsp;&nbsp;&nbsp; (元)</label>
-                    <input type="number" name="title" required lay-verify="required" placeholder="0.00" autocomplete="off" style="width:300px" class="layui-input">
-                </div>
-                <div>
-                    <label class="layui-form-label">允许会员折扣：&nbsp;&nbsp;&nbsp;&nbsp; (元)</label>
-                    <input type="radio" name="sex" value="True" title="是">是
-                    <input type="radio" name="sex" value="False" title="否" checked>否
-                </div>
-                <div>
-                    <label class="layui-form-label">项目状态：&nbsp;&nbsp;&nbsp;&nbsp; (元)</label>
-                    <input type="radio" name="shi" value="True" title="启用">启用
-                    <input type="radio" name="shi" value="False" title="禁用" checked>禁用
-                </div>
-            </div>
-</body>
+            </form>
+        </div>
+    </div>
+</div>
 
 <style>
     span {
-        margin-left: 10px;
         color: red;
     }
-
-
-    input {
-        margin-left: 30px;
-    }
 </style>
+
+
+
 <script>
     var from;
     $().ready(function () {
+        var uid = sessionStorage.getItem("UId");
+        layui.use(['form', 'layedit', 'laydate'], function () {
+            form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate;
+
+            //日期
+            laydate.render({
+                elem: '#date'
+            });
+            laydate.render({
+                elem: '#date1'
+            });
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+        });
         layui.use('form', function () {
             form = layui.form;
 
@@ -76,7 +120,16 @@
                 layer.msg(JSON.stringify(data.field));
                 return false;
             });
+            //监听指定开关
+            form.on('switch(switchTest)', function (data) {
+                layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                    offset: '6px'
+                });
+                layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+            });
         });
+
+        console.log(uid);
         ShowPrescriptionInfos();
     })
 
@@ -89,7 +142,6 @@
                 console.log(d);
                 $("#LeiBie").empty();
                 $(d).each(function () {
-
                     var html = "<option value='" + this.recipeId + "'>" + this.recipeName + "</option>";
                     console.log(html);
                     $("#LeiBie").append(html);
@@ -97,6 +149,22 @@
                 });
             }
         })
+    }
+
+    function FJAddFJ() {
+
+        //var str = {
+        //    additional=$("#text_Name").val(),
+        //    recipeKey=$("#LeiBie").val(),
+        //    moneyInfn=$("#text_Money").val(),
+        //    cost=$("#text_Money1").val(),
+        //    createTime=new Date().toLocaleDateString(),
+        //    CreatepersonKey=uid,
+
+
+        //};
+
+
     }
 </script>
 
