@@ -4,10 +4,9 @@
     Layout = "~/Views/Home/_Layout.cshtml";
 }
 
-<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
-<script src="~/layui-v2.4.5/layui/layui.js"></script>
 <script src="~/js/site.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
 <script>
     $(function () {
         Selx();
@@ -51,7 +50,7 @@
                         "<td>" + this.idCard + "</td>" +
                         "<td>" + this.vTypeName + "</td>" +
                         "<td style='color:#ffd800;font-weight:bold'>" + this.vGradeName + "</td>" +
-                        "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.vIPName + '</a>' +"</td>" +
+                        "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.vIPName + '</a>' + "</td>" +
                         "<td>" + this.phone + "</td>" +
                         "<td>" + this.amassPrice + "</td>" +
                         "<td>" + this.svalueMoney + "</td>" +

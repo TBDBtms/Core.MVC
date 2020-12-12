@@ -24,6 +24,11 @@ namespace Core.MVC.Controllers
         {
             return View();
         }
+        public IActionResult ShowCZ(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
         /// <summary>
         /// 积分管理
         /// </summary>
