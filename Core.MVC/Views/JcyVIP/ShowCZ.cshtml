@@ -19,13 +19,14 @@
         })
         function ShowInfos(id) {
             $.ajax({
-                url: "http://localhost:4965/api/JcyVIP/GetById?id=" + id,
+                url: "http://localhost:4965/api/JcyVIP/GetById" ,
                 dataType: "json",
+                data: { id: @ViewBag.id },
                 type: "get",
                 success: function (data) {
-                    $("#card").val(data.idCard);
-                    $("#name").val(data.vIPName);
-                    $("#ye").val(data.svalueMoney);
+                    $("#card").text(data.idCard);
+                    $("#name").text(data.vIPName);
+                    $("#ye").text(data.svalueMoney);
                 }
             })
         }

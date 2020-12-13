@@ -1,0 +1,101 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VIPCZ</title>
+    <script src="~/js/site.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+    <script>
+        $(function () {
+            ShowInfos();
+        })
+        function ShowInfos(id) {
+            console.log(id);
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetById",
+                dataType: "json",
+                data: { id:@ViewBag.id},
+                type: "get",
+                success: function (data) {
+                    console.log(data);
+                    $("#card").text(data.idCard);
+                    $("#name").text(data.vIPName);
+                    $("#ye").text(data.svalueMoney);
+                }
+            })
+        }
+        function Upd() {
+            var vip = {
+                PayMoney: $("#money").val(),
+                GiveMoney: $("#addmoney").val(),
+                SId: $("[name=fs]:checked").val(),
+                Id: $("#id").val()
+            };
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/UpdVIPInfo",
+                dataType: "json",
+                type: "post",
+                data: vip,
+                //contentType:"/application/json",
+                success: function (data) {
+                    console.log(data);
+                    if (data > 0) {
+                        alert('充值成功');
+                        location.reload();
+                        window.close();
+                    } else {
+                        alert('充值失败');
+                        location.reload();
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div style="text-align:center">
+        <input type="hidden" id="id" value="@ViewBag.id" />
+        <h3>余额充值</h3>
+        <br />
+        <div>
+            会员卡号:<span id="card"></span>&emsp;&emsp;会员姓名:<span id="name"></span>
+        </div>
+        <br />
+        <div>
+            余额:<span id="ye"> </span>
+        </div>
+        <br />
+        <div>
+            充值金额(元):<span style="color:red">*</span>
+            <input type="text" id="money" value="" class="layui-text" />
+        </div>
+        <br />
+        <div>
+            赠送金额(元):&nbsp; <input type="text" id="addmoney" value="" class="layui-text" />
+        </div>
+        <br />
+        <div>
+            支付方式:
+            <input type="radio" name="fs" value="0" checked />现金
+            <input type="radio" name="fs" value="1" />支付宝
+            <input type="radio" name="fs" value="2" />微信
+            <input type="radio" name="fs" value="3" />银行卡
+        </div>
+        <br />
+        <div>
+            <input type="button" name="name" value="取消" class="layui-btn" />
+            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="Upd()"/>
+        </div>
+    </div>
+</body>
+</html>

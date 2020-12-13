@@ -10,7 +10,79 @@
 <script>
     $(function () {
         Selx();
+        text1();
+        text2();
+        text3();
+        text4();
+        text5();
     })
+    function text1() {
+        $('.test2').on('click', function () {
+            layer.open({
+                type: 2,
+                title: false,
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['400', '300px'],
+                anim: 2,
+                content: ['/JcyVIP/VIPCZ?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
+            });
+
+            console.log(this.id);
+        });
+    }
+    function text2() {
+        $('.test3').on('click', function () {
+            layer.open({
+                type: 2,
+                title: false,
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['400', '300px'],
+                anim: 2,
+                content: ['/JcyVIP/VIPDJ?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
+            });
+        });
+    }
+    function text3() {
+        $('.test4').on('click', function () {
+            layer.open({
+                type: 2,
+                title: false,
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['400', '300px'],
+                anim: 2,
+                content: ['/JcyVIP/VIPBD?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
+            });
+        });
+    }
+    function text4() {
+        $('.test5').on('click', function () {
+            layer.open({
+                type: 2,
+                title: false,
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['400', '300px'],
+                anim: 2,
+                content: ['/JcyVIP/VIPTK?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
+            });
+        });
+    }
+    function text5() {
+        $('.test6').on('click', function () {
+            layer.open({
+                type: 2,
+                title: false,
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['400', '300px'],
+                anim: 2,
+                content: ['/JcyVIP/SetVIP?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
+            });
+        });
+    }
     function Selx() {
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetVIPgrades",
@@ -59,7 +131,7 @@
                         "<td>" + this.startTime + "</td>" +
                         "<td>" + this.endTime + "</td>" +
                         "<td>" + this.vIPState + "</td>" +
-                        "<td>操作</td></tr>";
+                        "<td><a href='#' class='test2' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>充值</a>&nbsp;<a href='#' id='" + this.id + "' class='test3' style='color:darkslateblue;font-weight:bold'>设置会员等级</a>&nbsp;<a href='#' class='test4' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动</a>&nbsp;<a href='#' class='test5' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>退款</a>&nbsp;<a href='#' id='" + this.id + "' class='test6' style='color:darkslateblue;font-weight:bold'>等级变更记录</a></td></tr>";
                     $("#list").append(htmls);
                 })
             }
@@ -103,6 +175,7 @@
             </tr>
         </thead>
         <tbody id="list">
+
         </tbody>
     </table>
 </div>
