@@ -16,5 +16,10 @@ namespace Core.MVC.Controllers
         {
             return View();
         }
+        public IActionResult FJModify(int cid)
+        {
+            ViewBag.id = cid;
+            return View();
+        }
     }
 }

@@ -132,7 +132,7 @@
                         "<td>" + this.uname + "</td>" +
                         "<td>" + (this.vip ? "是" : "否") + "</td>" +
                         "<td>" + (this.cState ? "启用" : "未启用") + "</td>" +
-                        "<td><a onclick='Update(" + this.sequenceId + ")'style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='Del(" + this.sequenceId + ")'>删除</a></td></tr>";
+                        "<td><a onclick='Update(" + this.sequenceId + ")' style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='Del(" + this.sequenceId + ")'>删除</a></td></tr>";
                     $("#tbody_id").append(str);
                     i++;
                 })
@@ -158,9 +158,8 @@
             });
         }
     }
-
     function Update(id) {
-        location.href = ""
+        location.href = "/DLH_Fee/FJModify?cid=" + id;
     }
     function FJAdd() {
         location.href = "/DLH_Fee/FJAdd";
