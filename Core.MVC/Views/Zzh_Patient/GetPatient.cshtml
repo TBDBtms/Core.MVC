@@ -158,7 +158,7 @@
                         "<td style='color:orange'>" + this.vGradeName + "</td>" +
                         "<td>" + this.createTime + "</td>" +
                         "<td>" + this.caoPeople + "</td>" +
-                        "<td><a href=''  style='margin-left:10px' onclick=''>接诊</a><a href='' style='margin-left:15px' onclick=''>编辑</a><a href='' style='margin-left:15px' onclick=''>设置会员</a><a href='' style='margin-left:15px' onclick='Del(" + this.patientId + ")'>删除</a></td></tr>";
+                        "<td><a href=''  style='margin-left:10px' onclick=''>接诊</a><a style='margin-left:15px' onclick='Update(" + this.patientId+")'>编辑</a><a href='' style='margin-left:15px' onclick=''>设置会员</a><a href='' style='margin-left:15px' onclick='Del(" + this.patientId + ")'>删除</a></td></tr>";
                     $("#GetPat").append(str);
                 });
             }
@@ -183,6 +183,10 @@
                 }
             })
         }
+    }
+    //修改
+    function Update(id) {
+        location.href = "/Zzh_Patient/UpdPatient?pid=" + id;
     }
 </script>
 

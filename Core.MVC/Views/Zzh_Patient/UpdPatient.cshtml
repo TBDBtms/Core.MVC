@@ -1,14 +1,15 @@
 ﻿
 @{
-    ViewData["Title"] = "AddPatient";
+    ViewData["Title"] = "UpdPatient";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <div>
+    <input id="hid" type="hidden" value="@ViewBag.pid" />
     <div style="height:100px;">
-        <h2 style="font-weight:bold;margin-left:100px;margin-top:50px;float:left;color:blueviolet">新增患者信息</h2>
+        <h2 style="font-weight:bold;margin-left:100px;margin-top:50px;float:left;color:blueviolet">编辑患者信息</h2>
         <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:100px; float:right;margin-top:50px" onclick="location.href='/Zzh_Patient/GetPatient'">返回</button>
-        <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:30px;float:right;margin-top:50px" onclick="Add()">保存</button>
+        <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:30px;float:right;margin-top:50px" onclick="Upd()">保存</button>
     </div>
     <div style="height:100px;margin-top:30px">
         <div>
@@ -196,7 +197,7 @@
                     <input type="text" id="txt_workUnit" style="width:200px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者工作单位" class="layui-input">
                 </div>
             </div>
-            <div  style="float:left;">
+            <div style="float:left;">
                 <div style="margin-top:5px">
                     <h3 style="margin-top:5px;margin-left:125px;float:left;border-radius:10px">备注</h3>
                     <input type="text" id="txt_Remark" style="width:500px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者备注" class="layui-input">
@@ -266,6 +267,7 @@
         Sheng();
         City();
         ZhiYe();
+        HuiXian();
     });
     //患者来源
     function LaiYuan() {
@@ -359,8 +361,38 @@
             }
         })
     }
-    function Add() {
+    //回显
+    function HuiXian() {
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/GetPatient?patientId=" +@ViewBag.pid,
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $("#txt_name").val(d.patientName);
+                $("#txt_card").val(d.patientCard);
+                $("#txt_age").val(d.patientAge);
+                $("#date").val(d.patientDateBirth);
+                $("#sex").val(d.patientSex);
+                $("#txt_phone").val(d.patientPhone);
+                $("#txt_papers").val(d.patientpapers);
+                $("#txt_Source").val(d.patientSourceId);
+                $("#txt_HuiYuan").val(d.memberType);
+                $("#date1").val(d.endData);
+                $("#txt_Nation").val(d.nation);
+                $("#txt_Marital").val(d.maritalStatus);
+                $("#txt_Education").val(d.educationId);
+                $("#txt_sheng").val(d.provinceId);
+                $("#txt_shi").val(d.cityId);
+                $("#txt_Address").val(d.patientAddress);
+                $("#txt_Position").val(d.positionId);
+                $("#txt_workUnit").val(d.workUnit);
+                $("#txt_Remark").val(d.remark);
+            }
+        })
+    }
+    function Upd() {
         var m = {
+            PatientId: $("#hid").val(),
             PatientName: $("#txt_name").val(),
             PatientCard: $("#txt_card").val(),
             PatientAge: $("#txt_age").val(),
@@ -382,16 +414,16 @@
             Remark: $("#txt_Remark").val(),
         }
         $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/AddPatient",
+            url: "http://localhost:4965/api/Zzh_Patient/UpdPatient",
             type: "post",
             dataType: "json",
             data: m,
             success: function (d) {
                 if (d > 0) {
-                    alert("添加成功");
+                    alert("修改成功");
                 }
                 else {
-                    alert("添加失败");
+                    alert("修改失败");
                 }
             }
         })

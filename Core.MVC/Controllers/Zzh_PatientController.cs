@@ -16,6 +16,10 @@ namespace Core.MVC.Controllers
         {
             return View();
         }
-
+        public IActionResult UpdPatient(int pid)
+        {
+            ViewBag.pid = pid;
+            return View();
+        }
     }
 }
