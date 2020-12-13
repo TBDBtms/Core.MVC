@@ -9,7 +9,7 @@
     }
 </style>
 <script src="~/lib/jquery/dist/jquery.js"></script>
-
+<input id="date1111" type="hidden" />
 <div style="width:1600px;height:1000px;margin-left:30px">
     <div style="width:1600px;height:150px;">
         <div style="float:left;margin-left:60px;margin-top:50px">
@@ -17,7 +17,7 @@
         </div>
         <div style="float:right">
             <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:100px;background-color:#FFFFFF; float:right;color:black;font-weight: bold;" onclick="location.href='/DLH_Fee/Show'">返回</button>
-            <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:30px;background-color:#C2C5F6;float:right;color:black;font-weight: bold;" onclick="FJAddFJ()">保存</button>
+            <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:30px;background-color:#C2C5F6;float:right;color:black;font-weight: bold;" id="baocuen" onclick="FJAddFJ()">保存</button>
         </div>
     </div>
     <div style="width:1600px;height:30px;">
@@ -90,48 +90,34 @@
 
 
 <script>
-    var from;
-    $().ready(function () {
-        var uid = sessionStorage.getItem("UId");
+    var form;
+         
         layui.use(['form', 'layedit', 'laydate'], function () {
             form = layui.form
                 , layer = layui.layer
                 , layedit = layui.layedit
                 , laydate = layui.laydate;
-
-            //日期
-            laydate.render({
-                elem: '#date'
-            });
-            laydate.render({
-                elem: '#date1'
-            });
-            //监听提交
-            form.on('submit(formDemo)', function (data) {
-                layer.msg(JSON.stringify(data.field));
-                return false;
-            });
-        });
-        layui.use('form', function () {
-            form = layui.form;
-
-            //监听提交
-            form.on('submit(formDemo)', function (data) {
-                layer.msg(JSON.stringify(data.field));
-                return false;
-            });
-            //监听指定开关
-            form.on('switch(switchTest)', function (data) {
-                layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                    offset: '6px'
+           
+      
+                //监听指定开关
+                form.on('switch(switchTest)', function (data) {
+                    layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                        offset: '6px'
+                    });
+                    layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
                 });
-                layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+            laydate.render({
+                elem: '#date1111', //指定元素
+                type: 'datetime', // 可选择：年、月、日、时、分、秒
+                format: 'yyyy-MM-dd HH:mm:ss', //指定时间格式
+                value: new Date(), // 指定值
             });
         });
-
-        console.log(uid);
+      
+    $(function () {
         ShowPrescriptionInfos();
     })
+       
 
     function ShowPrescriptionInfos() {
         $.ajax({
@@ -140,31 +126,30 @@
             dataType: "json",
             success: function (d) {
                 console.log(d);
-                $("#LeiBie").empty();
-                $(d).each(function () {
-                    var html = "<option value='" + this.recipeId + "'>" + this.recipeName + "</option>";
+                $(d).each(function() {
+                    var html="<option value='" + this.recipeId + "'>" + this.recipeName + "</option>";
                     console.log(html);
                     $("#LeiBie").append(html);
-                    form.render('select');
+
                 });
+                form.render('select');
+
             }
-        })
+        });
     }
-
+    
     function FJAddFJ() {
-
         var str = {
-            additional=$("#text_Name").val(),
-            recipeKey=$("#LeiBie").val(),
-            moneyInfn=$("#text_Money").val(),
-            cost=$("#text_Money1").val(),
-            createTime=new Date().toLocaleDateString(),
-            createpersonKey=uid,
-            vip=$("[name=sex]:checked").val(),
-            cState=$("[name=shi]:checked").val()
+            Additional:$("#text_Name").val(),
+            RecipeKey:$("#LeiBie").val(),
+            MoneyInfn:$("#text_Money").val(),
+            Cost: $("#text_Money1").val(),
+            CTime:$("#date1111").val(),
+            CreatepersonKey:sessionStorage.getItem("Uid"),
+            Vip:$("[name=sex]:checked").val(),
+            CState:$("[name=shi]:checked").val()
         };
         console.log(str);
-
         $.ajax({
             url: "http://localhost:4965/api/DLH_Fee/AddCost",
             type: "post",
@@ -178,7 +163,7 @@
                     alert("添加失败");
                 }
             }
-        });
+        })
     }
 </script>
 

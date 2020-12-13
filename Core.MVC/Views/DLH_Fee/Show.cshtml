@@ -79,24 +79,26 @@
 </style>
 
 <script>
+    var form;
     $(function () {
-        layui.use('form', function () {
-            form = layui.form;
-
-            //监听提交
-            form.on('submit(formDemo)', function (data) {
-                layer.msg(JSON.stringify(data.field));
-                return false;
-            });
-        });
+     
         ShowPrescriptionInfos();
+        Showfujiafeiyong();
     });
 
+
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+    });
 
     function ShowPrescriptionInfos() {
         $.ajax({
             url: "http://localhost:4965/api/DLH_Fee/GetPrescriptionInfos",
             type: "get",
+            async: false,
             dataType: "json",
             success: function (d) {
                 console.log(d);
@@ -104,19 +106,18 @@
                     var html = "<option value='" + this.recipeId + "'>" + this.recipeName + "</option>";
                     console.log(html);
                     $("#LeiBie").append(html);
+
                 });
+                form.render('select');
             },
-            complete: function () {
-                Showfujiafeiyong();
-            }
         })
     }
-  
     function Showfujiafeiyong() {
         var i = 1;
         $.ajax({
             url: "http://localhost:4965/api/DLH_Fee/GetCostsInfos",
             type: "get",
+            async: false,
             dataType: "json",
             success: function (d) {
                 $("#tbody_id").empty();
@@ -127,11 +128,11 @@
                         "<td>" + this.recipeName + "</td>" +
                         "<td>" + this.moneyInfn + "</td>" +
                         "<td>" + this.cost + "</td>" +
-                        "<td>" + this.createTime + "</td>" +
+                        "<td>" + this.time + "</td>" +
                         "<td>" + this.uname + "</td>" +
                         "<td>" + (this.vip ? "是" : "否") + "</td>" +
                         "<td>" + (this.cState ? "启用" : "未启用") + "</td>" +
-                        "<td><a onclick='Update(" + this.sequenceId + ")' style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='Del(" + this.sequenceId + ")'>删除</a></td></tr>";
+                        "<td><a onclick='Update(" + this.sequenceId + ")'style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='Del(" + this.sequenceId + ")'>删除</a></td></tr>";
                     $("#tbody_id").append(str);
                     i++;
                 })
