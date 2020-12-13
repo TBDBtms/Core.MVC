@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewData["Title"] = "AddUserinfo";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<div style="background-color:gainsboro">
+    <div style="height:100px;background-color:aqua">
+        <h2 style="font-weight:bold;margin-left:100px;margin-top:50px;float:left">新增员工信息</h2>
+        <button type="button" class="layui-btn" style="width:100px;height:50px;margin-right:100px; margin-top: 30px;float:right" onclick="location.href='/HzxLogin/Index'">返回</button>
+        <button type="button" class="layui-btn" style="width:100px;height:50px;margin-right:30px; margin-top: 30px;float:right">保存</button>
+
+    </div>
+    <div style="height:100px;background-color:yellow;margin-top:30px">
+        <div style="margin-top:30px">
+            <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">员工编号</h3>
+            <input type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;" lay-verify="title" autocomplete="off" placeholder="请填写员工编号" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">员工姓名</h3>
+            <input type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;" lay-verify="title" autocomplete="off" placeholder="请填写员工姓名" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">员工年龄</h3>
+            <input type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;" lay-verify="title" autocomplete="off" placeholder="请填写员工姓名" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">员工性别</h3>
+            <select id="Select1" style="width:200px;margin-left:20px;float:left;margin-top:30px; height:35px;">
+                <option value="0">男</option>
+                <option value="1">女</option>
+
+            </select>
+        </div>
+    </div>
+    <div style="height:100px;background-color:aqua">
+        <div style="margin-top:30px">
+            <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">手机号码</h3>
+            <input type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;" lay-verify="title" autocomplete="off" placeholder="请填写员工手机号" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">所属科室</h3>
+            <select id="Select1" style="width:200px;margin-left:20px;float:left;margin-top:30px; height:35px;">
+                <option value="0"></option>
+             
+
+            </select>
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">入职时间</h3>
+            <input type="datetime" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;" lay-verify="title" autocomplete="off" placeholder="请填写员工入职时间" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">操作人</h3>
+            <input type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;" lay-verify="title" autocomplete="off" placeholder="操作人" class="layui-input">
+        </div>
+    </div>
+    <div style="height:100px;background-color:beige">
+        <div style="margin-top:30px">
+            <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">员工状态</h3>
+            <input type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;" lay-verify="title" autocomplete="off" placeholder="请填写员工状态" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">员工账号</h3>
+            <input type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;" lay-verify="title" autocomplete="off" placeholder="请填写员工账号" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">员工密码</h3>
+            <input type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;" lay-verify="title" autocomplete="off" placeholder="请填写员工密码" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">角色</h3>
+            <select id="Select1" style="width:200px;margin-left:20px;float:left;margin-top:30px; height:35px;">
+                <option value="0"></option>
+
+
+            </select>
+        </div>
+    </div>
+    <div style="height:100px;background-color:bisque">
+        <div style="margin-top:30px">
+            <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">员工血型</h3>
+            <input type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;" lay-verify="title" autocomplete="off" placeholder="请输入员工血型" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">员工家乡</h3>
+            <select id="Select1" style="width:200px;margin-left:20px;float:left;margin-top:30px; height:35px;">
+                <option value="0"></option>
+
+
+            </select>
+            <select id="Select1" style="width:200px;margin-left:20px;float:left;margin-top:30px; height:35px;">
+                <option value="0"></option>
+
+
+            </select>
+           
+        </div>
+    </div>
+
+    <div style="height:100px;background-color:coral"></div>
+    <div style="height:100px;background-color:chartreuse"></div>
+    <div style="height:100px;background-color:darkcyan"></div>
+</div>

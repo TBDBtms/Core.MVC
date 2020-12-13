@@ -181,8 +181,6 @@
             var Uiphone = $("#Uiphone").val();
             var Upass = $("#Upass").val();
             if (text === num) {
-
-
                 $.ajax({
                     url: "http://localhost:4965/api/Hzx_Login/Login",
                     type: "get",
@@ -212,6 +210,12 @@
                 alert('验证失败')
             }
         }
+
+    }
+    //注册按钮
+    function Zhu()
+    {
+        location.href = "/HzxLogin/Zhu";
 
     }
 

@@ -14,7 +14,7 @@
 <body>
     <span id="sp1"></span>
         <ul class="layui-nav layui-bg-cyan" lay-filter="" style="background-color:aqua">
-            <li class="layui-nav-item"><a href="">我</a></li>
+            <li class="layui-nav-item"><a href="" >我</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">个人中心</a>
                 <dl class="layui-nav-child">
@@ -229,13 +229,13 @@
     layui.use('element', function () {
         var element = layui.element;
 
-        //…
+        
     });
     $().ready(function () {
         var Uname = sessionStorage.getItem("Uname");
         var Rname = sessionStorage.getItem("Rname");
         var Uid = sessionStorage.getItem("Uid");
 
-        $("#sp1").text(Uname + "" + Rname + "" + Uid);
+        $("#sp1").text(Uname + "" + Rname);
     });
 </script>
