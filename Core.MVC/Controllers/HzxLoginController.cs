@@ -9,14 +9,7 @@ namespace Core.MVC.Controllers
 {
     public class HzxLoginController : Controller
     {
-        //public IActionResult Index(string Uname = null, string Qma = null,string Rname=null)
-        //{
-
-        //    ViewData["Uname"] = Uname;
-        //    ViewData["Qma"] = Qma;
-        //    ViewData["Rname"] = Rname;
-        //    return View();
-        //}
+        
 
         public IActionResult Index()
         {
@@ -27,7 +20,18 @@ namespace Core.MVC.Controllers
             
             return View();
         }
-     
+        public IActionResult Zhu()
+        {
+
+            return View();
+        }
+
+        public IActionResult Addroleinfo()
+        {
+
+            return View();
+        }
+
 
     }
 }
