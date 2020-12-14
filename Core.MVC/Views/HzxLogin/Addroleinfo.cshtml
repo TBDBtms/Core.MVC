@@ -54,8 +54,8 @@
                 $(d).each(function () {
                     $("#tb").append(" <tr>"+
                         "<td>"+this.rid+"</td >"+
-                    "<td>"+this.rname+"</td>"+
-                    "<td>操作</td>"+
+                        "<td>" + this.rname + "</td>" +
+                        "<td> <input id='Button1' type='button' value='配置' onclick='Quan(" + this.rid + ")' /></td>" +
                 "</tr >");
                 });
             }
@@ -72,4 +72,9 @@
             return false;
         });
     });
+    function Quan(rid)
+    {
+        location.href = "/HzxLogin/AddQuan?Rid="+rid;
+
+    }
 </script>

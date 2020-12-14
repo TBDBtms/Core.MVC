@@ -82,3 +82,25 @@
     <div style="height:100px;background-color:chartreuse"></div>
     <div style="height:100px;background-color:darkcyan"></div>
 </div>
+<script>
+    var form;
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>

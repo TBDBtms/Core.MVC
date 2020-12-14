@@ -94,7 +94,7 @@
     </center>
 
     <div style="margin:0 auto;width:600px;height:700px;border-radius:10px;background:rgba(255,255,255,.6)">
-        <div style="margin: 40px 150px;padding: 26px 0"><input type="text" required="required" id="Uiphone" placeholder="手机号" class="input" style="border:0;height:33px;border-radius:5px;min-width:300px;padding-left:10px" /></div>
+        <div style="margin: 40px 150px;padding: 26px 0"><input type="text" required="required" id="Uname" placeholder="用户名" class="input" style="border:0;height:33px;border-radius:5px;min-width:300px;padding-left:10px" /></div>
         <div style="margin: 10px 150px"><input type="password" id="Upass" required="required" placeholder="密码" class="input" style="border: 0; height: 33px; border-radius: 5px; min-width: 300px; padding-left: 10px " /></div>
 
         <div style="margin: 20px 150px"><span style="font-size:24px">验证码</span> <canvas id="canvas" width="120" height="40" style="background-color:white;margin-top:15px"></canvas></div>
@@ -105,7 +105,7 @@
         <div style="margin: 20px 150px">
             <span>
                 没有账号？请点击<input id="Button2" type="button" class="but" value="注册" onclick="Zhu()" style="margin-left: 3px; border: 0; height: 40px; border-radius: 5px; min-width: 100px; padding-left: 10px; font-size:18px" />
-                <input id="Button3" type="button" value="找回密码" class="but" onclick="zhuche()" style="margin-left: 3px; border: 0; height: 40px;margin-top:20px; border-radius: 5px; min-width: 100px; padding-left: 10px;font-size:18px" />
+                <input id="Button3" type="button" value="找回密码" class="but" onclick="zhao()" style="margin-left: 3px; border: 0; height: 40px;margin-top:20px; border-radius: 5px; min-width: 100px; padding-left: 10px;font-size:18px" />
             </span>
         </div>
 
@@ -178,22 +178,25 @@
         //点击按钮验证
         document.getElementById("Button1").onclick = function () {
             var text = input.value //获取输入框的值
-            var Uiphone = $("#Uiphone").val();
+            var Uname = $("#Uname").val();
             var Upass = $("#Upass").val();
             if (text === num) {
                 $.ajax({
                     url: "http://localhost:4965/api/Hzx_Login/Login",
                     type: "get",
-                    data: { Uiphone: Uiphone, Upass: Upass },
+                    data: { uname: Uname, Upass: Upass },
                     dataType: "json",
                     success: function (d) {
                         if (d != null) {
                             alert("登录成功");
                             //跳用户界面
                             sessionStorage.setItem("Uname", d.uname);
+                            sessionStorage.setItem("Upass", d.upass);
                             sessionStorage.setItem("Qma", d.qma);
                             sessionStorage.setItem("Rname", d.rname);
                             sessionStorage.setItem("Uid", d.uid);
+
+
                             location.href = "/HzxLogin/Index";
                             return;
                         }
@@ -218,6 +221,17 @@
         location.href = "/HzxLogin/Zhu";
 
     }
+    function zhao() {
+        var Uname = $("#Uname").val();
+        if (Uname == "")
+        {
+            alert("请输入用户名");
+            return;
+        }
+        location.href = "/HzxLogin/zhao?Uname="+Uname;
+
+    }
+
 
 
 </script>
