@@ -82,9 +82,53 @@
                 AddRemark: $("#remark").val(),
                 Id: $("#id").val()
             };
-            
             $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/AddIntegral",
+                dataType: "json",
+                data: htmls,
+                type: "post",
+                success: function (data) {
+                    if (data > 0) {
+                        alert('成功');
+                        location.reload();
+                    } else {
+                        alert('失败');
+                        location.reload();
+                    }
+                }
+            })
+        }
+        function KoujVIPJF() {
+            var htmls = {
+                Integral: $("#num1").val(),
+                KJRemark: $("#remark1").val(),
+                Id: $("#ids").val()
+            };
+            console.log(htmls);
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/JIanIntegral",
+                dataType: "json",
+                data: htmls,
+                type: "post",
+                success: function (data) {
+                    if (data > 0) {
+                        alert('成功');
+                        location.reload();
+                    } else {
+                        alert('失败');
+                        location.reload();
+                    }
+                }
+            })
+        }
+        function QinlVIPJF() {
+            var htmls = {
+                InClearRemark: $("#remark2").val(),
+                Id: $("#idx").val()
+            };
+            console.log(htmls);
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/ClearIntegral",
                 dataType: "json",
                 data: htmls,
                 type: "post",
@@ -104,6 +148,8 @@
 <body>
     <div>
         <input type="hidden" id="id" value="@ViewBag.id" />
+        <input type="hidden" id="ids" value="@ViewBag.id" />
+        <input type="hidden" id="idx" value="@ViewBag.id" />
         &emsp;<h3 style="margin-left:15px;">积分变动</h3>
         <br />
         <div>
@@ -122,24 +168,24 @@
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">
                     增加数量<span style="color:red">*</span><br />
-                    <input type="text" name="num" value="" /><br />
+                    <input type="text" id="num" value="" /><br />
                     备注:<br />
                     <textarea id="remark"></textarea><br />
                     <input type="button" name="name" value="取消" class="layui-btn" />
-                    <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="AddVIPJF()"/>
+                    <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="AddVIPJF()" />
                 </div>
                 <div class="layui-tab-item">
                     扣减数量<span style="color:red">*</span><br />
-                    <input type="text" name="num" value="" /><br />
+                    <input type="text" id="num1" value="" /><br />
                     备注:<br />
                     <textarea id="remark1"></textarea><br />
                     <input type="button" name="name" value="取消" class="layui-btn" />
-                    <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" />
+                    <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="KoujVIPJF()" />
                 </div>
                 <div class="layui-tab-item">
                     <textarea id="remark2"></textarea><br />
                     <input type="button" name="name" value="取消" class="layui-btn" />
-                    <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" />
+                    <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="QinlVIPJF()" />
                 </div>
             </div>
         </div>

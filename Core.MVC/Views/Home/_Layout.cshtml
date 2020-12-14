@@ -7,11 +7,10 @@
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
 </head>
-
 <body>
-    <span id="sp1"></span>
+    
         <ul class="layui-nav layui-bg-cyan" lay-filter="" style="background-color:aqua">
-            <li class="layui-nav-item"><a href="" >我</a></li>
+            <li class="layui-nav-item"> <span id="sp1" style="color:black;font-weight:300"></span></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">个人中心</a>
                 <dl class="layui-nav-child">
@@ -103,8 +102,8 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">药品调价</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">新增调价</a></dd>
-                        <dd><a href="">查看调价详细</a></dd>
+                        <dd><a href="javascript:location.href='/ZHQ_administration/AddPricing'">新增调价</a></dd>
+                        <dd><a href="javascript:location.href='/ZHQ_administration/TJMingXi'">查看调价详细</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
