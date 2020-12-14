@@ -5,13 +5,36 @@
 }
 
 <h1></h1>
-<h1>MemberSet</h1>
+<h1></h1>
 <script src="~/js/site.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
 <script>
     $(function () {
         ShowInfofour();
+        $('.test').on('click', function () {
+            layer.open({
+                type: 2,
+                title: false,
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['400', '300px'],
+                anim: 2,
+                content: ['/JcyVIP/VIPSet', 'no'], //iframe的url，no代表不显示滚动条
+            });
+        });
+
+        $('.test1').on('click', function () {
+            layer.open({
+                type: 2,
+                title: false,
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['400px', '350px'],
+                anim: 2,
+                content: ['/JcyVIP/VIPSet', 'no'], //iframe的url，no代表不显示滚动条
+            });
+        });
     })
     function ShowInfofour() {
         $.ajax({
@@ -26,13 +49,13 @@
                     var htmls = "<tr>" +
                         "<td>" + this.id + "</td>" +
                         "<td style='color:#ffd800;font-weight:bold'>" + this.vGradeName + "</td>" +
-                        "<td>" + '<a href="javascript:;" style="color:darkslateblue">'+this.vIPName+'</a>'+"</td>" +
-                        "<td>" + this.vIPReset +"</td>" +
+                        "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.patientName + '</a>' + "</td>" +
+                        "<td>" + this.vIPReset + "</td>" +
                         "<td>" + this.minIntegral + "</td>" +
                         "<td>" + this.upgrade + "</td>" +
                         "<td>" + this.remark + "</td>" +
                         "<td>" + this.states + "</td>" +
-                        "<td><input type='button' onclick='Showform()' class='layui - btn layui - btn - warm' value='会员条件设置'><input type='button' onclick='form2()' class='layui - btn layui - btn - warm' value='新增会员类型'></td></tr>";
+                        "<td><input type='button'  class='test' value='会员条件设置'><input type='button'  class='test1' value='新增会员类型'></td></tr>";
                     $("#list3").append(htmls);
                 })
             }

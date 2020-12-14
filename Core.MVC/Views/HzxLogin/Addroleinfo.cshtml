@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "Addroleinfo";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+  
+    <div style="">
+        <table class="layui-table" style="text-align:center;margin-left:30px">
+
+            <thead style="background-color:aqua">
+                <tr style="background-color:aqua">
+
+                    <th style="text-align:center">角色id</th>
+                    <th style="text-align:center">角色名称</th>
+                    <th style="text-align:center">操作</th>
+                </tr>
+            </thead>
+            <tbody id="tb">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
+<script>
+
+    $().ready(function () {
+        Shows();
+
+
+    });
+    function Shows()
+    {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetRoleinfo",
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (d) {
+                $("#tb").empty();
+                $(d).each(function () {
+                    $("#tb").append(" <tr>"+
+                        "<td>"+this.rid+"</td >"+
+                    "<td>"+this.rname+"</td>"+
+                    "<td>操作</td>"+
+                "</tr >");
+                });
+            }
+        });
+
+    }
+    //Demo
+    layui.use('form', function () {
+        form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>

@@ -14,7 +14,7 @@
 <body>
     <span id="sp1"></span>
         <ul class="layui-nav layui-bg-cyan" lay-filter="" style="background-color:aqua">
-            <li class="layui-nav-item"><a href="">我</a></li>
+            <li class="layui-nav-item"><a href="" >我</a></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">个人中心</a>
                 <dl class="layui-nav-child">
@@ -207,11 +207,7 @@
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:location.href='/DLH_Fee/Show';">费用设置</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="">新增附加费</a></dd>
-                        <dd><a href="">新增诊疗费</a></dd>
-                        <dd><a href="">新增挂号费</a></dd>
-                    </dl>
+                   
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">支付方式设置</a>
@@ -233,13 +229,13 @@
     layui.use('element', function () {
         var element = layui.element;
 
-        //…
+        
     });
     $().ready(function () {
         var Uname = sessionStorage.getItem("Uname");
         var Rname = sessionStorage.getItem("Rname");
         var Uid = sessionStorage.getItem("Uid");
 
-        $("#sp1").text(Uname + "" + Rname + "" + Uid);
+        $("#sp1").text(Uname + "" + Rname);
     });
 </script>

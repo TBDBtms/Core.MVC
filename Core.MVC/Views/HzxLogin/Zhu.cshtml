@@ -1,0 +1,310 @@
+﻿
+@{
+    ViewData["Title"] = "Zhu";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div style="">
+    <div style="height:100px;">
+        <h2 style="font-weight:bold;margin-left:100px;margin-top:50px;float:left;color:blueviolet">新增员工信息</h2>
+        <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:100px; float:right;margin-top:50px" onclick="location.href='/Zzh_Patient/GetPatient'">返回</button>
+
+    </div>
+    <div style="height:100px;margin-top:30px">
+        <div>
+            <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">员工姓名</h3>
+            <input type="text" id="Uname" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写员工姓名" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">员工编号</h3>
+            <input type="text" id="Uno" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写员工编号" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">员工年龄</h3>
+            <input type="text" name="title" id="Uage"style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入数字" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">创建日期</h3>
+            <form class="layui-form">
+                <div class="layui-input-inline" style="margin-left:20px;margin-top:35px;">
+                    <input type="text" name="date" id="CreateTime" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div style="height:100px">
+        <div>
+            <div class="layui-form-item" style="float:left;margin-left:78px;margin-top:10px;height:45px;">
+                <form class="layui-form">
+                    <label class="layui-form-label">性别</label>
+                    <div style="width:300px;height:45px;">
+                        <div class="layui-input-block">
+                            <select name="interest" lay-filter="aihao" id="Usex" style="height: 45px;">
+                              
+                                <option value="0">男</option>
+                                <option value="1">女</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div style="float:left;margin-top:10px;">
+            <h3 style="margin-top:5px;margin-left:85px;float:left;">手机号码</h3>
+            <input type="text" id="Uiphone" name="title" style="width:200px;margin-left:20px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写员工手机号" class="layui-input">
+        </div>
+        <div style="float:left;margin-top:10px;">
+            <h3 style="margin-top:5px;margin-left:80px;float:left">员工账号</h3>
+            <input type="text" id="Uzhanghao" name="title" style="width:200px;margin-left:25px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写员工账号" class="layui-input">
+        </div>
+        <div style="float:left;margin-top:10px;">
+            <div style="float:left">
+                <div class="layui-form-item" style="float:left;margin-left:50px;height:50px;">
+                    <form class="layui-form">
+                        <label class="layui-form-label">所属科室</label>
+                        <div style="width:300px;">
+                            <div class="layui-input-block">
+                                <select lay-verify="required" id="keshi">
+                                    <option value="0">全科</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height:100px;">
+        <div>
+            <div class="layui-form-item" style="float:left;margin-left:78px">
+                <div class="layui-form-item" style="float:left;">
+                    <form class="layui-form">
+                        <label class="layui-form-label">员工血型</label>
+                        <div style="width:300px;">
+                            <div class="layui-input-block">
+                                <select name="interest" lay-filter="aihao" id="Uxue">
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div style="float:left">
+                <div style="float:left">
+                    <h3 style="margin-top:5px;margin-left:80px;float:left;border-radius:10px">创建人</h3>
+                </div>
+                <div class="layui-input-inline" style="margin-left:25px;">
+                    <input type="text" id="CreatName" name="title" style="width:200px;margin-left:25px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写员工账号" class="layui-input">
+                </div>
+            </div>
+            <div>
+                <div style="margin-top:5px">
+                    <h3 style="margin-top:5px;margin-left:120px;float:left;border-radius:10px">密码</h3>
+                </div>
+                <div style="margin-top:5px">
+                    <input type="text" name="title" style="width:200px;margin-left:20px;border-radius:10px;float:left;" lay-verify="title" autocomplete="off" placeholder="请填写密码" class="layui-input">
+                </div>
+            </div>
+            <div style="float:left">
+                <div class="layui-form-item" style="float:left;margin-left:50px">
+                    <div class="layui-form-item" style="float:left;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">角色</label>
+                            <div style="width:300px;">
+                                <div class="layui-input-block">
+                                    <select lay-verify="required" id="juese">
+                                        <option value="0"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height:100px;">
+        <div style="float:left">
+            <div class="layui-form-item" style="float:left;margin-left:75px">
+                <div class="layui-form-item" style="float:left;">
+                    <form class="layui-form">
+                        <label class="layui-form-label">员工状态</label>
+                        <div style="width:300px;">
+                            <div class="layui-input-block">
+                                <select name="interest" lay-filter="aihao" id="Uissale">
+                                    <option value="0">正常</option>
+                                    <option value="1">离职</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-form-item" style="float:left;margin-left:68px">
+                <div class="layui-form-item" style="float:left;">
+                    <form class="layui-form">
+                        <label class="layui-form-label">省</label>
+                        <div style="width:300px;">
+                            <div class="layui-input-block">
+                                <select  lay-verify="required" id="shen">
+                                    <option value="0"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-form-item" style="float:left;margin-left:77px">
+                <div class="layui-form-item" style="float:left;">
+                    <form class="layui-form">
+                        <label class="layui-form-label">市</label>
+                        <div style="width:300px;">
+                            <div class="layui-input-block">
+                                <select  lay-verify="required" id="shi">
+                                    <option value="0"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div style="float:left;margin-top:3px;margin-left:50px">
+            <input type="button" name="title" style="width:300px;margin-left:25px;float:left;height:40px;border-radius:10px" lay-verify="title" autocomplete="off" value="添加" class="layui-input">
+        </div>
+    </div>
+
+
+
+</div>
+<script>
+    var form;
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+    $().ready(function () {
+
+        keshi();
+        getrole();
+        getshen();
+
+
+    });
+    function getrole() {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetRoleinfo",
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (d) {
+                $("#juese").empty();
+                $("#juese").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.rid + "'>" + this.rname + "</option>";
+                    $("#juese").append(str);
+
+                });
+
+                form.render('select');
+
+
+
+
+            }
+        });
+
+    }
+    $("#shen").click(function () {
+
+        getshi();
+    });
+    function getshi() {
+        var Mid = $("#shen").val();
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetCounties?Mid=" + Mid,
+            type: "get",
+            async: false,
+            dataType: "json",
+            success: function (d) {
+                $("#shi").empty();
+                $("#shi").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.cid + "'>" + this.cname + "</option>";
+                    $("#shi").append(str);
+
+                });
+
+                form.render('select');
+
+
+
+
+            }
+        });
+
+    }
+    function getshen() {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetMarkets",
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (d) {
+                $("#shen").empty();
+                $("#shen").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.mid + "'>" + this.mname + "</option>";
+                    $("#shen").append(str);
+
+                });
+
+                form.render('select');
+
+
+
+
+            }
+        });
+
+    }
+    function keshi() {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetKeshis",
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (d) {
+                $("#keshi").empty();
+                $("#keshi").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.kid + "'>" + this.kname + "</option>";
+                    $("#keshi").append(str);
+
+                });
+
+                form.render('select');
+
+
+
+
+            }
+        });
+
+    }
+</script>
