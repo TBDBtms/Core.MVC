@@ -9,17 +9,18 @@
 </head>
 <body>
     
-        <ul class="layui-nav layui-bg-cyan" lay-filter="" style="background-color:aqua">
-            <li class="layui-nav-item"> <span id="sp1" style="color:black;font-weight:300"></span></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">个人中心</a>
-                <dl class="layui-nav-child">
-                    <dd><a onclick="location.href = '/HzxLogin/UpdPass';">修改密码</a></dd>
+    <ul class="layui-nav layui-bg-cyan" lay-filter="" style="background-color:aqua">
+        <li class="layui-nav-item"> <span id="sp1" style="color:black;font-weight:300"></span></li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">个人中心</a>
+            <dl class="layui-nav-child">
+                <dd><a onclick="location.href = '/HzxLogin/UpdPass';">修改密码</a></dd>
 
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a href="">社区</a></li>
-        </ul>
+            </dl>
+        </li>
+        <li class="layui-nav-item"><a href="">社区</a></li>
+        <li class="layui-nav-item"><a href="#" id="wl">闲的无聊?看会生活小常识?</a></li>
+    </ul>
     <div style="float:left;margin-top:0px">
         <div @*style="float:left;background-color:black;height:910px;width:210px;overflow:scroll;"*@ style="float:left">
             <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test" style="overflow: scroll;height:910px;width:210px;">
@@ -242,4 +243,15 @@
 
         $("#sp1").text(Uname + "" + Rname);
     });
+    $("#wl").click(function () {
+        layer.open({
+            type: 2,
+            title: false,
+            area: ['860px', '450px'],
+            shade: 0.8,
+            closeBtn: 0,
+            shadeClose: true,
+            content: '//www.bilibili.com/video/av56945246/'
+        });
+    })
 </script>

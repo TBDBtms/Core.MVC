@@ -33,6 +33,21 @@ namespace Core.MVC.Controllers
         {
             return View();
         }
+        public IActionResult UpdPatientSource(int id)
+        {
+            ViewBag.pid = id;
+            return View();
+        }
+        public IActionResult UpdEducation(int id)
+        {
+            ViewBag.pid = id;
+            return View();
+        }
+        public IActionResult UpdPosition(int id)
+        {
+            ViewBag.pid = id;
+            return View();
+        }
 
     }
 }
