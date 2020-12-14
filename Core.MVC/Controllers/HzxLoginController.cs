@@ -80,7 +80,18 @@ namespace Core.MVC.Controllers
 
             return View();
         }
-       
+        /// <summary>
+        /// 科室列表
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult keshi()
+        {
+           
+
+            return View();
+        }
+
+
 
 
 
