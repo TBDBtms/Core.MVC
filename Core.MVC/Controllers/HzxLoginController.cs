@@ -31,6 +31,19 @@ namespace Core.MVC.Controllers
 
             return View();
         }
+        public IActionResult AddQuan(int Rid)
+        {
+            ViewBag.Rid = Rid;
+            return View();
+        }
+        public IActionResult updUser(int Uid)
+        {
+            ViewBag.Uid = Uid;
+            return View();
+        }
+
+
+
 
 
     }

@@ -122,14 +122,14 @@
                 "<td style='text - align: center'>"+this.ukeids+"</td>"+
                 "<td style='text - align: center'>" +this.createTime+"</td>"+
                 "<td style='text - align: center'>" + this.creatName+"</td>"+
-                "<td style='text - align: center'>"+this.uissale+"</td>"+
+                "<td style='text - align: center'>"+(this.uissale?"离职":"正常工作")+"</td>"+
                 "<td style='text - align: center'>"+this.uzhanghao+"</td>"+
                 "<td style='text - align: center'>"+this.upass+"</td>"+
                 "<td style='text - align: center'>"+this.rname+"</td>"+
                 "<td style='text - align: center'>"+this.uxue+"</td>"+
                 "<td style='text - align: center'>"+this.cname+"</td>"+
                 "<td style='text - align: center'>" + this.qremark + "</td>" +
-                      "<td style='text - align: center'>" + (qma == "ABCD" ? "<input id='Button1' type='button' value='删除' onclick='DelUser("+ this.uid+")'/><input id='Button1' type='button' value='修改' onclick='UpdUser('" + this.uid + "')' />" : qma == "A" ? "" : qma == "Yi" ? "":"") + "</td>" +
+                      "<td style='text - align: center'>" + (qma == "ABCD" ? "<input id='Button1' type='button' value='删除' onclick='DelUser("+ this.uid+")'/><input id='Button1' type='button' value='修改' onclick='UpdUser(" + this.uid + ")' />" : qma == "A" ? "" : qma == "Yi" ? "":"") + "</td>" +
             "</tr>");
                 });
             }
@@ -172,6 +172,11 @@
             return false;
         });
     });
+    function UpdUser(uid)
+    {
+        location.href = "/HzxLogin/UpdUser?Uid=" + uid;
+
+    }
 </script>
 
 
