@@ -1,0 +1,426 @@
+﻿
+@{
+    ViewData["Title"] = "Addadministration";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div style="">
+    <div style="height:100px;">
+        <h2 style="font-weight:bold;margin-left:100px;margin-top:50px;float:left;color:blueviolet">新增药品信息</h2>
+        <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:100px; float:right;margin-top:50px" onclick="location.href='/ZHQ_administration/Showadministration'">返回</button>
+        <button type="button" class="layui-btn" id="btnBC" style="width:100px;height:45px;margin-right:30px;float:right;margin-top:50px">保存</button>
+    </div>
+    <div style="height:100px;margin-top:30px">
+        <div>
+            <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">药品编码</h3>
+            <input id="DrugBM" type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入药品编码" class="layui-input" >
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">药品条形码</h3>
+            <input id="DrugTXM" type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入条形码" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">药品通用名</h3>
+            <input id="DrugTYM" type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入通用名" class="layui-input">
+            <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">药品拼音码</h3>
+            <input id="DrugPYM" type="text" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入拼音码" class="layui-input">
+        </div>
+    </div>
+    <div style="height:100px">
+        <div>
+            <div class="layui-form-item" style="float:left;margin-left:78px;margin-top:10px;height:45px;">
+                <form class="layui-form">
+                    <label class="layui-form-label">药品分类</label>
+                    <div style="width:300px;height:45px;">
+                        <div class="layui-input-block">
+                            <select name="interest" lay-filter="aihao2" id="DrugFL" style="height: 45px;" onchange="FL()">
+                                
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div style="float:left;margin-top:10px;">
+            <h3 style="margin-top:5px;margin-left:85px;float:left;">药品规格</h3>
+            <input id="DrugGG" type="text" name="title" style="width:200px;margin-left:20px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入药品规格" class="layui-input">
+        </div>
+        <div style="float:left;margin-top:10px;">
+            <h3 style="margin-top:5px;margin-left:80px;float:left">批准文号</h3>
+            <input id="DrugWH" type="text" name="title" style="width:200px;margin-left:25px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入批准文号" class="layui-input">
+        </div>
+        <div style="float:left;margin-top:10px;">
+            <div style="float:left">
+                <div class="layui-form-item" style="float:left;margin-left:50px;height:50px;">
+                    <form class="layui-form">
+                        <label class="layui-form-label">药品剂型</label>
+                        <div style="width:300px;">
+                            <div class="layui-input-block">
+                                <select name="interest" lay-filter="aihao" id="DrugJX">
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height:100px;">
+        <div>
+            <div class="layui-form-item" style="float:left;margin-left:78px">
+                <div class="layui-form-item" style="float:left;">
+                    <form class="layui-form">
+                        <label class="layui-form-label">发票</label>
+                        <div style="width:300px;">
+                            <div class="layui-input-block">
+                                <select name="interest" lay-filter="aihao" id="DrugFP">
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div style="float:left">
+                <div style="float:left">
+                    <h3 style="margin-top:5px;margin-left:80px;float:left;border-radius:10px">包装系数</h3>
+                </div>
+                <div class="layui-input-inline" style="margin-left:25px;">
+                    <input id="DrugBZDWXS" type="text" style="width:200px" lay-verify="date" autocomplete="off" class="layui-input" placeholder="请输入包装系数">
+                </div>
+            </div>
+            <div>
+                <div style="margin-top:5px">
+                    <h3 style="margin-top:5px;margin-left:120px;float:left;border-radius:10px">剂量系数</h3>
+                </div>
+                <div style="margin-top:5px">
+                    <input id="DrugJLXS" type="text" name="title" style="width:200px;margin-left:20px;border-radius:10px;float:left;" lay-verify="title" autocomplete="off" class="layui-input" placeholder="请输入剂量系数">
+                </div>
+            </div>
+            <div style="float:left">
+                <div class="layui-form-item" style="float:left;margin-left:50px">
+                    <div class="layui-form-item" style="float:left;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">生产厂家</label>
+                            <div style="width:300px;">
+                                <div class="layui-input-block">
+                                    <select name="interest" lay-filter="aihao" id="DrugCJ">
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height:100px;">
+        <div style="float:left">
+            <div class="layui-form-item" style="float:left;margin-left:75px">
+                <div class="layui-form-item" style="float:left;">
+                    <form class="layui-form">
+                        <label class="layui-form-label">包装单位</label>
+                        <div style="width:300px;">
+                            <div class="layui-input-block">
+                                <select name="interest" lay-filter="aihao" id="DrugBZDW">
+                                    <option value="0">请选择</option>
+                                    <option value="1">盒</option>
+                                    <option value="2">袋</option>
+                                    <option value="3">片</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-form-item" style="float:left;margin-left:68px">
+                <div class="layui-form-item" style="float:left;">
+                    <form class="layui-form">
+                        <label class="layui-form-label">基本单位</label>
+                        <div style="width:300px;">
+                            <div class="layui-input-block">
+                                <select name="interest" lay-filter="aihao" id="DrugJBDW">
+                                    <option value="0">请选择</option>
+                                    <option value="1">盒</option>
+                                    <option value="2">袋</option>
+                                    <option value="3">片</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div style="float:left">
+            <div class="layui-form-item" style="float:left;margin-left:77px">
+                <div class="layui-form-item" style="float:left;">
+                    <form class="layui-form">
+                        <label class="layui-form-label">剂量单位</label>
+                        <div style="width:300px;">
+                            <div class="layui-input-block">
+                                <select name="interest" lay-filter="aihao" id="DrugJLDW">
+                                    <option value="0">请选择</option>
+                                    <option value="1">盒</option>
+                                    <option value="2">袋</option>
+                                    <option value="3">片</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div style="float:left;margin-top:10px;">
+            <h3 style="margin-top:5px;margin-left:85px;float:left;">采购价</h3>
+            <input id="DrugCGJ" type="text" name="title" style="width:200px;margin-left:20px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入采购价" class="layui-input">
+        </div>
+    </div>
+
+    <div style="height:100px;">
+        <div style="float:left">
+            <div style="float:left">
+                <div class="layui-form-item" style="float:left;margin-left:77px">
+                    <div class="layui-form-item" style="float:left;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">药品用法</label>
+                            <div style="width:300px;">
+                                <div class="layui-input-block">
+                                    <select name="interest" lay-filter="aihao" id="DrugYF">
+                                        <option value="0">请选择</option>
+                                        <option value="1">口服</option>
+                                        <option value="2">皮试</option>
+                                        <option value="3">涂抹</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div style="float:left;">
+                <div style="margin-top:5px">
+                    <h3 style="margin-top:5px;margin-left:85px;float:left;border-radius:10px">单次用量</h3>
+                    <input id="DrugDCYL" type="text" name="title" style="width:200px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入单次用量" class="layui-input">
+                </div>
+            </div>
+            <div style="float:left">
+                <div class="layui-form-item" style="float:left;margin-left:77px">
+                    <div class="layui-form-item" style="float:left;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">使用频度</label>
+                            <div style="width:300px;">
+                                <div class="layui-input-block">
+                                    <select name="interest" lay-filter="aihao" id="DrugPD">
+                                        <option value="0">请选择</option>
+                                        <option value="1">一天一次</option>
+                                        <option value="2">一天两次</option>
+                                        <option value="3">一天三次</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div style="float:left">
+                <div class="layui-form-item" style="float:left;margin-left:77px">
+                    <div class="layui-form-item" style="float:left;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">药品有效期</label>
+                            <div style="width:300px;">
+                                <div class="layui-input-block">
+                                    <select name="interest" lay-filter="aihao6" id="DrugYXQ">
+                                        <option value="0">请选择</option>
+                                        <option value="1">1-3个月</option>
+                                        <option value="2">3-6个月</option>
+                                        <option value="3">大于6个月</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height:100px;">
+        <div style="float:left">
+            <div style="float:left;">
+                <div style="margin-top:5px">
+                    <h3 style="margin-top:5px;margin-left:85px;float:left;border-radius:10px">库存上限</h3>
+                    <input id="DrugKCSX" type="text" name="title" style="width:200px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入库存上限" class="layui-input">
+                </div>
+            </div>
+            <div style="float:left;">
+                <div style="margin-top:5px">
+                    <h3 style="margin-top:5px;margin-left:85px;float:left;border-radius:10px">库存下限</h3>
+                    <input id="DrugKCXX" type="text" name="title" style="width:200px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入库存下限" class="layui-input">
+                </div>
+            </div>
+            <div style="float:left;">
+                <div style="margin-top:5px">
+                    <h3 style="margin-top:5px;margin-left:85px;float:left;border-radius:10px">药品说明</h3>
+                    <input id="DrugSM" type="text" name="title" style="width:200px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入药品说明" class="layui-input">
+                </div>
+            </div>
+            <div style="float:left;">
+                <div style="margin-top:5px">
+                    <h3 style="margin-top:5px;margin-left:85px;float:left;border-radius:10px">零售价</h3>
+                    <input id="DrugLSJ" type="text" name="title" style="width:200px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请输入零售价" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    </div>
+
+</div>
+<script>
+    var form;
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+        //form.on('select(aihao6)', function (data) {
+        //    alert('45');
+        //})
+    });
+    
+    $(function () {  //文档就绪函数
+        loadDrugFL();
+    })
+
+    function loadDrugFL() {
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_administration/Getclassification",
+            data: {},
+            type: "get",
+            dataType: "json",
+            contextType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                $("#DrugFL").empty();
+                $("#DrugFL").append("<option value='0'>请选择分类</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.drugClassId + "'>" + this.drugClassName + "</option>"
+                    $("#DrugFL").append(str);
+                })
+                form.render('select');
+                loadDrugJX();
+            }
+        })
+    }
+
+
+    function loadDrugJX() {
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_administration/Getform",
+            data: {},
+            type: "get",
+            dataType: "json",
+            contextType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                $("#DrugJX").empty();
+                $("#DrugJX").append("<option value='0'>请选择分类</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.dosage_formId + "'>" + this.dosage_formName + "</option>"
+                    $("#DrugJX").append(str);
+                })
+                form.render('select');
+                loadDrugFP();
+            }
+        })
+    }
+
+
+
+    function loadDrugFP() {
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_administration/GetInvoice1",
+            data: {},
+            type: "get",
+            dataType: "json",
+            contextType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                $("#DrugFP").empty();
+                $("#DrugFP").append("<option value='0'>请选择分类</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.invoiceId + "'>" + this.invoiceName + "</option>"
+                    $("#DrugFP").append(str);
+                })
+                form.render('select');
+                loadDrugCJ();
+            }
+        })
+    }
+
+    function loadDrugCJ() {
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_administration/GetManufacturer",
+            data: {},
+            type: "get",
+            dataType: "json",
+            contextType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                $("#DrugCJ").empty();
+                $("#DrugCJ").append("<option value='0'>请选择分类</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.manufacturerId + "'>" + this.manufacturerName + "</option>"
+                    $("#DrugCJ").append(str);
+                })
+                form.render('select');
+            }
+        })
+    }
+
+  
+    $("#btnBC").click(function () {
+        var model = {};
+        model.DrugBM = $("#DrugBM").val();
+        model.DrugTXM = $("#DrugTXM").val();
+        model.DrugTYM = $("#DrugTYM").val();
+        model.DrugPYM = $("#DrugPYM").val();
+        model.DrugFL = $("#DrugFL").val();
+        model.DrugGG = $("#DrugGG").val();
+        model.DrugJX = $("#DrugJX").val();
+        model.DrugFP = $("#DrugFP").val();
+        model.DrugWH = $("#DrugWH").val();
+        model.DrugCJ = $("#DrugCJ").val();
+        model.DrugBZDW = $("#DrugBZDW").val();
+        model.DrugBZDWXS = $("#DrugBZDWXS").val();
+        model.DrugJBDW = $("#DrugJBDW").val();
+        model.DrugJLXS = $("#DrugJLXS").val();
+        model.DrugJLDW = $("#DrugJLDW").val();
+        model.DrugCGJ = $("#DrugCGJ").val();
+        model.DrugLSJ = $("#DrugLSJ").val();
+        model.DrugYF = $("#DrugYF").val();
+        model.DrugDCYL = $("#DrugDCYL").val();
+        model.DrugPD = $("#DrugPD").val();
+        model.DrugYXQ = $("#DrugYXQ").val();
+        model.DrugKCSX = $("#DrugKCSX").val();
+        model.DrugKCXX = $("#DrugKCXX").val();
+        model.DrugSM = $("#DrugSM").val();
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_administration/Addadministration",
+            data: model,
+            type: "post",
+            dataType: "json",
+            contextType: "application/x-www-form-urlencoded",
+            success: function (d) {
+                if (d > 0) {
+                    alert('添加成功');
+                    location.href = '/ZHQ_administration/Showadministration';
+                } else {
+                    alert('添加失败');
+                    
+                }
+            }
+        })
+    })
+</script>

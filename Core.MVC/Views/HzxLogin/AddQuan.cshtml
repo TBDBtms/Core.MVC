@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewData["Title"] = "AddQuan";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div><button type="button" style="margin-left:auto" onclick="AddQuan()" class="layui-btn">配置</button></div>
+    <div style=" margin-left:auto">
+        <table class="layui-table" style="text-align:center;margin-left:30px">
+
+            <thead style="background-color:lavender">
+                <tr style="background-color:lavender">
+                    <th><input id="CKAll" type="checkbox" /></th>
+                    <th style="text-align:center">权限id</th>
+                    <th style="text-align:center">权限描述</th>
+                    <th style="text-align:center">权限码</th>
+                </tr>
+            </thead>
+            <tbody id="tb">
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+</html>
+<script>
+    $().ready(function () {
+
+
+        Shows();
+    });
+    function Shows() {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetQuanxians",
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $("#tb").empty();
+                $(d).each(function () {
+
+                    $("#tb").append("<tr>" +
+                        "<td><input name='CKone' type='checkbox' value='" + this.qid + "' /></td >" +
+                        "<td>" + this.qid + "</td >" +
+                        "<td>" + this.qremark + "</td>" +
+                        "<td>" + this.qma + "</td>" +
+                        "</tr >");
+
+                });
+
+
+
+            }
+
+
+
+
+        });
+
+
+    }
+
+</script>
+<script>
+
+    function AddQuan()
+    {
+        var Rids =@ViewBag.Rid;
+        var Qids = [];
+        $("[name=CKone]").each(function () {
+
+            if ($(this).prop("checked") == true) {
+                Qids.push($(this).val());
+            }
+
+
+        });
+        if (Qids.length <= 0)
+        {
+            alert("请选择权限");
+        }
+        var r = new Object();
+        var r= new FormData();
+
+        r.append("qid", Qids.toString());
+        r.append("rid", Rids);
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/Addquan",
+            data: r,
+            type: "post",
+            dataType: "json",
+            contentType: false,
+            processData: false,
+            success: function (d)
+            {
+                if (d > 0)
+                {
+                    alert("配置成功");
+                    location.href = "/HzxLogin/Index";
+                }
+                else {
+                    alert("配置失败");
+                }
+
+
+            }
+
+
+
+
+
+        });
+
+
+
+
+
+
+    }
+</script>
+

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "FJModify";
+    ViewData["Title"] = "ZLModify";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
 
@@ -9,28 +9,22 @@
         height: 50px;
     }
 </style>
-
 <script src="~/lib/jquery/dist/jquery.js"></script>
-
-
+<input type="hidden" id="hid" value="@ViewBag.ZLId" />
+<input id="date1111" type="hidden" />
 <div style="width:1600px;height:1000px;margin-left:30px">
-    <input type="hidden" id="hid" value="@ViewBag.id" />
-    <input id="date1111" type="hidden" />
     <div style="width:1600px;height:150px;">
         <div style="float:left;margin-left:60px;margin-top:50px">
-            <h1 style="font-weight: bold;">修改附加费</h1>
+            <h1 style="font-weight: bold;">修改诊疗费</h1>
         </div>
         <div style="float:right">
             <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:100px;background-color:#FFFFFF; float:right;color:black;font-weight: bold;" onclick="location.href='/DLH_Fee/Show'">返回</button>
-            <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:30px;background-color:#C2C5F6;float:right;color:black;font-weight: bold;" id="baocuen" onclick="FJModifyFJ()">保存</button>
+            <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:30px;background-color:#C2C5F6;float:right;color:black;font-weight: bold;" id="baocuen" onclick="ZLAddZL()">保存</button>
         </div>
     </div>
     <div style="width:1600px;height:30px;">
         <div style="float:left;margin-left:150px">
             <label style="font-size: 20px;font-weight: bold;">费用名称<span>*</span></label>
-        </div>
-        <div style="float:left;margin-left:250px;">
-            <label style="font-size: 20px;font-weight: bold;">处方类型</label>
         </div>
         <div style="float:left;margin-left:250px">
             <label style="font-size: 20px;font-weight: bold;">金额<span>*</span>（元）</label>
@@ -41,17 +35,7 @@
     </div>
     <div style="width:1600px;height:60px;">
         <div style="margin-left:130px;float:left;margin-top:0px">
-            <input type="text" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增附加费用名称" class="layui-input" id="text_Name">
-        </div>
-        <div style="margin-left:80px;float:left;height:70px">
-            <form class="layui-form">
-                <div style="width:300px;height:75px;">
-                    <div class="layui-input-block;" style="width:250px;height:70px;">
-                        <select name="interest" lay-filter="aihao" id="LeiBie">
-                        </select>
-                    </div>
-                </div>
-            </form>
+            <input type="text" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增费名称" class="layui-input" id="text_Name">
         </div>
         <div style="margin-left:20px;float:left">
             <input type="number" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增金额" class="layui-input" id="text_Money">
@@ -60,8 +44,10 @@
             <input type="number" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增成本价" class="layui-input" id="text_Money1">
         </div>
     </div>
+
+
     <div style="width:1600px;height:60px;">
-        <div style="margin-left:-650px;float:left">
+        <div style="margin-left:130px;float:left">
             <form class="layui-form">
                 <div class="layui-form-item">
                     <label class="layui-form-label" style="width:150px;font-size: 20px;font-weight: bold;">允许会员折扣：</label>
@@ -117,55 +103,33 @@
     });
 
     $(function () {
-        ShowPrescriptionInfos();
-        FJHuiXian();
-
+        ZLHuiXian();
     });
 
-
-    function ShowPrescriptionInfos() {
+    function ZLHuiXian() {
         $.ajax({
-            url: "http://localhost:4965/api/DLH_Fee/GetPrescriptionInfos",
-            type: "get",
-            dataType: "json",
-            success: function (d) {
-                console.log(d);
-                $(d).each(function () {
-                    var html = "<option value='" + this.recipeId + "'>" + this.recipeName + "</option>";
-                    console.log(html);
-                    $("#LeiBie").append(html);
-                });
-                form.render('select');
-            }
-        });
-    }
-
-    function FJHuiXian() {
-        $.ajax({
-            url: "http://localhost:4965/api/DLH_Fee/FXCost?cid=" +@ViewBag.id,
+            url: "http://localhost:4965/api/DLH_Fee/FXConsultations?cid=" +@ViewBag.ZLId,
             type: "get",
             dataType: "json",
             success: function (d) {
                 $("#text_Name").val(d.additional);
-                $("#LeiBie").val(d.recipeKey);
                 $("#text_Money").val(d.moneyInfn);
                 $("#text_Money1").val(d.cost);
                 $("[name=sex]:checked").val(d.vip);
                 $("[name=shi]:checked").val(d.cState)
                 console.log(d);
             }
-            
+
         });
     }
 
 
-    function FJModifyFJ() {
+    function ZLAddZL() {
         var str = {
             Additional:$("#text_Name").val(),
-            RecipeKey:$("#LeiBie").val(),
             MoneyInfn:$("#text_Money").val(),
             Cost:$("#text_Money1").val(),
-            CTime:$("#date1111").val(),
+            ZLTime:$("#date1111").val(),
             CreatepersonKey: sessionStorage.getItem("Uid"),
             Vip:$("[name=sex]:checked").val(),
             CState: $("[name=shi]:checked").val(),
@@ -173,7 +137,7 @@
         };
         console.log(str);
         $.ajax({
-            url: "http://localhost:4965/api/DLH_Fee/ModifyCost",
+            url: "http://localhost:4965/api/DLH_Fee/ModifyConsultations",
             type: "post",
             dataType: "json",
             data: str,

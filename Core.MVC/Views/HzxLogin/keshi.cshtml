@@ -1,9 +1,8 @@
 ﻿
 @{
-    ViewData["Title"] = "Addroleinfo";
+    ViewData["Title"] = "keshi";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
-
 <html>
 <head>
     <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -11,15 +10,15 @@
     <title>Index</title>
 </head>
 <body>
-  
+
     <div style="">
-        <table class="layui-table" style="text-align:center;margin-left:30px">
+        <table class="layui-table"  style="text-align:center;margin-left:30px">
 
             <thead style="background-color:lavender">
                 <tr style="background-color:lavender">
 
-                    <th style="text-align:center">角色id</th>
-                    <th style="text-align:center">角色名称</th>
+                    <th style="text-align:center">科室id</th>
+                    <th style="text-align:center">科室名称</th>
                     <th style="text-align:center">操作</th>
                 </tr>
             </thead>
@@ -45,7 +44,7 @@
     function Shows()
     {
         $.ajax({
-            url: "http://localhost:4965/api/Hzx_Login/GetRoleinfo",
+            url: "http://localhost:4965/api/Hzx_Login/GetKeshis",
             type: "get",
             dataType: "json",
             async: false,
@@ -53,9 +52,8 @@
                 $("#tb").empty();
                 $(d).each(function () {
                     $("#tb").append(" <tr>"+
-                        "<td>"+this.rid+"</td >"+
-                        "<td>" + this.rname + "</td>" +
-                        "<td> <input id='Button1' type='button' value='配置' onclick='Quan(" + this.rid + ")' /></td>" +
+                        "<td>"+this.kid+"</td >"+
+                        "<td>" + this.kname + "</td>" +
                 "</tr >");
                 });
             }
@@ -72,10 +70,7 @@
             return false;
         });
     });
-    function Quan(rid)
-    {
-        location.href = "/HzxLogin/AddQuan?Rid="+rid;
-
-    }
-   
+  
 </script>
+
+

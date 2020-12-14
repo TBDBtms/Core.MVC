@@ -1,16 +1,18 @@
 ﻿
 @{
-    ViewData["Title"] = "Zhu";
+    ViewData["Title"] = "updUser";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
 
+<h1>updUser</h1>
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<body style="background-color:antiquewhite">
+<body style="background-color:skyblue">
+
     <div>
         <div style="height:100px;">
             <h2 style="font-weight:bold;margin-left:100px;margin-top:50px;float:left;color:blueviolet">注册员工信息</h2>
             <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:100px; float:right;margin-top:50px" onclick="location.href='/HzxLogin/Index'">返回</button>
-
+            
         </div>
         <div style="height:100px;margin-top:30px">
             <div>
@@ -172,7 +174,7 @@
                 </div>
             </div>
             <div style="float:left;margin-top:3px;margin-left:50px">
-                <input type="button" name="title" style="width:300px;margin-left:25px;float:left;height:40px;border-radius:10px" lay-verify="title" autocomplete="off" value="添加" onclick="AddUser()" class="layui-btn">
+                <input type="button" name="title" style="width:300px;margin-left:25px;float:left;height:40px;border-radius:10px" lay-verify="title" autocomplete="off" value="添加" onclick="UpdUser()" class="layui-input">
             </div>
         </div>
 
@@ -184,11 +186,10 @@
 <script>
     $().ready(function () {
 
+        getdan();
         keshi();
         getrole();
         getshen();
-
-        $("#CreatName").val(sessionStorage.getItem("Uname"));
 
 
     });
@@ -207,14 +208,52 @@
         laydate.render({
             elem: '#date1'
         });
-        
+
         form.on('select(lop)', function (data) {
-      
+
             getshi();
         })
     });
-   
 
+    function getdan()
+    {
+        var Uid=@ViewBag.Uid
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetUserinfodan?Uid="+Uid,
+            type: "get",
+            dataType: "json",
+            success: function (d)
+            {
+                $("#Uname").val(d.uname);
+                $("#Usex").val(d.usex);
+                $("#Uage").val(d.uage);
+                $("#Uiphone").val(d.uiphone);
+                $("#keshi").val(d.ukeids);
+                $("#CreateTime").val(d.createTime);
+                $("#CreatName").val(d.creatName);
+                $("#Uissale").val(d.uissale);
+                $("#Uzhanghao").val(d.uzhanghao);
+                $("#Upass").val(d.upass);
+                $("#juese").val(d.rids);
+                $("#Uno").val(d.uno);
+                $("#Uxue").val(d.uxue);
+                $("#shi").val(d.cids);
+
+
+
+            }
+
+
+
+
+        });
+
+
+
+
+
+
+    }
     function getrole() {
         $.ajax({
             url: "http://localhost:4965/api/Hzx_Login/GetRoleinfo",
@@ -231,12 +270,17 @@
                 });
                 form.render('select');
 
+
+
+
+
+
             }
         });
 
     }
-    
-    
+
+
     function getshi() {
         var Mid = $("#shen").val();
         $.ajax({
@@ -276,7 +320,7 @@
                 });
                 form.render('select');
 
-                
+
 
 
 
@@ -301,7 +345,7 @@
                 });
                 form.render('select');
 
-                
+
 
 
 
@@ -310,7 +354,7 @@
         });
 
     }
-    function AddUser()
+    function UpdUser()
     {
         var u = {};
         u.Uname = $("#Uname").val();
@@ -318,8 +362,7 @@
         u.Uage = $("#Uage").val();
         u.Uiphone = $("#Uiphone").val();
         u.Ukeids = $("#keshi").val();
-        u.CreateTime = $("#CreateTime").val();
-        u.CreatName = $("#CreatName").val();
+        u.CreatName =sessionStorage.getItem("Uname");
         u.Uissale = $("#Uissale").val();
         u.Uzhanghao = $("#Uzhanghao").val();
         u.Upass = $("#Upass").val();
@@ -327,10 +370,11 @@
         u.Uno = $("#Uno").val();
         u.Uxue = $("#Uxue").val();
         u.cids = $("#shi").val();
+        u.Uid=@ViewBag.Uid;
 
-      
+
         $.ajax({
-            url: "http://localhost:4965/api/Hzx_Login/AddUserinfo",
+            url: "http://localhost:4965/api/Hzx_Login/UpdUser",
             data: u,
             type: "post",
             dataType: "json",
@@ -338,11 +382,11 @@
             {
                 if (d > 0)
                 {
-                    alert("添加成功");
+                    alert("修改成功");
                     location.href = "/HzxLogin/Index";
                 }
                 else {
-                    alert("添加失败");
+                    alert("修改失败");
                 }
 
 

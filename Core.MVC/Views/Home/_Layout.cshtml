@@ -1,8 +1,5 @@
 ﻿<!DOCTYPE html>
-@{ 
 
-
-}
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -10,16 +7,15 @@
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
 </head>
-
 <body>
-    <span id="sp1"></span>
+    
         <ul class="layui-nav layui-bg-cyan" lay-filter="" style="background-color:aqua">
-            <li class="layui-nav-item"><a href="" >我</a></li>
+            <li class="layui-nav-item"> <span id="sp1" style="color:black;font-weight:300"></span></li>
             <li class="layui-nav-item">
                 <a href="javascript:;">个人中心</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">修改密码</a></dd>
-                    <dd><a href="">找回密码</a></dd>
+                    <dd><a onclick="location.href = '/HzxLogin/UpdPass';">修改密码</a></dd>
+
                 </dl>
             </li>
             <li class="layui-nav-item"><a href="">社区</a></li>
@@ -70,7 +66,7 @@
                     <a href="javascript:;">药品管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:location.href='/ZHQ_administration/Showadministration';">药品信息维护</a></dd>
-                        <dd><a href="">新增药品</a></dd>
+                        <dd><a href="javascript:location.href='/ZHQ_administration/Addadministration';">新增药品</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -107,8 +103,8 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">药品调价</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">新增调价</a></dd>
-                        <dd><a href="">查看调价详细</a></dd>
+                        <dd><a href="javascript:location.href='/ZHQ_administration/AddPricing'">新增调价</a></dd>
+                        <dd><a href="javascript:location.href='/ZHQ_administration/TJMingXi'">查看调价详细</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -190,25 +186,32 @@
                     <a href="javascript:;">员工管理集合</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:location.href='/HzxLogin/Index';">员工管理</a></dd>
-                        <dd><a href="">新增员工信息</a></dd>
+                        <dd><a href="javascript:location.href='/HzxLogin/Zhu';">新增员工信息</a></dd>
 
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">科室管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">仅增科室信息</a></dd>
+                        <dd><a onclick="location.href='/HzxLogin/keshi'">科室信息</a></dd>
+                        <dd><a onclick="location.href='/HzxLogin/Addkeshi'">仅增科室信息</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">角色管理</a>
+                    <a href="javascript:">角色管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">仅增角色信息</a></dd>
+                        <dd><a href="javascript:location.href='/HzxLogin/Addroleinfo';">所有角色信息</a></dd>
+                        <dd><a href="javascript:location.href='/HzxLogin/Addrole';">仅增角色信息</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:location.href='/DLH_Fee/Show';">费用设置</a>
-                   
+                    <a href="javascript:;">费用设置</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:location.href='/DLH_Fee/Show';">新增附加费用</a></dd>
+                        <dd><a href="javascript:location.href='/DLH_Fee/Show';">诊疗费用</a></dd>
+                        <dd><a href="javascript:location.href='/DLH_Fee/Show';">挂号费用</a></dd>
+                        <dd><a href="">支付方式</a></dd>
+                    </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">支付方式设置</a>

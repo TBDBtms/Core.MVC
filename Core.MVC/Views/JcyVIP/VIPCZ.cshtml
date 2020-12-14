@@ -24,7 +24,7 @@
             $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/GetById",
                 dataType: "json",
-                data: { id:@ViewBag.id},
+                data: {id:@ViewBag.id},
                 type: "get",
                 success: function (data) {
                     console.log(data);
@@ -39,7 +39,7 @@
                 PayMoney: $("#money").val(),
                 GiveMoney: $("#addmoney").val(),
                 SId: $("[name=fs]:checked").val(),
-                Id: $("#id").val()
+                Id:$("#id").val()
             };
             $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/UpdVIPInfo",
@@ -94,7 +94,7 @@
         <br />
         <div>
             <input type="button" name="name" value="取消" class="layui-btn" />
-            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="Upd()"/>
+            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="Upd()" />
         </div>
     </div>
 </body>
