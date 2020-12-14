@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "Addkeshi";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<body style="background-color:antiquewhite">
+
+    <div style="height:100px;margin-top:30px">
+        <div>
+            <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">科室名称</h3>
+            <input type="text" id="Kname" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写新增科室名称" class="layui-input">
+            <button type="button" style="margin-left:auto" onclick="AddKeshi()" class="layui-btn">添加</button>
+
+        </div>
+    </div>
+
+</body>
+<script>
+    function AddKeshi() {
+
+        var Kname = $("#Kname").val();
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/Addkeshi",
+            data: {Kname:Kname},
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                if (d > 0) {
+                    alert("添加成功");
+                    location.href = "/HzxLogin/keshi";
+                }
+                else {
+                    alert("添加失败");
+                }
+
+
+
+
+            }
+
+
+
+
+
+
+        });
+
+    }
+</script>

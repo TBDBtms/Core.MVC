@@ -12,10 +12,10 @@
 <body>
 
     <div style="">
-        <table class="layui-table" style="text-align:center;margin-left:30px">
+        <table class="layui-table"  style="text-align:center;margin-left:30px">
 
-            <thead style="background-color:aqua">
-                <tr style="background-color:aqua">
+            <thead style="background-color:lavender">
+                <tr style="background-color:lavender">
 
                     <th style="text-align:center">科室id</th>
                     <th style="text-align:center">科室名称</th>
@@ -54,7 +54,6 @@
                     $("#tb").append(" <tr>"+
                         "<td>"+this.kid+"</td >"+
                         "<td>" + this.kname + "</td>" +
-                        "<td> <input id='Button1' type='button' value='删除' onclick='Del(" + this.kid + ")' /></td>" +
                 "</tr >");
                 });
             }
@@ -71,10 +70,7 @@
             return false;
         });
     });
-    function Del(kid)
-    {
-        
-    }
+  
 </script>
 
 
