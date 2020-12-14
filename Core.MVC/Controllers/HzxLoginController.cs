@@ -10,37 +10,78 @@ namespace Core.MVC.Controllers
     public class HzxLoginController : Controller
     {
         
+        /// <summary>
+        /// 显示员工列表
+        /// </summary>
+        /// <returns></returns>
 
         public IActionResult Index()
         {
             return View();
         }
+        //登录
         public IActionResult Login()
         {
             
             return View();
         }
+        //注册
         public IActionResult Zhu()
         {
 
             return View();
         }
-
+        /// <summary>
+        /// 显示角色列表
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Addroleinfo()
         {
 
             return View();
         }
+        /// <summary>
+        /// 给角色添加权限
+        /// </summary>
+        /// <param name="Rid"></param>
+        /// <returns></returns>
         public IActionResult AddQuan(int Rid)
         {
             ViewBag.Rid = Rid;
             return View();
         }
-        public IActionResult updUser(int Uid)
+        /// <summary>
+        /// 修改角色
+        /// </summary>
+        /// <param name="Uid"></param>
+        /// <returns></returns>
+        public IActionResult updUser(int Uid=0)
         {
             ViewBag.Uid = Uid;
             return View();
         }
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="Rid"></param>
+        /// <returns></returns>
+        public IActionResult UpdPass( )
+        {
+            
+            return View();
+        }
+        /// <summary>
+        /// 找回密码
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult zhao(string Uname="")
+        {
+            ViewBag.Uname = Uname;
+
+            return View();
+        }
+       
+
 
 
 

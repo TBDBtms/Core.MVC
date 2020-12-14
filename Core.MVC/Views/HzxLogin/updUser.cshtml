@@ -7,7 +7,7 @@
 <h1>updUser</h1>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <body style="background-color:skyblue">
-    <input id="hid" type="hidden" value="" />
+
     <div>
         <div style="height:100px;">
             <h2 style="font-weight:bold;margin-left:100px;margin-top:50px;float:left;color:blueviolet">注册员工信息</h2>
@@ -356,13 +356,13 @@
     }
     function UpdUser()
     {
-        var u = new FormData();
+        var u = {};
         u.Uname = $("#Uname").val();
         u.Usex = $("#Usex").val();
         u.Uage = $("#Uage").val();
         u.Uiphone = $("#Uiphone").val();
         u.Ukeids = $("#keshi").val();
-        u.CreatName = $("#CreatName").val();
+        u.CreatName = sessionStorage.getItem("Uname");
         u.Uissale = $("#Uissale").val();
         u.Uzhanghao = $("#Uzhanghao").val();
         u.Upass = $("#Upass").val();
@@ -370,7 +370,7 @@
         u.Uno = $("#Uno").val();
         u.Uxue = $("#Uxue").val();
         u.cids = $("#shi").val();
-        u.Uid=$("")
+        u.Uid=@ViewBag.Uid;
 
 
         $.ajax({
@@ -378,7 +378,6 @@
             data: u,
             type: "post",
             dataType: "json",
-            contentType: 'application/json; charset=UTF-8',
             success: function (d)
             {
                 if (d > 0)
