@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VIPTK</title>
+    <script src="~/js/site.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script>
+
+    </script>
+</head>
+<body>
+    <div>
+        <h3>余额退款</h3>
+        <br />
+        <div>
+            &emsp;会员卡号:<span id="card"></span>&emsp;&emsp;会员姓名:<span id="name"></span>
+        </div>
+        <br />
+        <div>
+            &emsp;余额:<span id="jf"></span>元
+        </div>
+        <br />
+        <div>
+            &emsp;退款金额(元)<span style="color:red">*</span><br />
+            &emsp;<input type="text" id="price" value="" class="layui-input" />
+        </div>
+        <br />
+        <div>
+            &emsp;退款方式<br />
+            &emsp;<input type="radio" name="tk" value="" />现金
+            <input type="radio" name="tk" value="" />支付宝
+            <input type="radio" name="tk" value="" />微信
+            <input type="radio" name="tk" value="" />银行卡
+        </div>
+        <br />
+        <div>
+            &emsp;备注:<br />
+            &emsp;<textarea id="remark"></textarea>
+        </div>
+        <br />
+        <div>
+            &emsp;<input type="button" name="name" value="取消" class="layui-btn" />
+            &emsp;<input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="" />
+        </div>
+    </div>
+</body>
+</html>
