@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "keshi";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<html>
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <div style="">
+        <table class="layui-table" style="text-align:center;margin-left:30px">
+
+            <thead style="background-color:aqua">
+                <tr style="background-color:aqua">
+
+                    <th style="text-align:center">科室id</th>
+                    <th style="text-align:center">科室名称</th>
+                    <th style="text-align:center">操作</th>
+                </tr>
+            </thead>
+            <tbody id="tb">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
+<script>
+
+    $().ready(function () {
+        Shows();
+
+
+    });
+    function Shows()
+    {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetKeshis",
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (d) {
+                $("#tb").empty();
+                $(d).each(function () {
+                    $("#tb").append(" <tr>"+
+                        "<td>"+this.kid+"</td >"+
+                        "<td>" + this.kname + "</td>" +
+                        "<td> <input id='Button1' type='button' value='删除' onclick='Del(" + this.kid + ")' /></td>" +
+                "</tr >");
+                });
+            }
+        });
+
+    }
+    //Demo
+    layui.use('form', function () {
+        form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+    function Del(kid)
+    {
+        
+    }
+</script>
+
+

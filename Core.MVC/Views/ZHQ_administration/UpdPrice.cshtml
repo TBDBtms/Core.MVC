@@ -1,0 +1,98 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <script src="layer.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+<body>
+   
+    <div align="center">
+        <input type="hidden" value="@ViewBag.id" />
+        原价格:<span id="sp" style="color:red"></span><br />
+        请输入要修改的价格<input type="number" id="txtNum" />
+        <input type="button" value="保存" id="btnBC"  />
+    </div>
+   
+</body>
+</html>
+<script>
+    var bh;
+    var name;
+    var gg;
+    var kcl;
+    var cgj;
+    var lsj;
+    var xlsj;
+    var czy;
+    $(function () {
+        init();
+    })
+
+    function init() {
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_administration/GetFirstPricing",
+            data: { id:@ViewBag.id},
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $("#sp").text(d.drugLSJ);
+                lsj = d.drugLSJ;
+                bh = d.drugBM;
+                name = d.drugTYM;
+                gg = d.drugGG;
+                kcl = d.drugKC;
+                cgj = d.drugCGJ;
+                czy = "张航琦";
+            }
+        })
+    }
+
+    $("#btnBC").click(function () {
+        var price = $("#txtNum").val();
+        xlsj = price;
+         $.ajax({
+             url: "http://localhost:4965/api/ZHQ_administration/UpdPrice2",
+             data: { id:@ViewBag.id,price:price },
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                if (d > 0) {
+                    var model = {};
+                    model.PricingBH = bh;
+                    model.PricingName = name;
+                    model.PricingGG = gg;
+                    model.PricingKC = kcl;
+                    model.PricingCGJ = cgj;
+                    model.PricingLSJ = lsj;
+                    model.PricingXLSJ = xlsj;
+                    model.PricingRName = czy;
+                    $.ajax({
+                        url: "http://localhost:4965/api/ZHQ_administration/AddPricing",
+                        type: "post",
+                        data: model,
+                        dataType: "json",
+                        success: function (da) {
+                            if (da > 0) {
+                                alert('操作成功');
+                                
+                            } else {
+                                alert('操作失败');
+                            }
+                        }
+                    })
+                
+                } else {
+                    alert('操作失败');
+                }
+            }
+        })
+    })
+</script>
