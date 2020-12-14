@@ -47,15 +47,20 @@
 
     })
     $(document).on('click', '.test2', function () {
-        layui.use("layer", function () {
-            var layer = layui.layer;
-            layer.open({
-                type: 1,
-                area: ['500px', '300px'],
-                content: $("#test"), //iframe的url，no代表不显示滚动条
-                title: '编辑患者来源',
-            });
-        })
+
+        layer.open({
+            type: 2,
+            closeBtn: 1, //不显示关闭按钮
+            area: ['500px', '300px'],
+            shade: [0],
+            title: false,
+            anim: 2,
+            content: ['/Zzh_Patient/UpdPatientSource?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
+            cancel: function (index, layero) {
+                ShowPosition();
+            }
+        });
+
     })
     function ShowPatientSource() {
 
@@ -76,7 +81,7 @@
                         "<td>" + this.patientSourceName + "</td>" +
                         "<td>" + this.createTime + "</td>" +
                         "<td>" + this.createPeople + "</td>" +
-                        "<td><a href='#' class='test2' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>编辑</a><a href='' style='margin-left:15px' onclick='Del(" + this.patientSourceId + ")'>删除</a></td></tr>";
+                        "<td><a href='#' class='test2' id='" + this.patientSourceId + "' style='color:darkslateblue;font-weight:bold'>编辑</a><a href='' style='margin-left:15px' onclick='Del(" + this.patientSourceId + ")'>删除</a></td></tr>";
                     $("#GetPS").append(str);
                 });
             }

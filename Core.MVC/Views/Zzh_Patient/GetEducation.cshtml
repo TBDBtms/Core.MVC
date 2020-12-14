@@ -45,6 +45,22 @@
     $(function () {
         ShowEducation();
     })
+    $(document).on('click', '.test2', function () {
+
+        layer.open({
+            type: 2,
+            closeBtn: 1, //不显示关闭按钮
+            area: ['500px', '300px'],
+            shade: [0],
+            title: false,
+            anim: 2,
+            content: ['/Zzh_Patient/UpdEducation?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
+            cancel: function (index, layero) {
+                ShowEducation();
+            }
+        });
+
+    })
     function ShowEducation() {
         var name = "";
         if ($("#aaa").val() != null) {
@@ -62,7 +78,7 @@
                         "<td>" + this.educationName + "</td>" +
                         "<td>" + this.createTime + "</td>" +
                         "<td>" + this.createPeople + "</td>" +
-                        "<td><a style='margin-left:15px' onclick='Update(" + this.educationId + ")'>编辑</a><a href='' style='margin-left:15px' onclick='Del(" + this.educationId + ")'>删除</a></td></tr>";
+                        "<td><a href='#' class='test2' id='" + this.educationId + "' style='color:darkslateblue;font-weight:bold'>编辑</a><a href='' style='margin-left:15px' onclick='Del(" + this.educationId + ")'>删除</a></td></tr>";
                     $("#GetED").append(str);
                 });
             }
@@ -124,19 +140,6 @@
                 }
             }
         })
-    }
-    function text3() {
-        $('.test4').on('click', function () {
-            layer.open({
-                type: 2,
-                title: false,
-                closeBtn: 1, //不显示关闭按钮
-                shade: [0],
-                area: ['400px', '300px'],
-                anim: 2,
-                content: ['/JcyVIP/VIPBD?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
-            });
-        });
     }
 </script>
 
