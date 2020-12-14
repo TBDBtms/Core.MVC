@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewData["Title"] = "GetPosition";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div>
+    <div style="width:1650px;height:100px">
+        <div class="layui-input-block" style="width:300px;float:left;margin-top:50px">
+            <input type="text" id="aaa" placeholder="分类名称" class="layui-input" />
+        </div>
+        <div style="float:left;margin-top:50px">
+            <button type="button" class="layui-btn" onclick="cx()">查询</button>
+        </div>
+        <div style="float:right;margin-top:50px">
+            <button type="button" class="layui-btn" style="float:right;margin-right:50px;" id="p1">
+                <i class="layui-icon">&#xe608;</i> 添加
+            </button>
+        </div>
+    </div>
+    <div style="margin-top:50px">
+        <div align="center" style="width:1650px;height:1000px">
+            <table class="layui-table" style="text-align:center;margin-left:30px">
+                <colgroup>
+                    <col width="150">
+                    <col width="200">
+                    <col>
+                </colgroup>
+                <thead style="background-color:lavender">
+                    <tr style="background-color: lavender">
+                        <th style="text-align:center">序号</th>
+                        <th style="text-align:center">职业名称</th>
+                        <th style="text-align:center">创建时间</th>
+                        <th style="text-align:center">创建人</th>
+                        <th style="text-align:center">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="GetPO">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        ShowPosition();
+    })
+    function ShowPosition() {
+        var name = "";
+        if ($("#aaa").val() != null) {
+            name = $("#aaa").val();
+        }
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/GetPosition?name=" + name,
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $("#GetPO").empty();
+                $(d).each(function () {
+                    var str = "<tr>" +
+                        "<td>" + this.positionId + "</td>" +
+                        "<td>" + this.positionName + "</td>" +
+                        "<td>" + this.createTime + "</td>" +
+                        "<td>" + this.createPeople + "</td>" +
+                        "<td><a style='margin-left:15px' onclick='Update(" + this.positionId + ")'>编辑</a><a href='' style='margin-left:15px' onclick='Del(" + this.positionId + ")'>删除</a></td></tr>";
+                    $("#GetPO").append(str);
+                });
+            }
+        });
+    }
+    function cx() {
+        ShowPosition();
+    }
+    function Del(id) {
+        confirm("确定要删除吗?")
+        {
+            $.ajax({
+                url: "http://localhost:4965/api/Zzh_Patient/DelPosition?id=" + id,
+                type: "post",
+                dataType: "json",
+                success: function (d) {
+                    if (d > 0) {
+                        alert("删除成功");
+                        location.href = '/Zzh_Patient/GetPosition';
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                }
+            })
+        }
+    }
+</script>
+
+<script>
+    layui.use("layer", function () {
+        var layer = layui.layer;
+        $("#p1").click(function () {
+            layer.open({
+                type: 1,
+                area: ['500px', '300px'],
+                content: $("#test"),
+                title: '新增职业',
+            });
+        });
+    })
+    function Add() {
+        var m = {
+            PositionName: $("#Zhiye").val()
+        }
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/AddPatient",
+            type: "post",
+            dataType: "json",
+            data: m,
+            success: function (d) {
+                if (d > 0) {
+                    alert("添加成功");
+                    location.href = "/Zzh_Patient/GetPatient";
+                }
+                else {
+                    alert("添加失败");
+                }
+            }
+        })
+    }
+
+</script>
+<div style="display:none" id="test">
+    <span style="float:left;margin-top:40px">职业名称</span>
+    <input type="text" id="Zhiye" placeholder="" class="layui-input" style="float:left;width:350px;margin-top:35px;margin-left:10px" />
+    <br />
+    <button type="button" class="layui-btn" onclick="location.href='/Zzh_Patient/GetPosition'" style="float:right;margin-right:80px;margin-top:20px">取消</button>
+    <button type="button" class="layui-btn" onclick="Add()" style="float:right;margin-right:50px;margin-top:20px">确定</button>
+</div>
+
