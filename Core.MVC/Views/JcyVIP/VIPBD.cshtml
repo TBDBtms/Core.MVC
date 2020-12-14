@@ -59,11 +59,51 @@
         });
     </script>
     <script>
-
+        $(function () {
+            ShowVIPInfo();
+        })
+        function ShowVIPInfo(id) {
+             $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetById",
+                dataType: "json",
+                data: { id:@ViewBag.id},
+                type: "get",
+                success: function (data) {
+                    console.log(data);
+                    $("#card").text(data.idCard);
+                    $("#name").text(data.patientName);
+                    $("#jf").text(data.integral);
+                }
+            })
+        }
+        function AddVIPJF() {
+            var htmls = {
+                Integral: $("#num").val(),
+                AddRemark: $("#remark").val(),
+                Id: $("#id").val()
+            };
+            
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/AddIntegral",
+                dataType: "json",
+                data: htmls,
+                type: "post",
+                success: function (data) {
+                    if (data > 0) {
+                        alert('成功');
+                        location.reload();
+                    } else {
+                        alert('失败');
+                        location.reload();
+                    }
+                }
+            })
+        }
     </script>
 </head>
 <body>
     <div>
+        <input type="hidden" id="id" value="@ViewBag.id" />
         &emsp;<h3 style="margin-left:15px;">积分变动</h3>
         <br />
         <div>
@@ -86,7 +126,7 @@
                     备注:<br />
                     <textarea id="remark"></textarea><br />
                     <input type="button" name="name" value="取消" class="layui-btn" />
-                    <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" />
+                    <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="AddVIPJF()"/>
                 </div>
                 <div class="layui-tab-item">
                     扣减数量<span style="color:red">*</span><br />

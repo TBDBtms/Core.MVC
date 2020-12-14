@@ -12,7 +12,7 @@
 </head>
 <body>
     <div>
-        <div>
+        <div >
             <form class="layui-form">
                 <div class="layui-form-item" style="float:left">
                     <label class="layui-form-label">选择框</label>
@@ -27,14 +27,17 @@
         <div style="float:left">
             <input type="text" name="title" id="txt_name" required lay-verify="required" placeholder="请输入员工姓名" autocomplete="off" class="layui-input" onchange="Shows()">
         </div>
-        <div><input id="Button1" type="button" class="layui-btn layui-btn-radius" value="搜索" style="background-color:aqua" onclick=" Shows()" /></div>
+        <div>
+            <button type="button" style="margin-left:auto" onclick="Shows()" class="layui-btn">&#xe615;</button>
+
+        </div>
 
     </div>
     <div style="">
         <table class="layui-table" style="text-align:center;margin-left:30px">
             
-            <thead style="background-color:aqua" >
-                <tr style="background-color:aqua">
+            <thead style="background-color:lavender" >
+                <tr style="background-color:lavender">
                     <th style="text-align:center">员工编号</th>
                     <th style="text-align:center">员工姓名</th>
                     <th style="text-align:center">员工性别</th>
@@ -81,14 +84,14 @@
             success: function (d)
             {
                 $("#keshi").empty();
-                $("#keshi").append("<option value='0'>请选择</option>");
+                $("#keshi").append("<option value='0'>全科</option>");
                 $(d).each(function () {
                     var str = "<option value='"+ this.kid + "'>" + this.kname + "</option>";
                     $("#keshi").append(str);
 
                 });
 
-                //form.render('select');
+                form.render('select');
 
 
             }
@@ -112,22 +115,22 @@
                 $("#tb").empty();
                 $(d).each(function () {
                     $("#tb").append("<tr>" +
-                 "<td style='color:aqua'>" + this.uno + "</td>" +
+                 "<td style='color:forestgreen'>" + this.uno + "</td>" +
                  "<td style='text - align: center'>"+this.uname+"</td >"+
                 "<td style='text - align: center'>"+(this.usex?"男":"女")+"</td>"+
                 "<td style='text - align: center'>"+this.uage+"</td>"+
                 "<td style='text - align: center'>"+this.uiphone+"</td>"+
                 "<td style='text - align: center'>"+this.ukeids+"</td>"+
-                "<td style='text - align: center'>" +this.createTime+"</td>"+
+                "<td style='text - align: center '>" +this.createTime+"</td>"+
                 "<td style='text - align: center'>" + this.creatName+"</td>"+
-                "<td style='text - align: center'>"+this.uissale+"</td>"+
+                "<td style='text - align:center color:forestgreen'>"+(this.uissale?"离职":"正常工作")+"</td>"+
                 "<td style='text - align: center'>"+this.uzhanghao+"</td>"+
                 "<td style='text - align: center'>"+this.upass+"</td>"+
                 "<td style='text - align: center'>"+this.rname+"</td>"+
                 "<td style='text - align: center'>"+this.uxue+"</td>"+
                 "<td style='text - align: center'>"+this.cname+"</td>"+
                 "<td style='text - align: center'>" + this.qremark + "</td>" +
-                      "<td style='text - align: center'>" + (qma == "ABCD" ? "<input id='Button1' type='button' value='删除' onclick='DelUser("+ this.uid+")'/><input id='Button1' type='button' value='修改' onclick='UpdUser('" + this.uid + "')' />" : qma == "A" ? "" : qma == "Yi" ? "":"") + "</td>" +
+                        "<td style='text - align: center'>" + (qma == "ABCD" ? "<input id='Button1' type='button' value='删除' style='background-color:lavender' onclick='DelUser(" + this.uid + ")'/><input id='Button1' type='button' value='修改' style='background-color:lavender' onclick='UpdUser(" + this.uid + ")' />" : qma == "A" ? "" : qma == "Yi" ? "<input id='Button1' type='button' value='删除' style='background-color:lavender' onclick='DelUser(" + this.uid + ")'/>":"") + "</td>" +
             "</tr>");
                 });
             }
@@ -170,6 +173,11 @@
             return false;
         });
     });
+    function UpdUser(uid)
+    {
+        location.href = "/HzxLogin/UpdUser?Uid=" + uid;
+
+    }
 </script>
 
 
