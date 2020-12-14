@@ -81,16 +81,14 @@
             success: function (d)
             {
                 $("#keshi").empty();
-                $("#keshi").append("<option value='0'>请选择</option>");
+                $("#keshi").append("<option value='0'>全科</option>");
                 $(d).each(function () {
                     var str = "<option value='"+ this.kid + "'>" + this.kname + "</option>";
                     $("#keshi").append(str);
 
                 });
 
-                //form.render('select');
-
-
+                form.render('select');
 
 
             }
@@ -122,14 +120,14 @@
                 "<td style='text - align: center'>"+this.ukeids+"</td>"+
                 "<td style='text - align: center'>" +this.createTime+"</td>"+
                 "<td style='text - align: center'>" + this.creatName+"</td>"+
-                "<td style='text - align: center'>"+this.uissale+"</td>"+
+                "<td style='text - align: center'>"+(this.uissale?"离职":"正常工作")+"</td>"+
                 "<td style='text - align: center'>"+this.uzhanghao+"</td>"+
                 "<td style='text - align: center'>"+this.upass+"</td>"+
                 "<td style='text - align: center'>"+this.rname+"</td>"+
                 "<td style='text - align: center'>"+this.uxue+"</td>"+
                 "<td style='text - align: center'>"+this.cname+"</td>"+
                 "<td style='text - align: center'>" + this.qremark + "</td>" +
-                      "<td style='text - align: center'>" + (qma == "ABCD" ? "<input id='Button1' type='button' value='删除' onclick='DelUser("+ this.uid+")'/><input id='Button1' type='button' value='修改' onclick='UpdUser('" + this.uid + "')' />" : qma == "A" ? "" : qma == "Yi" ? "":"") + "</td>" +
+                      "<td style='text - align: center'>" + (qma == "ABCD" ? "<input id='Button1' type='button' value='删除' onclick='DelUser("+ this.uid+")'/><input id='Button1' type='button' value='修改' onclick='UpdUser(" + this.uid + ")' />" : qma == "A" ? "" : qma == "Yi" ? "":"") + "</td>" +
             "</tr>");
                 });
             }
@@ -172,6 +170,11 @@
             return false;
         });
     });
+    function UpdUser(uid)
+    {
+        location.href = "/HzxLogin/UpdUser?Uid=" + uid;
+
+    }
 </script>
 
 
