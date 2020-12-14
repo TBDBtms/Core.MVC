@@ -1,36 +1,33 @@
 ﻿
 @{
-    Layout = null;
+    ViewData["Title"] = "AddQuan";
+    Layout = "~/Views/Home/_Layout.cshtml";
 }
-
-<!DOCTYPE html>
 
 <html>
 <head>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <meta name="viewport" content="width=device-width" />
-    <title>AddQuan</title>
 </head>
 <body>
-    <table class="table-bordered">
-        <tr>
-            <th><input id="CKAll" type="checkbox" /></th>
-            <th>权限id</th>
-            <th>权限描述</th>
-            <th>权限码</th>
-        </tr>
-        <tbody id="tb">
-            <tr>
-                <td>权限id</td>
-                <td>权限描述</td>
-                <td>权限码</td>
-            </tr>
-        </tbody>
-    </table>
-    <div>
-        <input id="Button1" type="button" value="配置完成" onclick="AddQuan()"/>
+    <div><button type="button" style="margin-left:auto" onclick="AddQuan()" class="layui-btn">配置</button></div>
+    <div style=" margin-left:auto">
+        <table class="layui-table" style="text-align:center;margin-left:30px">
+
+            <thead style="background-color:lavender">
+                <tr style="background-color:lavender">
+                    <th><input id="CKAll" type="checkbox" /></th>
+                    <th style="text-align:center">权限id</th>
+                    <th style="text-align:center">权限描述</th>
+                    <th style="text-align:center">权限码</th>
+                </tr>
+            </thead>
+            <tbody id="tb">
+            </tbody>
+        </table>
+
     </div>
+
 </body>
 </html>
 <script>
@@ -39,24 +36,21 @@
 
         Shows();
     });
-    function Shows()
-    {
+    function Shows() {
         $.ajax({
             url: "http://localhost:4965/api/Hzx_Login/GetQuanxians",
             type: "get",
             dataType: "json",
-            success: function (d)
-            {
+            success: function (d) {
                 $("#tb").empty();
                 $(d).each(function () {
 
                     $("#tb").append("<tr>" +
-                        "<td><input name='CKone' type='checkbox' value='"+this.qid+"' /></td >" +
-                        "<td>"+this.qid+"</td >"+
-                        "<td>" + this.qremark+"</td>"+
+                        "<td><input name='CKone' type='checkbox' value='" + this.qid + "' /></td >" +
+                        "<td>" + this.qid + "</td >" +
+                        "<td>" + this.qremark + "</td>" +
                         "<td>" + this.qma + "</td>" +
-                        "<td> <input id='Button1' type='button' value='配置' /></td>" +
-            "</tr >");
+                        "</tr >");
 
                 });
 
@@ -74,7 +68,7 @@
 
 </script>
 <script>
- 
+
     function AddQuan()
     {
         var Rids =@ViewBag.Rid;
@@ -84,7 +78,7 @@
             if ($(this).prop("checked") == true) {
                 Qids.push($(this).val());
             }
-            
+
 
         });
         if (Qids.length <= 0)
@@ -117,16 +111,17 @@
 
             }
 
-            
+
 
 
 
         });
-        
 
-   
-    
+
+
+
 
 
     }
 </script>
+
