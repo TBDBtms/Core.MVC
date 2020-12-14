@@ -46,7 +46,7 @@
                     $("#list").empty();
                     $(data).each(function () {
                         var str = "<tr>"+
-                        "<td><input type='radio' name='chk' value=''/></td>"+
+                        "<td><input type='radio' name='chk' value="+this.id+"/></td>"+
                             "<td>" + this.vGradeName+"</td>"+
                             "<td>" + this.vTypeName+"</td>"+
                             "<td>" + this.discount+"</td></tr>";
@@ -56,18 +56,17 @@
             })
         }
         function UpdInfos() {
-            var id = 0;
             var htmls = {
                 endTime: $("#times").val(),
-                vGradeId: $("[name='chk']:checked").val(),
+                vGradeId: $("[name=chk]:checked").val(),
                 Id: $("#id").val()
             };
             console.log(htmls);
             $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/UpdVIPgrade",
-                data: htmls,
                 type: "post",
                 dataType: "json",
+                data: htmls,
                 success: function (data) {
                     if (data > 0) {
                         alert('设置成功');
