@@ -15,11 +15,52 @@
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script>
-
+        $(function () {
+            ShowVIPInfo();
+        })
+         function ShowVIPInfo(id) {
+             $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetById",
+                dataType: "json",
+                data: { id:@ViewBag.id},
+                type: "get",
+                success: function (data) {
+                    console.log(data);
+                    $("#card").text(data.idCard);
+                    $("#name").text(data.patientName);
+                    $("#jf").text(data.svalueMoney);
+                }
+            })
+        }
+        function UpdVIPTK() {
+            var htmls = {
+                RePrice: $("#price").val(),
+                ReTypeId: $("[name=tk]:checked").val(),
+                Remark: $("#remark").val(),
+                Id: $("#id").val()
+            };
+            console.log(htmls);
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/RePrice",
+                data: htmls,
+                dataType: "json",
+                type: "post",
+                success: function (data) {
+                    if (data > 0) {
+                        alert('设置成功');
+                        location.reload();
+                    } else {
+                        alert('设置失败');
+                        location.reload();
+                    }
+                }
+            })
+        }
     </script>
 </head>
 <body>
     <div>
+        <input type="hidden" id="id" value="@ViewBag.id" />
         <h3>余额退款</h3>
         <br />
         <div>
@@ -37,10 +78,10 @@
         <br />
         <div>
             &emsp;退款方式<br />
-            &emsp;<input type="radio" name="tk" value="" />现金
-            <input type="radio" name="tk" value="" />支付宝
-            <input type="radio" name="tk" value="" />微信
-            <input type="radio" name="tk" value="" />银行卡
+            &emsp;<input type="radio" name="tk" value="0"  checked/>现金
+            <input type="radio" name="tk" value="1" />支付宝
+            <input type="radio" name="tk" value="2" />微信
+            <input type="radio" name="tk" value="3" />银行卡
         </div>
         <br />
         <div>
@@ -50,7 +91,7 @@
         <br />
         <div>
             &emsp;<input type="button" name="name" value="取消" class="layui-btn" />
-            &emsp;<input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="" />
+            &emsp;<input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="UpdVIPTK()" />
         </div>
     </div>
 </body>
