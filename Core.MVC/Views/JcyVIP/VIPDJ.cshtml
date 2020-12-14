@@ -9,7 +9,110 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>VIPDJ</title>
+    <script src="~/js/site.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+    <script>
+        $(function () {
+            Ones();
+            ShowInfos();
+            $("#chks").change(function () {
+                $(this).off('change');
+                document.getElementById("times").setAttribute("disabled", "disabled");
+            });
+        })
+        function Ones(id) {
+             $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetById",
+                dataType: "json",
+                data: { id:@ViewBag.id},
+                type: "get",
+                success: function (data) {
+                    console.log(data);
+                    $("#card").text(data.idCard);
+                    $("#name").text(data.patientName);
+                }
+            })
+        }
+        function ShowInfos() {
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
+                dataType: "json",
+                type: "get",
+                success: function (data) {
+                    $("#list").empty();
+                    $(data).each(function () {
+                        var str = "<tr>"+
+                        "<td><input type='radio' name='chk' value=''/></td>"+
+                            "<td>" + this.vGradeName+"</td>"+
+                            "<td>" + this.vTypeName+"</td>"+
+                            "<td>" + this.discount+"</td></tr>";
+                        $("#list").append(str);
+                    })
+                }
+            })
+        }
+        function UpdInfos() {
+            var id = 0;
+            var htmls = {
+                endTime: $("#times").val(),
+                vGradeId: $("[name='chk']:checked").val(),
+                Id: $("#id").val()
+            };
+            console.log(htmls);
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/UpdVIPgrade",
+                data: htmls,
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    if (data > 0) {
+                        alert('设置成功');
+                        ShowInfos();
+                    } else {
+                        alert('设置失败');
+                        ShowInfos();
+                    }
+                }
+            })
+        }
+        
+    </script>
 </head>
 <body>
+    <div>
+        <input type="hidden" id="id" value="@ViewBag.id" />
+        &emsp;<h3 style="margin-left:15px;">设置会员等级</h3>
+        <br />
+        <div>
+            &emsp;会员卡号:<span id="card"></span>&emsp;&emsp;会员名称:<span id="name"></span>
+        </div>
+        <br />
+        <div>
+            &emsp; 到期时间: <input type="date" id="times" value="" />&emsp;&emsp;<input type="checkbox" id="chks" value="" /> 永不过期
+        </div>
+        <div>
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td>会员等级</td>
+                        <td>会员姓名</td>
+                        <td>折扣</td>
+                    </tr>
+                </thead>
+                <tbody id="list">
+
+                </tbody>
+            </table>
+        </div>
+        <div style="float:right">
+            <input type="button" name="name" value="取消" class="layui-btn" />
+            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="UpdInfos()" />
+        </div>
+    </div>
 </body>
 </html>
