@@ -4,7 +4,7 @@
     Layout = "~/Views/Home/_Layout.cshtml";
 }
 
-<h1>SValuemage</h1>
+<h1></h1>
 <script src="~/js/site.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
@@ -19,7 +19,7 @@
                 shade: [0],
                 area: ['400', '300px'],
                 anim: 2,
-                content: ['/JcyVIP/ShowCZ', 'no'], //iframe的url，no代表不显示滚动条
+                content: ['/JcyVIP/ShowCZ?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
             });
         });
     })
@@ -61,13 +61,13 @@
                         "<td>" + this.idCard + "</td>" +
                         "<td>" + this.vTypeName + "</td>" +
                         "<td style='color:#ffd800;font-weight:bold'>" + this.vGradeName + "</td>" +
-                        "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.vIPName + '</a>' + "</td>" +
+                        "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.patientName + '</a>' + "</td>" +
                         "<td>" + this.phone + "</td>" +
                         "<td>" + this.amassSvalue + "</td>" +
                         "<td>" + this.addGiveMoney + "</td>" +
                         "<td>" + this.svalueMoney + "</td>" +
                         "<td>" + this.amassPrice + "</td>" +
-                        "<td><input type='button' class='test2' value='充值' /></td></tr>";
+                        "<td><a href='#' class='test2' style='color:darkslateblue;font-weight:bold'>充值</a>&nbsp;</td></tr>";
                     $("#list1").append(htmls);
                 })
             }
