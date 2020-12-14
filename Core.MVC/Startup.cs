@@ -46,7 +46,7 @@ namespace Core.MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=ZHQ_administration}/{action=AddPricing}/{id?}");
+                    pattern: "{controller=HzxLogin}/{action=Login}/{id?}");
             });
         }
     }

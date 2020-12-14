@@ -1,25 +1,19 @@
 ﻿
 @{
-    ViewData["Title"] = "ZLModify";
+    ViewData["Title"] = "GHAdd";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
 
-<style>
-    .layui-input, select {
-        height: 50px;
-    }
-</style>
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<input type="hidden" id="hid" value="@ViewBag.ZLId" />
 <input id="date1111" type="hidden" />
 <div style="width:1600px;height:1000px;margin-left:30px">
     <div style="width:1600px;height:150px;">
         <div style="float:left;margin-left:60px;margin-top:50px">
-            <h1 style="font-weight: bold;">修改诊疗费</h1>
+            <h1 style="font-weight: bold;">新增挂号费</h1>
         </div>
         <div style="float:right">
             <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:100px;background-color:#FFFFFF; float:right;color:black;font-weight: bold;" onclick="location.href='/DLH_Fee/Show'">返回</button>
-            <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:30px;background-color:#C2C5F6;float:right;color:black;font-weight: bold;" id="baocuen" onclick="ZLAddZL()">保存</button>
+            <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:30px;background-color:#C2C5F6;float:right;color:black;font-weight: bold;" id="baocuen" onclick="GHAddGH()">保存</button>
         </div>
     </div>
     <div style="width:1600px;height:30px;">
@@ -35,7 +29,7 @@
     </div>
     <div style="width:1600px;height:60px;">
         <div style="margin-left:130px;float:left;margin-top:0px">
-            <input type="text" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增费名称" class="layui-input" id="text_Name">
+            <input type="text" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增费用名称" class="layui-input" id="text_Name">
         </div>
         <div style="margin-left:20px;float:left">
             <input type="number" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增金额" class="layui-input" id="text_Money">
@@ -79,10 +73,12 @@
 </style>
 
 
+
 <script>
+
     var form;
 
-    layui.use(['form','layedit','laydate'], function () {
+    layui.use(['form', 'layedit', 'laydate'], function () {
         form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
@@ -101,56 +97,32 @@
             value: new Date(), // 指定值
         });
     });
-
-    $(function () {
-        ZLHuiXian();
-    });
-
-    function ZLHuiXian() {
-        $.ajax({
-            url: "http://localhost:4965/api/DLH_Fee/FXConsultations?cid=" +@ViewBag.ZLId,
-            type: "get",
-            dataType: "json",
-            success: function (d) {
-                $("#text_Name").val(d.additional);
-                $("#text_Money").val(d.moneyInfn);
-                $("#text_Money1").val(d.cost);
-                $("[name=sex]:checked").val(d.vip);
-                $("[name=shi]:checked").val(d.cState)
-                console.log(d);
-            }
-
-        });
-    }
-
-
-    function ZLAddZL() {
+    function GHAddGH() {
         var str = {
-            Additional:$("#text_Name").val(),
+            Registra:$("#text_Name").val(),
             MoneyInfn:$("#text_Money").val(),
             Cost:$("#text_Money1").val(),
-            ZLTime:$("#date1111").val(),
-            CreatepersonKey: sessionStorage.getItem("Uid"),
+            GHTime:$("#date1111").val(),
+            CreatepersonKey:sessionStorage.getItem("Uid"),
             Vip:$("[name=sex]:checked").val(),
-            CState: $("[name=shi]:checked").val(),
-            SequenceId: $("#hid").val()
+            CState:$("[name=shi]:checked").val()
         };
         console.log(str);
         $.ajax({
-            url: "http://localhost:4965/api/DLH_Fee/ModifyConsultations",
+            url: "http://localhost:4965/api/DLH_Fee/AddRegistration",
             type: "post",
             dataType: "json",
             data: str,
             success: function (date) {
                 if (date > 0) {
-                    alert("修改成功");
+                    alert("添加成功");
                     location.href = "/DLH_Fee/Show";
                 }
                 else {
-                    alert("修改失败");
+                    alert("添加失败");
                 }
             }
-        });
+        })
     }
 </script>
 

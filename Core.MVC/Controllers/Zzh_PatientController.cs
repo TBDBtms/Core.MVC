@@ -21,5 +21,18 @@ namespace Core.MVC.Controllers
             ViewBag.pid = pid;
             return View();
         }
+        public IActionResult GetPatientSource()
+        {
+            return View();
+        }
+        public IActionResult GetEducation()
+        {
+            return View();
+        }
+        public IActionResult GetPosition()
+        {
+            return View();
+        }
+
     }
 }

@@ -90,6 +90,27 @@ namespace Core.MVC.Controllers
 
             return View();
         }
+        /// <summary>
+        /// 添加科室
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Addkeshi()
+        {
+
+
+            return View();
+        }
+
+        /// <summary>
+        /// 添加角色
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult AddRole()
+        {
+
+
+            return View();
+        }
 
 
 
