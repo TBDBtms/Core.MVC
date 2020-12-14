@@ -81,14 +81,14 @@
             success: function (d)
             {
                 $("#keshi").empty();
-                $("#keshi").append("<option value='0'>请选择</option>");
+                $("#keshi").append("<option value='0'>全科</option>");
                 $(d).each(function () {
                     var str = "<option value='"+ this.kid + "'>" + this.kname + "</option>";
                     $("#keshi").append(str);
 
                 });
 
-                //form.render('select');
+                form.render('select');
 
 
             }
