@@ -15,110 +15,112 @@
     <div style="width:50px;float:right;margin-top:15px;margin-right:42px">
         <input type="button" value="新增药品" class="layui-btn" onclick="location.href='/ZHQ_administration/Addadministration'" />
     </div>
-    <table class="layui-table" style="text-align:center">
-        <tr style="background-color:lavender">
-            <th>序号</th>
-            <th>药品编号</th>
-            <th>药品通用名</th>
-            <th>药品分类</th>
-            <th>药品规格</th>
-            <th>生产厂家</th>
-            <th>采购价</th>
-            <th>零售价</th>
-            <th>调价</th>
-        </tr>
-        <tbody id="tb">
-         
-        </tbody>
-        
-    </table>
-    <div align="center">
-        <input type="button" id="SY" value="首页" />
-        <input type="button" id="SXY" value="上一页" />
-        <input type="button" onclick="XXY()" value="下一页" />
-        <input type="button" id="WY" value="尾页" />
-        当前页/总页数:<span style="color:blue" id="sp"></span>
+    <div style="width:50px;float:right;margin-top:15px;margin-right:42px">
+        <input type="button" value="调价明细" class="layui-btn" onclick="location.href='/ZHQ_administration/TJMingXi'" />
     </div>
-</div>
-<script>
-  
-    var pageindex = 1;
-    var pagesize = 10;
-    var count = 0;  //总条数
-    var pagecount = 0;  //总页数
-    $(function () {
-        
-        LoadTable();
-    })
+        <table class="layui-table" style="text-align:center">
+            <tr style="background-color:lavender">
+                <th>序号</th>
+                <th>药品编号</th>
+                <th>药品通用名</th>
+                <th>药品分类</th>
+                <th>药品规格</th>
+                <th>生产厂家</th>
+                <th>采购价</th>
+                <th>零售价</th>
+                <th>调价</th>
+            </tr>
+            <tbody id="tb">
+            </tbody>
 
-    $("#btnCX").click(function () {
-      
-       LoadTable();
-       
-    })
+        </table>
+        <div align="center">
+            <button type="button" style="margin-left:auto" id="SY" class="layui-btn">首页</button>
+            <button type="button" style="margin-left:auto" id="SXY" class="layui-btn">上一页</button>
+            <button type="button" style="margin-left:auto" onclick="XXY()" class="layui-btn">下一页</button>
+            <button type="button" style="margin-left:auto" id="WY" class="layui-btn">尾页</button>
+            当前页/总页数:<span style="color:blue" id="sp"></span>
+        </div>
+    </div>
+    <script>
 
-    $("#SXY").click(function () {
-        if (pageindex == 1) {
-            alert('已经是第一页');
-            return;
-        }
-        pageindex = pageindex - 1;
-        $("#sp").text(pageindex);
-        LoadTable();
-    })
+        var pageindex = 1;
+        var pagesize = 10;
+        var count = 0;  //总条数
+        var pagecount = 0;  //总页数
+        $(function () {
 
-    $("#SY").click(function () {
-        pageindex = 1;
-        $("#sp").text(pageindex);
-        LoadTable();
-    })
-    $("#WY").click(function () {
-        pageindex = pagecount;
-        $("#sp").text(pageindex);
-        LoadTable();
-    })
-    function XXY() {
-        if (pageindex == pagecount) {
-            alert('已经是最后一页');
-            return;
-        }
-        pageindex = pageindex + 1;
-        $("#sp").text(pageindex);
-        LoadTable();
-    }
-
-
-    function LoadTable() {
-        var name = $("#txtName").val();
-        var i = 1;
-        $.ajax({
-            url: "http://localhost:4965/api/ZHQ_administration/Getadministration",
-            data: { name: name, pageindex: pageindex, pagesize: pagesize },
-            type: "get",
-            dataType: "json",
-            success: function (d) {
-                $("#tb").empty();
-                $(d.pageList).each(function () {
-                    var str = "<tr>" +
-                        "<td>" + i + "</td>" +
-                        "<td>" + this.drugBM + "</td>" +
-                        "<td>" + this.drugTYM + "</td>" +
-                        "<td>" + this.drugClassName + "</td>" +
-                        "<td>" + this.drugGG + "</td>" +
-                        "<td>" + this.manufacturerName + "</td>" +
-                        "<td style='color:red'>" + this.drugCGJ + "</td>" +
-                        "<td style='color:blue'>" + this.drugLSJ + "</td>" +
-                        "<td><a class='pc' href='#' id='" + this.drugId +"' style='color:blue'>调价</a></td>" +
-                        "</tr>";
-                    $("#tb").append(str);
-                    i++;
-                })
-                count = d.countnum;  //总条数
-                pagecount = Math.ceil(count * 1.0 / pagesize); //总页数
-                $("#sp").text(pageindex + "/" + pagecount);
-            }
+            LoadTable();
         })
-    }
+
+        $("#btnCX").click(function () {
+
+            LoadTable();
+
+        })
+
+        $("#SXY").click(function () {
+            if (pageindex == 1) {
+                alert('已经是第一页');
+                return;
+            }
+            pageindex = pageindex - 1;
+            $("#sp").text(pageindex);
+            LoadTable();
+        })
+
+        $("#SY").click(function () {
+            pageindex = 1;
+            $("#sp").text(pageindex);
+            LoadTable();
+        })
+        $("#WY").click(function () {
+            pageindex = pagecount;
+            $("#sp").text(pageindex);
+            LoadTable();
+        })
+        function XXY() {
+            if (pageindex == pagecount) {
+                alert('已经是最后一页');
+                return;
+            }
+            pageindex = pageindex + 1;
+            $("#sp").text(pageindex);
+            LoadTable();
+        }
+
+
+        function LoadTable() {
+            var name = $("#txtName").val();
+            var i = 1;
+            $.ajax({
+                url: "http://localhost:4965/api/ZHQ_administration/Getadministration",
+                data: { name: name, pageindex: pageindex, pagesize: pagesize },
+                type: "get",
+                dataType: "json",
+                success: function (d) {
+                    $("#tb").empty();
+                    $(d.pageList).each(function () {
+                        var str = "<tr>" +
+                            "<td>" + i + "</td>" +
+                            "<td>" + this.drugBM + "</td>" +
+                            "<td>" + this.drugTYM + "</td>" +
+                            "<td>" + this.drugClassName + "</td>" +
+                            "<td>" + this.drugGG + "</td>" +
+                            "<td>" + this.manufacturerName + "</td>" +
+                            "<td style='color:red'>" + this.drugCGJ + "</td>" +
+                            "<td style='color:blue'>" + this.drugLSJ + "</td>" +
+                            "<td><a class='pc' href='#' id='" + this.drugId + "' style='color:blue'>调价</a></td>" +
+                            "</tr>";
+                        $("#tb").append(str);
+                        i++;
+                    })
+                    count = d.countnum;  //总条数
+                    pagecount = Math.ceil(count * 1.0 / pagesize); //总页数
+                    $("#sp").text(pageindex + "/" + pagecount);
+                }
+            })
+        }
 
         $(document).on('click', '.pc', function () {
             layer.open({
@@ -134,5 +136,5 @@
                 }
             });
         });
-      
-</script>
+
+    </script>
