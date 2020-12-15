@@ -6,6 +6,7 @@
 
 <html>
 <head>
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
@@ -55,7 +56,7 @@
                     $("#tb").append(" <tr>"+
                         "<td>"+this.rid+"</td >"+
                         "<td>" + this.rname + "</td>" +
-                        "<td> <input id='Button1' type='button' value='配置' onclick='Quan(" + this.rid + ")' /></td>" +
+                        "<td> <input class='Button1' type='button' value='配置' id='" + this.rid + "' /></td>" +
                 "</tr >");
                 });
             }
@@ -72,10 +73,21 @@
             return false;
         });
     });
-    function Quan(rid)
-    {
-        location.href = "/HzxLogin/AddQuan?Rid="+rid;
+  
+    $(document).on('click', '.Button1', function () {
 
-    }
-   
+        layer.open({
+            type: 2,
+            closeBtn: 1, //不显示关闭按钮
+            area: ['500px', '300px'],
+            shade: [0],
+            title: false,
+            anim: 2,
+            content: ['/HzxLogin/AddQuan?Rid=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
+            cancel: function (index, layero) {
+                Shows();
+            }
+        });
+
+    })
 </script>

@@ -1,18 +1,19 @@
 ﻿
 @{
-    ViewData["Title"] = "AddQuan";
-    Layout = "~/Views/Home/_Layout.cshtml";
+    Layout = null;
 }
 
 <html>
 <head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <meta name="viewport" content="width=device-width" />
 </head>
 <body>
+ 
     <div><button type="button" style="margin-left:auto" onclick="AddQuan()" class="layui-btn">配置</button></div>
     <div style=" margin-left:auto">
-        <table class="layui-table" style="text-align:center;margin-left:30px">
+        <table  class="table-bordered" style="text-align:center;margin-left:30px">
 
             <thead style="background-color:lavender">
                 <tr style="background-color:lavender">
@@ -102,7 +103,9 @@
                 if (d > 0)
                 {
                     alert("配置成功");
+                    close();
                     location.href = "/HzxLogin/Index";
+               
                 }
                 else {
                     alert("配置失败");
