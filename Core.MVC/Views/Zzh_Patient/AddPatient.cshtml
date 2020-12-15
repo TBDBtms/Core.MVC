@@ -360,6 +360,9 @@
         })
     }
     function Add() {
+
+
+        var caoNAME = sessionStorage.getItem("Uname");
         var m = {
             PatientName: $("#txt_name").val(),
             PatientCard: $("#txt_card").val(),
@@ -380,6 +383,7 @@
             PositionId: $("#txt_Position").val(),
             WorkUnit: $("#txt_workUnit").val(),
             Remark: $("#txt_Remark").val(),
+            CaoPeople: caoNAME,
         }
         $.ajax({
             url: "http://localhost:4965/api/Zzh_Patient/AddPatient",

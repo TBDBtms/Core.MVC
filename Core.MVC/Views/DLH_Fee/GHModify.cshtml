@@ -1,0 +1,151 @@
+﻿
+@{
+    ViewData["Title"] = "GHModify";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<input type="hidden" id="hid" value="@ViewBag.GHId" />
+<input id="date1111" type="hidden" />
+<div style="width:1600px;height:1000px;margin-left:30px">
+    <div style="width:1600px;height:150px;">
+        <div style="float:left;margin-left:60px;margin-top:50px">
+            <h1 style="font-weight: bold;">修改挂号费</h1>
+        </div>
+        <div style="float:right">
+            <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:100px;background-color:#FFFFFF; float:right;color:black;font-weight: bold;" onclick="location.href='/DLH_Fee/Show'">返回</button>
+            <button type="button" class="layui-btn" style="width:100px;margin-top:50px;height:45px;margin-right:30px;background-color:#C2C5F6;float:right;color:black;font-weight: bold;" id="baocuen" onclick="GHAddGH()">保存</button>
+        </div>
+    </div>
+    <div style="width:1600px;height:30px;">
+        <div style="float:left;margin-left:150px">
+            <label style="font-size: 20px;font-weight: bold;">费用名称<span>*</span></label>
+        </div>
+        <div style="float:left;margin-left:250px">
+            <label style="font-size: 20px;font-weight: bold;">金额<span>*</span>（元）</label>
+        </div>
+        <div style="float:left;margin-left:250px">
+            <label style="font-size: 20px;font-weight: bold;">成本价（元）</label>
+        </div>
+    </div>
+    <div style="width:1600px;height:60px;">
+        <div style="margin-left:130px;float:left;margin-top:0px">
+            <input type="text" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增费名称" class="layui-input" id="text_Name">
+        </div>
+        <div style="margin-left:20px;float:left">
+            <input type="number" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增金额" class="layui-input" id="text_Money">
+        </div>
+        <div style="margin-left:80px;float:left">
+            <input type="number" name="title" style="width:250px;margin-left:20px;float:left;height:50px;" lay-verify="title" autocomplete="off" placeholder="新增成本价" class="layui-input" id="text_Money1">
+        </div>
+    </div>
+
+
+    <div style="width:1600px;height:60px;">
+        <div style="margin-left:130px;float:left">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:150px;font-size: 20px;font-weight: bold;">允许会员折扣：</label>
+                    <div class="layui-input-block" style="float:left;margin-left:20px">
+                        <input type="radio" name="sex" value="True" title="是" checked="">
+                        <input type="radio" name="sex" value="False" title="否">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div style="margin-left:120px;float:left">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width:150px;font-size: 20px;font-weight: bold;">项目启用：</label>
+                    <div class="layui-input-block" style="float:left;margin-left:20px">
+                        <input type="radio" name="shi" value="True" title="启用" checked="">
+                        <input type="radio" name="shi" value="False" title="不启用">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    span {
+        color: red;
+    }
+</style>
+
+
+<script>
+    var form;
+
+    layui.use(['form','layedit','laydate'], function () {
+        form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+        laydate.render({
+            elem: '#date1111', //指定元素
+            type: 'datetime', // 可选择：年、月、日、时、分、秒
+            format: 'yyyy-MM-dd HH:mm:ss', //指定时间格式
+            value: new Date(), // 指定值
+        });
+    });
+
+    $(function () {
+        GHHuiXian();
+    });
+
+    function GHHuiXian() {
+        $.ajax({
+            url: "http://localhost:4965/api/DLH_Fee/FXRegistration?cid=" +@ViewBag.GHId,
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $("#text_Name").val(d.registra);
+                $("#text_Money").val(d.moneyInfn);
+                $("#text_Money1").val(d.cost);
+                $("[name=sex]:checked").val(d.vip);
+                $("[name=shi]:checked").val(d.cState)
+                console.log(d);
+            }
+
+        });
+    }
+
+
+    function GHAddGH() {
+        var str = {
+            Registra:$("#text_Name").val(),
+            MoneyInfn:$("#text_Money").val(),
+            Cost:$("#text_Money1").val(),
+            GHTime:$("#date1111").val(),
+            CreatepersonKey: sessionStorage.getItem("Uid"),
+            Vip:$("[name=sex]:checked").val(),
+            CState: $("[name=shi]:checked").val(),
+            SequenceId: $("#hid").val()
+        };
+        console.log(str);
+        $.ajax({
+            url: "http://localhost:4965/api/DLH_Fee/ModifyRegistration",
+            type: "post",
+            dataType: "json",
+            data: str,
+            success: function (date) {
+                if (date > 0) {
+                    alert("修改成功");
+                    location.href = "/DLH_Fee/Show";
+                }
+                else {
+                    alert("修改失败");
+                }
+            }
+        });
+    }
+
+</script>

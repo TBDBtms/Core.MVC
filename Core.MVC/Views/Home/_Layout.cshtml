@@ -9,6 +9,12 @@
 </head>
 <body>
     
+    <ul class="layui-nav layui-bg-cyan" lay-filter="" style="background-color:aqua">
+        <li class="layui-nav-item"> <span id="sp1" style="color:black;font-weight:300"></span></li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">个人中心</a>
+            <dl class="layui-nav-child">
+                <dd><a onclick="location.href = '/HzxLogin/UpdPass';">修改密码</a></dd>
         <ul class="layui-nav layui-bg-cyan" lay-filter="" style="background-color:aqua">
             <li class="layui-nav-item"> <span id="sp1" style="color:lavender;font-weight:400"></span></li>
             <li class="layui-nav-item">
@@ -16,10 +22,11 @@
                 <dl class="layui-nav-child">
                     <dd><a onclick="location.href = '/HzxLogin/UpdPass';">修改密码</a></dd>
 
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a href="">社区</a></li>
-        </ul>
+            </dl>
+        </li>
+        <li class="layui-nav-item"><a href="">社区</a></li>
+        <li class="layui-nav-item"><a href="#" id="wl">闲的无聊?看会生活小常识?</a></li>
+    </ul>
     <div style="float:left;margin-top:0px">
         <div @*style="float:left;background-color:black;height:910px;width:210px;overflow:scroll;"*@ style="float:left">
             <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test" style="overflow: scroll;height:910px;width:210px;">
@@ -57,6 +64,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:">患者管理</a>
                     <dl class="layui-nav-child">
+                        <dd><a href="javascript:location.href='/Zzh_Patient/GetPatient';">患者信息</a></dd>
                         <dd><a href="javascript:location.href='/Zzh_Patient/AddPatient';">新增患者信息</a></dd>
                         <dd><a href="javascript:location.href='/Zzh_Patient/UpdPatient';">编辑患者信息</a></dd>
                     </dl>
@@ -176,9 +184,9 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">患者来源</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">患者来源</a></dd>
-                        <dd><a href="">患者学历</a></dd>
-                        <dd><a href="">患者职业</a></dd>
+                        <dd><a href="javascript:location.href='/Zzh_Patient/GetPatientSource'">患者来源</a></dd>
+                        <dd><a href="javascript:location.href='/Zzh_Patient/GetEducation'">患者学历</a></dd>
+                        <dd><a href="javascript:location.href='/Zzh_Patient/GetPosition'">患者职业</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -193,13 +201,14 @@
                     <a href="javascript:;">科室管理</a>
                     <dl class="layui-nav-child">
                         <dd><a onclick="location.href='/HzxLogin/keshi'">科室信息</a></dd>
-                        <dd><a href="">仅增科室信息</a></dd>
+                        <dd><a onclick="location.href='/HzxLogin/Addkeshi'">仅增科室信息</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:">角色管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:location.href='/HzxLogin/Addroleinfo';">仅增角色信息</a></dd>
+                        <dd><a href="javascript:location.href='/HzxLogin/Addroleinfo';">所有角色信息</a></dd>
+                        <dd><a href="javascript:location.href='/HzxLogin/Addrole';">仅增角色信息</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -240,4 +249,15 @@
 
         $("#sp1").text(Uname + "" + Rname);
     });
+    $("#wl").click(function () {
+        layer.open({
+            type: 2,
+            title: false,
+            area: ['860px', '450px'],
+            shade: 0.8,
+            closeBtn: 0,
+            shadeClose: true,
+            content: '//www.bilibili.com/video/av56945246/'
+        });
+    })
 </script>

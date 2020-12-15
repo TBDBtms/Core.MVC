@@ -6,7 +6,7 @@
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <body>
-    <div class="layui-tab">
+    <div class="layui-tab" style="margin-left:20px">
         <ul class="layui-tab-title">
             <li class="layui-this">附加费用设置</li>
             <li>诊疗费设置</li>
@@ -14,7 +14,7 @@
             <li>支付方式</li>
         </ul>
         <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
+            <div class="layui-tab-item layui-show" style="width:111%; height:120%; margin-left: 132px">
                 <div>
                     <form class="layui-form">
                         <div class="layui-form-item">
@@ -66,11 +66,11 @@
 
 
 
-            <div class="layui-tab-item">
-                <div>
+            <div class="layui-tab-item" style="width:104%;height:120%;margin-left:132px">
+                <div class="layui-tab-item layui-show" style="width:94%; height: 120%; margin-left: 132px">
                     <form class="layui-form">
-                        <div class="layui-form-item">
-                            <div class="layui-input-block" style="width:300px;float:left">
+                        <div class="layui-form-item" style="margin-left:-39px">
+                            <div class="layui-input-block" style="width:300px;float:left;margin-left:-92px">
                                 <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="诊疗费查询" class="layui-input">
                             </div>
                             <div class="layui-input-block" style="width:300px;float:right">
@@ -104,18 +104,168 @@
                     </table>
                 </div>
             </div>
-            <div class="layui-tab-item">内容3</div>
-            <div class="layui-tab-item">内容4</div>
-            <div class="layui-tab-item">内容5</div>
+
+
+
+
+            <div class="layui-tab-item" style="width:104%;height:120%;margin-left:132px">
+
+                <div class="layui-tab-item layui-show" style="width:94%; height: 120%; margin-left: 132px">
+                    <form class="layui-form">
+                        <div class="layui-form-item" style="margin-left:-241px">
+                            <div class="layui-input-block" style="width:300px;float:left">
+                                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="挂号费查询" class="layui-input">
+                            </div>
+                            <div class="layui-input-block" style="width:300px;float:right">
+                                <input type="button" class="layui-btn" value="新增挂号费用" onclick="GHAdd()" style="background-color:#C2C5F6;font-weight:bold;color:black" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="150">
+                            <col width="200">
+                            <col>
+                        </colgroup>
+                        <thead>
+                            <tr style="background-color:#C2C5F6">
+                                <th style="font-weight:bold">序号</th>
+                                <th style="font-weight:bold">挂号费名称</th>
+                                <th style="font-weight:bold">金额(元)</th>
+                                <th style="font-weight:bold">成本价(元)</th>
+                                <th style="font-weight:bold">创建时间</th>
+                                <th style="font-weight:bold">创建人员</th>
+                                <th style="font-weight:bold">允许会员折扣</th>
+                                <th style="font-weight:bold">费用状态</th>
+                                <th style="font-weight:bold">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_GH">
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+            </div>
+            <div class="layui-tab-item" style="width:226%;height:120%;margin-left:132px";>
+
+
+                <div class="layui-tab-item layui-show" style="width:155%;height:120%;" >
+                    <div style="height:140px" >
+                        <img src="~/img/xianjin.png" />
+                        <div id="div_str">
+                            <strong>现金支付</strong>
+                        </div>
+                        <form class="layui-form layui-form-pane" action="">
+                            <div id="dddd" class="layui-form-item" pane>
+                                <div id="kq" class="layui-input-block">
+                                    <input type="checkbox" name="zzz" lay-skin="switch" lay-text="开启|关闭">
+                                </div>
+                            </div>
+                        </form>
+                        
+                     </div>   
+                    <div style="height:140px">
+                        <img src="~/img/zhifubao.png" />
+                        <div id="div_str">
+                            <strong>支付宝支付</strong>
+                        </div>
+                        <form class="layui-form layui-form-pane" action="">
+                            <div id="dddd" class="layui-form-item" pane>
+                                <div id="kq" class="layui-input-block">
+                                    <input type="checkbox" name="zzz" lay-skin="switch" lay-text="开启|关闭">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div style="height:140px">
+                        <img src="~/img/wx.png" />
+                        <div id="div_str">
+                            <strong>微信支付</strong>
+                        </div>
+                        <form class="layui-form layui-form-pane" action="">
+                            <div id="dddd" class="layui-form-item" pane>
+                                <div id="kq" class="layui-input-block">
+                                    <input type="checkbox" name="zzz" lay-skin="switch" lay-text="开启|关闭">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div style="height:140px">
+                        <img src="~/img/lianyi.png" />
+                        <div id="div_str">
+                            <strong>银行卡支付</strong>
+                        </div>
+                        <form class="layui-form layui-form-pane" action="">
+                            <div id="dddd" class="layui-form-item" pane>
+                                <div id="kq" class="layui-input-block">
+                                    <input type="checkbox" name="zzz" lay-skin="switch" lay-text="开启|关闭">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div style="height:140px">
+                        <img src="~/img/huyuan.png" />
+                        <div id="div_str">
+                            <strong>会员卡支付</strong>
+                        </div>
+                        <form class="layui-form layui-form-pane" action="">
+                            <div id="dddd" class="layui-form-item" pane>
+                                <div id="kq" class="layui-input-block">
+                                    <input type="checkbox" name="zzz" lay-skin="switch" lay-text="开启|关闭">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div style="height:140px">
+                        <img src="~/img/guazhang.png" />
+                        <div id="div_str">
+                            <strong>挂账</strong>
+                        </div>
+                        <form class="layui-form layui-form-pane" action="">
+                            <div id="dddd" class="layui-form-item" pane>
+                                <div id="kq" class="layui-input-block">
+                                    <input type="checkbox" name="zzz" lay-skin="switch" lay-text="开启|关闭">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
-
 </body>
 
 <style>
     th {
         color: black;
         font-weight: bold;
+    }
+    img{
+        margin:0px;
+        padding:0px;
+        margin-top:50px;
+    }
+    div #div_str{
+        margin: 0px;
+        padding: 0px;
+        margin-top: -39px;
+        margin-left:100px;
+        font-size:30px;
+    }
+    div #dddd{
+        border-width:0px;
+        float:right;
+        margin-top:20px;
+    }
+    div #kq {
+        margin-top: -55px;
+        margin-right:80px;
+        margin-left:20px;
     }
 </style>
 
@@ -128,16 +278,23 @@
         ShowPrescriptionInfos();
         Showfujiafeiyong();
         Showzhenliaofeiyong();
+        Showguahao();
     });
 
 
-    layui.use(['form', 'layedit', 'laydate'], function () {
+    layui.use(['form', 'layedit', 'laydate'], 'form', function () {
+        var form = layui.form;
         form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
             , laydate = layui.laydate;
-    });
 
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
     function ShowPrescriptionInfos() {
         $.ajax({
             url: "http://localhost:4965/api/DLH_Fee/GetPrescriptionInfos",
@@ -153,8 +310,8 @@
 
                 });
                 form.render('select');
-            },
-        })
+            }
+        });
     }
     function Showfujiafeiyong() {
         var i = 1;
@@ -228,14 +385,13 @@
                         "<td>" + this.uname + "</td>" +
                         "<td>" + (this.vip ? "是" : "否") + "</td>" +
                         "<td>" + (this.cState ? "启用" : "未启用") + "</td>" +
-                        "<td><a onclick='Update(" + this.sequenceId + ")' style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='DelZD(" + this.sequenceId + ")'>删除</a></td></tr>";
+                        "<td><a onclick='UpdateZD(" + this.sequenceId + ")' style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='DelZD(" + this.sequenceId + ")'>删除</a></td></tr>";
                     $("#tbody_ZL").append(str);
                     i++;
                 });
             }
         });
     }
-
     function DelZD(id) {
         if (confirm("确认删除吗?")) {
             $.ajax({
@@ -253,16 +409,64 @@
             });
         }
     }
-
+    function UpdateZD(id) {
+        location.href = "/DLH_Fee/ZLModify?cid=" + id;
+    }
 
     function ZLAdd() {
         location.href="/DLH_Fee/ZLAdd"
     }
+    ///=====================================================================挂号========================================================================
+    function Showguahao() {
+        var i = 1;
+        $.ajax({
+            url: "http://localhost:4965/api/DLH_Fee/GetRegistrations",
+            type: "get",
+            async: false,
+            dataType: "json",
+            success: function (d) {
+                $("#tbody_GH").empty();
+                $(d).each(function () {
+                    var str = "<tr>" +
+                        "<td>" + i + "</td>" +
+                        "<td>" + this.registra + "</td>" +
+                        "<td>" + this.moneyInfn + "</td>" +
+                        "<td>" + this.cost + "</td>" +
+                        "<td>" + this.time + "</td>" +
+                        "<td>" + this.uname + "</td>" +
+                        "<td>" + (this.vip ? "是" : "否") + "</td>" +
+                        "<td>" + (this.cState ? "启用" : "未启用") + "</td>" +
+                        "<td><a onclick='UpdateGH(" + this.sequenceId + ")' style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='DelGH(" + this.sequenceId + ")'>删除</a></td></tr>";
+                    $("#tbody_GH").append(str);
+                    i++;
+                });
+            }
+        });
+    }
+    function DelGH(id) {
+        if (confirm("确认删除吗?")) {
+            $.ajax({
+                url: "http://localhost:4965/api/DLH_Fee/DelRegistration?cid=" + id,
+                type: "post",
+                dataType: "json",
+                success: function (d) {
+                    if (d > 0) {
+                        alert("删除成功");
+                        Showguahao();
+                    } else {
+                        alert("删除失败");
+                    }
+                }
+            });
+        }
+    }
+    function UpdateGH(id) {
+        location.href = "/DLH_Fee/GHModify?cid=" + id;
+    }
 
-
-
-
-
+    function GHAdd() {
+        location.href = "/DLH_Fee/GHAdd";
+    }
 </script>
 
 
