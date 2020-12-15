@@ -5,7 +5,9 @@
 }
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <div>
+
     <div style="width:1650px;height:100px">
+        <input id="hid" type="hidden" value="@ViewBag.id" />
         <div class="layui-input-block" style="width:300px;float:left;margin-top:50px">
             <input type="text" id="aaa" placeholder="分类名称" class="layui-input" />
         </div>
@@ -44,6 +46,23 @@
 <script>
     $(function () {
         ShowPosition();
+
+    })
+    $(document).on('click', '.test2', function () {
+
+            layer.open({
+                type: 2,
+                closeBtn: 1, //不显示关闭按钮
+                area: ['500px', '300px'],
+                shade: [0],
+                title: false,
+                anim: 2,
+                content: ['/Zzh_Patient/UpdPosition?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
+                cancel: function (index, layero) {
+                    ShowPosition();
+                }
+            });
+   
     })
     function ShowPosition() {
         var name = "";
@@ -62,7 +81,7 @@
                         "<td>" + this.positionName + "</td>" +
                         "<td>" + this.createTime + "</td>" +
                         "<td>" + this.createPeople + "</td>" +
-                        "<td><a style='margin-left:15px' onclick='Update(" + this.positionId + ")'>编辑</a><a href='' style='margin-left:15px' onclick='Del(" + this.positionId + ")'>删除</a></td></tr>";
+                        "<td><a href='#' class='test2' id='" + this.positionId + "' style='color:darkslateblue;font-weight:bold'>编辑</a><a href='' style='margin-left:15px' onclick='Del(" + this.positionId + ")'>删除</a></td></tr>";
                     $("#GetPO").append(str);
                 });
             }
@@ -106,17 +125,17 @@
     })
     function Add() {
         var m = {
-            PositionName: $("#Zhiye").val()
+            PositionName: $("#txt_name").val()
         }
         $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/AddPatient",
+            url: "http://localhost:4965/api/Zzh_Patient/AddPosition",
             type: "post",
             dataType: "json",
             data: m,
             success: function (d) {
                 if (d > 0) {
                     alert("添加成功");
-                    location.href = "/Zzh_Patient/GetPatient";
+                    location.href = "/Zzh_Patient/GetPosition";
                 }
                 else {
                     alert("添加失败");
@@ -128,7 +147,7 @@
 </script>
 <div style="display:none" id="test">
     <span style="float:left;margin-top:40px">职业名称</span>
-    <input type="text" id="Zhiye" placeholder="" class="layui-input" style="float:left;width:350px;margin-top:35px;margin-left:10px" />
+    <input type="text" id="txt_name" placeholder="" class="layui-input" style="float:left;width:350px;margin-top:35px;margin-left:10px" />
     <br />
     <button type="button" class="layui-btn" onclick="location.href='/Zzh_Patient/GetPosition'" style="float:right;margin-right:80px;margin-top:20px">取消</button>
     <button type="button" class="layui-btn" onclick="Add()" style="float:right;margin-right:50px;margin-top:20px">确定</button>

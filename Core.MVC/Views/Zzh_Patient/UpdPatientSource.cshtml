@@ -1,0 +1,65 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UpdPatientSource</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+</head>
+<body>
+    <div align="center">
+        <input type="hidden" id="hid" value="@ViewBag.pid" />
+        <span style="float:left;margin-top:40px">患者来源</span>
+        <input type="text" id="txt_name" placeholder="" class="layui-input" style="float:left;width:350px;margin-top:35px;margin-left:10px" />
+        <br />
+        <button type="button" class="layui-btn" onclick="location.href='/Zzh_Patient/GetPatientSource'" style="float:right;margin-right:80px;margin-top:20px">取消</button>
+        <button type="button" class="layui-btn" onclick="btnBC()" style="float:right;margin-right:50px;margin-top:20px">确定</button>
+    </div>
+</body>
+</html>
+<script>
+     $(function () {
+        init();
+    })
+
+    function init() {
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/ShowPatientSource",
+            data: { patientSourceId:@ViewBag.pid},
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $("#txt_name").val(d.patientSourceName)
+            }
+        })
+    }
+
+    function btnBC() {
+        var str = {
+            PatientSourceId: $("#hid").val(),
+            PatientSourceName: $("#txt_name").val()
+        }
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/UpdPatientSource",
+            type: "post",
+            dataType: "json",
+            data: str,
+            success: function (d) {
+                if (d > 0) {
+                    alert("修改成功");
+                    location.href = "/Zzh_Patient/GetPatientSource";
+                }
+                else {
+                    alert("修改失败");
+                }
+            }
+        })
+    }
+</script>
