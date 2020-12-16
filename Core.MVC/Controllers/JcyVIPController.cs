@@ -154,5 +154,13 @@ namespace Core.MVC.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 会员条件设置
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult AddVIPType()
+        {
+            return View();
+        }
     }
 }
