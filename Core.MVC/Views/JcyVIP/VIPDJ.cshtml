@@ -16,8 +16,13 @@
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
     <script>
+        var card;
+        var name;
+        var types;
+        var man;
         $(function () {
             Ones();
+            FindInfos();
             ShowInfos();
             $("#chks").change(function () {
                 $(this).off('change');
@@ -37,12 +42,28 @@
                 }
             })
         }
+
+        function FindInfos() {
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
+                dataType: "json",
+                type: "get",
+                success: function (data) {
+                    console.log(data);
+                    card = data.idCard;
+                    name = data.patientName;
+                    types = "人工操作";
+                    man = "晋超宇";
+                }
+            })
+        }
         function ShowInfos() {
             $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
                 dataType: "json",
                 type: "get",
                 success: function (data) {
+                    console.log(data)
                     $("#list").empty();
                     $(data).each(function () {
                         var str = "<tr>"+
@@ -55,22 +76,106 @@
                 }
             })
         }
+        var hydj;
+        var hymc;
+        var zk;
         function UpdInfos() {
-            var htmls = {
-                endTime: $("#times").val(),
-                vGradeId: $("[name=chk]:checked").val(),
-                Id: $("#id").val()
-            };
-            console.log(htmls);
+            //var htmls = {
+            //    endTime: $("#times").val(),
+            //    vGradeId: $("[name=chk]:checked").val(),
+            //    Id: $("#id").val()
+            //};
+            if ($("[name=chk]:checked").val()==1) {
+                $.ajax({
+                    url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
+                    dataType: "json",
+                    type: "get",
+                    success: function (data) {
+                        hydj = "VIP1";
+                        hymc= "普通会员";
+                        zk = "9.80";
+                    }
+                })
+            }
+            else if ($("[name=chk]:checked").val() == 2) {
+                $.ajax({
+                    url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
+                    dataType: "json",
+                    type: "get",
+                    success: function (data) {
+                        hydj = "VIP2";
+                        hymc = "初级会员";
+                        zk = "9.50";
+                    }
+                })
+            }
+            else if ($("[name=chk]:checked").val() == 3) {
+                $.ajax({
+                    url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
+                    dataType: "json",
+                    type: "get",
+                    success: function (data) {
+                        hydj = "VIP3";
+                        hymc = "高级会员";
+                        zk = "8.88";
+                    }
+                })
+            }
+            else if ($("[name=chk]:checked").val() == 4) {
+                $.ajax({
+                    url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
+                    dataType: "json",
+                    type: "get",
+                    success: function (data) {
+                        hydj = "VIP4";
+                        hymc = "白银会员";
+                        zk = "8.50";
+                    }
+                })
+            }
+            if ($("[name=chk]:checked").val() == 5) {
+                $.ajax({
+                    url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
+                    dataType: "json",
+                    type: "get",
+                    success: function (data) {
+                        hydj = "VIP5";
+                        hymc = "黄金会员";
+                        zk = "8.00";
+                    }
+                })
+            }
+            var htmls = {};
+            htmls.endTime = $("#times").val();
+            htmls.vGradeName = hydj;
+            htmls.vIPName = hymc;
+            htmls.discount = zk;
             $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/UpdVIPgrade",
                 type: "post",
                 dataType: "json",
                 data: htmls,
                 success: function (data) {
+                    console.log(data)
                     if (data > 0) {
-                        alert('设置成功');
-                        ShowInfos();
+                        var adds = {};
+                        adds.vIPCard = card;
+                        adds.vIPName = name;
+                        adds.chType = types;
+                        adds.operator = man;
+                        $.ajax({
+                            url: "http://localhost:4965/api/JcyVIP/AddGrade",
+                            dataType: "json",
+                            type: "post",
+                            data: adds,
+                            success: function (d) {
+                                if (d > 0) {
+                                    alert('成功');
+                                } else {
+                                    alert('失败')
+                                }
+                            }
+                        })
                     } else {
                         alert('设置失败');
                         ShowInfos();
@@ -78,7 +183,6 @@
                 }
             })
         }
-        
     </script>
 </head>
 <body>
@@ -104,11 +208,10 @@
                     </tr>
                 </thead>
                 <tbody id="list">
-
                 </tbody>
             </table>
         </div>
-        <div style="float:right">
+        <div style="text-align:center">
             <input type="button" name="name" value="取消" class="layui-btn" />
             <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="UpdInfos()" />
         </div>

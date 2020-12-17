@@ -113,7 +113,6 @@
                 success: function (data) {
                     if (data > 0) {
                         alert('成功');
-                        location.reload();
                     } else {
                         alert('失败');
                         location.reload();
@@ -157,7 +156,7 @@
         </div>
         <br />
         <div>
-            目前积分:<span id="jf"></span>
+            &emsp;目前积分:<span id="jf"></span>
         </div>
         <div class="layui-tab">
             <ul class="layui-tab-title">
@@ -169,21 +168,26 @@
                 <div class="layui-tab-item layui-show">
                     增加数量<span style="color:red">*</span><br />
                     <input type="text" id="num" value="" /><br />
+                    <br />
                     备注:<br />
-                    <textarea id="remark"></textarea><br />
+                    <textarea id="remark" style="width:200px;height:80px;"></textarea><br />
+                    <br />
                     <input type="button" name="name" value="取消" class="layui-btn" />
                     <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="AddVIPJF()" />
                 </div>
                 <div class="layui-tab-item">
                     扣减数量<span style="color:red">*</span><br />
                     <input type="text" id="num1" value="" /><br />
+                    <br />
                     备注:<br />
-                    <textarea id="remark1"></textarea><br />
+                    <textarea id="remark1" style="width:200px;height:80px;"></textarea><br />
+                    <br />
                     <input type="button" name="name" value="取消" class="layui-btn" />
                     <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="KoujVIPJF()" />
                 </div>
                 <div class="layui-tab-item">
-                    <textarea id="remark2"></textarea><br />
+                    <textarea id="remark2" style="width:200px;height:80px;"></textarea><br />
+                    <br />
                     <input type="button" name="name" value="取消" class="layui-btn" />
                     <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="QinlVIPJF()" />
                 </div>

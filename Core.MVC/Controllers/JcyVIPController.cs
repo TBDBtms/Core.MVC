@@ -59,8 +59,10 @@ namespace Core.MVC.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
         public IActionResult SetVIP(int id)
         {
+            ViewBag.id = id;
             return View();
         }
 
@@ -151,6 +153,14 @@ namespace Core.MVC.Controllers
         /// </summary>
         /// <returns></returns>
         public IActionResult VIPUpds()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 会员条件设置
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult AddVIPType()
         {
             return View();
         }
