@@ -5,10 +5,10 @@
 }
 <style>
     table tr td {
-        width:50px;
-        height:20px;
-        color:black;
-        font-size:5px
+        width: 50px;
+        height: 20px;
+        color: black;
+        font-size: 5px
     }
 
 </style>
@@ -20,118 +20,208 @@
     <div style="width:50px;float:left;margin-top:15px">
         <input type="button" value="查询" id="btnCX" class="layui-btn" />
     </div>
+    <div style="width:50px;float:left;margin-top:15px">
+        <input type="button" value="查询所有药品" id="btnCXSY" class="layui-btn" style="margin-left:20px"/>
+    </div>
     <div style="width:50px;float:right;margin-top:15px;margin-right:42px">
         <input type="button" value="新增药品" class="layui-btn" onclick="location.href='/ZHQ_administration/Addadministration'" />
     </div>
-    <table class="layui-table" style="text-align:center">
-        <tr style="background-color:lavender">
-            <th>序号</th>
-            <th>药品编号</th>
-            <th>创建时间</th>
-            <th>药品通用名</th>
-            <th>药品分类</th>
-            <th>药品规格</th>
-            <th>生产厂家</th>
-            <th>采购价</th>
-            <th>零售价</th>
-            <th>药品说明</th>
-            <th>销售数量</th>
-            <th>盘点状态</th>
-            <th>药品状态</th>
-        </tr>
-        <tbody id="tb">
-        </tbody>
-    </table>
-    <div align="center">
+    <div style="width:1200px;height:110px;float:left">
+        <table style="font-size:15px" class="layui-table">
+            <tr style="height:28px">
+                <td style="background-color:gainsboro"><span style="font-size:15px">品牌</span></td>
+                <td id="pb" style="width:400px"><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span></td>
+            </tr>
+            <tr style="height:28px">
+                <td style="background-color:gainsboro"><span style="font-size:15px">分类</span></td>
+                <td id="fl"><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span></td>
+            </tr>
+            <tr style="height:28px">
+                <td style="background-color:gainsboro"><span style="font-size:15px">剂型</span></td>
+                <td id="jx"><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span><span style="margin-left:15px;font-size:15px"><a href="#">123456</a></span></td>
+            </tr>
+        </table>
+    </div>
+    @*<table class="layui-table" style="text-align:center;margin-top:20px">
+            <tr style="background-color:lavender">
+                <th>序号</th>
+                <th>药品编号</th>
+                <th>创建时间</th>
+                <th>药品通用名</th>
+                <th>药品分类</th>
+                <th>药品规格</th>
+                <th>生产厂家</th>
+                <th>采购价</th>
+                <th>零售价</th>
+                <th>药品说明</th>
+                <th>销售数量</th>
+                <th>盘点状态</th>
+                <th>药品状态</th>
+            </tr>
+            <tbody id="tb">
+            </tbody>
+        </table>*@
+    <div style="width:1245px;height:580px;float:left;margin-top:20px;margin-left:-8px" id="pj">
+        @*<div style="height:247px;width:223px;margin-left:20px;float:left;margin-top:5px">
+            <div style="width:180px;height:173px;margin-top:15px;margin-left:20px" align="center">
+                <img src="~/images/bk-zhuce-1.png" style="width:179px; height: 173px; margin-top: -1px;" />
+            </div>
+            <div style="height:23px;width:182px;margin-top:2px;margin-left:19px">
+                <span>5646465646646</span>
+            </div>
+            <div style="height:23px;width:182px;margin-top:10px;margin-left:19px">
+                <span style="color:red;font-size:21px">58.5元</span><span style="margin-left:20px">数量充足</span>
+            </div>
+        </div>*@
+    </div>
+    <div align="center" style="float:left;margin-left:31px">
         <button type="button" style="margin-left:auto" id="SY" class="layui-btn">首页</button>
         <button type="button" style="margin-left:auto" id="SXY" class="layui-btn">上一页</button>
         <button type="button" style="margin-left:auto" onclick="XXY()" class="layui-btn">下一页</button>
         <button type="button" style="margin-left:auto" id="WY" class="layui-btn">尾页</button>
-            当前页/总页数:<span style="color:blue" id="sp"></span>
+        当前页/总页数:<span style="color:blue" id="sp"></span>
 
     </div>
-  
+
 </div>
 
-<script>
-    var pageindex = 1;
-    var pagesize =10;
-    var count = 0;  //总条数
-    var pagecount = 0;  //总页数
-    $(function () {
-       
-        LoadTable();
-    })
+    <script>
+        var pageindex = 1;
+        var pagesize = 10;
+        var count = 0;  //总条数
+        var pagecount = 0;  //总页数
+        var bid = 0;
+        var wid = 0;
+        $(function () {
 
-    $("#btnCX").click(function () {
-        LoadTable();
-
-    })
-
-    $("#SXY").click(function () {
-        if (pageindex == 1) {
-            alert('已经是第一页');
-            return;
-        }
-        pageindex = pageindex - 1;
-        $("#sp").text(pageindex);
-        LoadTable();
-    })
- 
-    $("#SY").click(function () {
-        pageindex = 1;
-        $("#sp").text(pageindex);
-        LoadTable();
-    })
-    $("#WY").click(function () {
-        pageindex = pagecount;
-        $("#sp").text(pageindex);
-        LoadTable();
-    })
-    function XXY() {
-        if (pageindex == pagecount) {
-            alert('已经是最后一页');
-            return;
-        }
-        pageindex = pageindex + 1;
-        $("#sp").text(pageindex);
-        LoadTable();
-    }
-      
- 
-    function LoadTable() {
-        var name = $("#txtName").val();
-        var i = 1;
-        $.ajax({
-            url: "http://localhost:4965/api/ZHQ_administration/Getadministration",
-            data: { name:name,pageindex:pageindex,pagesize: pagesize},
-            type: "get",
-            dataType: "json",
-            success: function (d) {
-                $("#tb").empty();
-                $(d.pageList).each(function () {
-                    var str = "<tr>" +
-                        "<td>" + i + "</td>" +
-                        "<td>" + this.drugBM + "</td>" +
-                        "<td>" + this.drugctime + "</td>" +
-                        "<td>" + this.drugTYM + "</td>" +
-                        "<td>" + this.drugClassName + "</td>" +
-                        "<td>" + this.drugGG + "</td>" +
-                        "<td>" + this.manufacturerName + "</td>" +
-                        "<td>" + this.drugCGJ + "</td>" +
-                        "<td>" + this.drugLSJ + "</td>" +
-                        "<td>" + this.drugSM + "</td>" +
-                        "<td>" + this.drugXSNum + "</td>" +
-                        "<td>" + (this.drugPDState == 1 ? "<span style='color:blue'>已盘点</span>" : "<span style='color:red'>未盘点</span>") + "</td>" +
-                        "<td>" + (this.drugState==1?"<span style='color:blue'>启用</span>":"<span style='color:red'>停用</span>") + "</td>" +
-                        "</tr>";
-                    $("#tb").append(str);
-                    i++;
-                })
-                count = d.countnum;  //总条数
-                pagecount = Math.ceil(count * 1.0 / pagesize); //总页数
-                $("#sp").text(pageindex + "/" + pagecount);
-            }
+            LoadTable();
         })
-    }
-</script>
+
+        $("#btnCX").click(function () {
+            LoadTable();
+
+        })
+
+        $("#SXY").click(function () {
+            if (pageindex == 1) {
+                alert('已经是第一页');
+                return;
+            }
+            pageindex = pageindex - 1;
+            $("#sp").text(pageindex);
+            LoadTable();
+        })
+
+        $("#SY").click(function () {
+            pageindex = 1;
+            $("#sp").text(pageindex);
+            LoadTable();
+        })
+        $("#WY").click(function () {
+            pageindex = pagecount;
+            $("#sp").text(pageindex);
+            LoadTable();
+        })
+        function XXY() {
+            if (pageindex == pagecount) {
+                alert('已经是最后一页');
+                return;
+            }
+            pageindex = pageindex + 1;
+            $("#sp").text(pageindex);
+            LoadTable();
+        }
+
+
+        function LoadTable() {
+            var num;
+            var name = $("#txtName").val();
+            var i = 1;
+            $.ajax({
+                url: "http://localhost:4965/api/ZHQ_administration/Getadministration",
+                data: { name: name, pageindex: pageindex, pagesize: pagesize, bid: bid, wid: wid },
+                type: "get",
+                dataType: "json",
+                success: function (d) {
+                    $("#pj").empty();
+                    $(d.pageList).each(function () {
+                        if (this.DrugKC <= 100) {
+                            num = "数量较少";
+                        } else {
+                            num = "数量充足";
+                        }
+                        $("#pj").append("<div style='height:247px;width:223px;margin-left:20px;float:left;margin-top:5px'><div style='width:180px;height:173px;margin-top:15px;margin-left:20px' align='center'> <img src='" + this.imgUrl + "' style='width:179px; height: 173px; margin-top: -1px;'/></div><div style='height:23px;width:182px;margin-top:2px;margin-left:19px'><span>" + this.drugTYM + "</span></div><div style='height:23px;width:182px;margin-top:10px;margin-left:19px'><span style='color:red;font-size:21px'>" + this.drugLSJ + "元</span><span style='margin-left:20px'>" + num + "</span></div></div>");
+                                              
+                    })
+                    count = d.countnum;  //总条数
+                    pagecount = Math.ceil(count * 1.0 / pagesize); //总页数
+                    $("#sp").text(pageindex + "/" + pagecount);
+                    loadDrugFL();
+
+                }
+            })
+        }
+
+
+        function loadDrugFL() {
+            $.ajax({
+                url: "http://localhost:4965/api/ZHQ_administration/Getclassification",
+                data: {},
+                type: "get",
+                dataType: "json",
+                contextType: "application/x-www-form-urlencoded",
+                success: function (d) {
+                    $("#fl").empty();
+                    $(d).each(function () {
+                        var str = "<span style='margin-left: 15px; font - size: 15px'><a href='#' style='color:blue' onclick='gb(" + this.drugClassId + "," + 3 + ")'>" + this.drugClassName + "</a></span>";
+                        $("#fl").append(str);
+                    })
+                    loadDrugJX();
+                }
+            })
+        }
+
+
+        function loadDrugJX() {
+            $.ajax({
+                url: "http://localhost:4965/api/ZHQ_administration/Getform",
+                data: {},
+                type: "get",
+                dataType: "json",
+                contextType: "application/x-www-form-urlencoded",
+                success: function (d) {
+                    $("#jx").empty();
+                    $(d).each(function () {
+                        var str = "<span style='margin-left: 15px; font - size: 15px'><a href='#' style='color:blue' onclick='gb(" + this.dosage_formId + "," + 2 + ")'>" + this.dosage_formName + "</a></span>";
+                        $("#jx").append(str);
+                    })
+                    loadDrugPB();
+                }
+            })
+        }
+        function loadDrugPB() {
+            $.ajax({
+                url: "http://localhost:4965/api/ZHQ_administration/GetBrand",
+                data: {},
+                type: "get",
+                dataType: "json",
+                contextType: "application/x-www-form-urlencoded",
+                success: function (d) {
+                    $("#pb").empty();
+                    $(d).each(function () {
+                        var str = "<span style='margin-left:15px;font-size:15px;'><a href='#' style='color:blue' onclick='gb(" + this.brandId + "," + 1 + ")'>" + this.brandName + "</a></span>";
+                        $("#pb").append(str);
+                    })
+                }
+            })
+        }
+
+        $("#btnCXSY").click(function () {
+            gb(0, 0);
+        })
+        function gb(d1, d2) {
+            bid = d2;
+            wid = d1;
+            LoadTable();
+        }
+    </script>

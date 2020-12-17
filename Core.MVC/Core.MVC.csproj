@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\ZHQ_administration\Addadministration.cshtml~RF212e3a7.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HTTPContentCompressor" Version="1.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
 
