@@ -14,18 +14,18 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
     <script>
-        $(function () {
-            ShowVIPInfo();
+       $(function () {
+            ShowInfos();
         })
-         function ShowVIPInfo(id) {
-             $.ajax({
-                url: "http://localhost:4965/api/JcyVIP/GetById",
+        function ShowInfos(id) {
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetById" ,
                 dataType: "json",
-                data: { id:@ViewBag.id},
+                data: { id: @ViewBag.id },
                 type: "get",
                 success: function (data) {
-                    console.log(data);
                     $("#card").text(data.idCard);
                     $("#name").text(data.patientName);
                     $("#jf").text(data.svalueMoney);
