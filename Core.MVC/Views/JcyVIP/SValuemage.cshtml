@@ -17,9 +17,31 @@
                 title: false,
                 closeBtn: 1, //不显示关闭按钮
                 shade: [0],
-                area: ['400', '300px'],
+                area: ['400px', '300px'],
                 anim: 2,
                 content: ['/JcyVIP/ShowCZ?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
+            });
+        });
+        $('.test3').on('click', function () {
+            layer.open({
+                type: 2,
+                title: false,
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['400px', '300px'],
+                anim: 2,
+                content: ['/JcyVIP/ShowTK?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
+            });
+        });
+        $('.test4').on('click', function () {
+            layer.open({
+                type: 2,
+                title: false,
+                closeBtn: 1, //不显示关闭按钮
+                shade: [0],
+                area: ['400px', '300px'],
+                anim: 2,
+                content: ['/JcyVIP/ShowJL?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
             });
         });
     })
@@ -67,7 +89,7 @@
                         "<td>" + this.addGiveMoney + "</td>" +
                         "<td>" + this.svalueMoney + "</td>" +
                         "<td>" + this.amassPrice + "</td>" +
-                        "<td><a href='#' class='test2' style='color:darkslateblue;font-weight:bold'>充值</a>&nbsp;</td></tr>";
+                        "<td><a href='#' class='test2' style='color:darkslateblue;font-weight:bold'>充值</a>&nbsp;<a href='#' class='test3' style='color:darkslateblue;font-weight:bold'>退款</a>&nbsp;<a href='#' class='test4' style='color:darkslateblue;font-weight:bold'>充值/退款记录</a></td></tr>";
                     $("#list1").append(htmls);
                 })
             }

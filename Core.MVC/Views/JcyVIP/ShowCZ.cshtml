@@ -30,6 +30,32 @@
                 }
             })
         }
+        function UpdShowCZ() {
+            var vip = {
+                PayMoney: $("#money").val(),
+                GiveMoney: $("#addmoney").val(),
+                SId: $("[name=fs]:checked").val(),
+                Id: $("#id").val()
+            };
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/UpdCZ",
+                dataType: "json",
+                type: "post",
+                data: vip,
+                //contentType:"/application/json",
+                success: function (data) {
+                    console.log(data);
+                    if (data > 0) {
+                        alert('充值成功');
+                        location.reload();
+                        window.close();
+                    } else {
+                        alert('充值失败');
+                        location.reload();
+                    }
+                }
+            })
+        }
     </script>
 </head>
 <body>
@@ -64,7 +90,7 @@
         <br />
         <div>
             <input type="button" name="name" value="取消" class="layui-btn" />
-            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" />
+            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm"  onclick="UpdShowCZ()"/>
         </div>
     </div>
 </body>
