@@ -4,11 +4,10 @@
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>VIPSet</title>
+    <title>VIPUpds</title>
     <script src="~/js/site.js"></script>
     <link href="~/layui-v2.4.5/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
@@ -17,14 +16,15 @@
     <script>
         function AddVIPInfo() {
             var strs = {};
-            strs.VGradeId= $("#djbd").val();
-            strs.VIPName= $("#names").val();
-            strs.VIPReset= $("#zk").val();
-            strs.MinIntegral= $("#zd").val();
-            strs.Upgrade= $("#sj").val();
+            strs.VGradeId = $("#djbd").val();
+            strs.VIPName = $("#names").val();
+            strs.VIPReset = $("#zk").val();
+            strs.MinIntegral = $("#zd").val();
+            strs.Upgrade = $("#sj").val();
             strs.Remark = $("#remarks").val();
+            strs.Id = $("#id").val();
             $.ajax({
-                url: "http://localhost:4965/api/JcyVIP/AddVIPType",
+                url: "http://localhost:4965/api/JcyVIP/UpdVIPType",
                 dataType: "json",
                 type: "post",
                 data: strs,
@@ -41,6 +41,7 @@
 </head>
 <body>
     <div>
+        <input type="hidden" id="id" value="@ViewBag.id" />
         <h3 style="text-align:center">新增会员类型</h3><br />
         <div>
             <div>
