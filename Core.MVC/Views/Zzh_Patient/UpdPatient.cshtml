@@ -59,6 +59,9 @@
                         <div style="width:300px;">
                             <div class="layui-input-block">
                                 <select name="interest" lay-filter="aihao" id="txt_Source">
+                                    <option value="1">自来</option>
+                                    <option value="2">别人介绍</option>
+                                    <option value="3">广告</option>
                                 </select>
                             </div>
                         </div>
@@ -76,12 +79,6 @@
                         <div style="width:300px;">
                             <div class="layui-input-block">
                                 <select name="interest" lay-filter="aihao" id="txt_HuiYuan">
-                                    <option value="1">非会员</option>
-                                    <option value="2">初级会员</option>
-                                    <option value="3">高级会员</option>
-                                    <option value="4">白银会员</option>
-                                    <option value="5">黄金会员</option>
-                                    <option value="6">钻石会员</option>
                                 </select>
                             </div>
                         </div>
@@ -132,6 +129,12 @@
                         <div style="width:300px;">
                             <div class="layui-input-block">
                                 <select name="interest" lay-filter="aihao" id="txt_Education">
+                                    <option value="1">初中以下</option>
+                                    <option value="2">高中</option>
+                                    <option value="3">大专</option>
+                                    <option value="4">本科</option>
+                                    <option value="5">硕士及以上</option>
+                                    <option value="6">未说明</option>
                                 </select>
                             </div>
                         </div>
@@ -180,10 +183,13 @@
                 <div class="layui-form-item" style="float:left;margin-left:77px">
                     <div class="layui-form-item" style="float:left;">
                         <form class="layui-form">
-                            <label class="layui-form-label">职业</label>
+                            <label class="layui-form-label">科室</label>
                             <div style="width:300px;">
                                 <div class="layui-input-block">
-                                    <select name="interest" lay-filter="aihao" id="txt_Position">
+                                    <select name="interest" lay-filter="aihao" id="txt_Departments">
+                                        <option value="1">全科</option>
+                                        <option value="2">儿科</option>
+                                        <option value="3">骨科</option>
                                     </select>
                                 </div>
                             </div>
@@ -191,57 +197,94 @@
                     </div>
                 </div>
             </div>
-            <div style="float:left;">
-                <div style="margin-top:5px">
-                    <h3 style="margin-top:5px;margin-left:85px;float:left;border-radius:10px">工作单位</h3>
-                    <input type="text" id="txt_workUnit" style="width:200px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者工作单位" class="layui-input">
+            <div style="float:left">
+                <div style="float:left">
+                    <div class="layui-form-item" style="float:left;margin-left:77px">
+                        <div class="layui-form-item" style="float:left;">
+                            <form class="layui-form">
+                                <label class="layui-form-label">职业</label>
+                                <div style="width:300px;">
+                                    <div class="layui-input-block">
+                                        <select name="interest" lay-filter="aihao" id="txt_Position">
+                                            <option value="1">工人</option>
+                                            <option value="2">公务员</option>
+                                            <option value="3">医生</option>
+                                            <option value="4">教师</option>
+                                            <option value="5">互联网从业者</option>
+                                            <option value="6">未说明</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div style="float:left;">
-                <div style="margin-top:5px">
-                    <h3 style="margin-top:5px;margin-left:125px;float:left;border-radius:10px">备注</h3>
-                    <input type="text" id="txt_Remark" style="width:500px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者备注" class="layui-input">
+                <div style="float:left">
+                    <div class="layui-form-item" style="float:left;margin-left:77px">
+                        <div class="layui-form-item" style="float:left;">
+                            <form class="layui-form">
+                                <label class="layui-form-label">操作人</label>
+                                <div style="width:300px;">
+                                    <div class="layui-input-block">
+                                        <select name="interest" lay-filter="aihao" id="txt_czr">
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div style="float:left;">
+                    <div style="margin-top:5px">
+                        <h3 style="margin-top:5px;margin-left:125px;float:left;border-radius:10px">备注</h3>
+                        <input type="text" id="txt_Remark" style="width:200px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者备注" class="layui-input">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div>
-        <div>
-            <h2 style="font-weight:bold;margin-left:100px;float:left;color:blueviolet">关联家庭成员</h2>
-        </div>
-        <div style="float:right;margin-right:-680px;">
-            <button type="button" class="layui-btn" style="float:right;margin-right:650px;margin-top:30px;" onclick="location.href ='/Zzh_Patient/AddPatient'">
-                <i class="layui-icon">&#xe608;</i> 添加家庭成员
-            </button>
-        </div>
-        <div style="margin-top:40px;margin-left:50px">
-            <table class="layui-table" style="text-align:center;margin-left:30px;margin-top:40px">
-                <colgroup>
-                    <col width="150">
-                    <col width="200">
-                    <col>
-                </colgroup>
-                <thead style="background-color:lavender">
-                    <tr style="background-color: lavender">
-                        <th style="text-align:center">序号</th>
-                        <th style="text-align:center">家庭关系</th>
-                        <th style="text-align:center">姓名</th>
-                        <th style="text-align:center">性别</th>
-                        <th style="text-align:center">单位</th>
-                        <th style="text-align:center">出生日期</th>
-                        <th style="text-align:center">手机号</th>
-                        <th style="text-align:center">创建时间</th>
-                        <th style="text-align:center">操作</th>
-                    </tr>
-                </thead>
-                <tbody id="GetPat">
-                </tbody>
-            </table>
+        <h2 style="font-weight:bold;margin-left:100px;float:left;color:blueviolet">家庭成员</h2>
+    </div>
+    <div style="margin-top:40px;margin-left:50px">
+        <h3 style="margin-top:5px;margin-left:85px;float:left;border-radius:10px">成员关系</h3>
+        <h3 style="margin-top:5px;margin-left:145px;float:left;border-radius:10px">家庭成员名称</h3>
+        <h3 style="margin-top:5px;margin-left:204px;float:left;border-radius:10px">患者家庭成员性别</h3>
+        <h3 style="margin-top:5px;margin-left:135px;float:left;border-radius:10px">患者家庭成员年龄</h3>
+        <h3 style="margin-top:5px;margin-left:135px;float:left;border-radius:10px">患者家庭成员手机号</h3>
+    </div>
+</div>
+<div style="margin-top:20px">
+    <div style="margin-top:40px;margin-left:20px">
+        <div class="layui-form-item" style="float:left;">
+            <form class="layui-form">
+                <div style="width:250px;">
+                    <div class="layui-input-block">
+                        <select name="interest" lay-filter="aihao" id="txt_familyTies">
+                        </select>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-
+    <input type="text" id="txt_releFamilyName" style="width:200px;margin-left:70px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写家庭成员名称" class="layui-input">
+    <div style="float:left;">
+        <div class="layui-form-item">
+            <form class="layui-form">
+                <div style="width:250px;">
+                    <div class="layui-input-block">
+                        <select name="interest" lay-filter="aihao" id="txt_fsex">
+                            <option value="true">男</option>
+                            <option value="false">女</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <input type="text" id="txt_releFamilyAge" style="width:200px;margin-left:120px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写家庭成员年龄" class="layui-input">
+    <input type="text" id="txt_releFamilyPhone" style="width:200px;margin-left:70px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写家庭成员手机号" class="layui-input">
 </div>
-
 <script>
     var form;
     layui.use(['form', 'layedit', 'laydate'], function () {
@@ -257,43 +300,55 @@
         laydate.render({
             elem: '#date1'
         });
-            //监听提交
-            form.on('submit(formDemo)', function (data) {
-                layer.msg(JSON.stringify(data.field));
-                return false;
-            });
-        LaiYuan();
-        XueLi();
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
         Sheng();
         City();
-        ZhiYe();
+        CZR();
+        GuanXi();
+        HuiYuan();
         HuiXian();
     });
-    //患者来源
-    function LaiYuan() {
+    function GuanXi() {
         $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/GetPatientSource",
+            url: "http://localhost:4965/api/Zzh_Patient/GetFamilyTies",
             type: "get",
             dataType: "json",
             success: function (d) {
                 $(d).each(function () {
-                    var html = "<option value='" + this.patientSourceId + "'>" + this.patientSourceName + "</option>";
-                    $("#txt_Source").append(html);
+                    var html = "<option value='" + this.familyTiesId + "'>" + this.familyTiesName + "</option>";
+                    $("#txt_familyTies").append(html);
                     form.render('select');
                 });
             }
         })
     }
-    //学历下拉
-    function XueLi() {
+    function HuiYuan() {
         $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/GetEducation",
+            url: "http://localhost:4965/api/Zzh_Patient/GetMemberType",
             type: "get",
             dataType: "json",
             success: function (d) {
                 $(d).each(function () {
-                    var html = "<option value='" + this.educationId + "'>" + this.educationName + "</option>";
-                    $("#txt_Education").append(html);
+                    var html = "<option value='" + this.memberTypeId + "'>" + this.memberTypeName + "</option>";
+                    $("#txt_HuiYuan").append(html);
+                    form.render('select');
+                });
+            }
+        })
+    }
+    function CZR() {
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/GetCaoZuoRen",
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $(d).each(function () {
+                    var html = "<option value='" + this.caoZuoRenId + "'>" + this.caoZuoRenName + "</option>";
+                    $("#txt_czr").append(html);
                     form.render('select');
                 });
             }
@@ -333,7 +388,7 @@
     function erji() {
         var id = $("#txt_sheng").val();
         $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/GetCitys?provinceId="+id,
+            url: "http://localhost:4965/api/Zzh_Patient/GetCitys?provinceId=" + id,
             type: "get",
             dataType: "json",
             success: function (d) {
@@ -346,25 +401,9 @@
             }
         })
     }
-    //职业下拉
-    function ZhiYe() {
-        $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/GetPosition",
-            type: "get",
-            dataType: "json",
-            success: function (d) {
-                $(d).each(function () {
-                    var html = "<option value='" + this.positionId + "'>" + this.positionName + "</option>";
-                    $("#txt_Position").append(html);
-                    form.render('select');
-                });
-            }
-        })
-    }
-    //回显
     function HuiXian() {
         $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/GetPatient?patientId=" +@ViewBag.pid,
+            url: "http://localhost:4965/api/Zzh_Patient/ShowPatient?patientId=" + @ViewBag.pid,
             type: "get",
             dataType: "json",
             success: function (d) {
@@ -375,8 +414,8 @@
                 $("#sex").val(d.patientSex);
                 $("#txt_phone").val(d.patientPhone);
                 $("#txt_papers").val(d.patientpapers);
-                $("#txt_Source").val(d.patientSourceId);
-                $("#txt_HuiYuan").val(d.memberType);
+                $("#txt_Source").val(d.patientSource);
+                $("#txt_HuiYuan").val(d.memberTypeId);
                 $("#date1").val(d.endData);
                 $("#txt_Nation").val(d.nation);
                 $("#txt_Marital").val(d.maritalStatus);
@@ -384,14 +423,20 @@
                 $("#txt_sheng").val(d.provinceId);
                 $("#txt_shi").val(d.cityId);
                 $("#txt_Address").val(d.patientAddress);
-                $("#txt_Position").val(d.positionId);
-                $("#txt_workUnit").val(d.workUnit);
+                $("#txt_Position").val(d.position);
+                $("#txt_czr").val(d.caoPeopleId);
+                $("#txt_Departments").val(d.departments);
                 $("#txt_Remark").val(d.remark);
+                $("#txt_familyTies").val(d.familyTiesId);
+                $("#txt_releFamilyName").val(d.releFamilyName);
+                $("#txt_fsex").val(d.releFamilySex);
+                $("#txt_releFamilyAge").val(d.releFamilyAge);
+                $("#txt_releFamilyPhone").val(d.releFamilyPhone);
             }
         })
     }
     function Upd() {
-        var m = {
+        var str = {
             PatientId: $("#hid").val(),
             PatientName: $("#txt_name").val(),
             PatientCard: $("#txt_card").val(),
@@ -400,31 +445,37 @@
             PatientSex: $("#sex").val(),
             PatientPhone: $("#txt_phone").val(),
             Patientpapers: $("#txt_papers").val(),
-            PatientSourceId: $("#txt_Source").val(),
-            MemberType: $("#txt_HuiYuan").val(),
+            PatientSource: $("#txt_Source").val(),
+            MemberTypeId: $("#txt_HuiYuan").val(),
             EndData: $("#date1").val(),
             Nation: $("#txt_Nation").val(),
             MaritalStatus: $("#txt_Marital").val(),
-            EducationId: $("#txt_Education").val(),
+            Education:$("#txt_Education").val(),
             ProvinceId: $("#txt_sheng").val(),
             CityId: $("#txt_shi").val(),
             PatientAddress: $("#txt_Address").val(),
-            PositionId: $("#txt_Position").val(),
-            WorkUnit: $("#txt_workUnit").val(),
+            Position: $("#txt_Position").val(),
+            CaoPeopleId: $("#txt_czr").val(),
+            Departments: $("#txt_Departments").val(),
             Remark: $("#txt_Remark").val(),
+            FamilyTiesId: $("#txt_familyTies").val(),
+            ReleFamilyName: $("#txt_releFamilyName").val(),
+            ReleFamilySex: $("#txt_fsex").val(),
+            ReleFamilyAge: $("#txt_releFamilyAge").val(),
+            ReleFamilyPhone: $("#txt_releFamilyPhone").val(),
         }
         $.ajax({
             url: "http://localhost:4965/api/Zzh_Patient/UpdPatient",
             type: "post",
             dataType: "json",
-            data: m,
+            data: str,
             success: function (d) {
                 if (d > 0) {
-                    alert("修改成功");
+                    alert("编辑成功");
                     location.href = "/Zzh_Patient/GetPatient";
                 }
                 else {
-                    alert("修改失败");
+                    alert("编辑失败");
                 }
             }
         })

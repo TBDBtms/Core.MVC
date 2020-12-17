@@ -1,0 +1,90 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddVIPType</title>
+    <script src="~/js/site.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+<body>
+    <div>
+        <h3>新增会员类型</h3><br />
+        <div>
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <h4>会员等级:</h4><br />
+                    <input type="text" name="username" lay-verify="required" placeholder="请输入会员等级" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-inline">
+                    <h4>会员名称:</h4><br />
+                    &emsp;<input type="text" name="username" lay-verify="required" placeholder="请输入会员名称" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <h4>会员折扣:</h4><br />
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入会员折扣" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <h4>最低消费积分</h4><br />
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入最低消费积分" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+            </div>
+            <div>
+                <div class="layui-input-inline">
+                    <h4>升级所需积分:</h4><br />
+                    <input type="text" name="username" lay-verify="required" placeholder="请输入升级所需积分" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <br />
+            <div>
+                <div class="layui-input-inline">
+                    <h4>状态:</h4><br />
+                    <input type="radio" name="sex" value="" title="">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <br />
+                <div>
+                    <h4>升级所需积分:</h4><br />
+                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div>
+            <div></div>
+            <div>
+                <input type="button" name="name" value="取消" class="layui-btn" />&emsp;
+                <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

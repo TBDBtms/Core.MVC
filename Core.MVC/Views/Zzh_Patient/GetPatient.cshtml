@@ -111,14 +111,15 @@
     //会员下拉
     function ShowVIPType() {
         $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/ZGetVIPgrade",
+            url: "http://localhost:4965/api/Zzh_Patient/GetMemberType",
             type: "get",
             dataType: "json",
             success: function (d) {
                 $(d).each(function () {
-                    var html = "<option value='" + this.vGradeId + "'>" + this.vGradeName + "</option>";
+                    var html = "<option value='" + this.memberTypeId + "'>" + this.memberTypeName + "</option>";
                     $("#VIPgrade").append(html);
                     form.render('select');
+                    console.log(d);
                 });
             },
             complete: function () {
@@ -140,6 +141,7 @@
         if ($("#VIPgrade").val()!=0) {
             id=$("#VIPgrade").val();
         }
+        
         $.ajax({
             url: "http://localhost:4965/api/Zzh_Patient/GetPatients",
             type: "get",
@@ -155,11 +157,12 @@
                         "<td>" + (this.patientSex?"男":"女") + "</td>" +
                         "<td>" + this.patientAge + "</td>" +
                         "<td>" + this.patientPhone + "</td>" +
-                        "<td style='color:orange'>" + this.vGradeName + "</td>" +
+                        "<td style='color:orange'>" + this.memberTypeName + "</td>" +
                         "<td>" + this.createTime + "</td>" +
-                        "<td>" + this.caoPeople + "</td>" +
+                        "<td>" + this.caoZuoRenName + "</td>" +
                         "<td><a href=''  style='margin-left:10px' onclick=''>接诊</a><a style='margin-left:15px' onclick='Update(" + this.patientId+")'>编辑</a><a href='' style='margin-left:15px' onclick=''>设置会员</a><a href='' style='margin-left:15px' onclick='Del(" + this.patientId + ")'>删除</a></td></tr>";
                     $("#GetPat").append(str);
+                    console.log(d);
                 });
             }
         });
