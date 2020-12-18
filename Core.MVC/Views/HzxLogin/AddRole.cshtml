@@ -1,19 +1,19 @@
 ﻿
 @{
-    Layout = null;
+    ViewData["Title"] = "AddRole";
+    Layout = "~/Views/Home/_Layout.cshtml";
 }
 
-
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<body>
+<body >
 
     <div style="height:100px;margin-top:30px">
         <div>
             <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">角色名称</h3>
             <input type="text" id="Rname" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写新增角色名称" class="layui-input">
-            <button type="button" style="margin-left:auto;margin-top:35px;" onclick="AddRelo()" class="layui-btn">添加</button>
+            <button type="button" style="margin-left:auto;margin-top:35px;"   onclick="AddRelo()" class="layui-btn">添加</button>
         </div>
-
+    
     </div>
 
 
@@ -31,7 +31,7 @@
             success: function (d) {
                 if (d > 0) {
                     alert("添加成功");
-                    
+                    location.href = "/HzxLogin/Addroleinfo";
                 }
                 else {
                     alert("添加失败");
@@ -41,6 +41,11 @@
 
 
             }
+
+
+
+
+
 
         });
 

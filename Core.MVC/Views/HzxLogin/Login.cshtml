@@ -225,8 +225,8 @@
                             sessionStorage.setItem("Qma", d.qma);
                             sessionStorage.setItem("Rname", d.rname);
                             sessionStorage.setItem("Uid", d.uid);
-                    
-                            location.href = "/ZHQ_First/Index?Qma="+d.qma;
+                            location.href = "/HzxLogin/Index?Qma="+d.qma;
+                            location.href = "/ZHQ_First/Index";
                             return;
                         }
                         else {
@@ -249,8 +249,13 @@
 
     }
     function zhao() {
-     
-        location.href = "/HzxLogin/zhao";
+        var Uname = $("#Uname").val();
+        if (Uname == "")
+        {
+            alert("请输入用户名");
+            return;
+        }
+        location.href = "/HzxLogin/zhao?Uname="+Uname;
 
     }
 
