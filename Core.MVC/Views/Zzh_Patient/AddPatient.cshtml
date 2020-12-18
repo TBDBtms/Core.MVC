@@ -179,7 +179,7 @@
     <div style="height:100px;">
         <div style="float:left">
             <div style="float:left">
-                <div class="layui-form-item" style="float:left;margin-left:77px">
+                <div class="layui-form-item" style="float:left;margin-left:50px">
                     <div class="layui-form-item" style="float:left;">
                         <form class="layui-form">
                             <label class="layui-form-label">科室</label>
@@ -198,7 +198,7 @@
             </div>
             <div style="float:left">
                 <div style="float:left">
-                    <div class="layui-form-item" style="float:left;margin-left:77px">
+                    <div class="layui-form-item" style="float:left;margin-left:-9px">
                         <div class="layui-form-item" style="float:left;">
                             <form class="layui-form">
                                 <label class="layui-form-label">职业</label>
@@ -219,24 +219,41 @@
                     </div>
                 </div>
                 <div style="float:left">
-                    <div class="layui-form-item" style="float:left;margin-left:77px">
-                        <div class="layui-form-item" style="float:left;">
-                            <form class="layui-form">
-                                <label class="layui-form-label">操作人</label>
-                                <div style="width:300px;">
-                                    <div class="layui-input-block">
-                                        <select name="interest" lay-filter="aihao" id="txt_czr">
-                                        </select>
+                    <div style="float:left">
+                        <div class="layui-form-item" style="float:left;margin-left:-4px">
+                            <div class="layui-form-item" style="float:left;">
+                                <form class="layui-form">
+                                    <label class="layui-form-label">患者状态</label>
+                                    <div style="width:300px;">
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao" id="txt_PState">
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div style="float:left;">
-                    <div style="margin-top:5px">
-                        <h3 style="margin-top:5px;margin-left:125px;float:left;border-radius:10px">备注</h3>
-                        <input type="text" id="txt_Remark" style="width:200px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者备注" class="layui-input">
+                    <div style="float:left">
+                        <div class="layui-form-item" style="float:left;margin-left:-14px">
+                            <div class="layui-form-item" style="float:left;">
+                                <form class="layui-form">
+                                    <label class="layui-form-label">操作人</label>
+                                    <div style="width:300px;">
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao" id="txt_czr">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="float:left;">
+                        <div style="margin-top:5px">
+                            <h3 style="margin-top:5px;margin-left:125px;float:left;border-radius:10px">备注</h3>
+                            <input type="text" id="txt_Remark" style="width:200px;margin-left:20px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者备注" class="layui-input">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -245,44 +262,46 @@
     <div>
         <h2 style="font-weight:bold;margin-left:100px;float:left;color:blueviolet">家庭成员</h2>
     </div>
-    <div style="margin-top:40px;margin-left:50px">
+    <div style="margin-top:50px;margin-left:50px">
         <h3 style="margin-top:5px;margin-left:85px;float:left;border-radius:10px">成员关系</h3>
         <h3 style="margin-top:5px;margin-left:145px;float:left;border-radius:10px">家庭成员名称</h3>
         <h3 style="margin-top:5px;margin-left:204px;float:left;border-radius:10px">患者家庭成员性别</h3>
         <h3 style="margin-top:5px;margin-left:135px;float:left;border-radius:10px">患者家庭成员年龄</h3>
         <h3 style="margin-top:5px;margin-left:135px;float:left;border-radius:10px">患者家庭成员手机号</h3>
     </div>
+    <div style="margin-top:96px;">
+        <div style="margin-top:20px">
+            <div style="margin-top:40px;margin-left:20px">
+                <div class="layui-form-item" style="float:left;">
+                    <form class="layui-form">
+                        <div style="width:250px;">
+                            <div class="layui-input-block">
+                                <select name="interest" lay-filter="aihao" id="txt_familyTies">
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <input type="text" id="txt_releFamilyName" style="width:200px;margin-left:70px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写家庭成员名称" class="layui-input">
+            <div style="float:left;">
+                <div class="layui-form-item">
+                    <form class="layui-form">
+                        <div style="width:250px;">
+                            <div class="layui-input-block">
+                                <select name="interest" lay-filter="aihao" id="txt_fsex">
+                                    <option value="true">男</option>
+                                    <option value="false">女</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <input type="text" id="txt_releFamilyAge" style="width:200px;margin-left:120px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写家庭成员年龄" class="layui-input">
+        <input type="text" id="txt_releFamilyPhone" style="width:200px;margin-left:70px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写家庭成员手机号" class="layui-input">
+    </div>
 </div>
-<div style="margin-top:20px">
-    <div style="margin-top:40px;margin-left:20px">
-        <div class="layui-form-item" style="float:left;">
-            <form class="layui-form">
-                <div style="width:250px;">
-                    <div class="layui-input-block">
-                        <select name="interest" lay-filter="aihao" id="txt_familyTies">
-                        </select>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <input type="text" id="txt_releFamilyName" style="width:200px;margin-left:70px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写家庭成员名称" class="layui-input">
-    <div style="float:left;">
-        <div class="layui-form-item">
-            <form class="layui-form">
-                <div style="width:250px;">
-                    <div class="layui-input-block">
-                        <select name="interest" lay-filter="aihao" id="txt_fsex">
-                            <option value="true">男</option>
-                            <option value="false">女</option>
-                        </select>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <input type="text" id="txt_releFamilyAge" style="width:200px;margin-left:120px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写家庭成员年龄" class="layui-input">
-    <input type="text" id="txt_releFamilyPhone" style="width:200px;margin-left:70px;float:left;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写家庭成员手机号" class="layui-input">
 </div>
 <script>
     var form;
@@ -304,11 +323,12 @@
             layer.msg(JSON.stringify(data.field));
             return false;
         });
-        Sheng();
-        City();
-        CZR();
-        HuiYuan();
         GuanXi();
+        State();
+        CZR();
+        City();
+        Sheng();
+        HuiYuan();
     });
     function GuanXi() {
         $.ajax({
@@ -349,6 +369,9 @@
                     $("#txt_czr").append(html);
                     form.render('select');
                 });
+            },
+            complete: function () {
+                Sheng();
             }
         })
     }
@@ -364,7 +387,10 @@
                     $("#txt_sheng").append(html);
                     form.render('select');
                 });
-            }
+            },
+            complete: function () {
+                City();
+            } 
         })
     }
     //市下拉
@@ -379,7 +405,25 @@
                     $("#txt_shi").append(html);
                     form.render('select');
                 });
-            }
+            },
+            complete: function () {
+                City();
+            } 
+        })
+    }
+    //市下拉
+    function City() {
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/GetCity",
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $(d).each(function () {
+                    var html = "<option value='" + this.cityId + "'>" + this.cityName + "</option>";
+                    $("#txt_shi").append(html);
+                    form.render('select');
+                });
+            },
         })
     }
     //省市二级联动
@@ -394,6 +438,21 @@
                 $(d).each(function () {
                     var html = "<option value='" + this.cityId + "'>" + this.cityName + "</option>";
                     $("#txt_shi").append(html);
+                    form.render('select');
+                });
+            }
+        })
+    }
+
+    function State() {
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/GetPatientState",
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $(d).each(function () {
+                    var html = "<option value='" + this.patientStateId + "'>" + this.patientStateName + "</option>";
+                    $("#txt_PState").append(html);
                     form.render('select');
                 });
             }
@@ -425,7 +484,8 @@
             ReleFamilyName: $("#txt_releFamilyName").val(),
             ReleFamilySex: $("#txt_fsex").val(),
             ReleFamilyAge: $("#txt_releFamilyAge").val(),
-            ReleFamilyPhone: $("#txt_releFamilyPhone").val()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+            ReleFamilyPhone: $("#txt_releFamilyPhone").val(),
+            PatientStateId: $("#txt_PState").val()     
         }
         $.ajax({
             url: "http://localhost:4965/api/Zzh_Patient/AddPatient",

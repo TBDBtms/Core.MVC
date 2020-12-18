@@ -1,0 +1,235 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link href="~/css/cmd.css" rel="stylesheet" />
+<h1 style="color:red;margin-left:50px;margin-top:30px">工作台</h1>
+<div id="ddd" style="width:1600px;height:500px;float:left">
+    <div id="div1">
+        <div style="float:left">
+            <div style="float:left;margin-top:20px">
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+                    <div class="layui-form-item" style="width:300px">
+                        <label class="layui-form-label">开始时间：</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="sTime" name="sTime" model="datetime" format="yyyy-MM-dd" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input test-item" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="float:left;margin-top:20px">
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+                    <div class="layui-form-item" style="width:300px">
+                        <label class="layui-form-label">结束时间：</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="eTime" name="eTime" model="datetime" format="yyyy-MM-dd" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input test-item" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="float:left;margin-top:20px">
+                <form class="layui-form">
+                    <div class="layui-form-item" style="float:left">
+                        <label class="layui-form-label">结症状态</label>
+                        <div style="width:300px">
+                            <div class="layui-input-block">
+                                <select lay-filter="aihao" id="VIPgrade">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-input-block" style="width:300px;float:left;margin-top:20px">
+                <input type="text" id="aaa" placeholder="请输入患者姓名" class="layui-input" />
+            </div>
+            <div style="float:left;margin-top:20px">
+                <button type="button" class="layui-btn" onclick="cx()">查询</button>
+            </div>
+        </div>
+    </div>
+    <div id="div2" style="background-color:coral">
+        <div id="d1" style="background-color:red">
+            <div>
+                <div style="float:left;width:80px;height:110px">
+                    <img src="~/Zzhimg/QQ图片20201218101515 (1).png" style="margin-top:40px;margin-left:20px;width:80px;height:80px" />
+                </div>
+                <div style="float:left;margin-top:32px;width:270px;height:50px;margin-left:45px;">
+                    <span style="font-size:20px;">11</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style="font-size:15px;">222</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style="font-size:15px;">性别</span>&nbsp;
+                    <span style="font-size:15px;">女</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style="font-size:25px;">待接诊</span>
+                </div>
+
+                <div style="margin-left:120px;margin-top:20px">
+                    <span style="font-size:15px;">创建时间:111111111</span>
+                </div>
+
+                <div style="margin-left:120px;">
+                    <span style="font-size:15px">科室:</span>&nbsp;&nbsp;
+                    <span style="font-size:15px">全科</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style="font-size:15px">医生:</span>&nbsp;&nbsp;
+                    <span style="font-size:15px">王玉</span>&nbsp;&nbsp;&nbsp;
+                </div>
+
+                <div style="margin-left:120px;">
+                    <span style="font-size:15px;">手机号码:</span>&nbsp;&nbsp;
+                    <span style="font-size:15px">13345678890</span>
+                </div>
+            </div>
+            <div>
+                <div style="float:left;width:50px;height:50px;margin-left:26px">
+                    <button type="button" class="layui-btn" style="width:150px;height:50px;background-color:brown">接诊
+                    </button>
+                </div>
+                <div style="float:left;width:50px;height:50px;margin-left:140px">
+                    <button type="button" class="layui-btn"  style="width:150px;height:50px;background-color:blanchedalmond">查看患者信息
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="d1" style="background-color:orange">
+
+        </div>
+        <div id="d1" style="background-color:red"></div>
+    </div>
+    <div id="div3" style="background-color:chartreuse">
+        <div id="d2" style="background-color:forestgreen"></div>
+        <div id="d2" style="background-color:red"></div>
+        <div id="d2" style="background-color:brown"></div>
+    </div>
+    <div id="div4" style="background-color:cornflowerblue">
+        <div id="d3" style="background-color:red"></div>
+        <div id="d3" style="background-color:indigo"></div>
+        <div id="d3" style="background-color:red"></div>
+    </div>
+    <div id="div5" style="background-color:magenta"></div>
+</div>
+
+<script>
+    $(function () {
+        layui.use('form', function () {
+            form = layui.form;
+            var layData = ['form', 'laydate'];
+            layui.use(layData, function () {
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '#sTime'
+                });
+                laydate.render({
+                    elem: '#eTime'
+                });
+            });
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+
+        });
+        State();
+        ShowPatients();
+        ShowVIPType();
+
+    })
+    //会员下拉
+    function ShowVIPType() {
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/GetMemberType",
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $(d).each(function () {
+                    var html = "<option value='" + this.memberTypeId + "'>" + this.memberTypeName + "</option>";
+                    $("#VIPgrade").append(html);
+                    form.render('select');
+                });
+            }
+        })
+    }
+    function State() {
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/GetPatientState",
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $(d).each(function () {
+                    var html = "<option value='" + this.patientStateId + "'>" + this.patientStateName + "</option>";
+                    $("#txt_PState").append(html);
+                    form.render('select');
+                });
+            }
+        })
+    }
+    function ShowPatients() {
+        var sex = $("#txt_sex").val();
+        var txt_state = $("#txt_state").val();
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/GetPatients",
+            type:"get",
+            dataType: "json",
+            success: function (d) {
+                $("#ddd").empty();
+                if (this.PatientSex == "true") {
+                    sex == "男";
+                }
+                else {
+                    sex == "女";
+                }
+                if (this.PatientSex == "待接诊") {
+                    txt_state = "<span style='color:red'>待接诊</span>";
+                }
+                else if (this.PatientSex == "接诊中") {
+                    txt_state = "<span style='color:green'>接诊中</span>";
+                }
+                else if (this.PatientSex == "已完成") {
+                    txt_state = "<span style='color:black'>已完成</span>";
+                }
+                $(d).each(function () {
+                    var str = "<div id = 'd1'><div>" +
+                        "<div style='float:left;width:80px;height:110px'>" +
+                        "<img src='~/Zzhimg/QQ图片20201218101515 (1).png' style='margin-top:40px;margin-left:20px;width:80px;height:80px' />" +
+                        "</div>" +
+                        "<div style='float:left;margin-top:32px;width:270px;height:50px;margin-left:45px;'>" +
+                        "<span style='font-size:20px;'>" + this.patientName + "</span>&nbsp;&nbsp;&nbsp;&nbsp;" +
+                        "<span style='font-size:10px;color:orange'>" + this.memberTypeName + "</span>&nbsp;&nbsp;&nbsp;&nbsp;" +
+                        "<span style='font-size:15px;' id='txt_sex'>" + this.patientSex + "</span>&nbsp;" +
+                        "<span style='font-size:15px;'>" + this.patientAge + "</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                        "<span style='font - size: 25px;' id='txt_state'>" + this.patientStateName + "</span>" +
+                        "</div>" +
+                        "<div style='margin-left:120px;margin-top:20px'>" +
+                        "<span style='font- size:15px; '>创建时间:" + this.createTime + "</span>" +
+                        "</div>" +
+                        "<div style='margin-left:120px;'>" +
+                        "<span style='font-size:15px'>科室:</span>&nbsp;&nbsp;" +
+                        "<span style='font- size:15px'>" + this.departments + "</span>&nbsp;&nbsp;&nbsp;&nbsp;" +
+                        "<span style='font-size:15px'>医生:</span>&nbsp;&nbsp;" +
+                        "<span style='font-size:15px'>" + this.caoZuoRenName + "</span>&nbsp;&nbsp;&nbsp;" +
+                        "</div>" +
+
+                        "<div style='margin-left:120px;'>" +
+                        "<span style='font-size:15px;'>手机号码:</span>&nbsp;&nbsp;" +
+                        "<span style='font-size:15px'>" + this.patientPhone + "</span>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div>" +
+                        "<div style='float:left;width:50px;height:50px;margin-left:26px'>" +
+                        "<button type='button' class='layui-btn' style='width:150px;height:50px;background-color:brown'>接诊" +
+                        "</button>" +
+                        "</div>" +
+                        "<div style='float:left;width:50px;height:50px;margin-left:140px'>" +
+                        "<button type='button' class='layui-btn' style='width:150px;height:50px;background-color:blanchedalmond'>查看患者信息" +
+                        "</button>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>";
+                    $("#ddd").append(str);
+                })
+                    }
+                })
+    }
+</script>
