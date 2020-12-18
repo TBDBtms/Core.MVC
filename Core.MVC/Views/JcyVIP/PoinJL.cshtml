@@ -1,0 +1,89 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PoinJL</title>
+    <script src="~/js/site.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+    <script>
+         $(function () {
+            ShowInfos();
+            GetPoinJL();
+        })
+        function ShowInfos(id) {
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetById" ,
+                dataType: "json",
+                data: { id: @ViewBag.id },
+                type: "get",
+                success: function (data) {
+                    $("#card").text(data.idCard);
+                    $("#name").text(data.patientName);
+                    $("#jf").text(data.integral);
+                }
+            })
+        }
+        function GetPoinJL() {
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetVIPmoneys",
+                dataType: "json",
+                type: "get",
+                data: { name: $("#name").val() },
+                success: function (data) {
+                    console.log(data);
+                    $("#list").empty();
+                    $(data).each(function () {
+                        var html = "<tr>" +
+                            "<td>" + this.newTimes + "</td>" +
+                            "<td>" + this.changeCZ + "</td>" +
+                            "<td>" + this.num + "</td>" +
+                            "<td>" + this.man + "</td>" +
+                            "<td>" + this.remark + "</th></tr >";
+                        $("#list").append(html);
+                    })
+                }
+            })
+        }
+
+    </script>
+</head>
+<body>
+    <input type="hidden" id="id" value="@ViewBag.id" />
+    <input type="hidden" id="name" value="@ViewBag.name" />
+    &emsp;<h3>余额退款</h3>
+    <br />
+    <div>
+        &emsp;会员卡号:<span id="card"></span>&emsp;&emsp;会员姓名:<span id="name"></span>
+    </div>
+    <br />
+    <div>
+        &emsp;积分:<span id="jf"></span>元
+    </div>
+    <div>
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <td>时间</td>
+                    <td>变动操作</td>
+                    <td>数量</td>
+                    <td>操作员</td>
+                    <td>备注</td>
+                </tr>
+            </thead>
+            <tbody id="list">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

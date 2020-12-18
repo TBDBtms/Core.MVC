@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ShowCZ</title>
+    <title>ShowTK</title>
     <script src="~/js/site.js"></script>
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -16,15 +16,9 @@
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
     <script>
-        var jysj;
-        var jylx;
-        var jyje;
-        var zsje;
-        var hjje;
-        var czy;
-        $(function () {
-            ShowInfos();
-            ShowDataInfo();
+       $(function () {
+           ShowInfos();
+           ShowDataInfo();
         })
         function ShowInfos(id) {
             $.ajax({
@@ -35,7 +29,7 @@
                 success: function (data) {
                     $("#card").text(data.idCard);
                     $("#name").text(data.patientName);
-                    $("#ye").text(data.svalueMoney);
+                    $("#jf").text(data.svalueMoney);
                 }
             })
         }
@@ -48,7 +42,7 @@
                 success: function (data) {
                     console.log(data);
                     jysj = data.dealTimes;
-                    jylx = "充值";
+                    jylx = "退款";
                     jyje = data.dealPrice;
                     zsje = data.givemoney;
                     hjje = data.sumoney;
@@ -57,31 +51,30 @@
             })
         }
 
-        function UpdShowCZ() {
-            var vip = {
-                PayMoney: $("#money").val(),
-                GiveMoney: $("#addmoney").val(),
-                SId: $("[name=fs]:checked").val(),
+        function UpdPriceTK() {
+            var htmls = {
+                RePrice: $("#price").val(),
+                ReTypeId: $("[name=tk]:checked").val(),
+                Remark: $("#remark").val(),
                 Id: $("#id").val()
             };
-
+            console.log(htmls);
             $.ajax({
-                url: "http://localhost:4965/api/JcyVIP/UpdCZ",
+                url: "http://localhost:4965/api/JcyVIP/UpdTK",
+                data: htmls,
                 dataType: "json",
                 type: "post",
-                data: vip,
-                //contentType:"/application/json",
                 success: function (data) {
-                    console.log(data);
                     var htmls = {};
                     htmls.dealTimes = jysj;
-                    htmls.dealType= jylx;
-                    htmls.dealPrice= jyje;
-                    htmls.givemoney= zsje;
+                    htmls.dealType = jylx;
+                    htmls.dealPrice = jyje;
+                    htmls.givemoney = zsje;
                     htmls.sumoney = hjje;
                     htmls.mans = czy;
                     htmls.id = $("#id").val();
                     if (data > 0) {
+                        alert('设置成功');
                         $.ajax({
                             url: "http://localhost:4965/api/JcyVIP/AddJL",
                             dataTypehjje: "json",
@@ -90,15 +83,15 @@
                             success: function (data) {
                                 console.log(data);
                                 if (data > 0) {
-                                    alert('充值成功');
-                                    location.href = "/JcyVIP/ShowJL" ;
+                                    alert('设置成功');
+                                    location.href = "/JcyVIP/ShowJL";
                                 } else {
-                                    alert('充值失败');
+                                    alert('设置失败');
                                 }
                             }
                         })
                     } else {
-                        alert('充值失败');
+                        alert('设置失败');
                         location.reload();
                     }
                 }
@@ -107,38 +100,39 @@
     </script>
 </head>
 <body>
-    <div style="text-align:center">
+    <div>
         <input type="hidden" id="id" value="@ViewBag.id" />
-        <h3>余额充值</h3>
+        &emsp;<h3>余额退款</h3>
         <br />
         <div>
-            会员卡号:<span id="card"></span>&emsp;&emsp;会员姓名:<span id="name"></span>
+            &emsp;会员卡号:<span id="card"></span>&emsp;&emsp;会员姓名:<span id="name"></span>
         </div>
         <br />
         <div>
-            余额:<span id="ye"> </span>
+            &emsp;余额:<span id="jf"></span>元
         </div>
         <br />
         <div>
-            充值金额(元):<span style="color:red">*</span>
-            <input type="text" name="name" value="" class="layui-text" />
+            &emsp;退款金额(元)<span style="color:red">*</span><br />
+            &emsp;<input type="text" id="price" value="" class="layui-input" />
         </div>
         <br />
         <div>
-            赠送金额(元):&nbsp; <input type="text" name="name" value="" class="layui-text" />
+            &emsp;退款方式<br />
+            &emsp;<input type="radio" name="tk" value="0" checked />现金
+            <input type="radio" name="tk" value="1" />支付宝
+            <input type="radio" name="tk" value="2" />微信
+            <input type="radio" name="tk" value="3" />银行卡
         </div>
         <br />
         <div>
-            支付方式:
-            <input type="radio" name="name" value="现金" checked />现金
-            <input type="radio" name="name" value="支付宝" />支付宝
-            <input type="radio" name="name" value="微信" />微信
-            <input type="radio" name="name" value="银行卡" />银行卡
+            &emsp;备注:<br />
+            &emsp;<textarea id="remark"></textarea>
         </div>
         <br />
         <div>
-            <input type="button" name="name" value="取消" class="layui-btn" />
-            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm"  onclick="UpdShowCZ()"/>
+            &emsp;<input type="button" name="name" value="取消" class="layui-btn" />
+            &emsp;<input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="UpdPriceTK()" />
         </div>
     </div>
 </body>

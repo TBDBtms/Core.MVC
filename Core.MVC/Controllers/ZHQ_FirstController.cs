@@ -12,5 +12,6 @@ namespace Core.MVC.Controllers
         {
             return View();
         }
+
     }
 }
