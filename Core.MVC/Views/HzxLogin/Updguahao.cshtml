@@ -1,0 +1,393 @@
+﻿
+@{
+    ViewData["Title"] = "Updguahao";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<body>
+    <div>
+        <div style="height:100px;">
+            <h2 style="font-weight:bold;margin-left:100px;margin-top:50px;float:left;color:blueviolet">添加挂号信息</h2>
+            <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:100px; float:right;margin-top:50px" onclick="location.href='/HzxLogin/Index'">返回</button>
+
+        </div>
+        <div style="height:100px;margin-top:30px">
+            <div>
+                <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">挂号单号</h3>
+                <input type="text" id="Gno" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写挂号单号" class="layui-input">
+                <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">接诊医生</h3>
+                <input type="text" id="Yname" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写接诊医生" class="layui-input">
+                <div style="float:left;margin-top:30px;">
+                    <div style="float:left">
+                        <div class="layui-form-item" style="float:left;margin-left:80px;height:50px;">
+                            <form class="layui-form">
+                                <label class="layui-form-label">诊疗费</label>
+                                <div style="width:300px;">
+                                    <div class="layui-input-block">
+                                        <select lay-verify="required" id="Zlmoney">
+                                            <option value="10元">10元</option>
+                                            <option value="20员">20元</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">挂号日期</h3>
+                <form class="layui-form">
+                    <div class="layui-input-inline" style="margin-left:20px;margin-top:35px;">
+                        <input type="date" id="Gtime" lay-verify="date" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div style="height:100px">
+            <div>
+                <div class="layui-form-item" style="float:left;margin-left:78px;margin-top:10px;height:45px;">
+                    <form class="layui-form">
+                        <label class="layui-form-label">科室</label>
+                        <div style="width:300px;height:45px;">
+                            <div class="layui-input-block">
+                                <select name="interest" lay-filter="aihao" id="keshi" style="height: 45px;">
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div style="float:left;margin-top:10px;">
+                <h3 style="margin-top:5px;margin-left:90px;float:left;">挂号员</h3>
+                <input type="text" id="Gpelete" name="title" style="width:200px;margin-left:20px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写挂号员" class="layui-input">
+            </div>
+            <div style="float:left;margin-top:10px;">
+                <div style="float:left">
+                    <div class="layui-form-item" style="float:left;margin-left:80px;height:50px;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">挂号费</label>
+                            <div style="width:300px;">
+                                <div class="layui-input-block">
+                                    <select lay-verify="required" id="Gmoney">
+                                        <option value="10元">10元</option>
+                                        <option value="20员">20元</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div style="float:left;margin-top:10px;">
+                <div style="float:left">
+                    <div class="layui-form-item" style="float:left;margin-left:35px;height:50px;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">接诊类型</label>
+                            <div style="width:300px;">
+                                <div class="layui-input-block">
+                                    <select lay-verify="required" id="jztype">
+                                        <option value="0">初诊</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="height:100px;">
+            <div>
+                <div style="float:left;margin-top:10px;">
+                    <div style="float:left">
+                        <div class="layui-form-item" style="float:left;margin-left:80px;height:50px;">
+                            <form class="layui-form">
+                                <label class="layui-form-label">患者性别</label>
+                                <div style="width:300px;">
+                                    <div class="layui-input-block">
+                                        <select lay-verify="required" id="Hsex">
+                                            <option value="true">男</option>
+                                            <option value="false">女</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div style="float:left">
+                    <div style="float:left">
+                        <h3 style="margin-top:20px;margin-left:60px;float:left;border-radius:10px">患者姓名</h3>
+                    </div>
+                    <div class="layui-input-inline" style="margin-left:5px; margin-top:10px;">
+                        <input type="text" id="Hname" name="title" style="width:200px;margin-left:25px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者姓名" class="layui-input">
+                    </div>
+                </div>
+                <div>
+                    <div style="margin-top:5px">
+                        <h3 style="margin-top:5px;margin-left:80px;float:left;border-radius:10px; margin-top:20px;">患者卡号</h3>
+                    </div>
+                    <div style="margin-top:5px">
+                        <input type="text" name="title" id="Hkahao" style="width:200px;margin-left:20px; margin-top:10px; border-radius:10px;float:left;" lay-verify="title" autocomplete="off" placeholder="请填写患者卡号" class="layui-input">
+                    </div>
+                </div>
+                <div>
+                    <div style="margin-top:5px">
+                        <h3 style="margin-top:5px;margin-left:60px;float:left;border-radius:10px">患者年龄</h3>
+                    </div>
+                    <div style="margin-top:5px">
+                        <input type="text" name="title" id="Hage" style="width:200px;margin-left:20px;border-radius:10px;float:left;" lay-verify="title" autocomplete="off" placeholder="请填写患者年龄" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="height:100px;">
+            <div style="float:left">
+                <div class="layui-form-item" style="float:left;margin-left:75px">
+                    <div class="layui-form-item" style="float:left;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">出生日期</label>
+
+                            <div class="layui-input-inline" style="margin-left:20px;margin-top:1px;">
+                                <input type="date" id="Hcreatetime" lay-verify="date" placeholder="" autocomplete="off" class="layui-input">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div style="float:left">
+                <div class="layui-form-item" style="float:left;margin-left:10px">
+                    <div class="layui-form-item" style="float:left;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">省</label>
+                            <div style="width:300px;">
+                                <div class="layui-input-block">
+                                    <select lay-filter="lop" id="shen">
+                                        <option value="0"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div style="float:left">
+                <div class="layui-form-item" style="float:left;margin-left:77px">
+                    <div class="layui-form-item" style="float:left;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">市</label>
+                            <div style="width:300px;">
+                                <div class="layui-input-block">
+                                    <select lay-filter=“test” id="shi">
+                                        <option value="0"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div style="float:left;margin-top:10px;margin-left:-20px">
+                <h3 style="margin-top:50px;margin-left:100px;margin-top:0px;float:left">患者手机号</h3>
+                <input type="text" id="Hiphone" name="title" style="width:200px;margin-left:25px;float:left;height:45px; margin-top:-10px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写员工账号" class="layui-input">
+            </div>
+        </div>
+        <div style="height:100px;margin-top:-20px">
+            <div>
+                <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">患者身份证</h3>
+                <input type="text" id="Hsfz" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写身份证" class="layui-input">
+                <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">患者详情地址</h3>
+                <input type="text" id="Haddress" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写详情地址" class="layui-input">
+                <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">备注</h3>
+                <input type="text" id="Hremaek" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="备注" class="layui-input">
+                <input type="button" name="title" style="width:300px; margin-top:30px; margin-left:25px;float:left;height:40px;border-radius:10px" lay-verify="title" autocomplete="off" value="修改" onclick="UpdUser()" class="layui-btn">
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var form;
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        form = layui.form
+        form.render('select')
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        form.on('select(lop)', function (data) {
+
+            getshi();
+        })
+    });
+    $().ready(function () {
+
+        keshi();
+        getdan();
+        getshen();
+        getJtype();
+        $("#CreatName").val(sessionStorage.getItem("Uname"));
+
+
+    });
+    function getshi() {
+        var Mid = $("#shen").val();
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetCounties",
+            data: { Mid: Mid },
+            type: "get",
+            async: false,
+            dataType: "json",
+            success: function (d) {
+                $("#shi").empty();
+                $("#shi").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.cid + "'>" + this.cname + "</option>";
+                    $("#shi").append(str);
+                });
+                form.render('select');
+            }
+        });
+    }
+    function getshen() {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetMarkets",
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (d) {
+                $("#shen").empty();
+                $("#shen").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.mid + "'>" + this.mname + "</option>";
+                    $("#shen").append(str);
+
+                });
+
+            }
+        });
+
+    } function keshi() {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetKeshis",
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (d) {
+                $("#keshi").empty();
+                $("#keshi").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.kid + "'>" + this.kname + "</option>";
+                    $("#keshi").append(str);
+
+                });
+
+            }
+        });
+
+    }
+    function getJtype() {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetJZtypes",
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (d) {
+                $("#jztype").empty();
+                $("#jztype").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.jid + "'>" + this.jname + "</option>";
+                    $("#jztype").append(str);
+
+                });
+
+
+            }
+        });
+    }
+     function getdan()
+    {
+        var Gid=@ViewBag.Gid
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetX_Guahaosdan?Gid=" + Gid,
+            type: "get",
+            dataType: "json",
+            success: function (d)
+            {
+                $("#Gno").val(d.gno);
+                $("#keshi").val(d.ksids);
+                $("#jztype").val(d.jids);
+                $("#Yname").val(d.yname);
+                $("#Gmoney").val(d.gmoney);
+                $("#Zlmoney").val(d.zlmoney);
+                $("#Gtime").val(d.gtime);
+                $("#Gpelete").val(d.gpelete);
+                $("#Hname").val(d.hname);
+                $("#Hkahao").val(d.hkahao);
+                $("#Hage").val(d.hage);
+                $("#Hcreatetime").val(d.hcreatetime);
+                $("#Hsex").val(d.hsex);
+                $("#Hiphone").val(d.hiphone);
+                $("#Hsfz").val(d.hsfz);
+                $("#shi").val(d.Hcids);
+                $("#Haddress").val(d.haddress);
+                $("#Hremaek").val(d.haddress);
+            }
+
+
+
+
+        });
+
+
+
+
+
+
+    }
+    function UpdUser() {
+        var g = {};
+        g.Gno = $("#Gno").val();
+        g.ksids = $("#keshi").val();
+        g.Jids = $("#jztype").val();
+        g.Yname = $("#Yname").val();
+        g.Gmoney = $("#Gmoney").val();
+        g.Zlmoney = $("#Zlmoney").val();
+        g.Gtime = $("#Gtime").val();
+        g.Gpelete = $("#Gpelete").val();
+        g.Hname = $("#Hname").val();
+        g.Hkahao = $("#Hkahao").val();
+        g.Hage = $("#Hage").val();
+        g.Hcreatetime = $("#Hcreatetime").val();
+        g.Hsex = $("#Hsex").val();
+        g.Hiphone = $("#Hiphone").val();
+        g.Hsfz = $("#Hsfz").val();
+        g.Hcids = $("#shi").val();
+        g.Haddress = $("#Haddress").val();
+        g.Hremaek = $("#Hremaek").val();
+        g.Gid=@ViewBag.Gid;
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/UpdGua",
+            data: g,
+            type: "post",
+            dataType: "json",
+            success: function (d) {
+                if (d > 0) {
+                    alert("修改成功");
+                    location.href = "/HzxLogin/Showgua";
+                }
+                else {
+                    alert("修改失败");
+                }
+            }
+        });
+    }
+</script>
+
+

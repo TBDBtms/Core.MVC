@@ -10,14 +10,15 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <title>Index</title>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-
+   
 
     <style>
 
         body {
             background-repeat: no-repeat;
             background-size: 100% 100%;
-            background-attachment: fixed;
+    
+
         }
 
         html {
@@ -32,7 +33,7 @@
             height: 100%;
             font-family: 'Open Sans',sans-serif;
             margin: 0;
-            background-color: skyblue;
+         
         }
 
         #login {
@@ -70,14 +71,14 @@
             border-right: 1px solid #312E3D;
             border-bottom: 1px solid #56536A;
             border-radius: 4px;
-            background-color: skyblue;
+            background-color:aquamarine;
         }
 
         .but {
             width: 300px;
             min-height: 20px;
             display: block;
-            background-color: skyblue;
+            background-color:aquamarine;
             border: 1px solid #3762bc;
             color: #fff;
             padding: 9px 14px;
@@ -86,32 +87,43 @@
             border-radius: 5px;
             margin: 0;
         }
+        #imgss{
+            margin:0px;
+            padding:0px;
+            width:100%;
+            height:100%;
+            position:absolute;
+            z-index:-1;
+        }
     </style>
 </head>
 <body>
+    <div>
+        <img id="imgss" src="~/img/111.png" alt="" />
+    </div>
     <center>
-        <h1 style="margin-top:40px;font-size:48px">诊所内部管理系统</h1>
+        <h1 style="margin-top:40px;font-size:48px;color:aquamarine" >诊所内部管理系统</h1>
     </center>
 
-    <div style="margin:0 auto;width:600px;height:700px;border-radius:10px;background:rgba(255,255,255,.6)">
+    <div style="margin:0 auto;width:600px;height:700px;border-radius:10px;">
         <div style="margin: 40px 150px;padding: 26px 0"><input type="text" required="required" id="Uname" placeholder="用户名" class="input" style="border:0;height:33px;border-radius:5px;min-width:300px;padding-left:10px" /></div>
         <div style="margin: 10px 150px"><input type="password" id="Upass" required="required" placeholder="密码" class="input" style="border: 0; height: 33px; border-radius: 5px; min-width: 300px; padding-left: 10px " /></div>
 
         <div style="margin: 20px 150px"><span style="font-size:24px">验证码</span> <canvas id="canvas" width="120" height="40" style="background-color:white;margin-top:15px"></canvas></div>
         <div style="margin: 20px 150px"><span style="font-size:24px">请输入验证码 <input type="text" id="text" style="border:0;height:35px;border-radius:5px;min-width:150px;padding-left:10px;margin-top:10px"></span></div>
         <div style="margin: 20px 150px; ">
-            <input id="Button1" class="" type="button" value="登录" style="margin-top:10px;border: 0; height: 40px; border-radius: 5px; min-width: 100px; padding-left: 10px; font-size:18px" />
+            <input id="Button1" class="but" type="button" value="登录" style="margin-top:10px;border: 0; height: 40px; border-radius: 5px; min-width: 100px; padding-left: 10px; font-size:18px" />
         </div>
         <div style="margin: 20px 150px">
             <span>
-                没有账号？请点击<input id="Button2" type="button" class="but" value="注册" onclick="Zhu()" style="margin-left: 3px; border: 0; height: 40px; border-radius: 5px; min-width: 100px; padding-left: 10px; font-size:18px" />
+             
                 <input id="Button3" type="button" value="找回密码" class="but" onclick="zhao()" style="margin-left: 3px; border: 0; height: 40px;margin-top:20px; border-radius: 5px; min-width: 100px; padding-left: 10px;font-size:18px" />
             </span>
         </div>
 
-        <div style="margin: 20px 150px"><center><p style="color:#FA6F03;"><span onclick="lian()">登录遇到问题，点击此处</span></p></center></div>
+        <div style="margin: 20px 150px"><center><p style="color:#FA6F03;"><span onclick="lian()">有问题找猴子🐒</span></p></center></div>
 
-        <div style=""><center><p class="name">版权所有：花果山小组 联系电话:1234567855</p></center></div>
+        <div style=""><center><p class="name">版权所有：花果山工作室 联系电话:1234567855</p></center></div>
     </div>
 
 
@@ -195,7 +207,7 @@
                             sessionStorage.setItem("Qma", d.qma);
                             sessionStorage.setItem("Rname", d.rname);
                             sessionStorage.setItem("Uid", d.uid);
-                            location.href = "/HzxLogin/Index";
+                            location.href = "/HzxLogin/Index?Qma="+d.qma;
                             return;
                         }
                         else {

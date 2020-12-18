@@ -9,14 +9,10 @@ namespace Core.MVC.Controllers
 {
     public class HzxLoginController : Controller
     {
-        
-        /// <summary>
-        /// 显示员工列表
-        /// </summary>
-        /// <returns></returns>
 
-        public IActionResult Index()
+        public IActionResult Index(string Qma="")
         {
+            ViewBag.Qma = Qma;
             return View();
         }
         //登录
@@ -25,7 +21,7 @@ namespace Core.MVC.Controllers
             
             return View();
         }
-        //注册
+       //添加员工
         public IActionResult Zhu()
         {
 
@@ -111,6 +107,37 @@ namespace Core.MVC.Controllers
 
             return View();
         }
+        /// <summary>
+        /// 添加挂号
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Addguahao()
+        {
+
+
+            return View();
+        }
+        /// <summary>
+        /// 显示所有挂号信息
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Showgua()
+        {
+
+
+            return View();
+        }
+        /// <summary>
+        /// 修改所有挂号信息
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Updguahao(int Gid=0)
+        {
+
+            ViewBag.Gid = Gid;
+            return View();
+        }
+
 
 
 
