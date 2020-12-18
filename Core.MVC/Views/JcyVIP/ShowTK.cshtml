@@ -14,24 +14,43 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
     <script>
-        $(function () {
-            ShowVIPInfo();
+       $(function () {
+           ShowInfos();
+           ShowDataInfo();
         })
-         function ShowVIPInfo(id) {
-             $.ajax({
-                url: "http://localhost:4965/api/JcyVIP/GetById",
+        function ShowInfos(id) {
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetById" ,
                 dataType: "json",
-                data: { id:@ViewBag.id},
+                data: { id: @ViewBag.id },
                 type: "get",
                 success: function (data) {
-                    console.log(data);
                     $("#card").text(data.idCard);
                     $("#name").text(data.patientName);
                     $("#jf").text(data.svalueMoney);
                 }
             })
         }
+        function ShowDataInfo() {
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetVIPmoneys",
+                dataType: "json",
+                type: "get",
+                data: { id:@ViewBag.id},
+                success: function (data) {
+                    console.log(data);
+                    jysj = data.dealTimes;
+                    jylx = "退款";
+                    jyje = data.dealPrice;
+                    zsje = data.givemoney;
+                    hjje = data.sumoney;
+                    czy = "晋超宇";
+                }
+            })
+        }
+
         function UpdPriceTK() {
             var htmls = {
                 RePrice: $("#price").val(),
@@ -46,9 +65,31 @@
                 dataType: "json",
                 type: "post",
                 success: function (data) {
+                    var htmls = {};
+                    htmls.dealTimes = jysj;
+                    htmls.dealType = jylx;
+                    htmls.dealPrice = jyje;
+                    htmls.givemoney = zsje;
+                    htmls.sumoney = hjje;
+                    htmls.mans = czy;
+                    htmls.id = $("#id").val();
                     if (data > 0) {
                         alert('设置成功');
-                        location.reload();
+                        $.ajax({
+                            url: "http://localhost:4965/api/JcyVIP/AddJL",
+                            dataTypehjje: "json",
+                            type: "post",
+                            data: htmls,
+                            success: function (data) {
+                                console.log(data);
+                                if (data > 0) {
+                                    alert('设置成功');
+                                    location.href = "/JcyVIP/ShowJL";
+                                } else {
+                                    alert('设置失败');
+                                }
+                            }
+                        })
                     } else {
                         alert('设置失败');
                         location.reload();
