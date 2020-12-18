@@ -129,6 +129,8 @@ namespace Core.MVC.Controllers
         /// <returns></returns>
         public IActionResult PoinJL(int id)
         {
+            string name = "";
+            ViewBag.name = name;
             ViewBag.id = id;
             return View();
         }
@@ -152,8 +154,9 @@ namespace Core.MVC.Controllers
         /// 编辑
         /// </summary>
         /// <returns></returns>
-        public IActionResult VIPUpds()
+        public IActionResult VIPUpds(int id)
         {
+            ViewBag.id = id;
             return View();
         }
         /// <summary>
