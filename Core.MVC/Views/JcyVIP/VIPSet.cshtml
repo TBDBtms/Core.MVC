@@ -9,12 +9,34 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>VIPSet</title>
+    <script src="~/js/site.js"></script>
     <link href="~/layui-v2.4.5/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
-    <script src="~/js/site.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <script>
-
+        function AddVIPInfo() {
+            var strs = {};
+            strs.VGradeId= $("#djbd").val();
+            strs.VIPName= $("#names").val();
+            strs.VIPReset= $("#zk").val();
+            strs.MinIntegral= $("#zd").val();
+            strs.Upgrade= $("#sj").val();
+            strs.Remark = $("#remarks").val();
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/AddVIPType",
+                dataType: "json",
+                type: "post",
+                data: strs,
+                success: function (data) {
+                    if (data > 0) {
+                        alert('保存成功');
+                    } else {
+                        alert('保存失败');
+                    }
+                }
+            })
+        }
     </script>
 </head>
 <body>
@@ -25,9 +47,9 @@
                 会员等级:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 会员名称:<br />
             </div>
             <div>
-                <input type="text" id="name" value="" class="layui-text" />
+                <input type="text" id="djbd" value="" class="layui-text" />
 
-                <input type="text" id="name" value="" class="layui-text" />
+                <input type="text" id="names" value="" class="layui-text" />
             </div>
         </div>
         <div>
@@ -35,9 +57,9 @@
                 会员折扣:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 最低消费积分:<br />
             </div>
             <div>
-                <input type="text" id="name" value="" class="layui-text" />
+                <input type="text" id="zk" value="" class="layui-text" />
 
-                <input type="text" id="name" value="" class="layui-text" />
+                <input type="text" id="zd" value="" class="layui-text" />
             </div>
         </div>
         <div>
@@ -45,18 +67,18 @@
                 升级所需积分:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp; 状态:<br />
             </div>
             <div>
-                <input type="text" id="name" value="" class="layui-text" />
-                <input type="radio" name="name" value="" class="layui-text" />
+                <input type="text" id="sj" value="" class="layui-text" />
+                <input type="radio" id="zt" value="" class="layui-text" />
             </div>
         </div>
         <div>
             备注:<br />
-            <input type="text" id="name" value="" class="layui-text" />
+            <input type="text" id="remarks" value="" class="layui-text" />
         </div>
         <br />
         <div style="text-align:center">
             <input type="button" name="name" value="取消" class="layui-btn" />
-            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" />
+            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="AddVIPInfo()" />
         </div>
     </div>
 </body>

@@ -16,9 +16,9 @@
         <input type="hidden" value="@ViewBag.id" />
         原价格:<span id="sp" style="color:red"></span><br />
         请输入要修改的价格<input type="number" id="txtNum" />
-        <input type="button" value="保存" id="btnBC"  />
+        <input type="button" value="保存" id="btnBC" />
     </div>
-   
+
 </body>
 </html>
 <script>
@@ -80,13 +80,13 @@
                         success: function (da) {
                             if (da > 0) {
                                 alert('操作成功');
-                                
+
                             } else {
                                 alert('操作失败');
                             }
                         }
                     })
-                
+
                 } else {
                     alert('操作失败');
                 }
