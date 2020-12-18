@@ -34,9 +34,6 @@
                 <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
                 @if (Qma == "ABCD")
                 {
-
-
-
                     <li class="layui-nav-item layui-nav-itemed">
                         <a href="javascript:;">新开就诊</a>
                         <dl class="layui-nav-child">
@@ -50,7 +47,7 @@
                         <a href="javascript:;">挂号</a>
                         <dl class="layui-nav-child">
                             <dd><a href="">新增挂号</a></dd>
-                            <dd><a href="javascript:location.href='/HzxLogin/Showgua';">挂号记录</a></dd>
+                            <dd><a onclick="gua()">挂号记录</a></dd>
                             <dd><a href="javascript:location.href='/HzxLogin/Addguahao';">新增挂号信息</a></dd>
                         </dl>
                     </li>
@@ -455,6 +452,7 @@
 </body>
 </html>
 <script>
+    var Qma = sessionStorage.getItem("Qma");
     //注意：导航 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function () {
         var element = layui.element;
@@ -479,5 +477,10 @@
             content: '//www.bilibili.com/video/av56945246/'
         });
     })
+    function gua()
+    {
+        location.href = "/HzxLogin/Showgua?Qma="+Qma;
+
+    }
     
 </script>

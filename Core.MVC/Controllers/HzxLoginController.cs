@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace Core.MVC.Controllers
 {
     public class HzxLoginController : Controller
@@ -61,7 +60,7 @@ namespace Core.MVC.Controllers
         /// </summary>
         /// <param name="Rid"></param>
         /// <returns></returns>
-        public IActionResult UpdPass( )
+        public IActionResult UpdPass(string Uname="")
         {
             
             return View();
@@ -70,10 +69,9 @@ namespace Core.MVC.Controllers
         /// 找回密码
         /// </summary>
         /// <returns></returns>
-        public IActionResult zhao(string Uname="")
+        public IActionResult zhao()
         {
-            ViewBag.Uname = Uname;
-
+      
             return View();
         }
         /// <summary>
@@ -121,10 +119,10 @@ namespace Core.MVC.Controllers
         /// 显示所有挂号信息
         /// </summary>
         /// <returns></returns>
-        public IActionResult Showgua()
+        public IActionResult Showgua(string Qma="")
         {
 
-
+            ViewBag.Qma = Qma;
             return View();
         }
         /// <summary>
