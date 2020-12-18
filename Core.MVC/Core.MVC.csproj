@@ -9,7 +9,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HTTPContentCompressor" Version="1.0.1" />
+    <None Include="wwwroot\css\D_Case.css" />
+    <None Include="wwwroot\layer-v3.1.1\layer\layer.js" />
+    <None Include="wwwroot\layer-v3.1.1\layer\mobile\layer.js" />
+    <None Include="wwwroot\layer-v3.1.1\文档\jquery下载.url" />
+    <None Include="wwwroot\layer-v3.1.1\文档\layer官网.url" />
+    <None Include="wwwroot\layer-v3.1.1\文档\layer文档.url" />
+    <None Include="wwwroot\layer-v3.1.1\文档\layui社区.url" />
+    <None Include="wwwroot\layer-v3.1.1\文档\获得layim.url" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
 
