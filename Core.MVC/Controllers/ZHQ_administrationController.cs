@@ -44,7 +44,11 @@ namespace Core.MVC.Controllers
         }
         public IActionResult TJMingXi()
         {
-           
+            return View();
+        }
+        public IActionResult GetFirstDrug(int id=0)
+        {
+            ViewBag.id = id;
             return View();
         }
         public class uploadResult
