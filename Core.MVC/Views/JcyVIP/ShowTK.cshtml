@@ -65,16 +65,15 @@
                 dataType: "json",
                 type: "post",
                 success: function (data) {
-                    var htmls = {};
-                    htmls.dealTimes = jysj;
-                    htmls.dealType = jylx;
-                    htmls.dealPrice = jyje;
-                    htmls.givemoney = zsje;
-                    htmls.sumoney = hjje;
-                    htmls.mans = czy;
-                    htmls.id = $("#id").val();
                     if (data > 0) {
-                        alert('设置成功');
+                        var htmls = {};
+                        htmls.dealTimes = jysj;
+                        htmls.dealType = jylx;
+                        htmls.dealPrice = jyje;
+                        htmls.givemoney = zsje;
+                        htmls.sumoney = hjje;
+                        htmls.mans = czy;
+                        htmls.id = $("#id").val();
                         $.ajax({
                             url: "http://localhost:4965/api/JcyVIP/AddJL",
                             dataTypehjje: "json",

@@ -16,15 +16,9 @@
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
     <script>
-        var jysj;
-        var jylx;
-        var jyje;
-        var zsje;
-        var hjje;
-        var czy;
+        
         $(function () {
             ShowInfos();
-            ShowDataInfo();
         })
         function ShowInfos(id) {
             $.ajax({
@@ -36,6 +30,7 @@
                     $("#card").text(data.idCard);
                     $("#name").text(data.patientName);
                     $("#ye").text(data.svalueMoney);
+                    ShowDataInfo();
                 }
             })
         }
@@ -44,19 +39,23 @@
                 url: "http://localhost:4965/api/JcyVIP/GetVIPmoneys",
                 dataType: "json",
                 type: "get",
-                data: { id:@ViewBag.id},
+                data: { name: $("#name").text() },
                 success: function (data) {
                     console.log(data);
-                    jysj = data.dealTimes;
                     jylx = "充值";
                     jyje = data.dealPrice;
-                    zsje = data.givemoney;
-                    hjje = data.sumoney;
+                    zsje = data.giveMoney;
+                    hjje = data.sumMoney;
                     czy = "晋超宇";
                 }
             })
         }
-
+        var jysj;
+        var jylx;
+        var jyje;
+        var zsje;
+        var hjje;
+        var czy;
         function UpdShowCZ() {
             var vip = {
                 PayMoney: $("#money").val(),
@@ -64,7 +63,7 @@
                 SId: $("[name=fs]:checked").val(),
                 Id: $("#id").val()
             };
-
+            console.log(vip);
             $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/UpdCZ",
                 dataType: "json",
@@ -73,25 +72,23 @@
                 //contentType:"/application/json",
                 success: function (data) {
                     console.log(data);
-                    var htmls = {};
-                    htmls.dealTimes = jysj;
-                    htmls.dealType= jylx;
-                    htmls.dealPrice= jyje;
-                    htmls.givemoney= zsje;
-                    htmls.sumoney = hjje;
-                    htmls.mans = czy;
-                    htmls.id = $("#id").val();
                     if (data > 0) {
+                        var htmls = {};
+                        htmls.dealType = jylx;
+                        htmls.dealPrice = jyje;
+                        htmls.givemoney = zsje;
+                        htmls.sumoney = hjje;
+                        htmls.mans = czy;
+                        htmls.id = $("#id").val();
                         $.ajax({
                             url: "http://localhost:4965/api/JcyVIP/AddJL",
-                            dataTypehjje: "json",
+                            dataType: "json",
                             type: "post",
                             data: htmls,
                             success: function (data) {
                                 console.log(data);
                                 if (data > 0) {
                                     alert('充值成功');
-                                    location.href = "/JcyVIP/ShowJL" ;
                                 } else {
                                     alert('充值失败');
                                 }
@@ -121,19 +118,19 @@
         <br />
         <div>
             充值金额(元):<span style="color:red">*</span>
-            <input type="text" name="name" value="" class="layui-text" />
+            <input type="text" id="money" value="" class="layui-text" />
         </div>
         <br />
         <div>
-            赠送金额(元):&nbsp; <input type="text" name="name" value="" class="layui-text" />
+            赠送金额(元):&nbsp; <input type="text" id="addmoney" value="" class="layui-text" />
         </div>
         <br />
         <div>
             支付方式:
-            <input type="radio" name="name" value="现金" checked />现金
-            <input type="radio" name="name" value="支付宝" />支付宝
-            <input type="radio" name="name" value="微信" />微信
-            <input type="radio" name="name" value="银行卡" />银行卡
+            <input type="radio" name="fs" value="0" checked />现金
+            <input type="radio" name="fs" value="1" />支付宝
+            <input type="radio" name="fs" value="2" />微信
+            <input type="radio" name="fs" value="3" />银行卡
         </div>
         <br />
         <div>
