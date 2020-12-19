@@ -1,20 +1,20 @@
 ﻿
 @{
-    ViewData["Title"] = "CaseShow";
+    ViewData["Title"] = "AdviceShow";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
-<link href="~/css/D_Case.css" rel="stylesheet"/>
+<link href="~/css/D_Case.css" rel="stylesheet" />
 
 <div id="divBig">
     <div id="div1">
         <div class="layui-input-block" style="width:300px;float:left;margin-top: 50px;">
-            <input onclick="CX()" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="附加费查询" class="layui-input">
+            <input onclick="CX()" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="医嘱信息" class="layui-input">
         </div>
         <div class="layui-input-block" style="width:300px;float:right;margin-top: 50px;margin-right:50px" id="pc">
-            <button id="but_Add" class="layui-btn" type="button"  >
-                <i class="layui-icon" >&#xe608;</i> 添加
+            <button id="but_Add" class="layui-btn" type="button">
+                <i class="layui-icon">&#xe608;</i> 添加
             </button>
         </div>
     </div>
@@ -29,7 +29,7 @@
             <thead>
                 <tr style="background-color:#C2C5F6">
                     <th>序号</th>
-                    <th>诊断内容</th>
+                    <th>医嘱内容</th>
                     <th>创建时间</th>
                     <th>创建人</th>
                     <th>操作</th>
@@ -50,8 +50,8 @@
 
     </div>
 </div>
-        
-     
+
+
 <script>
     var pageindex = 1;
     var pagesize = 10;
@@ -94,26 +94,26 @@
 
 
     var form;
-    $().ready(function () {   
+    $().ready(function () {
         Show();
     });
 
     $(document).on('click', '#pc', function () {
         layer.open({
             type: 2,
-            title: "添加信息",
+            title: "添加医嘱信息",
             closeBtn: 1, //不显示关闭按钮
             shade: [0],
             area: ['500px', '300px'],
             anim: 2,
-            content: ['/DLH_Case/CaseAdd', 'no'], //iframe的url，no代表不显示滚动条
+            content: ['/DLH_Advice/AdviceAdd', 'no'], //iframe的url，no代表不显示滚动条
             cancel: function (index, layero) {
                 if (confirm('确定要关闭么')) { //只有当点击confirm框的确定时，该层才会关闭
                     layer.close(index)
-                    location.href = "CaseShow";
+                    location.href = "AdviceShow";
                 }
                 return false;
-            }    
+            }
         });
         Show();
     });
@@ -121,19 +121,19 @@
     $(document).on('click','.up', function () {
         layer.open({
             type: 2,
-            title: "修改信息",
+            title: "修改医嘱信息",
             closeBtn: 1,
             shade: [0],
             area: ['500px', '300px'],
             anim: 2,
-            content: ['/DLH_Case/CaseUpdate?cid=' + this.id, 'no'],
+            content: ['/DLH_Advice/AdviceModify?cid=' + this.id, 'no'],
             cancel: function (index, layero) {
                 if (confirm('确定要关闭么')) { //只有当点击confirm框的确定时，该层才会关闭
                     layer.close(index)
-                    location.href = "CaseShow";
+                    location.href = "AdviceShow";
                 }
                 return false;
-            }    
+            }
         });
         //layer.alert("关闭", );
     })
@@ -142,7 +142,7 @@
     function Show() {
         var i = 1;
         $.ajax({
-            url: "http://localhost:4965/api/DLH_Case/GetCaseInfos",
+            url: "http://localhost:4965/api/DLH_Advice/GetAdvice",
             type: "get",
             dataType: "json",
             data: { name: name, pageindex: pageindex, pagesize: pagesize },
@@ -152,10 +152,10 @@
                 $(d.pageList).each(function () {
                     var str = "<tr>" +
                         "<td>" + i + "</td>" +
-                        "<td>" + this.caseName + "</td>" +
+                        "<td>" + this.adviceName + "</td>" +
                         "<td>" + this.time + "</td>" +
                         "<td>" + this.uname + "</td>" +
-                        "<td><a id='"+this.caseId+"' class='up' style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='DelCase("+ this.caseId +")'>删除</a></td>" +
+                        "<td><a id='" + this.adviceId + "' class='up' style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='DelCase(" + this.adviceId +")'>删除</a></td>" +
                         "</tr>";
                     $("#tbody_td").append(str);
                     i++;
@@ -166,12 +166,10 @@
             }
         });
     }
-
-
     function DelCase(id) {
         if (confirm("确认删除吗?")) {
             $.ajax({
-                url: "http://localhost:4965/api/DLH_Case/DeleteCase?cid=" + id,
+                url: "http://localhost:4965/api/DLH_Advice/DeleteAdvice?cid=" + id,
                 type: "post",
                 dataType: "json",
                 success: function (d) {
@@ -185,4 +183,8 @@
             });
         }
     }
+
+
+
 </script>
+
