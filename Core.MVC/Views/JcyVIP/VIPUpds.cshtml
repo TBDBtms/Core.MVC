@@ -25,6 +25,7 @@
                 data: { id: @ViewBag.id},
                 success: function (data) {
                     console.log(data);
+                    $("#id").val(data.id);
                     $("#djbd").val(data.vGradeName);
                     $("#names").val(data.vipName);
                     $("#zk").val(data.vipReset);
@@ -32,12 +33,12 @@
                     $("#sj").val(data.upgrade);
                     $("[name=zt]:checked").val(data.states);
                     $("#remarks").val(data.remark);
-                    $("#id").val(data.id);
                 }
             })
         }
         function AddVIPInfo() {
             var strs = {};
+            strs.id = $("#id").val();
             strs.vGradeName = $("#djbd").val();
             strs.vIPName = $("#names").val();
             strs.vIPReset = $("#zk").val();
@@ -45,7 +46,6 @@
             strs.upgrade = $("#sj").val();
             strs.states = $("[name=zt]:checked").val();
             strs.remark = $("#remarks").val();
-            strs.Id = $("#id").val();
             $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/UpdVIPType",
                 dataType: "json",
@@ -65,7 +65,7 @@
 <body>
     <div>
         <input type="hidden" id="id" value="@ViewBag.id" />
-        <h3 style="text-align:center">新增会员类型</h3><br />
+        <h3 style="text-align:center">修改会员类型</h3><br />
         <div>
             <div>
                 会员等级:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 会员名称:<br />
