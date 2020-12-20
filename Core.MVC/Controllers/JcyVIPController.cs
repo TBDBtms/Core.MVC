@@ -129,8 +129,6 @@ namespace Core.MVC.Controllers
         /// <returns></returns>
         public IActionResult PoinJL(int id)
         {
-            string name = "";
-            ViewBag.name = name;
             ViewBag.id = id;
             return View();
         }

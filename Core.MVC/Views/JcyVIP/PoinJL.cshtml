@@ -18,7 +18,6 @@
     <script>
          $(function () {
             ShowInfos();
-            GetPoinJL();
         })
         function ShowInfos(id) {
             $.ajax({
@@ -27,28 +26,29 @@
                 data: { id: @ViewBag.id },
                 type: "get",
                 success: function (data) {
+                    console.log(data);
                     $("#card").text(data.idCard);
                     $("#name").text(data.patientName);
                     $("#jf").text(data.integral);
+                    GetPoinJL();
                 }
             })
         }
         function GetPoinJL() {
             $.ajax({
-                url: "http://localhost:4965/api/JcyVIP/GetVIPmoneys",
+                url: "http://localhost:4965/api/JcyVIP/GetVIPmoneys?name=" + $("#name").text(),
                 dataType: "json",
                 type: "get",
-                data: { name: $("#name").val() },
                 success: function (data) {
                     console.log(data);
                     $("#list").empty();
                     $(data).each(function () {
                         var html = "<tr>" +
-                            "<td>" + this.newTimes + "</td>" +
-                            "<td>" + this.changeCZ + "</td>" +
-                            "<td>" + this.num + "</td>" +
-                            "<td>" + this.man + "</td>" +
-                            "<td>" + this.remark + "</th></tr >";
+                            "<td>" + this.dealTimes + "</td>" +
+                            "<td>" + this.dealType + "</td>" +
+                            "<td>" + this.giveMoney + "</td>" +
+                            "<td>" + this.mans + "</td>" +
+                            "<td>" + this.sumMoney + "</th></tr >";
                         $("#list").append(html);
                     })
                 }
@@ -59,7 +59,6 @@
 </head>
 <body>
     <input type="hidden" id="id" value="@ViewBag.id" />
-    <input type="hidden" id="name" value="@ViewBag.name" />
     &emsp;<h3>积分变动记录</h3>
     <br />
     <div>
