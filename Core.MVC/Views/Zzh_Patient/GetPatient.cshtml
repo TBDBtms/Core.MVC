@@ -107,6 +107,7 @@
 
         });
         ShowVIPType();
+        ShowPatient();
     })
     //会员下拉
     function ShowVIPType() {
@@ -121,9 +122,6 @@
                     form.render('select');
                     console.log(d);
                 });
-            },
-            complete: function () {
-                ShowPatient();
             }
         })
     }
