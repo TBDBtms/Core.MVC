@@ -192,10 +192,10 @@
         </div>
         <div style="width:650px;height:40px;float:left;" align="center">
             <div style="float:left;margin-top:8px;padding-left:158px">
-                <span style="padding-bottom:10px">库存:</span>
+                <span style="padding-bottom:10px">架上库存:</span>
             </div>
             <div style="float:left;margin-left:13px;margin-top:8px">
-                <span id="DrugKC"></span>
+                <span id="DrugJSKC"></span>
             </div>
         </div>
     </div>
@@ -209,7 +209,7 @@
     function init() {
         $.ajax({
             url: "http://localhost:4965/api/ZHQ_administration/GetFirstPricing",
-            data: {id:1},
+            data: {id:@ViewBag.id},
             type: "get",
             dataType: "json",
             success: function (d) {
@@ -233,7 +233,7 @@
                 $("#DrugPD").text(d.drugPD);
                 $("#DrugYXQ").text(d.drugYXQ);
                 $("#DrugSM").text(d.drugSM);
-                $("#DrugKC").text(d.drugKC);
+                $("#DrugJSKC").text(d.drugJSKC);
                 $("#DrugJLXS").text(d.drugJLXS);
             }
         })
