@@ -2,264 +2,209 @@
 @{
     Layout = null;
 }
+
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <title>Index</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-   
-
-
-                  
-    <style>
-
-        body {
-            margin:0px;
-            padding:0px;
-
-            background-size: 100% 100%;
-    
-
-            background-attachment: fixed;
-            
-        }
-        #tp{
-            width:100%;
-            height:100%;
-            top:0px;
-            left:0px;
-            position:absolute;
-            z-index:-1;
-        }
-        html {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            font-style: initial;
-        }
-
-        body {
-            width: 100%;
-            height: 100%;
-            font-family: 'Open Sans',sans-serif;
-            margin: 0;
-         
-            margin: 0px;
-        }
-
-        #login {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin: -150px 0 0 -150px;
-            width: 300px;
-            height: 300px;
-        }
-
-            #login h1 {
-                color: #fff;
-                text-shadow: 0 0 10px;
-                letter-spacing: 1px;
-                text-align: center;
-            }
-
-        h1 {
-            font-size: 2em;
-            margin: 0.67em 0;
-        }
-
-        input {
-            width: 278px;
-            height: 18px;
-            margin-bottom: 10px;
-            outline: none;
-            padding: 10px;
-            font-size: 13px;
-            color: #fff;
-            text-shadow: 1px 1px 1px;
-            border-top: 1px solid #312E3D;
-            border-left: 1px solid #312E3D;
-            border-right: 1px solid #312E3D;
-            border-bottom: 1px solid #56536A;
-            border-radius: 4px;
-            background-color:aquamarine;
-        }
-
-        .but {
-            width: 300px;
-            min-height: 20px;
-            display: block;
-            background-color:aquamarine;
-            border: 1px solid #3762bc;
-            color: #fff;
-            padding: 9px 14px;
-            font-size: 15px;
-            line-height: normal;
-            border-radius: 5px;
-            margin: 0;
-        }
-        #imgss{
-            margin:0px;
-            padding:0px;
-            width:100%;
-            height:100%;
-            position:absolute;
-            z-index:-1;
-        }
-    </style>
+    <title>Login</title>
 </head>
 <body>
-    <div>
-        <img id="imgss" src="~/img/111.png" alt="" />
-    </div>
-    <div>
-        <img id="tp" src="~/img/1.png" />
-    </div>
-    
-    <center>
-        <h1 style="margin-top:40px;font-size:48px;color:aquamarine" >诊所内部管理系统</h1>
-    </center>
-
-    <div style="margin:0 auto;width:600px;height:700px;border-radius:10px;">
-        <div style="margin: 40px 150px;padding: 26px 0"><input type="text" required="required" id="Uname" placeholder="用户名" class="input" style="border:0;height:33px;border-radius:5px;min-width:300px;padding-left:10px" /></div>
-        <div style="margin: 10px 150px"><input type="password" id="Upass" required="required" placeholder="密码" class="input" style="border: 0; height: 33px; border-radius: 5px; min-width: 300px; padding-left: 10px " /></div>
-
-        <div style="margin: 20px 150px"><span style="font-size:24px">验证码</span> <canvas id="canvas" width="120" height="40" style="background-color:white;margin-top:15px"></canvas></div>
-        <div style="margin: 20px 150px"><span style="font-size:24px">请输入验证码 <input type="text" id="text" style="border:0;height:35px;border-radius:5px;min-width:150px;padding-left:10px;margin-top:10px"></span></div>
-        <div style="margin: 20px 150px; ">
-            <input id="Button1" class="but" type="button" value="登录" style="margin-top:10px;border: 0; height: 40px; border-radius: 5px; min-width: 100px; padding-left: 10px; font-size:18px" />
-        </div>
-        <div style="margin: 20px 150px">
-            <span>
-             
-                <input id="Button3" type="button" value="找回密码" class="but" onclick="zhao()" style="margin-left: 3px; border: 0; height: 40px;margin-top:20px; border-radius: 5px; min-width: 100px; padding-left: 10px;font-size:18px" />
+    <img width="100%" height="100%" src="~/img/1.png" style="position:absolute; left:0; top:0; z-index:-1;" />
+    <div id="main" style="background-color:white">
+        <div style="padding:50px 20px 50px 20px">
+            <h2 style="color:blue;font-weight:800;margin-left:50px">诊所内部管理平台</h2>
+            <div class="input-group" style="margin-top:30px">
+                <span class="input-group-addon"><img src="~/imgs/u12.svg" style="width:30px;height:30px" /></span>
+                <input id="Uname" type="text" class="form-control" placeholder="请输入用户名...." style="width:50px">
+            </div>
+            @*<div class="input-group" style="margin-top:30px">
+            <span class="input-group-addon">
+                <img src="~/img/u13.svg" style="width:30px;height:30px;background-color: Transparent; border-style: none;" />
             </span>
+            <input id="MessageText" type="text" class="form-control" style="background-color: Transparent; border-style: none;" >
+            <button type="button" class="btn btn-default" style="width:80px;color:blue;border:1px solid blue;font-size:6px" onclick="">发送验证码</button>
+        </div>*@
+            <div class="input-group" style="margin-top:30px">
+                <span class="input-group-addon">
+                    <img src="~/imgs/u17.svg" style="width:30px;height:30px" />
+                </span>
+                <input id="Upass" type="password" placeholder="请输入密码...." class="form-control" style="background-color: Transparent; border-style: none;">
+            </div>
+            <div class="input-group" style="margin-left:70px;width:400px;height:30px">
+                <div class="sliding">
+                    请按住滑块，拖至最右侧。
+                    <p></p>
+                    <span class="span1_back"></span>
+
+                </div>
+            </div>
+            <div style="margin-top:50px">
+                <input class="btn btn-primary" style="width:200px;margin-left:100px" type="button" value="登录" id="btn_log" onclick="Login()" />
+            </div>
+            <div style="float:right">
+                <a onclick="zhao()" style="color:aqua">找回密码</a>
+            </div>
+            <div style=" margin-top:50px;"><center><p class="name">版权所有：🐒花果山工作室 联系电话:1763612428</p></center></div>
         </div>
-
-        <div style="margin: 20px 150px"><center><p style="color:#FA6F03;"><span onclick="lian()">有问题找猴子🐒</span></p></center></div>
-
-        <div style=""><center><p class="name">版权所有：花果山工作室 联系电话:1234567855</p></center></div>
     </div>
-
-
 </body>
 </html>
-<script>
-    var canvas = document.getElementById("canvas");//演员
-    var context = canvas.getContext("2d");//舞台，getContext() 方法可返回一个对象，该对象提供了用于在画布上绘图的方法和属性。
-    var button = document.getElementById("bt");//获取按钮
-    var input = document.getElementById("text");//获取输入框
-    draw();
-    canvas.onclick = function () {
-        context.clearRect(0, 0, 120, 40);//在给定的矩形内清除指定的像素
-        draw();
+<style>
+    #main {
+        position: absolute;
+        width: 600px;
+        height: 450px;
+        left: 50%;
+        top: 50%;
+        margin-left: -300px;
+        margin-top: -200px;
     }
-    // 随机颜色函数
-    function getColor() {
-        var r = Math.floor(Math.random() * 256);
-        var g = Math.floor(Math.random() * 256);
-        var b = Math.floor(Math.random() * 256);
-        return "rgb(" + r + "," + g + "," + b + ")";
+
+    .sliding {
+        width: 400px;
+        height: 40px;
+        margin: 20px auto;
+        background: rgba(212, 212, 212, 1);
+        text-align: center;
+        line-height: 40px;
+        position: relative;
     }
-    function draw() {
-        context.strokeRect(0, 0, 120, 40);//绘制矩形（无填充）
-        var aCode = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
-        // 绘制字母
-        var arr = [] //定义一个数组用来接收产生的随机数
-        var num //定义容器接收验证码
-        for (var i = 0; i < 4; i++) {
-            var x = 20 + i * 20;//每个字母之间间隔20
-            var y = 20 + 10 * Math.random();//y轴方向位置为20-30随机
-            var index = Math.floor(Math.random() * aCode.length);//随机索引值
-            var txt = aCode[index];
-            context.font = "bold 20px 微软雅黑";//设置或返回文本内容的当前字体属性
-            context.fillStyle = getColor();//设置或返回用于填充绘画的颜色、渐变或模式，随机
-            context.translate(x, y);//重新映射画布上的 (0,0) 位置，字母不可以旋转移动，所以移动容器
-            var deg = 90 * Math.random() * Math.PI / 180;//0-90度随机旋转
-            context.rotate(deg);// 	旋转当前绘图
-            context.fillText(txt, 0, 0);//在画布上绘制“被填充的”文本
-            context.rotate(-deg);//将画布旋转回初始状态
-            context.translate(-x, -y);//将画布移动回初始状态
-            arr[i] = txt //接收产生的随机数
-        }
-        num = arr[0] + arr[1] + arr[2] + arr[3] //将产生的验证码放入num
-        // 绘制干扰线条
-        for (var i = 0; i < 8; i++) {
-            context.beginPath();//起始一条路径，或重置当前路径
-            context.moveTo(Math.random() * 120, Math.random() * 40);//把路径移动到画布中的随机点，不创建线条
-            context.lineTo(Math.random() * 120, Math.random() * 40);//添加一个新点，然后在画布中创建从该点到最后指定点的线条
-            context.strokeStyle = getColor();//随机线条颜色
-            context.stroke();// 	绘制已定义的路径
-        }
-        // 绘制干扰点，和上述步骤一样，此处用长度为1的线代替点
-        for (var i = 0; i < 20; i++) {
-            context.beginPath();
-            var x = Math.random() * 120;
-            var y = Math.random() * 40;
-            context.moveTo(x, y);
-            context.lineTo(x + 1, y + 1);
-            context.strokeStyle = getColor();
-            context.stroke();
+
+        .sliding > p {
+            width: 0px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #7BBB55;
+            z-index: 99;
+            color: #FFFFFF;
+            text-align: center;
+            overflow: hidden;
         }
 
-        //点击按钮验证
-        document.getElementById("Button1").onclick = function () {
-            var text = input.value //获取输入框的值
-            var Uname = $("#Uname").val();
-            var Upass = $("#Upass").val();
-            if (text === num) {
-                $.ajax({
-                    url: "http://localhost:4965/api/Hzx_Login/Login",
-                    type: "get",
-                    data: { uname: Uname, Upass: Upass },
-                    dataType: "json",
-                    success: function (d) {
-                        if (d != null) {
-                            alert("登录成功");
-                            //跳用户界面
-                            sessionStorage.setItem("Uname", d.uname);
-                            sessionStorage.setItem("Upass", d.upass);
-                            sessionStorage.setItem("Qma", d.qma);
-                            sessionStorage.setItem("Rname", d.rname);
-                            sessionStorage.setItem("Uid", d.uid);
-                            location.href = "/HzxLogin/Index?Qma="+d.qma;
-                            location.href = "/ZHQ_First/Index";
-                            return;
-                        }
-                        else {
-                            alert("登陆失败！");
-                            location.href = "/HzxLogin/Login";
-                        }
-                    }
+        .sliding > span {
+            display: block;
+            width: 46px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-size: cover;
+            cursor: pointer;
+            z-index: 999;
+        }
 
-                })
-            } else {
-                alert('验证失败')
+    .span1_back {
+        background: url(http://localhost:6969/imgs/left.png) no-repeat center center;
+    }
+
+    .span2_back {
+        background: url(http://localhost:6969/imgs/left.png)no-repeat center center;
+    }
+</style>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+@*<link href="~/layuiadmin/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/layuiadmin/style/admin.css" rel="stylesheet" />
+    <script src="~/layer/layer.js"></script>
+    <script src="~/layuiadmin/layui/layui.js"></script>*@
+<script type="text/javascript">
+    $(function () {
+        $('#btn_log').attr("disabled", true);
+        $('.sliding > span').on('mousedown', function (ev) {
+            //获取鼠标摁下的位置
+            var down_X = ev.clientX;
+            //获取p,span的宽度
+            var p_W = $('.sliding > p').get(0).offsetWidth;
+            var span_X = $('.sliding > span').get(0).offsetLeft;
+            $(document).get(0).onmousemove = function (ev) {
+                //获取鼠标移动的位置
+                var move_X = ev.clientX;
+                //用移动过后的位置减去鼠标摁下的位置加上p的宽度或者 span 的left 值 因为俩者是同步的 所以 减去 其中一个就好
+                var size = move_X - down_X + p_W;
+                if (size > 0) {// 移动的时候判断size>0的时候执行，Math.min选取最小值，让拖动过程中不至于超出
+                    size = Math.min(($('.sliding').get(0).offsetWidth - $('.sliding > span').get(0).offsetWidth), size);
+                } else {
+                    //小于0的时候 size =0； 防止有无聊的用户拖回 超出边界
+                    size = 0;
+                }
+                $('.sliding > p').css('width', size + 'px');
+                $('.sliding > span').css('left', size + 'px');
+                //防止拖拽过程中选中文字
+                return false;
             }
-        }
+            $(document).get(0).onmouseup = function () {
+                //鼠标松开执行,判段span到达边界时候执行
+                if (($('.sliding > span').get(0).offsetLeft) >= ($('.sliding').get(0).offsetWidth - $('.sliding > span').get(0).offsetWidth)) {
+                    //更改span的背景图片
+                    $('.sliding > span').attr('class', 'span2_back');
+                    //更改p标签中的内容
+                    $('.sliding > p').text('验证通过');
+                    //验证成功之后执行的方法
+                    successAfter();
 
+                    //删除鼠标摁下方法防止用户 无聊往回 推拽
+                    $('.sliding > span').off('mousedown');
+                } else {
+                    //判断没到达边界让它再回到起点
+                    //利用jquery让p 和 span 回到起始状态
+                    $('.sliding > span').animate({ left: '0px' }, 300);
+                    $('.sliding > p').animate({ width: '0px' }, 300);
+                }
+                $(document).get(0).onmousemove = null; //最后让 鼠标移动 和 鼠标松开 事件停止
+                $(document).get(0).onmouseup = null;
+            }
+        })
+    });
+    function successAfter() {
+        $('#btn_log').removeAttr("disabled");
     }
-    //注册按钮
-    function Zhu()
+</script>
+<script>
+
+   
+    function Login()
     {
-        location.href = "/HzxLogin/Zhu";
+        var Uname = $("#Uname").val();
+        var Upass = $("#Upass").val();
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/Login",
+            type: "get",
+            data: { uname: Uname, Upass: Upass },
+            dataType: "json",
+            success: function (d) {
+                if (d != null) {
+                    alert("登录成功");
+                    //跳用户界面
+                    sessionStorage.setItem("Uname", d.uname);
+                    sessionStorage.setItem("Upass", d.upass);
+                    sessionStorage.setItem("Qma", d.qma);
+                    sessionStorage.setItem("Rname", d.rname);
+                    sessionStorage.setItem("Uid", d.uid);
+                    location.href = "/ZHQ_First/Index?Qma=" + d.qma;
+
+                }
+                else {
+                    alert("登陆失败！");
+                    location.href = "/HzxLogin/Login";
+                }
+            }
+
+        })
 
     }
     function zhao() {
         var Uname = $("#Uname").val();
-        if (Uname == "")
-        {
+        if (Uname == "") {
             alert("请输入用户名");
             return;
         }
-        location.href = "/HzxLogin/zhao?Uname="+Uname;
+        location.href = "/HzxLogin/zhao?Uname=" + Uname;
 
     }
 
 
-
 </script>
-
