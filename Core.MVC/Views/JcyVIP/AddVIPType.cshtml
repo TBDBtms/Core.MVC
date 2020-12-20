@@ -17,16 +17,13 @@
     <script>
         function AddInfos() {
             var strs = {};
-            strs.vGradeId = $("#djbd").val();
-            strs.vIPName = $("#names").val();
-            strs.vIPReset = $("#zk").val();
+            strsv.GradeId = $("#id").val();
+            strs.vGradeName = $("#djbd").val();
+            strs.vipName = $("#names").val();
+            strs.vipReset = $("#zk").val();
             strs.minIntegral = $("#zd").val();
             strs.upgrade = $("#sj").val();
-            if ($("[name=zt]:checked").val() == true) {
-                strs.states = 1;
-            } else {
-                strs.states = 0;
-            }
+            strs.states = $("[name=zt]:checked").val();
             strs.remark = $("#remarks").val();
             $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/AddVIPType",
@@ -84,7 +81,7 @@
         <br />
         <div style="text-align:center">
             <input type="button" name="name" value="取消" class="layui-btn" />
-            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="AddVIPInfo()" />
+            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="AddInfos()" />
         </div>
     </div>
 </body>
