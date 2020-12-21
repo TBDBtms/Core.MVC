@@ -14,76 +14,74 @@
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        function AddInfos() {
+            var strs = {};
+            strsv.GradeId = $("#id").val();
+            strs.vGradeName = $("#djbd").val();
+            strs.vipName = $("#names").val();
+            strs.vipReset = $("#zk").val();
+            strs.minIntegral = $("#zd").val();
+            strs.upgrade = $("#sj").val();
+            strs.states = $("[name=zt]:checked").val();
+            strs.remark = $("#remarks").val();
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/AddVIPType",
+                dataType: "json",
+                type: "post",
+                data: strs,
+                success: function (data) {
+                    if (data > 0) {
+                        alert('设置成功');
+                    } else {
+                        alert('设置失败');
+                    }
+                }
+            })
+        }
+    </script>
 </head>
 <body>
     <div>
-        <h3>新增会员类型</h3><br />
+        <input type="hidden" id="id" value="@ViewBag.id" />
+        <h3 style="text-align:center">新增会员类型</h3><br />
         <div>
-            <div class="layui-form-item">
-                <div class="layui-input-inline">
-                    <h4>会员等级:</h4><br />
-                    <input type="text" name="username" lay-verify="required" placeholder="请输入会员等级" autocomplete="off" class="layui-input">
-                </div>
+            <div>
+                会员等级:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 会员名称:<br />
             </div>
+            <div>
+                <input type="text" id="djbd" value="" class="layui-text" />
 
-            <div class="layui-form-item">
-                <div class="layui-input-inline">
-                    <h4>会员名称:</h4><br />
-                    &emsp;<input type="text" name="username" lay-verify="required" placeholder="请输入会员名称" autocomplete="off" class="layui-input">
-                </div>
+                <input type="text" id="names" value="" class="layui-text" />
             </div>
         </div>
         <div>
             <div>
-                <div class="layui-form-item">
-                    <div class="layui-input-inline">
-                        <h4>会员折扣:</h4><br />
-                        <input type="text" name="username" lay-verify="required" placeholder="请输入会员折扣" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
+                会员折扣:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp; 最低消费积分:<br />
             </div>
             <div>
-                <div class="layui-form-item">
-                    <div class="layui-input-inline">
-                        <h4>最低消费积分</h4><br />
-                        <input type="text" name="username" lay-verify="required" placeholder="请输入最低消费积分" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
+                <input type="text" id="zk" value="" class="layui-text" />
+
+                <input type="text" id="zd" value="" class="layui-text" checked />
             </div>
         </div>
         <div>
             <div>
+                升级所需积分:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp; 状态:<br />
             </div>
             <div>
-                <div class="layui-input-inline">
-                    <h4>升级所需积分:</h4><br />
-                    <input type="text" name="username" lay-verify="required" placeholder="请输入升级所需积分" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <br />
-            <div>
-                <div class="layui-input-inline">
-                    <h4>状态:</h4><br />
-                    <input type="radio" name="sex" value="" title="">
-                </div>
+                <input type="text" id="sj" value="" class="layui-text" />
+                <input type="radio" name="zt" value="" class="layui-text" />
             </div>
         </div>
         <div>
-            <div>
-                <br />
-                <div>
-                    <h4>升级所需积分:</h4><br />
-                    <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
-                </div>
-            </div>
+            备注:<br />
+            <input type="text" id="remarks" value="" class="layui-text" />
         </div>
         <br />
-        <div>
-            <div></div>
-            <div>
-                <input type="button" name="name" value="取消" class="layui-btn" />&emsp;
-                <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" />
-            </div>
+        <div style="text-align:center">
+            <input type="button" name="name" value="取消" class="layui-btn" />
+            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="AddInfos()" />
         </div>
     </div>
 </body>

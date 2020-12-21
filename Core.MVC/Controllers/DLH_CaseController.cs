@@ -6,10 +6,21 @@ using System.Threading.Tasks;
 
 namespace Core.MVC.Controllers
 {
-    public class DLH_CaseController1 : Controller
+    public class DLH_CaseController : Controller
     {
         public IActionResult CaseShow()
         {
+            return View();
+        }
+
+        public IActionResult CaseAdd()
+        {
+            return View();
+        }
+
+        public IActionResult CaseUpdate(int cid)
+        {
+            ViewBag.cases = cid;
             return View();
         }
     }

@@ -1,0 +1,241 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<style>
+    img {
+        transition: all 0.4s;
+    }
+
+    img:hover {
+        transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+    }
+</style>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+<body>
+    <div style="width:600px;height:1000px;margin-left:80px">
+        <div style="width:650px;height:100px;float:left" align="center">
+            <div style="float:left;margin-top:38px;padding-left:158px">
+                <span style="padding-bottom:10px">药品图片:</span>
+            </div>
+            <div style="float:left;margin-left:13px">
+                <img style="height:100px;width:150px" id="img"/>
+            </div>
+
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">药品名称:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugTYM"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">药品编码:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugBM"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">药品条形码:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugTXM"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">药品拼音码:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugPYM"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">药品类型:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugClassName"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">药品规格:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugGG"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">剂型类型:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="Dosage_formName"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">批准文号:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugWH"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">生产厂家:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="ManufacturerName"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">包装单位:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugBZDW"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">基本单位:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugJBDW"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">剂量系数:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugJLXS"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">剂量单位:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugJLDW"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">采购价:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugCGJ"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">零售价:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugLSJ"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">药品用法:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugYF"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">单次用量:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugDCYL"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">使用频度:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugPD"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">有效期:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugYXQ"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">说明:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugSM"></span>
+            </div>
+        </div>
+        <div style="width:650px;height:40px;float:left;" align="center">
+            <div style="float:left;margin-top:8px;padding-left:158px">
+                <span style="padding-bottom:10px">架上库存:</span>
+            </div>
+            <div style="float:left;margin-left:13px;margin-top:8px">
+                <span id="DrugJSKC"></span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $(function () {
+        init();
+    })
+
+    function init() {
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_administration/GetFirstPricing",
+            data: {id:@ViewBag.id},
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $("#img").prop("src", d.imgUrl);
+                $("#DrugBM").text(d.drugBM);
+                $("#DrugTXM").text(d.drugTXM);
+                $("#DrugTYM").text(d.drugTYM);
+                $("#DrugPYM").text(d.drugPYM);
+                $("#DrugClassName").text(d.drugClassName);
+                $("#DrugGG").text(d.drugGG);
+                $("#Dosage_formName").text(d.dosage_formName);
+                $("#DrugWH").text(d.drugWH);
+                $("#ManufacturerName").text(d.manufacturerName);
+                $("#DrugBZDW").text(d.drugBZDW);
+                $("#DrugJBDW").text(d.drugJBDW);
+                $("#DrugJLDW").text(d.drugJLDW);
+                $("#DrugCGJ").text(d.drugCGJ);
+                $("#DrugLSJ").text(d.drugLSJ);
+                $("#DrugYF").text(d.drugYF);
+                $("#DrugDCYL").text(d.drugDCYL);
+                $("#DrugPD").text(d.drugPD);
+                $("#DrugYXQ").text(d.drugYXQ);
+                $("#DrugSM").text(d.drugSM);
+                $("#DrugJSKC").text(d.drugJSKC);
+                $("#DrugJLXS").text(d.drugJLXS);
+            }
+        })
+    }
+</script>
