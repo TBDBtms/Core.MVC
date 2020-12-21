@@ -10,7 +10,7 @@
     <title>Index</title>
 </head>
 <body>
-
+    <div><input class='Button1' type='button' value='添加科室' /></div>
     <div style="">
         <table class="layui-table"  style="text-align:center;margin-left:30px">
 
@@ -19,7 +19,6 @@
 
                     <th style="text-align:center">科室id</th>
                     <th style="text-align:center">科室名称</th>
-                    <th style="text-align:center">操作</th>
                 </tr>
             </thead>
             <tbody id="tb">
@@ -70,6 +69,22 @@
             return false;
         });
     });
+    $(document).on('click', '.Button1', function () {
+
+        layer.open({
+            type: 2,
+            closeBtn: 1, //不显示关闭按钮
+            area: ['500px', '300px'],
+            shade: [0],
+            title: false,
+            anim: 2,
+            content: ['/HzxLogin/Addkeshi', 'no'], //iframe的url，no代表不显示滚动条
+            cancel: function (index, layero) {
+                Shows();
+            }
+        });
+
+    })
   
 </script>
 

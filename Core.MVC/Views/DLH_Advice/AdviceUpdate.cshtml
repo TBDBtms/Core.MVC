@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CaseUpdate</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/modules/code.css" rel="stylesheet" />
+</head>
+<body>
+    <input id="date1111" type="hidden" />
+    <input id="hxinfo" type="hidden" value="@ViewBag.cases" />
+    <div align="center">
+        <div>
+            <h1>修改诊断信息</h1>
+        </div>
+        <div>
+            <div>诊断信息</div>
+            <div><textarea id="txt_name" style="width:400px;height:100px"></textarea></div>
+        </div>
+        <div>
+            <input id="Button1" type="button" value="取消" />
+            <input id="Button1" type="button" value="确定" onclick="UpdateCase()" />
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $().ready(function () {
+        HX();
+    });
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+        laydate.render({
+            elem: '#date1111', //指定元素
+            type: 'datetime', // 可选择：年、月、日、时、分、秒
+            format: 'yyyy-MM-dd', //指定时间格式
+            value: new Date(), // 指定值
+        });
+    });
+
+
+    function HX() {
+        $.ajax({
+            url: "http://localhost:4965/api/DLH_Advice/GetAdvices?cid=" +@ViewBag.cases,
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                console.log(d);
+                $("#txt_name").val(d.adviceTable)
+            }
+        });
+    }
+
+    function UpdateCase() {
+        var str = {
+            AdviceName: $("#txt_name").val(),
+            AdviceTable: $("#date1111").val(),
+            Createperson: sessionStorage.getItem("Uid"),
+            AdviceId: $("#hxinfo").val()
+        }
+        console.log(str);
+        $.ajax({
+            url: "http://localhost:4965/api/DLH_Advice/AdviceModify",
+            type: "post",
+            dataType: "json",
+            data: str,
+            success: function (d) {
+                if (d > 0) {
+                    alert("修改成功");
+                }
+                else {
+                    alert("修改失败");
+                }
+            }
+        })
+    }
+</script>

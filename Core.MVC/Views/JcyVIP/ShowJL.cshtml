@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowJL</title>
+    <script src="~/js/site.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+    <script>
+        $(function () {
+            ShowInfos();
+        })
+        function ShowInfos(id) {
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetById" ,
+                dataType: "json",
+                data: { id: @ViewBag.id },
+                type: "get",
+                success: function (data) {
+                    $("#card").text(data.idCard);
+                    $("#name").text(data.patientName);
+                    $("#jf").text(data.svalueMoney);
+                    ShowJL();
+                }
+            })
+        }
+        function ShowJL() {
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetVIPmoneys",
+                dataType: "json",
+                type: "get",
+                data: { name: $("#name").text() },
+                success: function (data) {
+                    console.log(data);
+                    $("#list").empty();
+                    $(data).each(function () {
+                        console.log(data);
+                        var html = "<tr>" +
+                            "<td>" + this.dealTimes + "</td>" +
+                            "<td>" + this.dealType + "</td>" +
+                            "<td>" + this.dealPrice + "</td>" +
+                            "<td>" + this.giveMoney + "</td>" +
+                            "<td>" + this.sumMoney + "</td>" +
+                            "<td>" + this.mans + "</td></tr >";
+                        $("#list").append(html);
+                    })
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div style="text-align:center">
+        <input type="hidden" id="id" value="@ViewBag.id" />
+        &emsp;<h3>充值/退款记录</h3>
+        <br />
+        <div>
+            &emsp;会员卡号:<span id="card"></span>&emsp;&emsp;会员姓名:<span id="name"></span>
+        </div>
+        <br />
+        <div>
+            &emsp;余额:<span id="jf"></span>元
+        </div>
+        <div>
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>交易时间</th>
+                        <th>交易类型</th>
+                        <th>交易金额(元)</th>
+                        <th>赠送金额(元)</th>
+                        <th>合计金额(元)</th>
+                        <th>操作员</th>
+                    </tr>
+                </thead>
+                <tbody id="list">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -20,7 +20,7 @@
                 shade: [0],
                 area: ['400px', '300px'],
                 anim: 2,
-                content: ['/JcyVIP/VIPSet', 'no'], //iframe的url，no代表不显示滚动条
+                content: ['/JcyVIP/SetVipWhere?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
             });
         });
 
@@ -44,7 +44,7 @@
                 shade: [0],
                 area: ['400px', '350px'],
                 anim: 2,
-                content: ['/JcyVIP/VIPUpds', 'no'], //iframe的url，no代表不显示滚动条
+                content: ['/JcyVIP/VIPUpds?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
             });
         });
     })
@@ -56,29 +56,32 @@
             data: {},
             async: false,
             success: function (data) {
+                console.log(data);
                 $("#list3").empty();
                 $(data).each(function () {
                     var htmls = "<tr>" +
                         "<td>" + this.id + "</td>" +
-                        "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.patientName + '</a>' + "</td>" +
-                        "<td>" + this.vIPReset + "</td>" +
+                        "<td>" + this.vGradeName + "</td>" +
+                        "<td>" + this.vipName + "</td>" +
+                        "<td>" + this.vipReset + "</td>" +
                         "<td>" + this.minIntegral + "</td>" +
                         "<td>" + this.upgrade + "</td>" +
                         "<td>" + this.remark + "</td>" +
                         "<td>" + this.states + "</td>" +
-                        "<td><input type='button' class='test2'  value='编辑' /><input type='button'  class='test' value='新增会员类型'><input type='button'  class='test1' value='会员条件设置'></td></tr>";
+                        "<td><a href='#' class='test2' id='" + this.id + "'>编辑</a>&nbsp;<a type='button'  class='test' id='" + this.id + "'>新增会员类型</a>&nbsp;<a type='button'  class='test1' id='" + this.id + "' >会员条件设置</a>&nbsp;</td></tr>";
                     $("#list3").append(htmls);
                 })
             }
         })
     }
 </script>
-<div>
+<div style="text-align:center">
     <table class="layui-table">
         <thead>
             <tr style="background-color: lavender;">
                 <th>序号</th>
                 <th>会员等级</th>
+                <th>会员名称</th>
                 <th>折扣</th>
                 <th>最低积分</th>
                 <th>升级所需积分</th>
@@ -88,7 +91,7 @@
             </tr>
         </thead>
         <tbody id="list3">
-            
+
         </tbody>
     </table>
 </div>

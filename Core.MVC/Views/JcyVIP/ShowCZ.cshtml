@@ -9,11 +9,14 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>ShowCZ</title>
-    <link href="~/layui-v2.4.5/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
-    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
-    <script src="~/layui-v2.4.5/layui/layui.js"></script>
     <script src="~/js/site.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
     <script>
+        
         $(function () {
             ShowInfos();
         })
@@ -25,8 +28,76 @@
                 type: "get",
                 success: function (data) {
                     $("#card").text(data.idCard);
-                    $("#name").text(data.vIPName);
+                    $("#name").text(data.patientName);
                     $("#ye").text(data.svalueMoney);
+                    ShowDataInfo();
+                }
+            })
+        }
+        function ShowDataInfo() {
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetVIPmoneys",
+                dataType: "json",
+                type: "get",
+                data: { name: $("#name").text() },
+                success: function (data) {
+                    console.log(data);
+                    jylx = "充值";
+                    jyje = data.dealPrice;
+                    zsje = data.giveMoney;
+                    hjje = data.sumMoney;
+                    czy = "晋超宇";
+                }
+            })
+        }
+        var jysj;
+        var jylx;
+        var jyje;
+        var zsje;
+        var hjje;
+        var czy;
+        function UpdShowCZ() {
+            var vip = {
+                PayMoney: $("#money").val(),
+                GiveMoney: $("#addmoney").val(),
+                SId: $("[name=fs]:checked").val(),
+                Id: $("#id").val()
+            };
+            console.log(vip);
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/UpdCZ",
+                dataType: "json",
+                type: "post",
+                data: vip,
+                //contentType:"/application/json",
+                success: function (data) {
+                    console.log(data);
+                    if (data > 0) {
+                        var htmls = {};
+                        htmls.dealType = jylx;
+                        htmls.dealPrice = jyje;
+                        htmls.givemoney = zsje;
+                        htmls.sumoney = hjje;
+                        htmls.mans = czy;
+                        htmls.id = $("#id").val();
+                        $.ajax({
+                            url: "http://localhost:4965/api/JcyVIP/AddJL",
+                            dataType: "json",
+                            type: "post",
+                            data: htmls,
+                            success: function (data) {
+                                console.log(data);
+                                if (data > 0) {
+                                    alert('充值成功');
+                                } else {
+                                    alert('充值失败');
+                                }
+                            }
+                        })
+                    } else {
+                        alert('充值失败');
+                        location.reload();
+                    }
                 }
             })
         }
@@ -47,24 +118,24 @@
         <br />
         <div>
             充值金额(元):<span style="color:red">*</span>
-            <input type="text" name="name" value="" class="layui-text" />
+            <input type="text" id="money" value="" class="layui-text" />
         </div>
         <br />
         <div>
-            赠送金额(元):&nbsp; <input type="text" name="name" value="" class="layui-text" />
+            赠送金额(元):&nbsp; <input type="text" id="addmoney" value="" class="layui-text" />
         </div>
         <br />
         <div>
             支付方式:
-            <input type="radio" name="name" value="现金" checked />现金
-            <input type="radio" name="name" value="支付宝" />支付宝
-            <input type="radio" name="name" value="微信" />微信
-            <input type="radio" name="name" value="银行卡" />银行卡
+            <input type="radio" name="fs" value="0" checked />现金
+            <input type="radio" name="fs" value="1" />支付宝
+            <input type="radio" name="fs" value="2" />微信
+            <input type="radio" name="fs" value="3" />银行卡
         </div>
         <br />
         <div>
             <input type="button" name="name" value="取消" class="layui-btn" />
-            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" />
+            <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm"  onclick="UpdShowCZ()"/>
         </div>
     </div>
 </body>

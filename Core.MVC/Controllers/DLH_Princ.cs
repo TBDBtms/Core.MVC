@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.MVC.Controllers
 {
-    public class DLH_CaseController1 : Controller
+    public class DLH_Princ : Controller
     {
-        public IActionResult CaseShow()
+        public IActionResult PrincShow()
         {
             return View();
         }

@@ -152,8 +152,9 @@ namespace Core.MVC.Controllers
         /// 编辑
         /// </summary>
         /// <returns></returns>
-        public IActionResult VIPUpds()
+        public IActionResult VIPUpds(int id)
         {
+            ViewBag.id = id;
             return View();
         }
         /// <summary>
@@ -162,6 +163,15 @@ namespace Core.MVC.Controllers
         /// <returns></returns>
         public IActionResult AddVIPType()
         {
+            return View();
+        }
+        /// <summary>
+        /// vip条件设置
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult SetVipWhere(int id=0)
+        {
+            ViewBag.id = id;
             return View();
         }
     }

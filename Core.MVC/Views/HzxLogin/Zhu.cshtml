@@ -5,7 +5,7 @@
 }
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<body style="background-color:antiquewhite">
+<body>
     <div>
         <div style="height:100px;">
             <h2 style="font-weight:bold;margin-left:100px;margin-top:50px;float:left;color:blueviolet">注册员工信息</h2>
@@ -129,8 +129,8 @@
                             <div style="width:300px;">
                                 <div class="layui-input-block">
                                     <select name="interest" lay-filter="aihao" id="Uissale">
-                                        <option value="true">正常</option>
-                                        <option value="false">离职</option>
+                                        <option value="false">正常</option>
+                                        <option value="true">离职</option>
 
                                     </select>
                                 </div>
@@ -300,12 +300,6 @@
 
                 });
                 form.render('select');
-
-                
-
-
-
-
             }
         });
 
@@ -327,8 +321,6 @@
         u.Uno = $("#Uno").val();
         u.Uxue = $("#Uxue").val();
         u.cids = $("#shi").val();
-
-      
         $.ajax({
             url: "http://localhost:4965/api/Hzx_Login/AddUserinfo",
             data: u,
