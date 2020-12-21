@@ -129,8 +129,6 @@ namespace Core.MVC.Controllers
         /// <returns></returns>
         public IActionResult PoinJL(int id)
         {
-            string name = "";
-            ViewBag.name = name;
             ViewBag.id = id;
             return View();
         }
@@ -165,6 +163,15 @@ namespace Core.MVC.Controllers
         /// <returns></returns>
         public IActionResult AddVIPType()
         {
+            return View();
+        }
+        /// <summary>
+        /// vip条件设置
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult SetVipWhere(int id=0)
+        {
+            ViewBag.id = id;
             return View();
         }
     }

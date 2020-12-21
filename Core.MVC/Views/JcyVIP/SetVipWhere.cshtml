@@ -1,0 +1,123 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <script src="~/js/site.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+    <script>
+        $(function () {
+            
+        })
+
+        function clicks() {
+            $("#chks").off('change');
+            document.getElementById("xid").setAttribute("disabled", "disabled");
+        }
+
+        function clickx() {
+            $("#chk").off('change');
+            document.getElementById("cid").setAttribute("disabled", "disabled");
+        }
+        function Add() {
+            var htmls = {};
+            if ($(".zk:checked").val() == true) {
+                $(".zk").val() == 1;
+            } else {
+                $(".zk").val() == 0;
+            }
+            if ($(".sj").val() == true) {
+                $(".zk").val() == 1;
+            } else {
+                $(".zk").val() == 0;
+            }
+            htmls.RsestId = $(".zk:checked").val();
+            htmls.Rupgrade = $(".sj:checked").val();
+            htmls.XId = $("#xid").val();
+            htmls.CId = $("#cid").val();
+            htmls.Uppers = $("#uper").val();
+            htmls.Id = $("#id").val();
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/UpdVipwhere",
+                dataType: "json",
+                type: "post",
+                data: htmls,
+                success: function (data) {
+                    console.log(htmls);
+                    if (data > 0) {
+                        alert('设置成功');
+                    } else {
+                        alert('设置失败');
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <h3>会员条件设置</h3>
+    <input type="hidden" id="id" value="@ViewBag.id" />
+    <div style="width:400px;height:200px;">
+        <div style="width:310px;height:40px;">
+            <div style="float:left">
+                <span>会员折扣功能:</span>
+            </div>
+            <div style="float:right">
+                <input type="checkbox" class="zk" lay-skin="switch" value="1" checked>
+            </div>
+        </div>
+        <div style="width: 310px; height: 40px;">
+            <div style="float:left">
+                <span>会员升级功能:</span>
+            </div>
+            <div style="float:right">
+                <input type="checkbox" class="sj" value="1" lay-skin="switch" checked>
+            </div>
+        </div>
+        <div style="width:320px;height:40px;">
+            <div style="float:left">
+                <span>消费积分比例</span>
+            </div>
+            <div style="float:right">
+                <span>人民币:积分=1;</span>
+                <input type="number" id="xid" value="" style="width:50px;" />&nbsp;
+                开启<input type="checkbox" id="chks" value="" onchange="clicks()" />
+            </div>
+        </div>
+        <div style="width:320px;height:40px;">
+            <div style="float:left">
+                <span>充值积分比例</span>
+            </div>
+            <div style="float:right">
+                <span>人民币:积分=1;</span>
+                <input type="number" id="cid" value="" style="width:50px;" />&nbsp;
+                开启<input type="checkbox" id="chk" value="" onchange="clickx()" />
+            </div>
+        </div>
+        <div style="width:320px;height:40px;">
+            <div style="float:left">
+                <span>单次积分上限</span>
+            </div>
+            <div style="float:right">
+                <input type="number" id="uper" value="" style="width:50px;" />
+            </div>
+        </div>
+        <div style="width:300px;height:100px;float:right">
+            <div>
+                <input type="button" name="name" value="取消" onclick="" style="border:1px solid;" class="layui-btn" />
+                <input type="button" name="name" value="确定" onclick="Add()" style="background-color:blueviolet;" class="layui-btn" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

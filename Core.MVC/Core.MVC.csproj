@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -17,6 +17,15 @@
     <None Include="wwwroot\layer-v3.1.1\文档\layer文档.url" />
     <None Include="wwwroot\layer-v3.1.1\文档\layui社区.url" />
     <None Include="wwwroot\layer-v3.1.1\文档\获得layim.url" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\imgs\jiaoben6476.rar" />
+    <None Include="wwwroot\imgs\u12.svg" />
+    <None Include="wwwroot\imgs\u13.svg" />
+    <None Include="wwwroot\imgs\u17.svg" />
+    <None Include="wwwroot\imgs\u38.svg" />
+    <None Include="wwwroot\imgs\新建 Microsoft Excel 工作表.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
