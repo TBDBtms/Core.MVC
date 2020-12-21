@@ -165,5 +165,14 @@ namespace Core.MVC.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// vip条件设置
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult SetVipWhere(int id=0)
+        {
+            ViewBag.id = id;
+            return View();
+        }
     }
 }
