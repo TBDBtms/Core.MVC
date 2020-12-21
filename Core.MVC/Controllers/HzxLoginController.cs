@@ -70,9 +70,9 @@ namespace Core.MVC.Controllers
         /// 找回密码
         /// </summary>
         /// <returns></returns>
-        public IActionResult zhao(string Uname="")
+        public IActionResult zhao()
         {
-            ViewBag.Uname = Uname;
+      
 
             return View();
         }
@@ -136,6 +136,13 @@ namespace Core.MVC.Controllers
 
             ViewBag.Gid = Gid;
             return View();
+        }
+        public IActionResult Jzhospital(int Gid=0)
+        {
+
+            ViewBag.Gid = Gid;
+            return View();
+       
         }
 
 

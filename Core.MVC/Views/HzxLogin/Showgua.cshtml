@@ -12,7 +12,7 @@
 </head>
 <body>
     <div>
-        <button type="button" style="margin-left:auto" onclick="Shows()" class="layui-btn">查询</button>
+        <button type="button" style="margin-left:50px;" onclick="Shows()" class="layui-btn">查询</button>
 
         <div>
 
@@ -138,8 +138,8 @@
                         "<td style='text-align:center'>" + this.hiphone + "</td>" +
                         "<td style='text-align:center'>" + this.cname + "</td>" +
                         "<td style='text-align:center'>" + (this.xissale?"已就诊":"就诊") + "</td>" +
-                        "<td style='text - align: center'>" + (qma == "ABCD" ? "<input id='Button1' type='button' value='退号' style='background-color:lavender' onclick='Delguahao(" + this.gid + ")'/><input id='Button1' type='button' value='编辑' style='background-color:lavender' onclick='Updguahao(" + this.gid + ")' />" : qma == "A" ? "" : qma == "Yi" ? "<input id='Button1' type='button' value='退号' style='background-color:lavender' onclick='Delguahao(" + this.gid + ")'/>" : "") + "</td>" +
-                        "<td style='text - align: center'>" + (this.xissale == "0" ? "<input id='Button1' type='button' value='接诊' style='background-color:lavender' onclick='Updzhang(" + this.gid + ")'/>": "") + "</td>" +
+                        "<td style='text - align: center'>" + (qma == "ABCD" ? "<a style='color:darkslateblue;font-weight:bold' onclick='Delguahao(" + this.gid + ")'>退号</a>&nbsp;<a style='color:darkslateblue;font-weight:bold' onclick='Updguahao(" + this.gid + ")'>编辑</a>" : qma == "A" ? "" : qma == "Yi" ? "<a style='color:darkslateblue;font-weight:bold' onclick='Delguahao(" + this.gid + ")'>退号</a>" : "") + "</td>" +
+                        "<td style='text - align: center'>" + (this.xissale == "0" ? "<a style='color:darkslateblue;font-weight:bold' onclick='Updzhang(" + this.gid + ")'>接诊</a>": "") + "</td>" +
                         "</tr >");
                 });
             }
@@ -183,38 +183,12 @@
                 $(d).each(function () {
                     var str = "<option value='" + this.kid + "'>" + this.kname + "</option>";
                     $("#keshi").append(str);
-
                 });
-
             }
         });
-
     }
     function Updzhang(gid)
     {
-        if (confirm("确认修改吗？")) {
-
-            $.ajax({
-                url: "http://localhost:4965/api/Hzx_Login/Updissale?Gid=" + gid,
-                type: "post",
-                dataType: "json",
-                success: function (d) {
-                    if (d > 0) {
-                        alert("修改成功");
-                        location.reload();
-                    }
-                    else {
-                        alert("修改失败");
-
-                    }
-                }
-
-            });
-        }
-
-
-
-
-
+        location.href = "/HzxLogin/Jzhospital?Gid="+gid;
     }
 </script>
