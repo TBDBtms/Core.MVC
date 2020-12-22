@@ -318,7 +318,7 @@
             }
         });
     }
-    function  AddUser()
+    function AddUser()
     {
         var g = {};
         g.Gno = $("#Gno").val();
@@ -339,7 +339,6 @@
         g.Hcids = $("#shi").val();
         g.Haddress = $("#Haddress").val();
         g.Hremaek = $("#Hremaek").val();
-        g.Xissale = $("#xissale").prop("checked");
         $.ajax({
             url: "http://localhost:4965/api/Hzx_Login/AddGua",
             data: g,

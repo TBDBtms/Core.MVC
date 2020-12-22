@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<script src="~/js/site.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<script>
+    $(function () {
+        ShowIndex();
+    })
+    function ShowIndex() {
+        $.ajax({
+            url: "http://localhost:4965/api/JcyVIP/GetSupplierInfos",
+            dataType: "json",
+            type: "get",
+            data: { name: $("#name").val() },
+            success: function (data) {
+                $("#list").empty();
+                $(data).each(function () {
+                    var htmls = "<tr>"+
+                    "<td>序号</td>"+
+                    "<td>供应商编号</td>"+
+                    "<td>供应商名称</td>"+
+                    "<td>联系人</td>"+
+                    "<td>联系电话</td>"+
+                    "<td>创建时间</td>"+
+                    "<td>创建人员</td>"+
+                    "<td>供应商状态</td>"+
+                    "<td>操作</td></tr>";
+                    $("#list").append(htmls);
+                })
+            }
+        })
+    }
+</script>
+<div style="width:850px;height:450px;background-color:red;margin-left:450px;margin-top:50px;">
+    <div style="float:right;">
+        <input type="button" name="name" value="新增" onclick="" class="layui-btn" style="background-color:mediumslateblue" />
+    </div>
+    <hr />
+    <div>
+        <div style="width:600px;height:30px;">
+            <input type="text" id="name" value="" style="width:200px;height:30px;float:left" class="layui-input" />
+
+            <button type="button" class="layui-btn" style="background-color:mediumslateblue;float:left;height:30px;width:50px;">
+                <i class="layui-icon">&#xe615;</i>
+            </button>
+        </div>
+    </div>
+    <div></div>
+    <div>
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>供应商编号</th>
+                    <th>供应商名称</th>
+                    <th>联系人</th>
+                    <th>联系电话</th>
+                    <th>创建时间</th>
+                    <th>创建人员</th>
+                    <th>供应商状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="list">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

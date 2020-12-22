@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewData["Title"] = "ShowBinli";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+
+<html>
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div style="">
+        <table class="layui-table" style="text-align:center;margin-left:30px">
+            <thead style="background-color:lavender">
+                <tr style="background-color:lavender">
+                    <th style="text-align:center">患者姓名</th>
+                    <th style="text-align:center">患者卡号</th>
+                    <th style="text-align:center">患者年龄</th>
+                    <th style="text-align:center">患者出生日期</th>
+                    <th style="text-align:center">患者性别</th>
+                    <th style="text-align:center">患者手机号</th>
+                    <th style="text-align:center">患者身份证</th>
+                    <th style="text-align:center">接诊类型</th>
+                    <th style="text-align:center">地址</th>
+                    <th style="text-align:center">详情地址</th>
+                    <th style="text-align:center">诊断</th>
+                    <th style="text-align:center">医嘱</th>
+                </tr>
+            </thead>
+            <tbody id="tb">
+                <tr style="background-color:lavender">
+                    <td style="text-align:center">患者姓名</td>
+                    <td style="text-align:center">患者卡号</td>
+                    <td style="text-align:center">患者年龄</td>
+                    <td style="text-align:center">患者出生日期</td>
+                    <td style="text-align:center">患者性别</td>
+                    <td style="text-align:center">患者手机号</td>
+                    <td style="text-align:center">患者身份证</td>
+                    <td style="text-align:center">接诊类型</td>
+                    <td style="text-align:center">地址</td>
+                    <td style="text-align:center">详情地址</td>
+                    <td style="text-align:center">诊断</td>
+                    <td style="text-align:center">医嘱</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
+<script>
+    var form;
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        form = layui.form
+        form.render('select')
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+
+    });
+    $().ready(function () {
+
+        Shows();
+    });
+    function Shows()
+    {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetChufangs",
+            type: "get",
+            dataType: "json",
+            success: function (d)
+            {
+                $("#tb").empty();
+                $(d).each(function () {
+
+                    $("#tb").append("<tr style='background-color:lavender'>"+
+                    "<td style='text-align:center'>"+this.hname+"</td >"+
+                    "<td style='text-align:center'>"+this.hkahao+"</td>"+
+                    "<td style='text-align:center'>"+this.hage+"</td>"+
+                    "<td style='text-align:center'>"+this.hcreatetime+"</td>"+
+                    "<td style='text-align:center'>"+this.hsex+"</td>"+
+                    "<td style='text-align:center'>"+this.hiphone+"</td>"+
+                    "<td style='text-align:center'>"+this.hsfz+"</td>"+
+                    "<td style='text-align:center'>"+this.jztid+"</td>"+
+                    "<td style='text-align:center'>"+this.ccids+"</td>"+
+                    "<td style='text-align:center'>"+this.haddress+"</td>"+
+                    "<td style='text-align:center'>"+this.zduan+"</td>"+
+                    "<td style='text-align:center'>"+this.yizhu+"</td>"+
+                "</tr >");
+                });
+            }
+        });
+    }
+</script>
+

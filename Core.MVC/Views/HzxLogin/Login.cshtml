@@ -20,12 +20,12 @@
                 <input id="Uname" type="text" class="form-control" placeholder="请输入用户名...." style="width:50px">
             </div>
             @*<div class="input-group" style="margin-top:30px">
-            <span class="input-group-addon">
-                <img src="~/img/u13.svg" style="width:30px;height:30px;background-color: Transparent; border-style: none;" />
-            </span>
-            <input id="MessageText" type="text" class="form-control" style="background-color: Transparent; border-style: none;" >
-            <button type="button" class="btn btn-default" style="width:80px;color:blue;border:1px solid blue;font-size:6px" onclick="">发送验证码</button>
-        </div>*@
+                    <span class="input-group-addon">
+                        <img src="~/img/u13.svg" style="width:30px;height:30px;background-color: Transparent; border-style: none;" />
+                    </span>
+                    <input id="MessageText" type="text" class="form-control" style="background-color: Transparent; border-style: none;" >
+                    <button type="button" class="btn btn-default" style="width:80px;color:blue;border:1px solid blue;font-size:6px" onclick="">发送验证码</button>
+                </div>*@
             <div class="input-group" style="margin-top:30px">
                 <span class="input-group-addon">
                     <img src="~/imgs/u17.svg" style="width:30px;height:30px" />
@@ -164,10 +164,8 @@
     }
 </script>
 <script>
-
-   
-    function Login()
-    {
+      
+    function Login() {
         var Uname = $("#Uname").val();
         var Upass = $("#Upass").val();
         $.ajax({
@@ -177,14 +175,14 @@
             dataType: "json",
             success: function (d) {
                 if (d != null) {
-                    alert("登录成功");
+
                     //跳用户界面
                     sessionStorage.setItem("Uname", d.uname);
                     sessionStorage.setItem("Upass", d.upass);
                     sessionStorage.setItem("Qma", d.qma);
                     sessionStorage.setItem("Rname", d.rname);
                     sessionStorage.setItem("Uid", d.uid);
-                    location.href = "/ZHQ_First/Index?Qma=" + d.qma;
+                    location.href = "/ZHQ_RK/ShowKC";
 
                 }
                 else {
@@ -192,9 +190,7 @@
                     location.href = "/HzxLogin/Login";
                 }
             }
-
         })
-
     }
     function zhao() {
         var Uname = $("#Uname").val();
@@ -205,6 +201,9 @@
         location.href = "/HzxLogin/zhao?Uname=" + Uname;
 
     }
+
+
+   
 
 
 </script>

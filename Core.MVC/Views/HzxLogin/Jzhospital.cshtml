@@ -146,9 +146,14 @@
     });
     $().ready(function () {
 
-        getdan();
+
+
         getshen();
         getJtype();
+          if (@ViewBag.ma== 2)
+        {
+            getdan();
+        }
 
     });
      function getdan()
@@ -250,7 +255,7 @@
             dataType: "json",
             success: function (d) {
                 if (d > 0) {
-                    
+
                 $.ajax({
                 url: "http://localhost:4965/api/Hzx_Login/Updissale?Gid=" +@ViewBag.Gid,
                 type: "post",
