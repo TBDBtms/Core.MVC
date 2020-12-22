@@ -48,11 +48,11 @@
     <div style="height:122px;width:250px;background-color:ghostwhite;float:left;margin-left:78px;border-radius:28px">
         <div style="font-size:60px;margin-left:88px;margin-top:10px">78</div>
         <div style="margin-left:76px;color:darkgray;font-size:15px">今日挂号人数</div>
-    </div>                                                              
+    </div>
     <div style="height:122px;width:250px;background-color:ghostwhite;float:left;margin-left:78px;border-radius:28px">
         <div style="font-size:60px;margin-left:88px;margin-top:10px">32</div>
         <div style="margin-left:76px;color:darkgray;font-size:15px">近一周新增会员人数</div>
-    </div>                                                              
+    </div>
     <div style="height:122px;width:250px;background-color:ghostwhite;float:left;margin-left:78px;border-radius:28px">
         <div style="font-size:60px;margin-left:88px;margin-top:10px">3500</div>
         <div style="margin-left:76px;color:darkgray;font-size:15px">今日收费总金额</div>
@@ -61,13 +61,13 @@
 
 <div style="float:left;height:438px;width:800px;margin-top:80px;margin-left:100px">
     <div style="width:180px;margin-left:15px;">
-        <div style="border-radius:20px;background-color:gainsboro;height:25px;width:65px;float:left;margin-top:10px" align="center" onclick="ZXShow(1)" onmouseover="hg1()" onmouseout="hg2()"  id="g1">近一周</div>
+        <div style="border-radius:20px;background-color:gainsboro;height:25px;width:65px;float:left;margin-top:10px" align="center" onclick="ZXShow(1)" onmouseover="hg1()" onmouseout="hg2()" id="g1">近一周</div>
         <div style="border-radius:20px;background-color:gainsboro;height:25px;width:65px;float:left;margin-top:10px" align="center" onclick="ZXShow(2)" id="g2" onmouseover="hg3()" onmouseout="hg4()">近二周</div>
         @*<select id="sel" onchange="ZXShow()" class="layui-select">
-            <option value="0">查看近一周/近两周数据</option>
-            <option value="1">查看近一周数据</option>
-            <option value="2">查看近二周数据</option>
-        </select>*@
+                <option value="0">查看近一周/近两周数据</option>
+                <option value="1">查看近一周数据</option>
+                <option value="2">查看近二周数据</option>
+            </select>*@
     </div>
     <div style="float:left;height:400px;width:700px;" id="container2">
 
@@ -82,7 +82,7 @@
 
     $(function () {
         setTimeout(function () {
-         
+            layer.closeAll('loading');
         }, 2000);
         showYU();
         ZXShow();
@@ -91,7 +91,7 @@
         $("#g1").css("background-color", "lightcoral");
     }
     function hg2() {
-       
+
         $("#g1").css("background-color", "gainsboro");
     }
     function hg3() {
@@ -101,8 +101,8 @@
 
         $("#g2").css("background-color", "gainsboro");
     }
-    function ZXShow(d=0) {
-       
+    function ZXShow(d = 0) {
+
         var month = [];
         var renshu = [];
         if (d == 1) {

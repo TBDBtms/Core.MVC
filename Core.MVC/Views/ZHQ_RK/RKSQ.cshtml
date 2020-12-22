@@ -1,0 +1,148 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        table td {
+            width:60px;
+            height:40px
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>RKSQ</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+</head>
+<body>
+    <div style="margin-left:43px">
+        <table>
+            <tr>
+                <td>药品编号:</td>
+                <td><span id="spbh"></span></td>
+                <td>药品名称:</td>
+                <td><span id="spyname"></span></td>
+            </tr>
+            <tr>
+                <td>采购价:</td>
+                <td><span id="spncgj"></span></td>
+                <td>零售价:</td>
+                <td><span id="spnlsj"></span></td>
+            </tr>
+            <tr>
+                <td>入库类型:</td>
+                <td><span id="sprklx"></span></td>
+                <td>操作时间:</td>
+                <td><span id="sptime"></span></td>
+            </tr>
+            <tr>
+                <td>生产厂家:</td>
+                <td><span id="spcj"></span></td>
+                <td>药品单位:</td>
+                <td><span id="spdw"></span></td>
+            </tr>
+            <tr>
+                <td>图片:</td>
+                <td><span><img style="height:40px;width:40px" id="img" /></span></td>
+                <td>药品类型:</td>
+                <td><span id="splx"></span></td>
+            </tr>
+            <tr>
+                <td>规格:</td>
+                <td><span id="spgg"></span></td>
+                <td>操作人:</td>
+                <td><span id="spcname"></span></td>
+            </tr>
+            <tr>
+                <td>库存上限:</td>
+                <td><span id="spkcsx"></span></td>
+                <td>当前库存:</td>
+                <td><span id="spdqkc"></span></td>
+            </tr>
+            <tr>
+                <td>申请数量:</td>
+                <td><input type="number" id="txtnum" style="height:22px;width:111px" /></td>
+               
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td><textarea id="area" style="height:22px;width:111px"></textarea></td>
+                <td><div style="margin-left:10px"><input type="button" value="提交" class="layui-btn" id="btnTJ" /></div></td>
+            </tr>
+        </table>
+    </div>
+    
+</body>
+</html>
+<script>
+    $(function () {
+        init();
+    })
+    function TimeNow() {
+        var Time = new Date();
+        var year = Time.getFullYear();
+        var month = Time.getMonth() + 1;
+        var day = Time.getDate();
+        //var hour = Time.getHours();
+        //var minute = Time.getMinutes();
+        //var second = Time.getSeconds();
+        return shijian = year + "/" + month + "/" + day; //+ " " + hour + ":" + minute + ":" + second;
+    }
+    function init() {
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_administration/GetFirstPricing",
+            data: {id:@ViewBag.id},
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                var name = sessionStorage.getItem("Uname");
+                var time = TimeNow();
+                $("#spbh").text(d.drugBM);
+                $("#spyname").text(d.drugTYM);
+                $("#spncgj").text(d.drugCGJ);
+                $("#spnlsj").text(d.drugLSJ);
+                $("#sprklx").text("申请入库");
+                $("#sptime").text(time);
+                $("#spcj").text(d.manufacturerName);
+                $("#spdw").text(d.drugBZDW);
+                $("#img").prop("src", d.imgUrl);
+                $("#splx").text(d.drugClassName);
+                $("#spgg").text(d.drugGG);
+                $("#spcname").text(name);
+                $("#spkcsx").text(d.drugKCSX);
+                $("#spdqkc").text(d.drugKC);
+            }
+        })
+    }
+
+    $("#btnTJ").click(function () {
+        var time = TimeNow();
+        var model = {};
+        model.RKSQYPName = $("#spyname").text();
+        model.RKSQCGJ = $("#spncgj").text();
+        model.RKSQLSJ = $("#spnlsj").text();
+        model.RKSQLX = $("#splx").text();
+        model.RKSQTime = time;
+        model.RKSQImg = $("#img").prop("src");
+        model.RKSQName = $("#spcname").text();
+        model.RKSQNum = $("#txtnum").val();
+        model.RKSQDesc = $("#area").val();
+
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_RK/AddRKSQ",
+            data: model,
+            type: "post",
+            dataType: "json",
+            success: function (d) {
+                if (d > 0) {
+                    alert('提交申请成功!请等待审核!');
+                }
+            }
+        })
+    })
+</script>

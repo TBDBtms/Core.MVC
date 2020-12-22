@@ -201,14 +201,14 @@
                     dataType: "json",
                     success: function (d) {
                         if (d != null) {
-                            alert("登录成功");
+                          
                             //跳用户界面
                             sessionStorage.setItem("Uname", d.uname);
                             sessionStorage.setItem("Upass", d.upass);
                             sessionStorage.setItem("Qma", d.qma);
                             sessionStorage.setItem("Rname", d.rname);
                             sessionStorage.setItem("Uid", d.uid);
-                            location.href = "/ZHQ_First/Index";
+                            location.href = "/ZHQ_RK/ShowKC";
                             return;
                         }
                         else {
