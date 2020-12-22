@@ -137,13 +137,21 @@ namespace Core.MVC.Controllers
             ViewBag.Gid = Gid;
             return View();
         }
-        public IActionResult Jzhospital(int Gid=0)
+        public IActionResult Jzhospital(int Gid=0,int ma=0)
         {
 
             ViewBag.Gid = Gid;
+            ViewBag.ma = ma;
             return View();
        
         }
+        public IActionResult ShowBinli()
+        {
+
+            return View();
+
+        }
+
 
 
 
