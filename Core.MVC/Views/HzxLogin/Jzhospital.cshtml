@@ -261,58 +261,39 @@
     }
 
     $("#button111").click(function () {
-        if (@ViewBag.ma== 2)
-        {
-              var c = {};
-        c.Hname = $("#Hname").val();
-        c.Hkahao = $("#Hkahao").val();
-        c.Hage = $("#Hage").val();
-        c.Hcreatetime = $("#Hcreatetime").val();
-        c.Hsex = $("#Hsex").val();
-        c.Hiphone = $("#Hiphone").val();
-        c.Hsfz = $("#Hsfz").val();
-        c.Jztid = $("#jztype").val();
-        c.ccids = $("#shi").val();
-        c.Haddress = $("#Haddress").val();
-        c.Zduan = $("#Zduan").val();
-        c.Yizhu = $("#Yizhu").val();
-        $.ajax({
-            url: "http://localhost:4965/api/Hzx_Login/AddJzhospital",
-            data: c,
-            type: "post",
-            async: false,
-            dataType: "json",
-            success: function (d)
-            {
-                if (d > 0) {
-                $.ajax({
-                 url: "http://localhost:4965/api/Hzx_Login/Updissale?Gid=" +@ViewBag.Gid,
+        if (@ViewBag.ma== 2) {
+            var c = {};
+            c.Hname = $("#Hname").val();
+            c.Hkahao = $("#Hkahao").val();
+            c.Hage = $("#Hage").val();
+            c.Hcreatetime = $("#Hcreatetime").val();
+            c.Hsex = $("#Hsex").val();
+            c.Hiphone = $("#Hiphone").val();
+            c.Hsfz = $("#Hsfz").val();
+            c.Jztid = $("#jztype").val();
+            c.ccids = $("#shi").val();
+            c.Haddress = $("#Haddress").val();
+            c.Zduan = $("#Zduan").val();
+            c.Yizhu = $("#Yizhu").val();
+            $.ajax({
+                url: "http://localhost:4965/api/Hzx_Login/AddJzhospital",
+                data: c,
                 type: "post",
+                async: false,
                 dataType: "json",
-                async:false,
                 success: function (d) {
                     if (d > 0) {
                         alert("诊断成功");
-                        location.href = "/HzxLogin/Showgua";
                     }
                     else {
-                        alert("修改失败");
-
+                        alert("诊断失败");
                     }
                 }
-
-            });
-
-                }
-                else {
-                    alert("诊断失败");
-                }
-            }
-        });
-
+            })
         }
-        if (@ViewBag.ma== 3)
-        {
+    
+
+    if (@ViewBag.ma== 3) {
         var c = {};
         c.patientName = $("#Hname").val();
         c.Hkahao = $("#Hkahao").val();
@@ -334,16 +315,30 @@
             dataType: "json",
             success: function (d) {
                 if (d > 0) {
-                    alert("诊断成功");
+                    $.ajax({
+                        url: "http://localhost:4965/api/Zzh_Patient/Updaaa?Aid=" +@ViewBag.Gid ,
+                        type: "post",
+                        dataType: "json",
+                        async: false,
+                        success: function (d) {
+                            if (d > 0) {
+                                alert("修改成功");
+                                location.href = "/ZZH_Cmd/Index";
+                            }
+                            else {
+                                alert("修改失败");
 
+                            }
+                        }
+                    })
                 }
                 else {
                     alert("诊断失败");
                 }
             }
-        });
-        }
-    });
+        })
+    }
+    })
 
 
 </script>
