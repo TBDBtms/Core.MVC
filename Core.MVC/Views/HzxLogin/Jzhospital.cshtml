@@ -154,6 +154,10 @@
         {
             getdan();
         }
+          if (@ViewBag.ma== 3)
+        {
+            getdan1();
+        }
 
     });
      function getdan()
@@ -175,6 +179,27 @@
                 $("#Hsfz").val(d.hsfz);
                 $("#shi").val(d.Hcids);
                 $("#Haddress").val(d.haddress);
+            }
+        });
+    }
+     function getdan1()
+    {
+        var Gid=@ViewBag.Gid
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/ShowPatient?patientId=" + Gid,
+            type: "get",
+            dataType: "json",
+            success: function (d)
+            {
+                $("#Hname").val(d.patientName);
+                $("#Hkahao").val(d.patientCard);
+                $("#Hage").val(d.patientAge);
+                $("#Hcreatetime").val(d.patientDateBirth);
+                $("#Hsex").val(d.patientSex);
+                $("#Hiphone").val(d.patientPhone);
+                $("#Hsfz").val(d.patientpapers);
+                $("#shi").val(d.cityId);
+                $("#Haddress").val(d.patientAddress);
             }
         });
     }
@@ -255,25 +280,7 @@
             dataType: "json",
             success: function (d) {
                 if (d > 0) {
-
-                $.ajax({
-                url: "http://localhost:4965/api/Hzx_Login/Updissale?Gid=" +@ViewBag.Gid,
-                type: "post",
-                dataType: "json",
-                async:false,
-                success: function (d) {
-                    if (d > 0) {
-                        alert("修改成功");
-                        location.href = "/HzxLogin/Showgua";
-                    }
-                    else {
-                        alert("修改失败");
-
-                    }
-                }
-
-            });
-
+                    alert("诊断成功");
                 }
                 else {
                     alert("诊断失败");
