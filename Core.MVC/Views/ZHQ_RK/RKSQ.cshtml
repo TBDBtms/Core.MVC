@@ -121,6 +121,7 @@
     }
 
     $("#btnTJ").click(function () {
+        var t =@ViewBag.id;
         var time = TimeNow();
         var model = {};
         model.RKSQYPName = $("#spyname").text();
@@ -132,6 +133,7 @@
         model.RKSQName = $("#spcname").text();
         model.RKSQNum = $("#txtnum").val();
         model.RKSQDesc = $("#area").val();
+        model.tid = t;
 
         $.ajax({
             url: "http://localhost:4965/api/ZHQ_RK/AddRKSQ",
@@ -141,6 +143,8 @@
             success: function (d) {
                 if (d > 0) {
                     alert('提交申请成功!请等待审核!');
+                } else {
+                    alert('操作失败!');
                 }
             }
         })
