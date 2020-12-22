@@ -8,8 +8,9 @@ namespace Core.MVC.Controllers
 {
     public class ZHQ_FirstController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string Qma="")
         {
+            ViewBag.Qma = Qma;
             return View();
         }
 

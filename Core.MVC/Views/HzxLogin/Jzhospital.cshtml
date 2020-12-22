@@ -1,0 +1,286 @@
+﻿
+@{
+    ViewData["Title"] = "Jzhospital";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<body>
+    <div>
+        <div style="height:100px;">
+            <h2 style="font-weight:bold;margin-left:100px;margin-top:50px;float:left;color:blueviolet">添加挂号信息</h2>
+            <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:100px; float:right;margin-top:50px" onclick="location.href='/HzxLogin/Index'">返回</button>
+
+        </div>
+        <div style="height:100px;margin-top:30px">
+            <div>
+                <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">患者姓名</h3>
+                <input type="text" id="Hname" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者姓名" class="layui-input">
+                <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">患者卡号</h3>
+                <input type="text" id="Hkahao" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者卡号" class="layui-input">
+                <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">患者年龄</h3>
+                <input type="text" id="Hage" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者年龄" class="layui-input">
+                <h3 style="margin-top:50px;margin-left:80px;margin-top:40px;float:left">出生日期</h3>
+                <form class="layui-form">
+                    <div class="layui-input-inline" style="margin-left:20px;margin-top:35px;">
+                        <input type="date" id="Hcreatetime" lay-verify="date" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div style="height:100px">
+            <div>
+                <div class="layui-form-item" style="float:left;margin-left:78px;margin-top:10px;height:45px;">
+                    <form class="layui-form">
+                        <label class="layui-form-label">性别</label>
+                        <div style="width:300px;height:45px;">
+                            <div class="layui-input-block">
+                                <select name="interest" lay-filter="aihao" id="Hsex" style="height: 45px;">
+                                    <option value="true">男</option>
+                                    <option value="false">女</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div style="float:left;margin-top:10px;">
+                <h3 style="margin-top:5px;margin-left:90px;float:left;">手机号</h3>
+                <input type="text" id="Hiphone" name="title" style="width:200px;margin-left:20px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写手机号" class="layui-input">
+            </div>
+            <div style="float:left;margin-top:10px;">
+                <h3 style="margin-top:5px;margin-left:90px;float:left;">身份证</h3>
+                <input type="text" id="Hsfz" name="title" style="width:200px;margin-left:20px;float:left;height:45px;border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写身份证号" class="layui-input">
+            </div>
+            <div style="float:left;margin-top:10px;">
+                <div style="float:left">
+                    <div class="layui-form-item" style="float:left;margin-left:35px;height:50px;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">接诊类型</label>
+                            <div style="width:300px;">
+                                <div class="layui-input-block">
+                                    <select lay-verify="required" id="jztype">
+                                        <option value="0">初诊</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="height:100px;">
+            <div style="float:left">
+                <div class="layui-form-item" style="float:left;margin-left:10px">
+                    <div class="layui-form-item" style="float:left;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">省</label>
+                            <div style="width:300px;">
+                                <div class="layui-input-block">
+                                    <select lay-filter="lop" id="shen">
+                                        <option value="0"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div style="float:left">
+                <div class="layui-form-item" style="float:left;margin-left:77px">
+                    <div class="layui-form-item" style="float:left;">
+                        <form class="layui-form">
+                            <label class="layui-form-label">市</label>
+                            <div style="width:300px;">
+                                <div class="layui-input-block">
+                                    <select lay-filter=“test” id="shi">
+                                        <option value="0"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div style="float:left;margin-top:10px;margin-left:-20px">
+                <h3 style="margin-top:50px;margin-left:100px;margin-top:0px;float:left">详情地址</h3>
+                <input type="text" id="Haddress" name="title" style="width:200px;margin-left:25px;float:left;height:45px; margin-top:-10px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写患者详情地址" class="layui-input">
+            </div>
+            <div style="float:left;margin-top:10px;margin-left:-20px">
+                <h3 style="margin-top:50px;margin-left:100px;margin-top:0px;float:left">医生诊断信息</h3>
+                <input type="text" id="Zduan" name="title" style="width:200px;margin-left:25px;float:left;height:45px; margin-top:-10px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写诊断信息" class="layui-input">
+            </div>
+        </div>
+        <div style="height:100px;">
+            <div style="float:left;margin-top:10px;margin-left:-20px">
+                <h3 style="margin-top:50px;margin-left:100px;margin-top:0px;float:left">医嘱</h3>
+                <input type="text" id="Yizhu" name="title" style="width:800px;margin-left:25px;float:left;height:45px; margin-top:-10px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写医嘱信息" class="layui-input">
+            </div>
+        </div>
+        <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:100px; float:right;margin-top:50px" onclick="Addjie()">完成诊断</button>
+
+    </div>
+</body>
+<script>
+    var form;
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        form = layui.form
+        form.render('select')
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        form.on('select(lop)', function (data) {
+
+            getshi();
+        })
+    });
+    $().ready(function () {
+
+        getdan();
+        getshen();
+        getJtype();
+
+    });
+     function getdan()
+    {
+        var Gid=@ViewBag.Gid
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetX_Guahaosdan?Gid=" + Gid,
+            type: "get",
+            dataType: "json",
+            success: function (d)
+            {
+                $("#jztype").val(d.jids);
+                $("#Hname").val(d.hname);
+                $("#Hkahao").val(d.hkahao);
+                $("#Hage").val(d.hage);
+                $("#Hcreatetime").val(d.hcreatetime);
+                $("#Hsex").val(d.hsex);
+                $("#Hiphone").val(d.hiphone);
+                $("#Hsfz").val(d.hsfz);
+                $("#shi").val(d.Hcids);
+                $("#Haddress").val(d.haddress);
+            }
+        });
+    }
+    function getshi() {
+        var Mid = $("#shen").val();
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetCounties",
+            data: { Mid: Mid },
+            type: "get",
+            async: false,
+            dataType: "json",
+            success: function (d) {
+                $("#shi").empty();
+                $("#shi").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.cid + "'>" + this.cname + "</option>";
+                    $("#shi").append(str);
+                });
+                form.render('select');
+            }
+        });
+    }
+    function getshen() {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetMarkets",
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (d) {
+                $("#shen").empty();
+                $("#shen").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.mid + "'>" + this.mname + "</option>";
+                    $("#shen").append(str);
+
+                });
+
+            }
+        });
+    }
+    function getJtype()
+    {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetJZtypes",
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (d) {
+                $("#jztype").empty();
+                $("#jztype").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.jid + "'>" + this.jname + "</option>";
+                    $("#jztype").append(str);
+                });
+            }
+        });
+    }
+    function Addjie()
+    {
+        var c = {};
+        c.Hname = $("#Hname").val();
+        c.Hkahao = $("#Hkahao").val();
+        c.Hage = $("#Hage").val();
+        c.Hcreatetime = $("#Hcreatetime").val();
+        c.Hsex = $("#Hsex").val();
+        c.Hiphone = $("#Hiphone").val();
+        c.Hsfz = $("#Hsfz").val();
+        c.Jztid = $("#jztype").val();
+        c.ccids = $("#shi").val();
+        c.Haddress = $("#Haddress").val();
+        c.Zduan = $("#Zduan").val();
+        c.Yizhu = $("#Yizhu").val();
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/AddJzhospital",
+            data: c,
+            type: "post",
+            async: false,
+            dataType: "json",
+            success: function (d) {
+                if (d > 0) {
+                    
+                $.ajax({
+                url: "http://localhost:4965/api/Hzx_Login/Updissale?Gid=" +@ViewBag.Gid,
+                type: "post",
+                dataType: "json",
+                async:false,
+                success: function (d) {
+                    if (d > 0) {
+                        alert("修改成功");
+                        location.href = "/HzxLogin/Showgua";
+                    }
+                    else {
+                        alert("修改失败");
+
+                    }
+                }
+
+            });
+
+                }
+                else {
+                    alert("诊断失败");
+                }
+            }
+        });
+
+
+
+
+
+    }
+
+
+</script>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -6,17 +6,6 @@
 
   <ItemGroup>
     <None Remove="Views\ZHQ_administration\Addadministration.cshtml~RF212e3a7.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\css\D_Case.css" />
-    <None Include="wwwroot\layer-v3.1.1\layer\layer.js" />
-    <None Include="wwwroot\layer-v3.1.1\layer\mobile\layer.js" />
-    <None Include="wwwroot\layer-v3.1.1\文档\jquery下载.url" />
-    <None Include="wwwroot\layer-v3.1.1\文档\layer官网.url" />
-    <None Include="wwwroot\layer-v3.1.1\文档\layer文档.url" />
-    <None Include="wwwroot\layer-v3.1.1\文档\layui社区.url" />
-    <None Include="wwwroot\layer-v3.1.1\文档\获得layim.url" />
   </ItemGroup>
 
   <ItemGroup>
