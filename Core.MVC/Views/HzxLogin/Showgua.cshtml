@@ -180,7 +180,7 @@
             success: function (d) {
                 $("#keshi").empty();
                 $("#keshi").append("<option value='0'>请选择</option>");
-                $(d).each(function () {
+                $(d).each(function () {s
                     var str = "<option value='" + this.kid + "'>" + this.kname + "</option>";
                     $("#keshi").append(str);
                 });
@@ -189,6 +189,6 @@
     }
     function Updzhang(gid)
     {
-        location.href = "/HzxLogin/Jzhospital?Gid="+gid;
+        location.href = "/HzxLogin/Jzhospital?Gid="+gid+"&ma="+2;
     }
 </script>
