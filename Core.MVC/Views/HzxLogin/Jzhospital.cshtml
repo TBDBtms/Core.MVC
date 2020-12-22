@@ -219,6 +219,7 @@
                     var str = "<option value='" + this.cid + "'>" + this.cname + "</option>";
                     $("#shi").append(str);
                 });
+
                 form.render('select');
             }
         });
@@ -290,7 +291,7 @@
                 async:false,
                 success: function (d) {
                     if (d > 0) {
-                        alert("修改成功");
+                        alert("诊断成功");
                         location.href = "/HzxLogin/Showgua";
                     }
                     else {
@@ -307,9 +308,6 @@
                 }
             }
         });
-
-
-
 
         }
         if (@ViewBag.ma== 3)
@@ -335,23 +333,7 @@
             dataType: "json",
             success: function (d) {
                 if (d > 0) {
-                $.ajax({
-                url: "http://localhost:4965/api/Hzx_Login/Updissale?Gid=" +@ViewBag.Gid,
-                type: "post",
-                dataType: "json",
-                async:false,
-                success: function (d) {
-                    if (d > 0) {
-                        alert("修改成功");
-                        location.href = "/Zzh_Patient/";
-                    }
-                    else {
-                        alert("修改失败");
-
-                    }
-                }
-
-            });
+                    alert("诊断成功");
 
                 }
                 else {
@@ -359,14 +341,7 @@
                 }
             }
         });
-
-
-
-
-
         }
-
-
     });
 
 
