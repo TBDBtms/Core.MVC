@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewData["Title"] = "UpdZF";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+
+<script src="~/js/site.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
+<script>
+    function UpdZF() {
+        var htmls = {};
+        var str;
+        htmls.CashId = $("[name=chk]:checked").val();
+        htmls.AlipayId = $("[name=chks]:checked").val();
+        htmls.WeChatId = $("[name=ck]:checked").val();
+        htmls.BankcardId = $("[name=cs]:checked").val();
+        htmls.ClubCardId = $("[name=cd]:checked").val();
+        htmls.Suspends = $("[name=cv]:checked").val();
+        htmls.CashId.val() == 1 ? 1 : 0;
+        htmls.AlipayId.val() == 1 ? 1 : 0;
+        htmls.WeChatId.val() == 1 ? 1 : 0;
+        htmls.BankcardId.val() == 1 ? 1 : 0;
+        htmls.ClubCardId.val() == 1 ? 1 : 0;
+        htmls.Suspends.val() == 1 ? 1 : 0;
+        if ($("[name=chk]").click()) {
+            str = htmls.CashId;
+        }
+        if ($("[name=chks]").click()) {
+            str = htmls.AlipayId;
+        }
+        if ($("[name=ck]").click()) {
+            str = htmls.WeChatId;
+        }
+        if ($("[name=cs]").click()) {
+            str = htmls.BankcardId;
+        }
+        if ($("[name=cd]").click()) {
+            str = htmls.ClubCardId;
+        }
+        if ($("[name=cv]").click()) {
+            str = htmls.Suspends;
+        }
+        $.ajax({
+            url: "http://localhost:4965/api/JcyVIP/UpdZF",
+            dataType: "json",
+            type: "post",
+            data: str,
+            success: function (data) {
+                if (data > 0) {
+                    alert("设置成功");
+                } else {
+                    alert('设置出错');
+                }
+            }
+        })
+    }
+</script>
+<h3>支付方式设置</h3><br />
+<div style="width: 1080px; height:800px;margin-left:50px;">
+    <div style="width:1080px;height:100px;">
+        <div style="float:left">
+            <img src="~/ZFFSImg/xianjin.png" />
+        </div>
+        <div style="float:left">
+            <div>现金支付</div>
+            <div style="float:left">用户可以使用现金付款</div>
+        </div>
+        <div style="float:right">
+            <input type="checkbox" name="chk" value="1" onclick="UpdZF()" checked/>
+        </div>
+    </div>
+    <div style="width:1080px;height:90px;">
+        <div style="float:left">
+            <img src="~/ZFFSImg/zhifubao.png" />
+        </div>
+        <div style="float:left">
+            <div>支付宝支付</div>
+            <div>用户可以使用支付宝付款</div>
+        </div>
+        <div style="float:right">
+            <input type="checkbox" name="chks" value="1"  onclick="UpdZF()" checked/>
+        </div>
+    </div>
+    <div style="width:1080px;height:90px;">
+        <div style="float:left">
+            <img src="~/ZFFSImg/weixin.png" />
+        </div>
+        <div style="float:left">
+            <div>微信支付</div>
+            <div>用户可以使用微信付款</div>
+        </div>
+        <div style="float:right">
+            <input type="checkbox" name="ck" value="1" onclick="UpdZF()"  checked/>
+        </div>
+    </div>
+    <div style="width:1080px;height:90px;">
+        <div style="float:left">
+            <img src="~/ZFFSImg/yinhangka.png" />
+        </div>
+        <div style="float:left">
+            <div>银行卡</div>
+            <div>用户可以使用银行卡付款</div>
+        </div>
+        <div style="float:right">
+            <input type="checkbox" name="cs" value="1"  onclick="UpdZF()" checked/>
+        </div>
+    </div>
+    <div style="width:1080px;height:90px;">
+        <div style="float:left">
+            <img src="~/ZFFSImg/huiyuanka.png" />
+        </div>
+        <div style="float:left">
+            <div>会员卡支付</div>
+            <div>用户可以使用会员卡付款</div>
+        </div>
+        <div style="float:right">
+            <input type="checkbox" name="cd" value="1" onclick="UpdZF()" checked/>
+        </div>
+    </div>
+    <div style="width:1080px;height:90px;">
+        <div style="float:left">
+            <img src="~/ZFFSImg/guazhang.png" />
+        </div>
+        <div style="float:left">
+            <div>挂账</div>
+            <div>用户可以挂账后会员卡扣款或下次一起支付</div>
+        </div>
+        <div style="float:right">
+            <input type="checkbox" name="cv" value="1" onclick="UpdZF()" checked/>
+        </div>
+    </div>
+</div>
