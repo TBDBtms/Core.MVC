@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewData["Title"] = "ShowKC";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+<div style="width:209px;float:left;margin-top:15px">
+    <input type="text" id="txtName" placeholder="请输入药品名称/药品编号" class="layui-input" />
+</div>
+<div style="width:77px;float:left;margin-top:15px">
+    <input type="button" value="查询" id="btnCX" class="layui-btn" />
+</div>
+<style>
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+<table class="layui-table" style="text-align:center">
+    <tr style="background-color:lavender">
+        <th>编号</th>
+        <th>药品编码</th>
+        <th>药品名称</th>
+        <th>图片</th>
+        <th>药品类型</th>
+        <th>药品规格</th>
+        <th>生产厂家</th>
+        <th>采购价</th>
+        <th>零售价</th>
+        <th>库存上限</th>
+        <th>库存下线</th>
+        <th>现库存</th>
+        <th>操作</th>
+    </tr>
+    <tbody id="tb">
+    </tbody>
+</table>
+<div align="center" style="float:left;margin-left:31px">
+    <button type="button" style="margin-left:auto" id="SY" class="layui-btn">首页</button>
+    <button type="button" style="margin-left:auto" id="SXY" class="layui-btn">上一页</button>
+    <button type="button" style="margin-left:auto" onclick="XXY()" class="layui-btn">下一页</button>
+    <button type="button" style="margin-left:auto" id="WY" class="layui-btn">尾页</button>
+    当前页/总页数:<span style="color:blue" id="sp"></span>
+
+</div>
+<script>
+    var pageindex = 1;
+    var pagesize = 10;
+    var count = 0;  //总条数
+    var pagecount = 0;  //总页数
+    $(function () {
+        LoadTable();
+    })
+    $("#btnCX").click(function () {
+        pageindex = 1;
+        LoadTable();
+
+    })
+
+    $("#SXY").click(function () {
+        if (pageindex == 1) {
+            alert('已经是第一页');
+            return;
+        }
+        pageindex = pageindex - 1;
+        $("#sp").text(pageindex);
+        LoadTable();
+    })
+
+    $("#SY").click(function () {
+        pageindex = 1;
+        $("#sp").text(pageindex);
+        LoadTable();
+    })
+    $("#WY").click(function () {
+        pageindex = pagecount;
+        $("#sp").text(pageindex);
+        LoadTable();
+    })
+    function XXY() {
+        if (pageindex == pagecount) {
+            alert('已经是最后一页');
+            return;
+        }
+        pageindex = pageindex + 1;
+        $("#sp").text(pageindex);
+        LoadTable();
+    }
+    function LoadTable() {
+        var name = $("#txtName").val();
+        var i = 1;
+        var js = sessionStorage.getItem("Rname");
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_administration/Getadministration",
+            data: { name: name, pageindex: pageindex, pagesize: pagesize },
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $("#tb").empty();
+                $(d.pageList).each(function () {
+                    var cz;
+                    if (js == "药品负责人") {
+                      
+                        if (this.drugKC <= this.drugKCXX) {
+                            cz = "<span><a href='#' style='color:blue' id='" + this.drugId + "' class='sq'>申请提货</a></span>"
+                        } else {
+                            cz = "<span><a href='#'>暂无操作</a></span>"
+                        }
+                    } else {
+                        cz = "<span><a href='#'>暂无操作</a></span>"
+                    }
+                    var str = "<tr>" +
+                        "<td>" + i + "</td>" +
+                        "<td>" + this.drugBM + "</td>" +
+                        "<td>" + this.drugTYM + "</td>" +
+                        "<td><img src='" + this.imgUrl + "' style='width:60px;height:40px'/></td>" +
+                        "<td>" + this.drugClassName + "</td>" +
+                        "<td>" + this.drugGG + "</td>" +
+                        "<td>" + this.manufacturerName + "</td>" +
+                        "<td style='color:blue'>" + this.drugCGJ + "</td>" +
+                        "<td style='color:green'>" + this.drugLSJ + "</td>" +
+                        "<td style='color:green'>" + this.drugKCSX + "</td>" +
+                        "<td style='color:red'>" + this.drugKCXX + "</td>" +
+                        "<td>" + this.drugKC + "</td>" +
+                        "<td>" + cz + "</td>" +
+                        "</tr>";
+                    $("#tb").append(str);
+                    i++;
+                });
+                count = d.countnum;  //总条数
+                pagecount = Math.ceil(count * 1.0 / pagesize); //总页数
+                $("#sp").text(pageindex + "/" + pagecount);
+            
+
+            }
+        })
+    }
+    $(document).on('click', '.sq', function () {
+        layer.open({
+            type: 2,
+            area: ['400px', '500px'],
+            shadeClose: true, //点击遮罩关闭
+            content: '/ZHQ_RK/RKSQ?id=' + this.id,
+        });
+    });
+</script>
+

@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewData["Title"] = "PrincShow";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+<link href="~/css/D_Case.css" rel="stylesheet" />
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div id="divBig">
+    <div id="div1">
+        <div class="layui-input-block" style="width:300px;float:left;margin-top: 50px;">
+            <input onclick="CX()" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="过往病例信息" class="layui-input">
+        </div>
+        <div class="layui-input-block" style="width:300px;float:right;margin-top: 50px;margin-right:50px" id="pc">
+            <button id="but_Add" class="layui-btn" type="button">
+                <i class="layui-icon">&#xe608;</i> 添加
+            </button>
+        </div>
+    </div>
+    <hr />
+    <div id="div2">
+        <table class="layui-table" lay-skin="line">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+                <tr style="background-color:#C2C5F6">
+                    <th>序号</th>
+                    <th>过往病例</th>
+                    <th>创建时间</th>
+                    <th>创建人</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="tbody_td">
+            </tbody>
+        </table>
+    </div>
+    <div id="div3">
+        <div align="center" style="float:left;margin-left:640px">
+            <button type="button" style="margin-left:auto" id="SY" class="layui-btn">首页</button>
+            <button type="button" style="margin-left:auto" id="SXY" class="layui-btn">上一页</button>
+            <button type="button" style="margin-left:auto" onclick="XXY()" class="layui-btn">下一页</button>
+            <button type="button" style="margin-left:auto" id="WY" class="layui-btn">尾页</button>
+            当前页/总页数:<span style="color:blue" id="sp"></span>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var pageindex = 1;
+    var pagesize = 10;
+    var count = 0;  //总条数
+    var pagecount = 0;  //总页数
+
+    $("#btnCX").click(function () {
+        Show();
+    })
+
+    $("#SXY").click(function () {
+        if (pageindex == 1) {
+            alert('已经是第一页');
+            return;
+        }
+        pageindex = pageindex - 1;
+        $("#sp").text(pageindex);
+        Show();
+    })
+
+    $("#SY").click(function () {
+        pageindex = 1;
+        $("#sp").text(pageindex);
+        Show();
+    })
+    $("#WY").click(function () {
+        pageindex = pagecount;
+        $("#sp").text(pageindex);
+        Show();
+    })
+    function XXY() {
+        if (pageindex == pagecount) {
+            alert('已经是最后一页');
+            return;
+        }
+        pageindex = pageindex + 1;
+        $("#sp").text(pageindex);
+        Show();
+    }
+
+
+    var form;
+    $().ready(function () {
+        Show();
+    });
+
+    
+
+    function Show() {
+        var i = 1;
+        $.ajax({
+            url: "http://localhost:4965/api/DLH_Princ/GetDate",
+            type: "get",
+            dataType: "json",
+            data: { name: name, pageindex: pageindex, pagesize: pagesize },
+            success: function (d) {
+                console.log(d);
+                $("#tbody_td").empty();
+                $(d).each(function () {
+                    var str = "<tr>" +
+                        "<td>" + i + "</td>" +
+                        "<td>" + this.pastName + "</td>" +
+                        "<td>" + this.time + "</td>" +
+                        "<td>" + this.uname + "</td>" +
+                        "<td><a style='color:blue' onclick='DelCase(" + this.pastId +")'>删除</a></td>" +
+                        "</tr>";
+                    $("#tbody_td").append(str);
+                    i++;
+                });
+                count = d.countnum;  //总条数
+                pagecount = Math.ceil(count * 1.0 / pagesize); //总页数
+                $("#sp").text(pageindex + "/" + pagecount);
+            }
+        });
+    }
+    //function DelCase(id) {
+    //    if (confirm("确认删除吗?")) {
+    //        $.ajax({
+    //            url: "http://localhost:4965/api/DLH_Princ/DeletePrinc?cid=" + id,0
+    //            type: "post",
+    //            dataType: "json",
+    //            success: function (d) {
+    //                if (d > 0) {
+    //                    alert("删除成功");
+    //                    Show();
+    //                } else {
+    //                    alert("删除失败");
+    //                }
+    //            }
+    //        });
+    //    }
+    //}
+
+
+
+</script>
+
+

@@ -84,6 +84,7 @@
 </div>              
 <script>
     var form;
+    
     var laydate;
     $(function () {
         layui.use('form', function () {
@@ -106,6 +107,7 @@
 
         });
         ShowVIPType();
+        ShowPatient();
     })
     //会员下拉
     function ShowVIPType() {
@@ -120,9 +122,6 @@
                     form.render('select');
                     console.log(d);
                 });
-            },
-            complete: function () {
-                ShowPatient();
             }
         })
     }
@@ -140,11 +139,12 @@
         if ($("#VIPgrade").val()!=0) {
             id=$("#VIPgrade").val();
         }
-        
+        var sdate = $("#sTime").val();
+        var edate = $("#eTime").val();
         $.ajax({
             url: "http://localhost:4965/api/Zzh_Patient/GetPatients",
             type: "get",
-            data: { name: name, id:id },
+            data: { name: name, id: id, sdate: sdate, edate: edate },
             dataType: "json",
             success: function (d) {
                 $("#GetPat").empty();
@@ -157,15 +157,30 @@
                         "<td>" + this.patientAge + "</td>" +
                         "<td>" + this.patientPhone + "</td>" +
                         "<td style='color:orange'>" + this.memberTypeName + "</td>" +
-                        "<td>" + this.createTime + "</td>" +
+                        "<td>" + this.aaa + "</td>" +
                         "<td>" + this.caoZuoRenName + "</td>" +
-                        "<td><a href=''  style='margin-left:10px' onclick=''>接诊</a><a style='margin-left:15px' onclick='Update(" + this.patientId+")'>编辑</a><a href='' style='margin-left:15px' onclick=''>设置会员</a><a href='' style='margin-left:15px' onclick='Del(" + this.patientId + ")'>删除</a></td></tr>";
+                        "<td><a href=''  style='margin-left:10px' onclick=''>接诊</a><a style='margin-left:15px' onclick='Update(" + this.patientId + ")'>编辑</a><a class='pc' style='margin-left:15px' id='" + this.patientId+"'>设置会员</a><a href='' style='margin-left:15px' onclick='Del(" + this.patientId + ")'>删除</a></td></tr>";
                     $("#GetPat").append(str);
                     console.log(d);
                 });
             }
         });
     }
+    $(document).on('click', '.pc', function () {
+        layer.open({
+            type: 2,
+            title: false,
+            closeBtn: 1, //不显示关闭按钮
+            shade: [0],
+            area: ['400', '300px'],
+            anim: 2,
+            content: ['/Zzh_Patient/HuiYuan?id='+ this.id, 'no'], //iframe的url，no代表不显示滚动条
+            cancel: function (index, layero) {
+                ShowPatient();
+            }
+
+        });
+    });
     //删除
     function Del(id) {
         confirm("确定要删除吗?")

@@ -9,7 +9,7 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-</head>
+</head>     
 <body>
     <div>
         <div >
@@ -28,7 +28,8 @@
             <input type="text" name="title" id="txt_name" required lay-verify="required" placeholder="请输入员工姓名" autocomplete="off" class="layui-input" onchange="Shows()">
         </div>
         <div>
-            <button type="button" style="margin-left:auto" onclick="Shows()" class="layui-btn">&#xe615;</button>
+       
+            <button type="button" style="margin-left:auto" onclick="Shows()" class="layui-btn" >查询</button>
 
         </div>
 
@@ -38,6 +39,7 @@
             
             <thead style="background-color:lavender" >
                 <tr style="background-color:lavender">
+                  
                     <th style="text-align:center">员工编号</th>
                     <th style="text-align:center">员工姓名</th>
                     <th style="text-align:center">员工性别</th>
@@ -64,19 +66,28 @@
 </body>
 </html>
 <script>
+    
     var name = sessionStorage.getItem("Uname");
     var Qma = sessionStorage.getItem("Qma");
     var form;
+    layui.use('form', function () {
+        form = layui.form;
+       form.render('select');
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+
     $().ready(function () {
         //显示
         Shows();
         keshi();
-
-
-
     });
     function keshi()
     {
+        
         $.ajax({
             url: "http://localhost:4965/api/Hzx_Login/GetKeshis",
             type: "get",
@@ -88,18 +99,14 @@
                 $(d).each(function () {
                     var str = "<option value='"+ this.kid + "'>" + this.kname + "</option>";
                     $("#keshi").append(str);
-
                 });
-
-                form.render('select');
-
-
             }
         });
-
+        
     }
     function Shows()
     {
+        
 
         var Uname = $("#txt_name").val();
         var kid = $("#keshi").val();
@@ -130,12 +137,14 @@
                 "<td style='text - align: center'>"+this.uxue+"</td>"+
                 "<td style='text - align: center'>"+this.cname+"</td>"+
                 "<td style='text - align: center'>" + this.qremark + "</td>" +
-                        "<td style='text - align: center'>" + (qma == "ABCD" ? "<input id='Button1' type='button' value='删除' style='background-color:lavender' onclick='DelUser(" + this.uid + ")'/><input id='Button1' type='button' value='修改' style='background-color:lavender' onclick='UpdUser(" + this.uid + ")' />" : qma == "A" ? "" : qma == "Yi" ? "<input id='Button1' type='button' value='删除' style='background-color:lavender' onclick='DelUser(" + this.uid + ")'/>":"") + "</td>" +
+                        "<td style='text - align: center'>" + (qma == "ABCD" ? "<a style='color:darkslateblue;font-weight:bold' onclick='DelUser(" + this.uid + ")'>删除</a>&nbsp;<a style='color:darkslateblue;font-weight:bold' onclick='UpdUser(" + this.uid + ")'>修改</a>" : qma == "A" ? "" : qma == "Yi" ? "<a style='color:darkslateblue;font-weight:bold' onclick='DelUser(" + this.uid + ")'>删除</a>":"") + "</td>" +
             "</tr>");
                 });
             }
         });
+        
     }
+    
     function DelUser(uid)
     {
         if (confirm("确认删除吗？")) {
@@ -163,16 +172,7 @@
         }
     }
 
-    //Demo
-    layui.use('form', function () {
-        form = layui.form;
-
-        //监听提交
-        form.on('submit(formDemo)', function (data) {
-            layer.msg(JSON.stringify(data.field));
-            return false;
-        });
-    });
+    
     function UpdUser(uid)
     {
         location.href = "/HzxLogin/UpdUser?Uid=" + uid;
