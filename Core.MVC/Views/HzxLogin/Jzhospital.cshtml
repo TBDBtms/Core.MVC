@@ -282,10 +282,11 @@
             type: "post",
             async: false,
             dataType: "json",
-            success: function (d) {
+            success: function (d)
+            {
                 if (d > 0) {
                 $.ajax({
-                    url: "http://localhost:4965/api/Zzh_Patient/Updaaa?Aid=" +@ViewBag.Gid,
+                 url: "http://localhost:4965/api/Hzx_Login/Updissale?Gid=" +@ViewBag.Gid,
                 type: "post",
                 dataType: "json",
                 async:false,
@@ -312,7 +313,7 @@
         }
         if (@ViewBag.ma== 3)
         {
-              var c = {};
+        var c = {};
         c.patientName = $("#Hname").val();
         c.Hkahao = $("#Hkahao").val();
         c.Hage = $("#Hage").val();
