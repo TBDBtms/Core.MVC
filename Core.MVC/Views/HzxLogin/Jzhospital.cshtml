@@ -8,8 +8,7 @@
 <body>
     <div>
         <div style="height:100px;">
-            <h2 style="font-weight:bold;margin-left:100px;margin-top:50px;float:left;color:blueviolet">添加挂号信息</h2>
-            <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:100px; float:right;margin-top:50px" onclick="location.href='/HzxLogin/Index'">返回</button>
+            <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:100px; float:right;margin-top:50px" onclick="location.href='/HzxLogin/Showgua'">返回</button>
 
         </div>
         <div style="height:100px;margin-top:30px">
@@ -118,7 +117,7 @@
                 <input type="text" id="Yizhu" name="title" style="width:800px;margin-left:25px;float:left;height:45px; margin-top:-10px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写医嘱信息" class="layui-input">
             </div>
         </div>
-        <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:100px; float:right;margin-top:50px" onclick="Addjie()">完成诊断</button>
+        <button type="button" id="button111" class="layui-btn" style="width:100px;height:45px;margin-right:100px; float:right;margin-top:50px" onclick="Addjie()">完成诊断</button>
 
     </div>
 </body>
@@ -154,8 +153,14 @@
         {
             getdan();
         }
+          if (@ViewBag.ma== 3)
+        {
+            getdan1();
+        }
+
 
     });
+
      function getdan()
     {
         var Gid=@ViewBag.Gid
@@ -175,6 +180,27 @@
                 $("#Hsfz").val(d.hsfz);
                 $("#shi").val(d.Hcids);
                 $("#Haddress").val(d.haddress);
+            }
+        });
+    }
+     function getdan1()
+    {
+        var Gid=@ViewBag.Gid
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/ShowPatient?patientId=" + Gid,
+            type: "get",
+            dataType: "json",
+            success: function (d)
+            {
+                $("#Hname").val(d.patientName);
+                $("#Hkahao").val(d.patientCard);
+                $("#Hage").val(d.patientAge);
+                $("#Hcreatetime").val(d.patientDateBirth);
+                $("#Hsex").val(d.patientSex);
+                $("#Hiphone").val(d.patientPhone);
+                $("#Hsfz").val(d.patientpapers);
+                $("#shi").val(d.cityId);
+                $("#Haddress").val(d.patientAddress);
             }
         });
     }
@@ -232,9 +258,11 @@
             }
         });
     }
-    function Addjie()
-    {
-        var c = {};
+
+    $("#button111").click(function () {
+        if (@ViewBag.ma== 2)
+        {
+              var c = {};
         c.Hname = $("#Hname").val();
         c.Hkahao = $("#Hkahao").val();
         c.Hage = $("#Hage").val();
@@ -255,7 +283,6 @@
             dataType: "json",
             success: function (d) {
                 if (d > 0) {
-
                 $.ajax({
                 url: "http://localhost:4965/api/Hzx_Login/Updissale?Gid=" +@ViewBag.Gid,
                 type: "post",
@@ -284,8 +311,63 @@
 
 
 
+        }
+        if (@ViewBag.ma== 3)
+        {
+              var c = {};
+        c.Hname = $("#Hname").val();
+        c.Hkahao = $("#Hkahao").val();
+        c.Hage = $("#Hage").val();
+        c.Hcreatetime = $("#Hcreatetime").val();
+        c.Hsex = $("#Hsex").val();
+        c.Hiphone = $("#Hiphone").val();
+        c.Hsfz = $("#Hsfz").val();
+        c.Jztid = $("#jztype").val();
+        c.ccids = $("#shi").val();
+        c.Haddress = $("#Haddress").val();
+        c.Zduan = $("#Zduan").val();
+        c.Yizhu = $("#Yizhu").val();
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/AddJzhospital",
+            data: c,
+            type: "post",
+            async: false,
+            dataType: "json",
+            success: function (d) {
+                if (d > 0) {
+                $.ajax({
+                url: "http://localhost:4965/api/Hzx_Login/Updissale?Gid=" +@ViewBag.Gid,
+                type: "post",
+                dataType: "json",
+                async:false,
+                success: function (d) {
+                    if (d > 0) {
+                        alert("修改成功");
+                        location.href = "/Zzh_Patient/";
+                    }
+                    else {
+                        alert("修改失败");
 
-    }
+                    }
+                }
+
+            });
+
+                }
+                else {
+                    alert("诊断失败");
+                }
+            }
+        });
+
+
+
+
+
+        }
+
+
+    });
 
 
 </script>

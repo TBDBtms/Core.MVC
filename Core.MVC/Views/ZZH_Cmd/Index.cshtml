@@ -203,7 +203,7 @@
                         "</div>" +
                         "<div>" +
                         "<div style='float:left;width:50px;height:50px;margin-left:26px'>" +
-                        "<button type='button' class='layui-btn' style='width:150px;height:50px;background-color:brown'>接诊" +
+                        "<button type='button' class='layui-btn' style='width:150px;height:50px;background-color:brown' onclick='Updzhang(" + this.patientId + ")' >接诊" +
                         "</button>" +
                         "</div>" +
                         "<div style='float:left;width:50px;height:50px;margin-left:140px'>" +
@@ -216,5 +216,8 @@
                 })
             }
         })
+    }
+    function Updzhang(gid) {
+        location.href = "/HzxLogin/Jzhospital?Gid=" + gid + "&ma=" + 3;
     }
 </script>
