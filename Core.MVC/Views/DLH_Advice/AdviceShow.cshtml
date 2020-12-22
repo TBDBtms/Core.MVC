@@ -10,7 +10,10 @@
 <div id="divBig">
     <div id="div1">
         <div class="layui-input-block" style="width:300px;float:left;margin-top: 50px;">
-            <input onclick="CX()" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="医嘱信息" class="layui-input">
+            <input id="shuru" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="医嘱信息" class="layui-input">  
+        </div>
+        <div class="layui-input-block" style="width:300px;float:left;margin-top: 50px;margin-left:0px">
+            <button type="button" class="layui-btn layui-btn-normal" onclick="CX()" style="float:left">查询</button>
         </div>
         <div class="layui-input-block" style="width:300px;float:right;margin-top: 50px;margin-right:50px" id="pc">
             <button id="but_Add" class="layui-btn" type="button">
@@ -98,6 +101,11 @@
         Show();
     });
 
+    function CX() {
+        Show();
+    }
+
+
     $(document).on('click', '#pc', function () {
         layer.open({
             type: 2,
@@ -140,6 +148,7 @@
 
 
     function Show() {
+        var name = $("#shuru").val();
         var i = 1;
         $.ajax({
             url: "http://localhost:4965/api/DLH_Advice/GetAdvice",
