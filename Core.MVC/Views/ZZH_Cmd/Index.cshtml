@@ -32,20 +32,7 @@
         </div>
     </div>
 </div>
-<div style="float:left;">
-    <form class="layui-form">
-        <div class="layui-form-item" style="float:left">
-            <label class="layui-form-label">接诊状态</label>
-            <div style="width:300px">
-                <div class="layui-input-block">
-                    <select lay-filter="aihao" id="txt_PState">
-                        <option value="0">全部</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
+
 <div>
     <div class="layui-input-block" style="width:300px;float:left">
         <input type="text" id="aaa" placeholder="请输入患者信息" class="layui-input" />
@@ -122,22 +109,7 @@
             }
         })
     }
-    function State() {
-        $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/GetPatientState",
-            type: "get",
-            dataType: "json",
-            success: function (d) {
-                $(d).each(function () {
-                    var html = "<option value='" + this.patientStateId + "'>" + this.patientStateName + "</option>";
-                    $("#txt_PState").append(html);
-                    form.render('select');
-                });
 
-            }
-
-        })
-    }
     function aaa() {
         $.ajax({
             url: "http://localhost:4965/api/Zzh_Patient/GetDepartment",
@@ -159,12 +131,11 @@
     }
     function ShowPatients() {
         var img;
-        var id = $("#txt_PState").val();
         var name = $("#aaa").val();
         var sdate = $("#sTime").val();
         var edate = $("#eTime").val();
         $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/GetPatients?pid=" + id + "&name=" + name + "&sdate=" + sdate + "&edate=" + edate,
+            url: "http://localhost:4965/api/Zzh_Patient/GetPatients?name="+ name + "&sdate=" + sdate + "&edate=" + edate,
             type: "get",
             dataType: "json",
             success: function (d) {
@@ -184,7 +155,7 @@
                         "<span style='font-size:10px;color:orange'>" + this.memberTypeName + "</span>&nbsp;&nbsp;&nbsp;&nbsp;" +
                         "<span style='font-size:15px;'>" + (this.patientSex ? "男" : "女") + "</span>&nbsp;" +
                         "<span style='font-size:15px;'>" + this.patientAge + "</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-                        "<span style='font-size: 20px;'>" + this.patientStateName + "</span>" +
+                        "<span style='font-size: 20px;'>" + (this.patientStateId?"已就诊":"未就诊") + "</span>" +
                         "</div>" +
                         "<div style='margin-left:120px;margin-top:20px'>" +
                         "<span style='font- size:15px; '>创建时间:" + this.aaa + "</span>" +
@@ -217,7 +188,7 @@
             }
         })
     }
-    function Updzhang(gid) {
-        location.href = "/HzxLogin/Jzhospital?Gid=" + gid + "&ma=" + 3;
+    function Updzhang(patientId) {
+        location.href = "/HzxLogin/Jzhospital?Gid=" + patientId + "&ma=" + 3;
     }
 </script>

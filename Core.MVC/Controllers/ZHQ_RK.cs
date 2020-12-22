@@ -21,5 +21,10 @@ namespace Core.MVC.Controllers
             ViewBag.id=id;
             return View();
         }
+        public IActionResult RK()
+        {
+            
+            return View();
+        }
     }
 }

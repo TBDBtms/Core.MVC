@@ -21,23 +21,42 @@
             success: function (data) {
                 $("#list").empty();
                 $(data).each(function () {
-                    var htmls = "<tr>"+
-                    "<td>序号</td>"+
-                    "<td>供应商编号</td>"+
-                    "<td>供应商名称</td>"+
-                    "<td>联系人</td>"+
-                    "<td>联系电话</td>"+
-                    "<td>创建时间</td>"+
-                    "<td>创建人员</td>"+
-                    "<td>供应商状态</td>"+
-                    "<td>操作</td></tr>";
+                    var htmls = "<tr>" +
+                        "<td>" + this.id + "</td>" +
+                        "<td>" + this.supGIS+"</td>" +
+                        "<td>" + this.supName + "</td>" +
+                        "<td>" + this.linkMan + "</td>" +
+                        "<td>" + this.linkPhone+"</td>" +
+                        "<td>" + this.cTimes+"</td>" +
+                        "<td>" + this.cMan + "</td>" +
+                        "<td>" + (this.supState == 1 ? "启用" : "禁用") + "</td>" +
+                        "<td><a href='#' onclick='Upd(" + this.id + ")' style='color: darkslateblue;'>编辑</a>&nbsp;<a href='#' onclick='Del(" + this.id + ")' style='color: darkslateblue;'>删除</a></td></tr>";
                     $("#list").append(htmls);
                 })
             }
         })
     }
+    function Upd(id) {
+        location.href = '/JcyGYS/FindbyId?id=' + id;
+    }
+    function Del(id) {
+        $.ajax({
+            url: "http://localhost:4965/api/JcyVIP/Del",
+            dataType: "json",
+            type: "post",
+            data: { id: id },
+            success: function (d) {
+                if (d > 0) {
+                    alert('删除成功');
+                    location.reload();
+                } else {
+                    alert('删除失败')
+                }
+            }
+        })
+    }
 </script>
-<div style="width:850px;height:450px;background-color:red;margin-left:450px;margin-top:50px;">
+<div style="width:950px;height:450px;margin-left:400px;margin-top:50px;">
     <div style="float:right;">
         <input type="button" name="name" value="新增" onclick="" class="layui-btn" style="background-color:mediumslateblue" />
     </div>
@@ -55,7 +74,7 @@
     <div>
         <table class="layui-table">
             <thead>
-                <tr>
+                <tr style="background-color: lavender;">
                     <th>序号</th>
                     <th>供应商编号</th>
                     <th>供应商名称</th>
@@ -68,7 +87,6 @@
                 </tr>
             </thead>
             <tbody id="list">
-
             </tbody>
         </table>
     </div>
