@@ -38,6 +38,7 @@
             type: "get",
             dataType: "json",
             success: function (d) {
+                $("#tb").empty();
                 $(d).each(function () {
                     if (js == "入库员" && this.rksqState == 1) {
                         var str = "<tr>" +
@@ -51,7 +52,7 @@
                             "<td>" + this.rksqlsj + "</td>" +
                             "<td>" + this.rksqName + "</td>" +
                             "<td>" + this.rksqDesc + "</td>" +
-                            "<td><a style='color:blue' href='#' onclick='SQTG(" + this.rksqId + ",2)'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue'>拒绝</a></td>" +
+                            "<td><a style='color:blue' href='#' onclick='SQTG(" + this.rksqId + ",2)'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue' onclick='JUJ(" + this.rksqId + ")'>拒绝</a></td>" +
                             "</tr>";
                         $("#tb").append(str);
                         i++;
@@ -68,7 +69,7 @@
                             "<td>" + this.rksqlsj + "</td>" +
                             "<td>" + this.rksqName + "</td>" +
                             "<td>" + this.rksqDesc + "</td>" +
-                            "<td><a style='color:blue' href='#' onclick='SQTG(" + this.rksqId + ",3)'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue'>拒绝</a></td>" +
+                            "<td><a style='color:blue' href='#' onclick='SQTG(" + this.rksqId + ",3)'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue'  onclick='JUJ(" + this.rksqId + ")'>拒绝</a></td>" +
                             "</tr>";
                         $("#tb").append(str);
                         i++;
@@ -85,7 +86,7 @@
                             "<td>" + this.rksqlsj + "</td>" +
                             "<td>" + this.rksqName + "</td>" +
                             "<td>" + this.rksqDesc + "</td>" +
-                            "<td><a style='color:blue' href='#' onclick='AddRK(" + this + ")'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue'>拒绝</a></td>" +
+                            "<td><a style='color:blue' href='#' onclick='AddRK(" + this.rksqId + ")'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue'  onclick='JUJ(" + this.rksqId + ")'>质量不通过</a></td>" +
                             "</tr>";
                         $("#tb").append(str);
                         i++;
@@ -113,7 +114,37 @@
         })
     }
 
-    function AddRK(dou) {
+    function AddRK(id) {
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_RK/AddRKB",
+            data: { id: id},
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                if (d > 0) {
+                    alert('操作成功');
+                    init();
+                } else {
+                    alert('操作失败')
+                }
+            }
+        })
+    }
 
+    function JUJ(id) {
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_RK/RKJU",
+            data: { id: id },
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                if (d > 0) {
+                    alert('操作成功');
+                    init();
+                } else {
+                    alert('操作失败')
+                }
+            }
+        })
     }
 </script>
