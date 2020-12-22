@@ -18,7 +18,7 @@
             <a href="javascript:;">个人中心</a>
             <dl class="layui-nav-child">
                 <dd><a onclick="location.href = '/HzxLogin/UpdPass';">修改密码</a></dd>
-                <dd><a onclick="location.href = '/HzxLogin/Login';">退出登录</a></dd>
+                <dd><a onclick="Tui()">退出登录</a></dd>
 
             </dl>
         </li>
@@ -268,5 +268,13 @@
             content: '//www.bilibili.com/video/av56945246/'
         });
     })
-    
+
+    function Tui()
+    {
+        if (confirm("确认退出登录?"))
+        {
+            location.href = "/HzxLogin/Login";
+        }
+
+    }
 </script>
