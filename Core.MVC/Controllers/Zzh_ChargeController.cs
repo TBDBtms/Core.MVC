@@ -8,6 +8,10 @@ namespace Core.MVC.Controllers
 {
     public class Zzh_ChargeController : Controller
     {
+        /// <summary>
+        /// 门诊日志
+        /// </summary>
+        /// <returns></returns>
         public IActionResult GetCharge()
         {
             return View();

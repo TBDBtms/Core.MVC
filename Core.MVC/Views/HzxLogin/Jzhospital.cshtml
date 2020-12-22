@@ -153,6 +153,10 @@
         {
             getdan();
         }
+          if (@ViewBag.ma== 3)
+        {
+            getdan1();
+        }
 
 
     });
@@ -176,6 +180,27 @@
                 $("#Hsfz").val(d.hsfz);
                 $("#shi").val(d.Hcids);
                 $("#Haddress").val(d.haddress);
+            }
+        });
+    }
+     function getdan1()
+    {
+        var Gid=@ViewBag.Gid
+        $.ajax({
+            url: "http://localhost:4965/api/Zzh_Patient/ShowPatient?patientId=" + Gid,
+            type: "get",
+            dataType: "json",
+            success: function (d)
+            {
+                $("#Hname").val(d.patientName);
+                $("#Hkahao").val(d.patientCard);
+                $("#Hage").val(d.patientAge);
+                $("#Hcreatetime").val(d.patientDateBirth);
+                $("#Hsex").val(d.patientSex);
+                $("#Hiphone").val(d.patientPhone);
+                $("#Hsfz").val(d.patientpapers);
+                $("#shi").val(d.cityId);
+                $("#Haddress").val(d.patientAddress);
             }
         });
     }
