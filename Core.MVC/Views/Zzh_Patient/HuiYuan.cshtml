@@ -1,0 +1,136 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            layui.use('form', function () {
+                form = layui.form;
+                var layData = ['form', 'laydate'];
+                layui.use(layData, function () {
+                    var laydate = layui.laydate;
+                    laydate.render({
+                        elem: '#sTime'
+                    });
+                    laydate.render({
+                        elem: '#eTime'
+                    });
+                });
+                //监听提交
+                form.on('submit(formDemo)', function (data) {
+                    layer.msg(JSON.stringify(data.field));
+                    return false;
+                });
+
+            });
+            ShowVIPType();
+            HuiXian();
+        })
+        //会员下拉
+        function ShowVIPType() {
+            $.ajax({
+                url: "http://localhost:4965/api/Zzh_Patient/GetMemberType",
+                type: "get",
+                dataType: "json",
+                success: function (d) {
+                    $(d).each(function () {
+                        var html = "<option value='" + this.memberTypeId + "'>" + this.memberTypeName + "</option>";
+                        $("#VIPgrade").append(html);
+
+                    }); form.render('select');
+                }
+            })
+        }
+        function HuiXian() {
+            $.ajax({
+                url: "http://localhost:4965/api/Zzh_Patient/ShowPatient?patientId=" + @ViewBag.pid,
+                type: "get",
+                dataType: "json",
+                success: function (d) {
+                    $("#bbb").text(d.patientName);
+                    $("#aaa").text(d.patientCard);
+                    $("#eTime").val(d.endData);
+                    $("#VIPgrade").val(d.memberTypeId);
+                }
+            })
+        }
+        function Upd() {
+            var str = {
+                PatientId: $("#hid").val(),
+                EndData: $("#eTime").val(),
+                MemberTypeId: $("#VIPgrade").val()
+            }
+            $.ajax({
+                url: "http://localhost:4965/api/Zzh_Patient/UpdPat",
+                type: "post",
+                dataType: "json",
+                data: str,
+                success: function (d) {
+                    if (d > 0) {
+                        alert("编辑成功"); 
+                    }
+                    else {
+                        alert("编辑失败");
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <input id="hid" type="hidden" value="@ViewBag.pid" />
+        <div>
+            <div style="float:left">
+                <a href="#">会员卡号</a>
+                <span id="aaa"></span>
+            </div>
+            <div style="float:left;margin-left:30px">
+                <a href="#">会员姓名</a>
+                <span id="bbb"></span>
+            </div>
+        </div>
+        <div>
+            <div style="float:left">
+                <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+                    <div class="layui-form-item" style="width:300px">
+                        <label class="layui-form-label">到期时间：</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="eTime" name="eTime" model="datetime"
+                                   format="yyyy-MM-dd" placeholder="yyyy-MM-dd" autocomplete="off"
+                                   class="layui-input test-item" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <form class="layui-form">
+                <div class="layui-form-item" style="float:left">
+                    <label class="layui-form-label">会员类型</label>
+                    <div style="width:300px">
+                        <div class="layui-input-block">
+                            <select lay-filter="aihao" id="VIPgrade">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div>
+            <button type="button" class="layui-btn" onclick="location.href='/Zzh_Patient/GetPatient'">取消</button>
+            <button type="button" class="layui-btn" onclick="Upd()">确定</button>
+        </div>
+    </div>
+</body>
+</html>

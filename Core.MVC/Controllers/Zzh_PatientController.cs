@@ -21,5 +21,10 @@ namespace Core.MVC.Controllers
             ViewBag.pid = pid;
             return View();
         }
+        public IActionResult HuiYuan(int id)
+        {
+            ViewBag.pid = id;
+            return View();
+        }
     }
 }

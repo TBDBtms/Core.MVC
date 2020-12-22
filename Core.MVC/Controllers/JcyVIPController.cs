@@ -174,5 +174,14 @@ namespace Core.MVC.Controllers
             ViewBag.id = id;
             return View();
         }
+        /// <summary>
+        /// 支付方式
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult UpdZF()
+        {
+
+            return View();
+        }
     }
 }
