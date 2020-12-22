@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewData["Title"] = "RK";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<table class="layui-table">
+    <tr style="background-color:lavender">
+        <td>序号</td>
+        <td>申请药品名称</td>
+        <td>药品图片</td>
+        <td>申请数量</td>
+        <td>申请时间</td>
+        <td>药品类型</td>
+        <td>采购价</td>
+        <td>零售价</td>
+        <td>申请人</td>
+        <td>备注</td>
+        <td>操作</td>
+    </tr>
+    <tbody id="tb">
+    </tbody>
+</table>
+<script>
+    $(function () {
+        init();
+    })
+
+    function init() {
+        var i = 1;
+        var js = sessionStorage.getItem("Rname");
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_RK/GetRKB",
+            data: {},
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $("#tb").empty();
+                $(d).each(function () {
+                    if (js == "入库员" ) {
+                        var str = "<tr>" +
+                            "<td>" + i + "</td>" +
+                            "<td>" + this.rksqypName + "</td>" +
+                            "<td><img src='" + this.rksqImg + "' style='height:50px;width:50px'/></td>" +
+                            "<td>" + this.rksqNum + "</td>" +
+                            "<td>" + this.gtime + "</td>" +
+                            "<td>" + this.rksqlx + "</td>" +
+                            "<td>" + this.rksqcgj + "</td>" +
+                            "<td>" + this.rksqlsj + "</td>" +
+                            "<td>" + this.rksqName + "</td>" +
+                            "<td>" + this.rksqDesc + "</td>" +
+                            "<td><a style='color:blue' href='#' onclick='SQTG(" + this.rksqNum + "," + this.pid + ")'>入库</a></td>" +
+                            "</tr>";
+                        $("#tb").append(str);
+                        i++;
+                    }
+                })
+            }
+        })
+    }
+
+    function SQTG(num,id) {
+       
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_RK/JiaNum",
+            data: { num: num, id: id },
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                if (d > 0) {
+                    alert('入库成功');
+                    init();
+                } else {
+                    alert('操作失败');
+                    return;
+                }
+            }
+        })
+    }
+</script>
+
