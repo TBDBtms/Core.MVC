@@ -135,6 +135,7 @@
 
 
     function LoadTable() {
+        var js = sessionStorage.getItem("Rname");
         var num;
         var name = $("#txtName").val();
         var i = 1;
@@ -146,10 +147,12 @@
             success: function (d) {
                 $("#pj").empty();
                 $(d.pageList).each(function () {
-                    if (this.drugJSKC <  50) {
+                    if (js == "药品负责人" && this.drugJSKC <= 20) {
                         num = "<span style=color:red>数量较少</span>&nbsp;&nbsp;<span style=color:blue><a href='#'>申请提货</a></span>";
+                    } else if (this.drugJSKC <= 20) {
+                        num = "<span style=color:red>数量较少</span>&nbsp;&nbsp;";
                     } else {
-                        num = "<span style=color:green>数量充足</span>";
+                        num = "<span style=color:blue>数量充足</span>&nbsp;&nbsp;";
                     }
                     $("#pj").append("<div class='ppp' style='height:247px;width:223px;margin-left:20px;float:left;margin-top:13px'><div style='width:180px;height:173px;margin-top:15px;margin-left:20px' align='center'> <img src='" + this.imgUrl + "' style='width:179px; height: 173px; margin-top: -1px;'/></div><div style='height:23px;width:182px;margin-top:2px;margin-left:19px'><span><a href='#' id=" + this.drugId + " class='xq' > " + this.drugTYM + "</a ></span ></div ><div style='height: 6px; width: 183px;margin-left:17px'><span>品牌:" + this.brandName + "</span></div> <div style='height:23px;width:182px;margin-top:10px;margin-left:15px'><span style='color:red;font-size:21px'>" + this.drugLSJ + "元</span><span style='margin-left:20px'>" + num + "</span></div></div >");
 
