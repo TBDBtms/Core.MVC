@@ -18,7 +18,7 @@
     function Showy() {
         pageindex = 1;
         $("#sp").text(pageindex);
-        ShowInfo();
+        ShowIndex();
     }
     function pore() {
         if (pageindex == 1) {
@@ -27,7 +27,7 @@
         }
         pageindex--;
         $("#sp").text(pageindex);
-        ShowInfo();
+        ShowIndex();
     }
     function Next() {
         if (pageindex == pageCount) {
@@ -36,16 +36,17 @@
         }
         pageindex++;
         $("#sp").text(pageindex);
-        ShowInfo();
+        ShowIndex();
 
     }
     function wei() {
         pageindex = pageCount;
         $("#sp").text(pageindex);
-        ShowInfo();
+        ShowIndex();
 
     }
     function ShowIndex() {
+        var i = 1;
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetSupplierInfos",
             dataType: "json",
@@ -53,9 +54,9 @@
             data: { name: $("#name").val() },
             success: function (data) {
                 $("#list").empty();
-                $(data).each(function () {
+                $(data.list).each(function () {
                     var htmls = "<tr>" +
-                        "<td>" + i + "</td>" +
+                        "<td>" + i++ + "</td>" +
                         "<td>" + this.supGIS+"</td>" +
                         "<td>" + this.supName + "</td>" +
                         "<td>" + this.linkMan + "</td>" +
@@ -86,7 +87,8 @@
                     alert('删除成功');
                     location.reload();
                 } else {
-                    alert('删除失败')
+                    alert('删除失败');
+                    location.reload();
                 }
             }
         })
@@ -94,7 +96,7 @@
 </script>
 <div style="width:950px;height:450px;margin-left:400px;margin-top:50px;">
     <div style="float:right;">
-        <input type="button" name="name" value="新增" onclick="" class="layui-btn" style="background-color:mediumslateblue" />
+        <input type="button" name="name" value="新增" onclick="location.href='/JcyGYS/Add'" class="layui-btn" style="background-color:mediumslateblue" />
     </div>
     <hr />
     <div>

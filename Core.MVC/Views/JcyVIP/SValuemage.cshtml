@@ -79,7 +79,7 @@
     function Showy() {
         pageindex = 1;
         $("#sp").text(pageindex);
-        ShowInfo();
+        ShowInfotwo();
     }
     function pore() {
         if (pageindex == 1) {
@@ -88,7 +88,7 @@
         }
         pageindex--;
         $("#sp").text(pageindex);
-        ShowInfo();
+        ShowInfotwo();
     }
     function Next() {
         if (pageindex == pageCount) {
@@ -97,13 +97,13 @@
         }
         pageindex++;
         $("#sp").text(pageindex);
-        ShowInfo();
+        ShowInfotwo();
 
     }
     function wei() {
         pageindex = pageCount;
         $("#sp").text(pageindex);
-        ShowInfo();
+        ShowInfotwo();
 
     }
     function ShowInfotwo() {
@@ -120,10 +120,11 @@
             success: function (data) {
                 $("#list1").empty();
                 $(data.list).each(function () {
+                    console.log(data)
                     var htmls = "<tr>" +
                         "<td>" + this.id + "</td>" +
                         "<td>" + this.idCard + "</td>" +
-                        "<td>" + this.vTypeName + "</td>" +
+                        "<td>" + this.vipName + "</td>" +
                         "<td style='color:#ffd800;font-weight:bold'>" + this.vGradeName + "</td>" +
                         "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.patientName + '</a>' + "</td>" +
                         "<td>" + this.phone + "</td>" +
