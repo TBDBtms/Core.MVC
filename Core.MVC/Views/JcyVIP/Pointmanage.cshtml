@@ -71,7 +71,7 @@
             async: false,
             success: function (data) {
                 $("#list2").empty();
-                $(data).each(function () {
+                $(data.list).each(function () {
                     var htmls = "<tr>" +
                         "<td>" + this.id + "</td>" +
                         "<td>" + this.idCard + "</td>" +
@@ -83,21 +83,57 @@
                         "<td><a href='#' class='test2' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动</a>&nbsp;<a href='#' class='test3' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动记录</a></td></tr>";
                     $("#list2").append(htmls);
                 })
+                pageCount = Math.ceil(data.count * 1.0 / pagesize);
+                $("#sp").text(pageindex);
+                $("#counts").text(pageCount);
             }
         })
     }
+    var pageindex = 1;
+    var pagesize = 5;
+    var pageCount = 0;
+    function Showy() {
+        pageindex = 1;
+        $("#sp").text(pageindex);
+        ShowInfothree();
+    }
+    function pore() {
+        if (pageindex == 1) {
+            alert("已经到首页了");
+            return;
+        }
+        pageindex--;
+        $("#sp").text(pageindex);
+        ShowInfothree();
+    }
+    function Next() {
+        if (pageindex == pageCount) {
+            alert("已经到尾页了");
+            return;
+        }
+        pageindex++;
+        $("#sp").text(pageindex);
+        ShowInfothree();
+
+    }
+    function wei() {
+        pageindex = pageCount;
+        $("#sp").text(pageindex);
+        ShowInfothree();
+
+    }
 </script>
-<div style="text-align:center;width:1200px;height:400px;">
-    <div style="margin-top:1px;">
-        会员等级:
-        <select name="interest" lay-filter="会员等级" id="dj2" style="width:100px;height:38px;">
-        </select>
-        <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
-        <button type="button" style="margin-left:auto" onclick="ShowInfothree()" class="layui-btn">
-            <i class="layui-icon">&#xe615;</i>
-        </button>
-    </div>
-    <table class="layui-table">
+<div style="margin-top:1px;margin-left:200px;">
+    会员等级:
+    <select name="interest" lay-filter="会员等级" id="dj2" style="width:100px;height:38px;">
+    </select>
+    <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
+    <button type="button" style="margin-left:auto" onclick="ShowInfothree()" class="layui-btn">
+        <i class="layui-icon">&#xe615;</i>
+    </button>
+</div>
+<div style="text-align:center;width:1400px;height:600px;margin-left:200px;">
+    <table class="layui-table" style="height: 600px;">
         <thead>
             <tr style="background-color: lavender;text-align:center;">
                 <th style="text-align:center">序号</th>
@@ -111,7 +147,15 @@
             </tr>
         </thead>
         <tbody id="list2">
-
         </tbody>
     </table>
+    <div style="text-align:center">
+        <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
+        <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
+        <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
+        <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+        当前页:<span style="color:blue" id="sp"></span>
+        总页数:<span style="color:red" id="counts"></span>
+    </div>
 </div>
+

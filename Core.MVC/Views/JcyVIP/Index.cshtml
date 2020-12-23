@@ -60,7 +60,6 @@
                 anim: 2,
                 content: ['/JcyVIP/VIPCZ?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
             });
-
             console.log(this.id);
         });
     }
@@ -183,19 +182,19 @@
         ShowInfo();
     }
 </script>
-<div style="text-align:center">
+<div style="text-align:center;width:1680px;height:700px;">
     <div style="margin-top:1px;">
         会员等级: <select name="interest" lay-filter="会员等级" id="dj" style="width:100px;height:38px;">
             <option></option>
         </select>
         创建时间: <input type="datetime" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" style="width:150px;height:33px;">
         <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
-        <button type="button" style="margin-left:auto" onclick="one()" class="layui-btn">
+        <button type="button" style="margin-left:auto" onclick="ShowInfo()" class="layui-btn">
             <i class="layui-icon">&#xe615;</i>
         </button>
         <input type="checkbox" name="name" value="" /> 会员到期预警
     </div>
-    <table class="layui-table">
+    <table class="layui-table" style="height: 600px;">
         <thead>
             <tr style="background-color: lavender;">
                 <th>序号</th>
