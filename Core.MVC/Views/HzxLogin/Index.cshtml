@@ -12,7 +12,7 @@
 </head>     
 <body>
     <div>
-        <div >
+        <div>
             <form class="layui-form">
                 <div class="layui-form-item" style="float:left">
                     <label class="layui-form-label">选择框</label>
@@ -28,18 +28,18 @@
             <input type="text" name="title" id="txt_name" required lay-verify="required" placeholder="请输入员工姓名" autocomplete="off" class="layui-input" onchange="Shows()">
         </div>
         <div>
-       
-            <button type="button" style="margin-left:auto" onclick="Shows()" class="layui-btn" >查询</button>
+
+            <button type="button" style="margin-left:auto" onclick="Shows()" class="layui-btn">查询</button>
 
         </div>
 
     </div>
     <div style="">
         <table class="layui-table" style="text-align:center;margin-left:30px">
-            
-            <thead style="background-color:lavender" >
+
+            <thead style="background-color:lavender">
                 <tr style="background-color:lavender">
-                  
+
                     <th style="text-align:center">员工编号</th>
                     <th style="text-align:center">员工姓名</th>
                     <th style="text-align:center">员工性别</th>
@@ -62,11 +62,54 @@
             </tbody>
         </table>
     </div>
-
+    <div style="margin-left:500px;">
+        <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
+        <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
+        <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
+        <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+        当前页/总页数:<span style="color:blue" id="sp"></span>
+    </div>
 </body>
 </html>
 <script>
-    
+    var pageindex = 1;
+    var pagesize = 5;
+    var pageCount = 0;
+    function Showy() {
+
+        pageindex = 1;
+        $("#sp").text(pageindex);
+        Shows();
+
+
+    }
+    function pore() {
+        if (pageindex == 1) {
+            alert("已经到首页了");
+            return;
+        }
+        pageindex--;
+        $("#sp").text(pageindex);
+        Shows();
+
+
+    }
+    function Next() {
+        if (pageindex == pageCount) {
+            alert("已经到尾页了");
+            return;
+        }
+        pageindex++;
+        $("#sp").text(pageindex);
+        Shows();
+
+    }
+    function wei() {
+        pageindex = pageCount;
+        $("#sp").text(pageindex);
+        Shows();
+
+    }
     var name = sessionStorage.getItem("Uname");
     var Qma = sessionStorage.getItem("Qma");
     var form;
@@ -82,8 +125,9 @@
 
     $().ready(function () {
         //显示
-        Shows();
         keshi();
+        Shows();
+      
     });
     function keshi()
     {
@@ -113,14 +157,14 @@
         var qma = Qma;
         $.ajax({
             url: "http://localhost:4965/api/Hzx_Login/GetUserinfos",
-            data: {Ukeids:kid,Uname:Uname},
+            data: {Ukeids:kid,Uname:Uname,pageindex:pageindex,pagesize:pagesize},
             type: "get",
             dataType: "json",
             async: false,
             success: function (d)
             {
                 $("#tb").empty();
-                $(d).each(function () {
+                $(d.list).each(function () {
                     $("#tb").append("<tr>" +
                  "<td style='color:forestgreen'>" + this.uno + "</td>" +
                  "<td style='text - align: center'>"+this.uname+"</td >"+
@@ -137,9 +181,11 @@
                 "<td style='text - align: center'>"+this.uxue+"</td>"+
                 "<td style='text - align: center'>"+this.cname+"</td>"+
                 "<td style='text - align: center'>" + this.qremark + "</td>" +
-                        "<td style='text - align: center'>" + (qma == "ABCD" ? "<a style='color:darkslateblue;font-weight:bold' onclick='DelUser(" + this.uid + ")'>删除</a>&nbsp;<a style='color:darkslateblue;font-weight:bold' onclick='UpdUser(" + this.uid + ")'>修改</a>" : qma == "A" ? "" : qma == "Yi" ? "<a style='color:darkslateblue;font-weight:bold' onclick='DelUser(" + this.uid + ")'>删除</a>":"") + "</td>" +
+                 "<td style='text - align: center'>" + (qma == "ABCD" ? "<a style='color:darkslateblue;font-weight:bold' onclick='DelUser(" + this.uid + ")'>删除</a>&nbsp;<a style='color:darkslateblue;font-weight:bold' onclick='UpdUser(" + this.uid + ")'>修改</a>" : qma == "A" ? "" : qma == "Yi" ? "<a style='color:darkslateblue;font-weight:bold' onclick='DelUser(" + this.uid + ")'>删除</a>":"") + "</td>" +
             "</tr>");
                 });
+                pageCount = Math.ceil(d.count * 1.0 / pagesize);
+                $("#sp").text(pageindex + "/" + pageCount);
             }
         });
         
