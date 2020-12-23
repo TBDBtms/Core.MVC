@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "RK";
+    ViewData["Title"] = "RKNO";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
 <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -30,14 +30,14 @@
         var i = 1;
         var js = sessionStorage.getItem("Rname");
         $.ajax({
-            url: "http://localhost:4965/api/ZHQ_RK/GetRKB",
+            url: "http://localhost:4965/api/ZHQ_RK/GetRKSQ",
             data: {},
             type: "get",
             dataType: "json",
             success: function (d) {
                 $("#tb").empty();
                 $(d).each(function () {
-                    if (js == "入库员" && this.rksqState!=99) {
+                    if (js == "仓管" && this.rksqState == 10) {
                         var str = "<tr>" +
                             "<td>" + i + "</td>" +
                             "<td>" + this.rksqypName + "</td>" +
@@ -49,7 +49,7 @@
                             "<td>" + this.rksqlsj + "</td>" +
                             "<td>" + this.rksqName + "</td>" +
                             "<td>" + this.rksqDesc + "</td>" +
-                            "<td><a style='color:blue' href='#' onclick='SQTG(" + this.rksqNum + "," + this.pid + "," + this.rksqId + ")'>入库</a></td>" +
+                            "<td><a style='color:blue' href='#' onclick='SC(" + this.rksqId + ")'>删除</a></td>" +
                             "</tr>";
                         $("#tb").append(str);
                         i++;
@@ -59,23 +59,24 @@
         })
     }
 
-    function SQTG(num,id,rid) {
-       
-        $.ajax({
-            url: "http://localhost:4965/api/ZHQ_RK/JiaNum",
-            data: { num: num, id: id, rid: rid },
-            type: "get",
-            dataType: "json",
-            success: function (d) {
-                if (d == 1) {
-                    alert('入库成功');
-                    init();
-                } else if (d == 3) {
-                    alert('已到达上线数量!其余库存将返回!');
-                    init();
+    function SC(id) {
+        if (confirm('确认删除吗?')) {
+            $.ajax({
+                url: "http://localhost:4965/api/ZHQ_RK/DelRKSQ",
+                data: { id: id },
+                type: "get",
+                dataType: "json",
+                success: function (d) {
+                    if (d > 0) {
+                        init();
+                    } else {
+                        alert('删除失败！');
+                    }
                 }
-            }
-        })
+            })
+        }
+      
     }
 </script>
+
 

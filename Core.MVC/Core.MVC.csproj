@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <None Remove="Views\ZHQ_administration\Addadministration.cshtml~RF212e3a7.TMP" />
+    <None Remove="Views\ZHQ_RK\RKNO.cshtml~RF172b3b8.TMP" />
   </ItemGroup>
 
   <ItemGroup>
