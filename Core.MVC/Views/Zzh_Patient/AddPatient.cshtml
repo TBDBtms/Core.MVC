@@ -227,6 +227,8 @@
                                     <div style="width:300px;">
                                         <div class="layui-input-block">
                                             <select name="interest" lay-filter="aihao" id="txt_PState">
+                                                <option value="true">已接诊</option>
+                                                <option value="false">未接诊</option>
                                             </select>
                                         </div>
                                     </div>
@@ -324,7 +326,6 @@
             return false;
         });
         GuanXi();
-        State();
         CZR();
         City();
         Sheng();
@@ -444,20 +445,7 @@
         })
     }
 
-    function State() {
-        $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/GetPatientState",
-            type: "get",
-            dataType: "json",
-            success: function (d) {
-                $(d).each(function () {
-                    var html = "<option value='" + this.patientStateId + "'>" + this.patientStateName + "</option>";
-                    $("#txt_PState").append(html);
-                    form.render('select');
-                });
-            }
-        })
-    }
+
     function Add() {
         var m = {
             PatientName: $("#txt_name").val(),

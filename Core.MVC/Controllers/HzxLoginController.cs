@@ -137,6 +137,12 @@ namespace Core.MVC.Controllers
             ViewBag.Gid = Gid;
             return View();
         }
+        /// <summary>
+        /// 接诊
+        /// </summary>
+        /// <param name="Gid"></param>
+        /// <param name="ma"></param>
+        /// <returns></returns>
         public IActionResult Jzhospital(int Gid=0,int ma=0)
         {
 
@@ -145,12 +151,21 @@ namespace Core.MVC.Controllers
             return View();
        
         }
+        /// <summary>
+        /// 显示病例
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ShowBinli()
         {
 
             return View();
 
         }
+        public IActionResult Showjilu() 
+        {
+            return View();
+        }
+
 
 
 
