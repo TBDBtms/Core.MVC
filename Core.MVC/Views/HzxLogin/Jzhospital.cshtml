@@ -283,7 +283,22 @@
                 dataType: "json",
                 success: function (d) {
                     if (d > 0) {
-                        alert("诊断成功");
+                        $.ajax({
+                            url: "http://localhost:4965/api/Hzx_Login/Updissale?Gid=" +@ViewBag.Gid ,
+                        type: "post",
+                        dataType: "json",
+                        async: false,
+                        success: function (d) {
+                            if (d > 0) {
+                            
+                                location.href = "/Hzx_Login/Showgua";
+                            }
+                            else {
+                                alert("修改失败");
+
+                            }
+                        }
+                    })
                     }
                     else {
                         alert("诊断失败");
@@ -291,7 +306,7 @@
                 }
             })
         }
-    
+
 
     if (@ViewBag.ma== 3) {
         var c = {};
