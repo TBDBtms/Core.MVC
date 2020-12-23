@@ -76,15 +76,59 @@
                     <td style="text-align:center">患者家乡</td>
                     <td style="text-align:center">状态</td>
                     <td style="text-align:center">操作</td>
-    
+
                 </tr>
             </tbody>
         </table>
     </div>
-
+    <div style="margin-left:500px;">
+        <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
+        <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
+        <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
+        <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+        当前页/总页数:<span style="color:blue" id="sp"></span>
+    </div>
 </body>
 </html>
-<script>   
+<script>
+    var pageindex = 1;
+    var pagesize = 5;
+    var pageCount = 0;
+    function Showy() {
+
+        pageindex = 1;
+        $("#sp").text(pageindex);
+        Shows();
+
+
+    }
+    function pore() {
+        if (pageindex == 1) {
+            alert("已经到首页了");
+            return;
+        }
+        pageindex--;
+        $("#sp").text(pageindex);
+        Shows();
+
+
+    }
+    function Next() {
+        if (pageindex == pageCount) {
+            alert("已经到尾页了");
+            return;
+        }
+        pageindex++;
+        $("#sp").text(pageindex);
+        Shows();
+
+    }
+    function wei() {
+        pageindex = pageCount;
+        $("#sp").text(pageindex);
+        Shows();
+
+    }
     var form;
     layui.use(['form', 'layedit', 'laydate'], function () {
         form = layui.form
@@ -106,8 +150,8 @@
     var qma = sessionStorage.getItem("Qma");
     $().ready(function () {
         keshi();
-
         Shows();
+
         var qma = Qma;
     });
     function Shows()
@@ -116,12 +160,12 @@
         var yname = $("#txt_name").val();
         $.ajax({
             url: "http://localhost:4965/api/Hzx_Login/GetX_Guahaos",
-            data: {kid:kid,yname:yname},
+            data: {kid:kid,yname:yname,pageindex:pageindex,pagesize:pagesize},
             type: "get",
             dataType: "json",
             success: function (d) {
                 $("#tb").empty();
-                $(d).each(function () {
+                $(d.list).each(function () {
 
                     $("#tb").append("<tr>" +
                         "<td style='text-align:center'>" + this.kname + "</td>" +
@@ -142,6 +186,8 @@
                         "<td style='text - align: center'>" + (this.xissale == "0" ? "<a style='color:darkslateblue;font-weight:bold' onclick='Updzhang(" + this.gid + ")'>接诊</a>": "") + "</td>" +
                         "</tr >");
                 });
+                pageCount = Math.ceil(d.count * 1.0 / pagesize);
+                $("#sp").text(pageindex + "/" + pageCount);
             }
         });
     }
@@ -180,7 +226,7 @@
             success: function (d) {
                 $("#keshi").empty();
                 $("#keshi").append("<option value='0'>请选择</option>");
-                $(d).each(function () {s
+                $(d).each(function () {
                     var str = "<option value='" + this.kid + "'>" + this.kname + "</option>";
                     $("#keshi").append(str);
                 });

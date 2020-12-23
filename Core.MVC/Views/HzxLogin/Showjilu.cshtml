@@ -1,0 +1,168 @@
+﻿
+@{
+    ViewData["Title"] = "Showjilu";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<html>
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div style="">
+        <table class="layui-table" style="text-align:center;margin-left:30px">
+
+            <thead style="background-color:lavender">
+                <tr style="background-color:lavender">
+
+                    <th style="text-align:center">登录名称</th>
+                    <th style="text-align:center">登录时间</th>
+                    <th style="text-align:center">职位</th>
+                    <th style="text-align:center">操作</th>
+                </tr>
+            </thead>
+            <tbody id="tb">
+                <tr style="background-color:lavender">
+                    <td style="text-align:center">登录名称</td>
+                    <td style="text-align:center">登录时间</td>
+                    <td style="text-align:center">职位</td>
+                    <td style="text-align:center">操作</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div style="margin-left:500px;">
+        <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
+        <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
+        <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
+        <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+        当前页/总页数:<span style="color:blue" id="sp"></span>
+    </div>
+</body>
+</html>
+<script>
+    var Qma = sessionStorage.getItem("Qma");
+    var pageindex = 1;
+    var pagesize = 5;
+    var pageCount = 0;
+    function Showy() {
+
+        pageindex = 1;
+        $("#sp").text(pageindex);
+        Shows();
+
+
+    }
+    function pore() {
+        if (pageindex == 1) {
+            alert("已经到首页了");
+            return;
+        }
+        pageindex--;
+        $("#sp").text(pageindex);
+        Shows();
+
+
+    }
+    function Next() {
+        if (pageindex == pageCount) {
+            alert("已经到尾页了");
+            return;
+        }
+        pageindex++;
+        $("#sp").text(pageindex);
+        Shows();
+
+    }
+    function wei() {
+        pageindex = pageCount;
+        $("#sp").text(pageindex);
+        Shows();
+
+    }
+    var form;
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        form = layui.form
+        form.render('select')
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+
+    });
+    $().ready(function () {
+       
+        Shows();
+
+    });
+    function Shows()
+    {
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetJlus",
+            data: {pageindex:pageindex,pagesize:pagesize},
+            type: "get",
+            success: function (d)
+            {
+                $("#tb").empty();
+                $(d.list).each(function () {
+                    $("#tb").append(" <tr>"+
+                       " <td style='text-align:center'>"+this.uname+"</td >"+
+                        "<td style='text-align:center'>" + this.czTime+"</td>"+
+                        "<td style='text-align:center'>" + this.zwei+"</td>"+
+                        "<td style='text - align: center'>" + (Qma == "ABCD" ? "<a style='color:darkslateblue;font-weight:bold' onclick='DelUser(" + this.jluid + ")'>删除</a>" :"") + "</td>" +
+                "</tr >");
+
+
+                });
+                pageCount = Math.ceil(d.count * 1.0 / pagesize);
+                $("#sp").text(pageindex + "/" + pageCount);
+
+
+
+
+            }
+
+
+
+
+
+        });
+       
+    }
+    function DelUser(jluid)
+    {
+        if (confirm("确认删除吗？")) {
+
+            $.ajax({
+                url: "http://localhost:4965/api/Hzx_Login/Deljlu?Jid=" + jluid,
+                type: "post",
+                dataType: "json",
+                success: function (d) {
+                    if (d > 0) {
+                        ;
+                        location.reload();
+                    }
+                    else {
+                        alert("退号失败");
+
+                    }
+                }
+
+            });
+        }
+
+
+    }
+</script>
+
+

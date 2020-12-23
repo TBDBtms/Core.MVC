@@ -13,7 +13,7 @@ namespace Core.MVC.Controllers
         }
         public IActionResult FindbyId(int id=0)
         {
-
+            ViewBag.id = id;
             return View();
         }
         public IActionResult Add()

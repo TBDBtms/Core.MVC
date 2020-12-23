@@ -182,7 +182,36 @@
                     sessionStorage.setItem("Qma", d.qma);
                     sessionStorage.setItem("Rname", d.rname);
                     sessionStorage.setItem("Uid", d.uid);
-                    location.href = "/ZHQ_RK/ShowKC";
+                    j = {};
+                    j.Uname = $("#Uname").val();
+                    j.Zwei = sessionStorage.getItem("Rname");
+                    $.ajax({
+                        url: "http://localhost:4965/api/Hzx_Login/AddJlu",
+                        data: j,
+                        type: "post",
+                        dataType: "json",
+                        success: function (d)
+                        {
+                            if (d > 0)
+                            {
+                                location.href = "/ZHQ_RK/ShowKC";
+                            }
+                            else {
+                                return;
+                            }
+
+
+                        }
+
+                        
+
+
+
+
+
+
+                    });
+                   
 
                 }
                 else {

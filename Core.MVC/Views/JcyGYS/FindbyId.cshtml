@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "FindbyId";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
 
@@ -9,6 +9,27 @@
 <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
 <script src="~/layui-v2.4.5/layui/layui.js"></script>
 <script>
+    $(function () {
+        ShowIndexInfo();
+    })
+    function ShowIndexInfo() {
+        $.ajax({
+            url: "http://localhost:4965/api/JcyVIP/FindById",
+            dataType: "json",
+            type: "get",
+            data: { id:@ViewBag.id},
+            success: function (data) {
+                console.log(data);
+                $("#SupGIS").val(data.supGIS);
+                $("#SupName").val(data.supName);
+                $("[name=SupState]:checked").val(data.supState);
+                $("#LinkMan").val(data.linkMan);
+                $("#LinkPhone").val(data.linkPhone);
+                $("#Remark").val(data.remark);
+                $("#id").val(data.id);
+            }
+        })
+    }
     function Adds() {
         var htmls = {};
         htmls.supGIS = $("#SupGIS").val();
@@ -18,27 +39,29 @@
         htmls.linkPhone = $("#LinkPhone").val();
         htmls.remark = $("#Remark").val();
         htmls.cMan = "晋超宇";
+        htmls.id = $("#id").val();
         $.ajax({
-            url: "http://localhost:4965/api/JcyVIP/Add",
+            url: "http://localhost:4965/api/JcyVIP/UpdSupplier",
             dataType: "json",
             data: htmls,
             type: "post",
             success: function (d) {
                 if (d > 0) {
                     console.log(htmls);
-                    alert('添加成功');
+                    alert('编辑成功');
                     location.reload();
                 } else {
-                    alert('添加失败');
+                    alert('编辑失败');
                 }
             }
         })
     }
 </script>
+<input type="hidden" id="id" value="@ViewBag.id" />
 <div style="width:1150px;height:465px;margin-left:400px;margin-top:50px; background-color:aliceblue">
     <div style="margin-left:15px;">
         <div style="width:1120px;height:70px;">
-            <div style="float:left"><h3 style="font-weight:900"><span>|</span> 新增供应商</h3></div>
+            <div style="float:left"><h3 style="font-weight:900"><span>|</span> 编辑供应商</h3></div>
             <div style="float:right">
                 <input type="button" value="保存" class="layui-btn" onclick="Adds()" />&nbsp;
                 <input type="button" value="返回" class="layui-btn" />
@@ -81,4 +104,3 @@
         </div>
     </div>
 </div>
-
