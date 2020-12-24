@@ -8,14 +8,6 @@
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
 <script>
-    var pageIndex = 1;
-    var pageSize = 10;
-    var count = 0;  //总条数
-    var pagecount = 0;  //总页数
-    var Id = 0;
-    var Phone = "";
-    var Card = "";
-    var Name = "";
     $(function () {
         Selx();
         text1();
@@ -24,39 +16,36 @@
         text4();
         text5();
     })
-    $("#btnCX").click(function () {
-        pageIndex = 1;
+    var pageindex = 1;
+    var pagesize = 5;
+    var pageCount = 0;
+    function Showy() {
+        pageindex = 1;
+        $("#sp").text(pageindex);
         ShowInfo();
-
-    })
-
-    $("#SXY").click(function () {
-        if (pageIndex == 1) {
-            alert('已经是第一页');
+    }
+    function pore() {
+        if (pageindex == 1) {
+            alert("已经到首页了");
             return;
         }
-        pageIndex = pageIndex - 1;
-        $("#sp").text(pageIndex);
+        pageindex--;
+        $("#sp").text(pageindex);
         ShowInfo();
-    })
-
-    $("#SY").click(function () {
-        pageIndex = 1;
-        $("#sp").text(pageIndex);
-        ShowInfo();
-    })
-    $("#WY").click(function () {
-        pageIndex = pagecount;
-        $("#sp").text(pageIndex);
-        ShowInfo();
-    })
-    function XXY() {
-        if (pageIndex == pagecount) {
-            alert('已经是最后一页');
+    }
+    function Next() {
+        if (pageindex == pageCount) {
+            alert("已经到尾页了");
             return;
         }
-        pageIndex = pageIndex + 1;
-        $("#sp").text(pageIndex);
+        pageindex++;
+        $("#sp").text(pageindex);
+        ShowInfo();
+
+    }
+    function wei() {
+        pageindex = pageCount;
+        $("#sp").text(pageindex);
         ShowInfo();
     }
     function text1() {
@@ -70,7 +59,6 @@
                 anim: 2,
                 content: ['/JcyVIP/VIPCZ?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
             });
-
             console.log(this.id);
         });
     }
@@ -81,7 +69,7 @@
                 title: false,
                 closeBtn: 1, //不显示关闭按钮
                 shade: [0],
-                area: ['600px', '400px'],
+                area: ['600px', '410px'],
                 anim: 2,
                 content: ['/JcyVIP/VIPDJ?id=' + this.id, 'no'], //iframe的url，no代表不显示滚动条
             });
@@ -152,11 +140,24 @@
         var etime = $("#etime").val();
         var id = $("#dj").val();
         var name = $("#name").val();
+        var reg = /^[\u4E00-\u9FA5]{2,4}$/;   /*定义验证表达式*/
+        var phg = /^[0-9]{11}$/;   /*定义验证表达式*/
+        if (reg.test(name)) {
+            name = $("#name").val();
+        } else if (phg.test(name)) {
+            name = list.phone;
+        } else {
+            name = list.idCard;
+        }
+        //var card = $("#name").val();
+        //var phone = $("#name").val();
+        var pageIndex = pageindex;
+        var pageSize = pagesize;
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetVIPInfos",
             dataType: "json",
             type: "get",
-            data: { stime=stime, etime=etime, id=id, name=name, phone=Phone, card=Card, pageIndex=pageindex, pageSize=pageSize, AllCount=pagecount },
+            data: { stime: stime, etime: etime, id: id, name: name, phone: name, card: name, pageindex: pageIndex, pagesize: pageSize },
             async: false,
             success: function (data) {
                 console.log(data);
@@ -175,13 +176,13 @@
                         "<td>" + this.integral + "</td>" +
                         "<td>" + this.startTime + "</td>" +
                         "<td>" + this.endTime + "</td>" +
-                        "<td>" + this.vIPState + "</td>" +
+                        "<td>" + (this.vipState==1?"启用":"禁用") + "</td>" +
                         "<td><a href='#' class='test2' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>充值</a>&nbsp;<a href='#' id='" + this.id + "' class='test3' style='color:darkslateblue;font-weight:bold'>设置会员等级</a>&nbsp;<a href='#' class='test4' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动</a>&nbsp;<a href='#' class='test5' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>退款</a>&nbsp;<a href='#' id='" + this.id + "' class='test6' style='color:darkslateblue;font-weight:bold'>等级变更记录</a></td></tr>";
                     $("#list").append(htmls);
-                    count = d.countnum;  //总条数
-                    pagecount = Math.ceil(count * 1.0 / pagesize); //总页数
-                    $("#sp").text(pageindex + "/" + pagecount);
                 })
+                pageCount = Math.ceil(data.count * 1.0 / pagesize);
+                $("#sp").text(pageindex);
+                $("#counts").text(pageCount);
             }
         })
     }
@@ -189,19 +190,19 @@
         ShowInfo();
     }
 </script>
-<div style="text-align:center">
+<div style="text-align:center;width:1680px;height:700px;">
     <div style="margin-top:1px;">
         会员等级: <select name="interest" lay-filter="会员等级" id="dj" style="width:100px;height:38px;">
             <option></option>
         </select>
-        创建时间: <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" style="width:150px;height:33px;">
+        创建时间: <input type="datetime" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" style="width:150px;height:33px;">
         <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
-        <button type="button" style="margin-left:auto" onclick="one()" class="layui-btn">
+        <button type="button" style="margin-left:auto" onclick="ShowInfo()" class="layui-btn">
             <i class="layui-icon">&#xe615;</i>
         </button>
         <input type="checkbox" name="name" value="" /> 会员到期预警
     </div>
-    <table class="layui-table">
+    <table class="layui-table" style="height: 600px;">
         <thead>
             <tr style="background-color: lavender;">
                 <th>序号</th>
@@ -224,12 +225,13 @@
 
         </tbody>
     </table>
-    <div align="center" style="float:left;margin-left:31px">
-        <button type="button" style="margin-left:auto" id="SY" class="layui-btn">首页</button>
-        <button type="button" style="margin-left:auto" id="SXY" class="layui-btn">上一页</button>
-        <button type="button" style="margin-left:auto" onclick="XXY()" class="layui-btn">下一页</button>
-        <button type="button" style="margin-left:auto" id="WY" class="layui-btn">尾页</button>
-        当前页/总页数:<span style="color:blue" id="sp"></span>
+    <div style="text-align:center">
+        <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
+        <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
+        <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
+        <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+        当前页:<span style="color:blue" id="sp"></span>
+        总页数:<span style="color:red" id="counts"></span>
     </div>
 </div>
 

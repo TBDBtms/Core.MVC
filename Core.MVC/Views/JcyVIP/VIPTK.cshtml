@@ -41,10 +41,10 @@
         }
         function UpdVIPTK() {
             var htmls = {
-                RePrice: $("#price").val(),
-                ReTypeId: $("[name=tk]:checked").val(),
-                Remark: $("#remark").val(),
-                Id: $("#id").val()
+                rePrice: $("#price").val(),
+                reTypeId: $("[name=tk]:checked").val(),
+                remark: $("#remark").val(),
+                id: $("#id").val()
             };
             console.log(htmls);
             $.ajax({
@@ -55,6 +55,8 @@
                 success: function (data) {
                     if (data > 0) {
                         alert('设置成功');
+                        let index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
                         location.reload();
                     } else {
                         alert('设置失败');

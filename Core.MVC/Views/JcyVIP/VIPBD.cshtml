@@ -100,6 +100,8 @@
                 success: function (data) {
                     if (data > 0) {
                         alert('成功');
+                        let index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
                         location.reload();
                     } else {
                         alert('失败');
@@ -123,6 +125,9 @@
                 success: function (data) {
                     if (data > 0) {
                         alert('成功');
+                        let index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                        location.reload();
                     } else {
                         alert('失败');
                         location.reload();
@@ -144,6 +149,8 @@
                 success: function (data) {
                     if (data > 0) {
                         alert('成功');
+                        let index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
                         location.reload();
                     } else {
                         alert('失败');

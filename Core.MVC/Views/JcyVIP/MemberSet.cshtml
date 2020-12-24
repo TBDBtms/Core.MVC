@@ -47,17 +47,49 @@
             });
         });
     })
+    var pageindex = 1;
+    var pagesize = 5;
+    var pageCount = 0;
+    function Showy() {
+        pageindex = 1;
+        $("#sp").text(pageindex);
+        ShowInfofour();
+    }
+    function pore() {
+        if (pageindex == 1) {
+            alert("已经到首页了");
+            return;
+        }
+        pageindex--;
+        $("#sp").text(pageindex);
+        ShowInfofour();
+    }
+    function Next() {
+        if (pageindex == pageCount) {
+            alert("已经到尾页了");
+            return;
+        }
+        pageindex++;
+        $("#sp").text(pageindex);
+        ShowInfofour();
+
+    }
+    function wei() {
+        pageindex = pageCount;
+        $("#sp").text(pageindex);
+        ShowInfofour();
+
+    }
     function ShowInfofour() {
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetMemberSet",
             dataType: "json",
             type: "get",
-            data: {},
             async: false,
             success: function (data) {
                 console.log(data);
                 $("#list3").empty();
-                $(data).each(function () {
+                $(data.list).each(function () {
                     var htmls = "<tr>" +
                         "<td>" + this.id + "</td>" +
                         "<td>" + this.vGradeName + "</td>" +
@@ -66,16 +98,19 @@
                         "<td>" + this.minIntegral + "</td>" +
                         "<td>" + this.upgrade + "</td>" +
                         "<td>" + this.remark + "</td>" +
-                        "<td>" + this.states + "</td>" +
-                        "<td><a href='#' class='test2' id='" + this.id + "'>编辑</a>&nbsp;<a type='button'  class='test' id='" + this.id + "'>新增会员类型</a>&nbsp;<a type='button'  class='test1' id='" + this.id + "' >会员条件设置</a>&nbsp;</td></tr>";
+                        "<td>" + (this.states==1?"启用":"禁用") + "</td>" +
+                        "<td><a href='#' class='test2' id='" + this.id + "'>编辑</a>&nbsp;<a href='#' class='test' id='" + this.id + "'>新增会员类型</a>&nbsp;<a href='#'  class='test1' id='" + this.id + "' >会员条件设置</a>&nbsp;</td></tr>";
                     $("#list3").append(htmls);
                 })
+                pageCount = Math.ceil(data.count * 1.0 / pagesize);
+                $("#sp").text(pageindex);
+                $("#counts").text(pageCount);
             }
         })
     }
 </script>
-<div style="text-align:center">
-    <table class="layui-table">
+<div style="margin-top:1px;margin-left:280px;text-align:center;width:1280px;height:560px;">
+    <table class="layui-table" style="height: 500px;width:1200px;">
         <thead>
             <tr style="background-color: lavender;">
                 <th>序号</th>
@@ -93,5 +128,13 @@
 
         </tbody>
     </table>
+</div>
+<div style="margin-left:700px;">
+    <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
+    <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
+    <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
+    <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+    当前页:<span style="color:blue" id="sp"></span>
+    总页数:<span style="color:red" id="counts"></span>
 </div>
 

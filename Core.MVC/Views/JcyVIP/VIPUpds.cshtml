@@ -61,6 +61,8 @@
                 success: function (data) {
                     if (data > 0) {
                         alert('保存成功');
+                        let index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
                     } else {
                         alert('保存失败');
                     }
