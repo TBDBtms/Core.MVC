@@ -141,6 +141,15 @@
         var etime = $("#etime").val();
         var id = $("#dj").val();
         var name = $("#name").val();
+        var reg = /^[\u4E00-\u9FA5]{2,4}$/;   /*定义验证表达式*/
+        var phg = /^[0-9]{11}$/;   /*定义验证表达式*/
+        if (reg.test(name)) {
+            name = $("#name").val();
+        } else if (phg.test(name)) {
+            name = list.phone;
+        } else {
+            name = list.idCard;
+        }
         //var card = $("#name").val();
         //var phone = $("#name").val();
         var pageIndex = pageindex;
@@ -149,7 +158,7 @@
             url: "http://localhost:4965/api/JcyVIP/GetVIPInfos",
             dataType: "json",
             type: "get",
-            data: { stime: stime, etime: etime, id: id, name: name, pageindex: pageIndex, pagesize: pageSize },
+            data: { stime: stime, etime: etime, id: id, name: name, phone: name, card: name, pageindex: pageIndex, pagesize: pageSize },
             async: false,
             success: function (data) {
                 console.log(data);

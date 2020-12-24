@@ -28,6 +28,9 @@
                 $(this).off('change');
                 document.getElementById("times").setAttribute("disabled", "disabled");
             });
+            if (document.getElementById("times").setAttribute("disabled", "disabled") == true) {
+                $("#time").val = "";
+            }
         })
         function Ones(id) {
              $.ajax({
@@ -156,7 +159,7 @@
                 dataType: "json",
                 data: htmls,
                 success: function (data) {
-                    console.log(data)
+                    console.log(data);
                     if (data > 0) {
                         var adds = {};
                         adds.vIPCard = card;
@@ -169,6 +172,7 @@
                             type: "post",
                             data: adds,
                             success: function (d) {
+                                console.log(adds);
                                 if (d > 0) {
                                     alert('成功');
                                     let index = parent.layer.getFrameIndex(window.name);
@@ -210,6 +214,7 @@
                     </tr>
                 </thead>
                 <tbody id="list">
+
                 </tbody>
             </table>
         </div>
