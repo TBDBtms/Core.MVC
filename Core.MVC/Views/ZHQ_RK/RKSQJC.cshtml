@@ -100,9 +100,9 @@
             data: { name: name, pageindex: pageindex, pagesize: pagesize },
             type: "get",
             dataType: "json",
-            success: function (d) {
+            success: function (d){
                 $("#tb").empty();
-                $(d).each(function () {
+                $(d.list).each(function () {
                     if (js == "入库员" && this.rksqState == 1) {
                         var str = "<tr>" +
                             "<td>" + i + "</td>" +
