@@ -11,7 +11,10 @@
 <script>
     $(function () {
         ShowIndex();
-
+        $("#show").click(function () {
+            pageindex = 1;
+            ShowIndex();
+        })
     })
     var pageindex = 1;
     var pagesize = 5;
@@ -103,7 +106,7 @@
         <div style="width:600px;height:30px;">
             <input type="text" id="name" value="" style="width:200px;height:30px;float:left" class="layui-input" />
 
-            <button type="button" class="layui-btn" style="background-color:mediumslateblue;float:left;height:30px;width:50px;" onclick="ShowIndex()">
+            <button type="button" class="layui-btn" style="background-color:mediumslateblue;float:left;height:30px;width:50px;" onclick="ShowIndex()" id="show">
                 <i class="layui-icon">&#xe615;</i>
             </button>
         </div>
