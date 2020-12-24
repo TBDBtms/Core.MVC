@@ -17,6 +17,16 @@
 
 </body>
 <script>
+    $().ready(function () {
+
+        var Rname = sessionStorage.getItem("Rname");
+        if (Rname == null)
+        {
+            alert("请登录");
+
+        }
+
+    });
     function AddKeshi() {
 
         var Kname = $("#Kname").val();
@@ -47,4 +57,5 @@
         });
 
     }
+
 </script>

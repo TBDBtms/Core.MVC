@@ -370,10 +370,29 @@
         u.Uno = $("#Uno").val();
         u.Uxue = $("#Uxue").val();
         u.cids = $("#shi").val();
-        u.Uid=@ViewBag.Uid;
+        u.Uid =@ViewBag.Uid;
+        var Uname = $("#Uname").val();
+        var Upass = $("#Upass").val();
+        var Uiphone = $("#Uiphone").val();
+        var reg = /^[\u4E00-\u9FA5]{2,4}$/;
+        var regs = /^[0-9]{6}$/;
+        var regiphone = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
+        if (!reg.test(Uname)) {
+            alert("姓名只能是字符");
+            return;
+        }
+        if (!regs.test(Upass)) {
+            alert("密码只能是6位数数字");
+            return;
+        }
+        if (!regiphone.test(Uiphone)) {
+            alert("手机格式不对");
+            return;
+        }
 
 
-        $.ajax({
+
+        $.ajax({ 
             url: "http://localhost:4965/api/Hzx_Login/UpdUser",
             data: u,
             type: "post",

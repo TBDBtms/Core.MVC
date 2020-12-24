@@ -16,6 +16,13 @@
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script>
         $(function () {
+            var Rname = sessionStorage.getItem("Rname");
+
+            if (Rname == null) {
+                alert("请登录");
+                location.href = "/HzxLogin/Login";
+            }
+
             ShowVIPInfo();
         })
          function ShowVIPInfo(id) {

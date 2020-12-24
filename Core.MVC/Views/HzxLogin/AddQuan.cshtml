@@ -34,6 +34,12 @@
 <script>
     $().ready(function () {
 
+        var Rname = sessionStorage.getItem("Rname");
+
+        if (Rname == null) {
+            alert("请登录");
+            location.href = "/HzxLogin/Login";
+        }
 
         Shows();
     });
@@ -103,6 +109,8 @@
                 if (d > 0)
                 {
                     alert("配置成功");
+                    let index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
                 
                
                 }

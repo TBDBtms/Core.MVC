@@ -20,12 +20,12 @@
                 <input id="Uname" type="text" class="form-control" placeholder="请输入用户名...." style="width:50px">
             </div>
             @*<div class="input-group" style="margin-top:30px">
-                    <span class="input-group-addon">
-                        <img src="~/img/u13.svg" style="width:30px;height:30px;background-color: Transparent; border-style: none;" />
-                    </span>
-                    <input id="MessageText" type="text" class="form-control" style="background-color: Transparent; border-style: none;" >
-                    <button type="button" class="btn btn-default" style="width:80px;color:blue;border:1px solid blue;font-size:6px" onclick="">发送验证码</button>
-                </div>*@
+            <span class="input-group-addon">
+                <img src="~/img/u13.svg" style="width:30px;height:30px;background-color: Transparent; border-style: none;" />
+            </span>
+            <input id="MessageText" type="text" class="form-control" style="background-color: Transparent; border-style: none;" >
+            <button type="button" class="btn btn-default" style="width:80px;color:blue;border:1px solid blue;font-size:6px" onclick="">发送验证码</button>
+        </div>*@
             <div class="input-group" style="margin-top:30px">
                 <span class="input-group-addon">
                     <img src="~/imgs/u17.svg" style="width:30px;height:30px" />
@@ -43,9 +43,14 @@
             <div style="margin-top:50px">
                 <input class="btn btn-primary" style="width:200px;margin-left:100px" type="button" value="登录" id="btn_log" onclick="Login()" />
             </div>
-            <div style="float:right">
-                <a onclick="zhao()" style="color:aqua">找回密码</a>
+            <div style="margin-top:50px">
+                <input id="Checkbox1" type="checkbox" /> 
+                <a onclick="xie()" style="">登录前请详情阅读使用协议,点击查看使用协议</a>
+                <a onclick="zhao()" style="color:aqua;margin-left:470px;">找回密码</a>
             </div>
+   
+              
+  
             <div style=" margin-top:50px;"><center><p class="name">版权所有：🐒花果山工作室 联系电话:1763612428</p></center></div>
         </div>
     </div>
@@ -160,7 +165,21 @@
         })
     });
     function successAfter() {
-        $('#btn_log').removeAttr("disabled");
+        $("#Checkbox1").change(function () {
+
+        if ($("#Checkbox1").prop("checked"))
+        {
+            $('#btn_log').removeAttr("disabled");
+            }
+        else {
+            $('#btn_log').attr("disabled", true);
+          
+        }
+        });
+      
+           
+        
+      
     }
 </script>
 <script>
@@ -194,7 +213,7 @@
                         {
                             if (d > 0)
                             {
-                                location.href = "/ZHQ_RK/ShowKC";
+                                location.href = "/ZHQ_First/Index";
                             }
                             else {
                                 return;
@@ -222,12 +241,8 @@
         })
     }
     function zhao() {
-        var Uname = $("#Uname").val();
-        if (Uname == "") {
-            alert("请输入用户名");
-            return;
-        }
-        location.href = "/HzxLogin/zhao?Uname=" + Uname;
+    
+        location.href = "/HzxLogin/zhao";
 
     }
 

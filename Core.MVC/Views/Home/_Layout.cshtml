@@ -38,7 +38,9 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">新开就诊</a>
                     <dl class="layui-nav-child">
+                        <dd><a href="javascript:location.href='/HzxLogin/Jzhospital';">接诊</a></dd>
                         <dd><a href="javascript:;">收费</a></dd>
+                        <dd><a href="javascript:location.href='/HzxLogin/ShowBinli';">所有病历</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -251,10 +253,16 @@
 
     });
     $().ready(function () {
-        var Uname = sessionStorage.getItem("Uname");
-        var Rname = sessionStorage.getItem("Rname");
         var Uid = sessionStorage.getItem("Uid");
         var Qma = sessionStorage.getItem("Qma");
+        var Uname = sessionStorage.getItem("Uname");
+        var Rname = sessionStorage.getItem("Rname");
+     
+        if (Rname==null)
+        {
+            alert("请登录");
+            location.href = "/HzxLogin/Login";
+        }
       
         $("#sp1").text(Uname + "" + Rname);
     });

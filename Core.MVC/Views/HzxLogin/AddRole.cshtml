@@ -19,6 +19,16 @@
 
 </body>
 <script>
+    $().ready(function () {
+
+        var Rname = sessionStorage.getItem("Rname");
+
+        if (Rname == null) {
+            alert("请登录");
+            location.href = "/HzxLogin/Login";
+        }
+
+    });
     function AddRelo() {
 
         var r = {};
@@ -31,7 +41,8 @@
             success: function (d) {
                 if (d > 0) {
                     alert("添加成功");
-                    location.href = "/HzxLogin/Addroleinfo";
+                    let index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
                 }
                 else {
                     alert("添加失败");
