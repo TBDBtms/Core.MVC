@@ -67,6 +67,7 @@
                 }
             })
         }
+
         function ShowInfos() {
             $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
@@ -86,9 +87,11 @@
                 }
             })
         }
-        var hydj;
-        var hymc;
-        var zk;
+
+        var hydj="";
+        var hymc=0;
+        var zk = 0;
+
         function UpdInfos() {
             //var htmls = {
             //    endTime: $("#times").val(),
@@ -102,7 +105,7 @@
                     type: "get",
                     success: function (data) {
                         hydj = "VIP1";
-                        hymc= "普通会员";
+                        hymc= 1;
                         zk = "9.80";
                     }
                 })
@@ -114,7 +117,7 @@
                     type: "get",
                     success: function (data) {
                         hydj = "VIP2";
-                        hymc = "初级会员";
+                        hymc = 2;
                         zk = "9.50";
                     }
                 })
@@ -126,7 +129,7 @@
                     type: "get",
                     success: function (data) {
                         hydj = "VIP3";
-                        hymc = "高级会员";
+                        hymc = 3;
                         zk = "8.88";
                     }
                 })
@@ -138,7 +141,7 @@
                     type: "get",
                     success: function (data) {
                         hydj = "VIP4";
-                        hymc = "白银会员";
+                        hymc = 4;
                         zk = "8.50";
                     }
                 })
@@ -150,17 +153,19 @@
                     type: "get",
                     success: function (data) {
                         hydj = "VIP5";
-                        hymc = "黄金会员";
+                        hymc = 5;
                         zk = "8.00";
                     }
                 })
             }
+
             var htmls = {};
+            htmlms.sid = s;
             htmls.endTime = $("#times").val();
-            htmls.vGradeName = hydj;
+            htmls.vGradeId = hydj;
             htmls.vIPName = hymc;
             htmls.discount = zk;
-            $.ajax({
+              $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/UpdVIPgrade",
                 type: "post",
                 dataType: "json",
@@ -185,12 +190,14 @@
                                     let index = parent.layer.getFrameIndex(window.name);
                                     parent.layer.close(index);
                                 } else {
-                                    alert('失败')
+                                    alert('成功')
+                                    let index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
                                 }
                             }
                         })
                     } else {
-                        alert('设置失败');
+                        alert('设置成功');
                         ShowInfos();
                     }
                 }
@@ -226,7 +233,7 @@
             </table>
         </div>
         <div style="text-align:center">
-            <input type="button" name="name" value="取消" class="layui-btn" />
+            <input type="button" name="name" value="取消" class="layui-btn" onclick="location.href='/JcyVIP/Index'" />
             <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="UpdInfos()" />
         </div>
     </div>

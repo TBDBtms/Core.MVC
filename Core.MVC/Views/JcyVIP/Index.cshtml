@@ -10,19 +10,23 @@
 <script>
     $(function () {
         Selx();
-        text1();
-        text2();
-        text3();
-        text4();
-        text5();
+        $("#show").click(function () {
+            pageindex = 1;
+            ShowInfo();
+        })
     })
     var pageindex = 1;
-    var pagesize = 5;
+    var pagesize = 10;
     var pageCount = 0;
     function Showy() {
         pageindex = 1;
         $("#sp").text(pageindex);
         ShowInfo();
+        text1();
+        text2();
+        text3();
+        text4();
+        text5();
     }
     function pore() {
         if (pageindex == 1) {
@@ -32,6 +36,11 @@
         pageindex--;
         $("#sp").text(pageindex);
         ShowInfo();
+        text1();
+        text2();
+        text3();
+        text4();
+        text5();
     }
     function Next() {
         if (pageindex == pageCount) {
@@ -41,12 +50,21 @@
         pageindex++;
         $("#sp").text(pageindex);
         ShowInfo();
-
+        text1();
+        text2();
+        text3();
+        text4();
+        text5();
     }
     function wei() {
         pageindex = pageCount;
         $("#sp").text(pageindex);
         ShowInfo();
+        text1();
+        text2();
+        text3();
+        text4();
+        text5();
     }
     function text1() {
         $('.test2').on('click', function () {
@@ -132,6 +150,11 @@
             },
             complete: function () {
                 ShowInfo();
+                text1();
+                text2();
+                text3();
+                text4();
+                text5();
             }
         })
     }
@@ -197,7 +220,7 @@
         </select>
         创建时间: <input type="datetime" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" style="width:150px;height:33px;">
         <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
-        <button type="button" style="margin-left:auto" onclick="ShowInfo()" class="layui-btn">
+        <button type="button" style="margin-left:auto" onclick="ShowInfo()" id="show" class="layui-btn">
             <i class="layui-icon">&#xe615;</i>
         </button>
         <input type="checkbox" name="name" value="" /> 会员到期预警

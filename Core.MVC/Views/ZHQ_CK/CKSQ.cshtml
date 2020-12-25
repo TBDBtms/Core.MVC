@@ -9,13 +9,14 @@
 <head>
     <style>
         table td {
-            width:60px;
-            height:40px
+            width: 60px;
+            height: 40px
         }
     </style>
     <meta name="viewport" content="width=device-width" />
-    <title>RKSQ</title>
+    <title>CKSQ</title>
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/layui.js"></script>
 </head>
@@ -61,13 +62,13 @@
             <tr>
                 <td>库存上限:</td>
                 <td><span id="spkcsx"></span></td>
-                <td>当前库存:</td>
+                <td>架上库存:</td>
                 <td><span id="spdqkc"></span></td>
             </tr>
             <tr>
                 <td>申请数量:</td>
                 <td><input type="number" id="txtnum" style="height:22px;width:111px" /></td>
-               
+
             </tr>
             <tr>
                 <td>备注</td>
@@ -76,18 +77,10 @@
             </tr>
         </table>
     </div>
-    
 </body>
 </html>
 <script>
     $(function () {
-        var Rname = sessionStorage.getItem("Rname");
-
-        if (Rname == null) {
-            alert("请登录");
-            location.href = "/HzxLogin/Login";
-        }
-
         init();
     })
     function TimeNow() {
@@ -122,28 +115,37 @@
                 $("#spgg").text(d.drugGG);
                 $("#spcname").text(name);
                 $("#spkcsx").text(d.drugKCSX);
-                $("#spdqkc").text(d.drugKC);
+                $("#spdqkc").text(d.drugJSKC);
             }
         })
     }
 
     $("#btnTJ").click(function () {
+
+        if ($("#txtnum").val() > 80) {
+            alert('单次最多可出数量为80!');
+            return;
+        }
+        if ($("#txtnum").val() + $("#spdqkc").val() > 150) {
+            alert('架上每种药品最多可存放150!')
+            return;
+        }
         var t =@ViewBag.id;
         var time = TimeNow();
         var model = {};
-        model.RKSQYPName = $("#spyname").text();
-        model.RKSQCGJ = $("#spncgj").text();
-        model.RKSQLSJ = $("#spnlsj").text();
-        model.RKSQLX = $("#splx").text();
-        model.RKSQTime = time;
-        model.RKSQImg = $("#img").prop("src");
-        model.RKSQName = $("#spcname").text();
-        model.RKSQNum = $("#txtnum").val();
-        model.RKSQDesc = $("#area").val();
+        model.CKSQYPName = $("#spyname").text();
+        model.CKSQCGJ = $("#spncgj").text();
+        model.CKSQLSJ = $("#spnlsj").text();
+        model.CKSQLX = $("#splx").text();
+        model.CKSQTime = time;
+        model.CKSQImg = $("#img").prop("src");
+        model.CKSQName = $("#spcname").text();
+        model.CKSQNum = $("#txtnum").val();
+        model.CKSQDesc = $("#area").val();
         model.tid = t;
 
         $.ajax({
-            url: "http://localhost:4965/api/ZHQ_RK/AddRKSQ",
+            url: "http://localhost:4965/api/ZHQ_CK/AddCKSQ",
             data: model,
             type: "post",
             dataType: "json",
