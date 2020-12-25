@@ -8,6 +8,7 @@
 <body>
     <div>
         <div style="height:100px;">
+            <h2 style="font-weight:bold;margin-left:100px;margin-top:50px;float:left;color:blueviolet">添加接诊病例信息</h2>
             <button type="button" class="layui-btn" style="width:100px;height:45px;margin-right:100px; float:right;margin-top:50px" onclick="location.href='/HzxLogin/Showgua'">返回</button>
 
         </div>
@@ -290,7 +291,7 @@
                         async: false,
                         success: function (d) {
                             if (d > 0) {
-                            
+
                                 location.href = "/Hzx_Login/Showgua";
                             }
                             else {

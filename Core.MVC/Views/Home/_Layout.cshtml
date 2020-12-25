@@ -33,13 +33,16 @@
             <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="test" style="overflow: scroll;height:910px;width:210px;">
 
                 <li class="layui-nav-item"><a href="">门诊管理</a></li>
+                <li class="layui-nav-item"><a href="javascript:location.href='/ZHQ_First/Index';">首页</a></li>
                 <li class="layui-nav-item"><a onclick="location.href='/ZHQ_First/Index'" href="javascript:;">首页</a></li>
                 <li class="layui-nav-item"><a href="javascript:location.href='/ZZH_Cmd/Index';">工作台</a></li>
                 <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">新开就诊</a>
                     <dl class="layui-nav-child">
+                        <dd><a href="javascript:location.href='/HzxLogin/Jzhospital';">接诊</a></dd>
                         <dd><a href="javascript:;">收费</a></dd>
+                        <dd><a href="javascript:location.href='/HzxLogin/ShowBinli';">所有病历</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -78,24 +81,7 @@
                         <dd><a href="javascript:location.href='/ZHQ_administration/Addadministration';">新增药品</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">药品入库管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="">新增入库信息</a></dd>
-                        <dd><a href="">编辑入库信息</a></dd>
-                        <dd><a href="">入库详细_审核通过</a></dd>
-                        <dd><a href="">入库详细_审核未通过</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">药品出库管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="">新增出库信息</a></dd>
-                        <dd><a href="">编辑出库信息</a></dd>
-                        <dd><a href="">出库详细_审核通过</a></dd>
-                        <dd><a href="">出库详细_审核未通过</a></dd>
-                    </dl>
-                </li>
+           
                 <li class="layui-nav-item">
                     <a href="javascript:;">库存管理</a>
                     <dl class="layui-nav-child">
@@ -161,14 +147,7 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">收费统计</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="">收支明细</a></dd>
-                        <dd><a href="">收费员收费统计</a></dd>
-                        <dd><a href="">科室收费统计</a></dd>
-                        <dd><a href="">医生业绩统计</a></dd>
-                        <dd><a href="">储值明细</a></dd>
-                    </dl>
+                    <a href="javascript:location.href='/Charge/Show';">收费统计</a>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">患者统计</a>
@@ -249,7 +228,7 @@
                 </li>
             </ul>
         </div>
-        <div style="float:left">
+        <div style="float:left" id="tbb">
             @RenderBody()
         </div>
     </div>
@@ -264,10 +243,18 @@
 
     });
     $().ready(function () {
-        var Uname = sessionStorage.getItem("Uname");
+    
         var Rname = sessionStorage.getItem("Rname");
+        if (Rname==null)
+        {
+            $("#tbb").remove();
+
+            location.href = "/HzxLogin/Login";
+         
+        }
         var Uid = sessionStorage.getItem("Uid");
         var Qma = sessionStorage.getItem("Qma");
+        var Uname = sessionStorage.getItem("Uname");
         $("#sp1").text(Uname + "" + Rname);
     });
     $("#wl").click(function () {

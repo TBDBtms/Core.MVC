@@ -35,6 +35,13 @@
     var czy;
     var name1;
     $(function () {
+        var Rname = sessionStorage.getItem("Rname");
+
+        if (Rname == null) {
+            alert("请登录");
+            location.href = "/HzxLogin/Login";
+        }
+
         init();
         name1 = sessionStorage.getItem("Uname");
     })
