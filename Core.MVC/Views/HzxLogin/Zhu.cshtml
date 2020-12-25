@@ -185,7 +185,8 @@
     $().ready(function () {
 
         var Rname = sessionStorage.getItem("Rname");
-        if (Rname != "院长") {
+        if (Rname == null) {
+            alert("请登录后再操作");
             location.href = "/HzxLogin/Login";
         }
         keshi();

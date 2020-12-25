@@ -241,7 +241,7 @@
                 </li>
             </ul>
         </div>
-        <div style="float:left">
+        <div style="float:left" id="tbb">
             @RenderBody()
         </div>
     </div>
@@ -256,17 +256,18 @@
 
     });
     $().ready(function () {
+    
+        var Rname = sessionStorage.getItem("Rname");
+        if (Rname==null)
+        {
+            $("#tbb").remove();
+
+            location.href = "/HzxLogin/Login";
+         
+        }
         var Uid = sessionStorage.getItem("Uid");
         var Qma = sessionStorage.getItem("Qma");
         var Uname = sessionStorage.getItem("Uname");
-        var Rname = sessionStorage.getItem("Rname");
-     
-        if (Rname==null)
-        {
-            alert("请登录");
-            location.href = "/HzxLogin/Login";
-        }
-      
         $("#sp1").text(Uname + "" + Rname);
     });
     $("#wl").click(function () {

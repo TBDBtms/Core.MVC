@@ -2,26 +2,29 @@
 @{
     Layout = null;
 }
+<link href="~/layui-v2.4.5/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
+<link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
 
+<script src="~/layui-v2.4.5/layui/layui.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<body style="background-color:antiquewhite">
+<body style="background-color:aliceblue">
 
     <div style="height:100px;margin-top:30px">
         <div>
             <h3 style="margin-top:50px;margin-left:100px;margin-top:40px;float:left">科室名称</h3>
             <input type="text" id="Kname" name="title" style="width:200px;margin-left:20px;float:left;margin-top:30px;height:45px; border-radius:10px" lay-verify="title" autocomplete="off" placeholder="请填写新增科室名称" class="layui-input">
-            <button type="button" style="margin-left:auto" onclick="AddKeshi()" class="layui-btn">添加</button>
+            <button type="button" style="margin-left:auto;margin-top:36px;"  onclick="AddKeshi()" class="layui-btn">添加</button>
 
         </div>
     </div>
 
 </body>
 <script>
+    
     $().ready(function () {
 
         var Rname = sessionStorage.getItem("Rname");
-        if (Rname == null)
-        {
+        if (Rname == null) {
             alert("请登录");
 
         }
@@ -32,7 +35,7 @@
         var Kname = $("#Kname").val();
         $.ajax({
             url: "http://localhost:4965/api/Hzx_Login/Addkeshi",
-            data: {Kname:Kname},
+            data: { Kname: Kname },
             type: "get",
             dataType: "json",
             success: function (d) {

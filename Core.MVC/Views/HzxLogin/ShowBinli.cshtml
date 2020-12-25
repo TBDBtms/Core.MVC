@@ -30,7 +30,7 @@
         </div>
         <div>
 
-            <button type="button" style="margin-left:auto" onclick="Shows()" class="layui-btn">查询</button>
+            <button type="button" style="margin-left:auto" id="btu1" class="layui-btn">查询</button>
 
         </div>
 
@@ -136,6 +136,10 @@
         });
 
 
+    });
+    $("#btu1").click(function () {
+        pageindex = 1;
+        Shows();
     });
     $().ready(function () {
 

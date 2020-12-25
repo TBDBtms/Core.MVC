@@ -31,7 +31,7 @@
             <input type="text" name="title" id="txt_name" required lay-verify="required" placeholder="请输入接诊医生姓名" autocomplete="off" class="layui-input" onchange="Shows()">
         </div>
         <div>
-            <button type="button" style="margin-left:auto" onclick="Shows()" class="layui-btn">查询</button>
+            <button type="button" style="margin-left:auto" id="but12"  class="layui-btn">查询</button>
 
         </div>
 
@@ -153,8 +153,14 @@
 
         var qma = Qma;
     });
+    $("#but12").click(function () {
+
+        pageindex = 1;
+        Shows();
+    });
     function Shows()
     {
+        
         var kid = $("#keshi").val();
         var yname = $("#txt_name").val();
         $.ajax({
@@ -181,7 +187,7 @@
                         "<td style='text-align:center'>" + this.hiphone + "</td>" +
                         "<td style='text-align:center'>" + this.cname + "</td>" +
                         "<td style='text-align:center'>" + (this.xissale?"已就诊":"未就诊") + "</td>" +
-                        "<td style='text - align: center'>" + (qma == "ABCD" ? "<a style='color:darkslateblue;font-weight:bold' onclick='Delguahao(" + this.gid + ")'>退号</a>&nbsp;<a style='color:darkslateblue;font-weight:bold' onclick='Updguahao(" + this.gid + ")'>编辑</a>" : qma == "A" ? "" : qma == "Yi" ? "<a style='color:darkslateblue;font-weight:bold' onclick='Delguahao(" + this.gid + ")'>退号</a>" : "") + "</td>" +
+                        "<td style='text - align: center'>" + (qma == "ABCD" ? "<a style='color:darkslateblue;font-weight:bold' onclick='Delguahao(" + this.gid + ")'>退号</a>&nbsp;<a style='color:darkslateblue;font-weight:bold' onclick='Updguahao(" + this.gid + ")'>编辑</a>" : qma == "F" ? "<a style='color:darkslateblue;font-weight:bold' onclick='Delguahao(" + this.gid + ")'>退号</a>&nbsp;<a style='color:darkslateblue;font-weight:bold' onclick='Updguahao(" + this.gid + ")'>编辑</a>" : qma == "Yi" ? "<a style='color:darkslateblue;font-weight:bold' onclick='Delguahao(" + this.gid + ")'>退号</a>" : "") + "</td>" +
                         "<td style='text - align: center'>" + (this.xissale == "0" ? "<a style='color:darkslateblue;font-weight:bold' onclick='Updzhang(" + this.gid + ")'>接诊</a>": "") + "</td>" +
                         "</tr >");
                 });
@@ -192,7 +198,7 @@
     }
     function Delguahao(gid)
     {
-        if (confirm("确认删除吗？")) {
+        if (confirm("确认退号吗？退号后如需重新挂号请去挂号界面！")) {
 
             $.ajax({
                 url: "http://localhost:4965/api/Hzx_Login/Delhao?Gid=" + gid,
