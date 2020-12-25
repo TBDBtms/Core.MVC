@@ -98,8 +98,8 @@
                         "<td>" + this.minIntegral + "</td>" +
                         "<td>" + this.upgrade + "</td>" +
                         "<td>" + this.remark + "</td>" +
-                        "<td>" + this.states + "</td>" +
-                        "<td><a href='#' class='test2' id='" + this.id + "'>编辑</a>&nbsp;<a type='button'  class='test' id='" + this.id + "'>新增会员类型</a>&nbsp;<a type='button'  class='test1' id='" + this.id + "' >会员条件设置</a>&nbsp;</td></tr>";
+                        "<td>" + (this.states==1?"启用":"禁用") + "</td>" +
+                        "<td><a href='#' class='test2' id='" + this.id + "'>编辑</a>&nbsp;<a href='#' class='test' id='" + this.id + "'>新增会员类型</a>&nbsp;<a href='#'  class='test1' id='" + this.id + "' >会员条件设置</a>&nbsp;</td></tr>";
                     $("#list3").append(htmls);
                 })
                 pageCount = Math.ceil(data.count * 1.0 / pagesize);
@@ -109,7 +109,7 @@
         })
     }
 </script>
-<div style="margin-top:1px;margin-left:280px;text-align:center;width:1480px;height:560px;">
+<div style="margin-top:1px;margin-left:280px;text-align:center;width:1280px;height:560px;">
     <table class="layui-table" style="height: 500px;width:1200px;">
         <thead>
             <tr style="background-color: lavender;">

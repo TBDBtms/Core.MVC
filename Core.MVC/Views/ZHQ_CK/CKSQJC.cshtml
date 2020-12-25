@@ -1,0 +1,200 @@
+﻿
+@{
+    ViewData["Title"] = "CKSQJC";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link href="~/css/D_Case.css" rel="stylesheet" />
+<div id="divBig">
+    <div id="div1">
+        <div class="layui-input-block" style="width:300px;float:left;margin-top: 50px;">
+            <input id="shuru" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="药品名称" class="layui-input">
+        </div>
+        <div class="layui-input-block" style="width:300px;float:left;margin-top: 50px;margin-left:0px">
+            <button type="button" class="layui-btn layui-btn-normal" onclick="CX()" style="float:left">查询</button>
+        </div>
+    </div>
+    <div id="div2">
+        <table class="layui-table">
+            <tr style="background-color:lavender">
+                <td>序号</td>
+                <td>申请药品名称</td>
+                <td>药品图片</td>
+                <td>申请数量</td>
+                <td>申请时间</td>
+                <td>药品类型</td>
+                <td>采购价</td>
+                <td>零售价</td>
+                <td>申请人</td>
+                <td>备注</td>
+                <td>操作</td>
+            </tr>
+            <tbody id="tb">
+            </tbody>
+        </table>
+    </div>
+    <div id="div3">
+        <div align="center" style="float:left;margin-left:640px">
+            <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
+            <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
+            <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
+            <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+            当前页/总页数:<span style="color:blue" id="sp"></span>
+        </div>
+    </div>
+</div>
+<script>
+    var pageindex = 1;
+    var pagesize = 10;
+    var pageCount = 0;
+    function Showy() {
+
+        pageindex = 1;
+        $("#sp").text(pageindex);
+        init();
+
+
+    }
+    function pore() {
+        if (pageindex == 1) {
+            alert("已经到首页了");
+            return;
+        }
+        pageindex--;
+        $("#sp").text(pageindex);
+        init();
+
+
+    }
+    function Next() {
+        if (pageindex == pageCount) {
+            alert("已经到尾页了");
+            return;
+        }
+        pageindex++;
+        $("#sp").text(pageindex);
+        init();
+
+    }
+    function wei() {
+        pageindex = pageCount;
+        $("#sp").text(pageindex);
+        init();
+
+    }
+
+
+    $(function () {
+        init();
+    });
+    function CX() {
+        init();
+    }
+    function init() {
+        var i = 1;
+        var js = sessionStorage.getItem("Rname");
+        var pj;
+        var name = $("#shuru").val();
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_CK/GetCKSQ",
+            data: { name: name, pageindex: pageindex, pagesize: pagesize },
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                $("#tb").empty();
+                $(d.list).each(function () {
+                    if (js == "出库员" && this.cksqState == 1) {
+                        var str = "<tr>" +
+                            "<td>" + i + "</td>" +
+                            "<td>" + this.cksqypName + "</td>" +
+                            "<td><img src='" + this.cksqImg + "' style='height:50px;width:50px'/></td>" +
+                            "<td>" + this.cksqNum + "</td>" +
+                            "<td>" + this.gtime + "</td>" +
+                            "<td>" + this.cksqlx + "</td>" +
+                            "<td>" + this.cksqcgj + "</td>" +
+                            "<td>" + this.cksqlsj + "</td>" +
+                            "<td>" + this.cksqName + "</td>" +
+                            "<td>" + this.cksqDesc + "</td>" +
+                            "<td><a style='color:blue' href='#' onclick='SQTG(" + this.cksqId + ",2)'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue' onclick='JUJ(" + this.cksqId + ")'>拒绝</a></td>" +
+                            "</tr>";
+                        $("#tb").append(str);
+                        i++;
+                    }
+                    else if (js == "仓管" && this.cksqState == 2) {
+                        var str = "<tr>" +
+                            "<td>" + i + "</td>" +
+                            "<td>" + this.cksqypName + "</td>" +
+                            "<td><img src='" + this.cksqImg + "' style='height:50px;width:50px'/></td>" +
+                            "<td>" + this.cksqNum + "</td>" +
+                            "<td>" + this.gtime + "</td>" +
+                            "<td>" + this.cksqlx + "</td>" +
+                            "<td>" + this.cksqcgj + "</td>" +
+                            "<td>" + this.cksqlsj + "</td>" +
+                            "<td>" + this.cksqName + "</td>" +
+                            "<td>" + this.cksqDesc + "</td>" +
+                            "<td><a style='color:blue' href='#' onclick='SQTG(" + this.cksqId + ",3)'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue'  onclick='JUJ(" + this.cksqId + ")'>拒绝</a></td>" +
+                            "</tr>";
+                        $("#tb").append(str);
+                        i++;
+                    }
+                });
+                pageCount = Math.ceil(d.count * 1.0 / pagesize);
+                $("#sp").text(pageindex + "/" + pageCount);
+            }
+        })
+    }
+
+
+    function SQTG(id, tgstate) {
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_CK/UpdState",
+            data: { id: id, tgstate: tgstate },
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                if (d > 0) {
+                    alert('操作成功');
+                    init();
+                } else {
+                    alert('操作失败')
+                }
+            }
+        })
+    }
+
+    //function AddRK(id) {
+    //    $.ajax({
+    //        url: "http://localhost:4965/api/ZHQ_RK/AddRKB",
+    //        data: { id: id },
+    //        type: "get",
+    //        dataType: "json",
+    //        success: function (d) {
+    //            if (d > 0) {
+    //                alert('操作成功');
+    //                init();
+    //            } else {
+    //                alert('操作失败')
+    //            }
+    //        }
+    //    })
+    //}
+
+    function JUJ(id) {
+        $.ajax({
+            url: "http://localhost:4965/api/ZHQ_CK/CKJU",
+            data: { id: id },
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                if (d > 0) {
+                    alert('操作成功');
+                    init();
+                } else {
+                    alert('操作失败')
+                }
+            }
+        })
+    }
+</script>
+

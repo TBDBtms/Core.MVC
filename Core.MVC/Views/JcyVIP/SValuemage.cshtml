@@ -14,6 +14,10 @@
         ShowJLIndex();
         ShowCZIndex();
         ShowTKIndex();
+        $("#show").click(function () {
+            pageindex = 1;
+            ShowInfotwo();
+        })
     })
     function ShowCZIndex() {
         $('.test2').on('click', function () {
@@ -147,7 +151,7 @@
     <select name="interest" lay-filter="会员等级" id="dj1" style="width:100px;height:38px;">
     </select>
     <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
-    <button type="button" style="margin-left:auto" onclick="ShowInfotwo()" class="layui-btn">
+    <button type="button" style="margin-left:auto" onclick="ShowInfotwo()" class="layui-btn" id="show">
         <i class="layui-icon">&#xe615;</i>
     </button>
 </div>

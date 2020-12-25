@@ -83,6 +83,8 @@
                                 console.log(data);
                                 if (data > 0) {
                                     alert('设置成功');
+                                    let index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
                                     location.href = "/JcyVIP/ShowJL";
                                 } else {
                                     alert('设置失败');
