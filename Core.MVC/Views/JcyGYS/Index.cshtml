@@ -11,8 +11,45 @@
 <script>
     $(function () {
         ShowIndex();
+        $("#show").click(function () {
+            pageindex = 1;
+            ShowIndex();
+        })
     })
+    var pageindex = 1;
+    var pagesize = 5;
+    var pageCount = 0;
+    function Showy() {
+        pageindex = 1;
+        $("#sp").text(pageindex);
+        ShowIndex();
+    }
+    function pore() {
+        if (pageindex == 1) {
+            alert("已经到首页了");
+            return;
+        }
+        pageindex--;
+        $("#sp").text(pageindex);
+        ShowIndex();
+    }
+    function Next() {
+        if (pageindex == pageCount) {
+            alert("已经到尾页了");
+            return;
+        }
+        pageindex++;
+        $("#sp").text(pageindex);
+        ShowIndex();
+
+    }
+    function wei() {
+        pageindex = pageCount;
+        $("#sp").text(pageindex);
+        ShowIndex();
+    }
     function ShowIndex() {
+        var i = 1;
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetSupplierInfos",
             dataType: "json",
@@ -20,9 +57,9 @@
             data: { name: $("#name").val() },
             success: function (data) {
                 $("#list").empty();
-                $(data).each(function () {
+                $(data.list).each(function () {
                     var htmls = "<tr>" +
-                        "<td>" + this.id + "</td>" +
+                        "<td>" + i++ + "</td>" +
                         "<td>" + this.supGIS+"</td>" +
                         "<td>" + this.supName + "</td>" +
                         "<td>" + this.linkMan + "</td>" +
@@ -33,6 +70,9 @@
                         "<td><a href='#' onclick='Upd(" + this.id + ")' style='color: darkslateblue;'>编辑</a>&nbsp;<a href='#' onclick='Del(" + this.id + ")' style='color: darkslateblue;'>删除</a></td></tr>";
                     $("#list").append(htmls);
                 })
+                pageCount = Math.ceil(data.count * 1.0 / pagesize);
+                $("#sp").text(pageindex);
+                $("#counts").text(pageCount);
             }
         })
     }
@@ -50,7 +90,8 @@
                     alert('删除成功');
                     location.reload();
                 } else {
-                    alert('删除失败')
+                    alert('删除失败');
+                    location.reload();
                 }
             }
         })
@@ -58,14 +99,14 @@
 </script>
 <div style="width:950px;height:450px;margin-left:400px;margin-top:50px;">
     <div style="float:right;">
-        <input type="button" name="name" value="新增" onclick="" class="layui-btn" style="background-color:mediumslateblue" />
+        <input type="button" name="name" value="新增" onclick="location.href='/JcyGYS/Add'" class="layui-btn" style="background-color:mediumslateblue" />
     </div>
     <hr />
     <div>
         <div style="width:600px;height:30px;">
             <input type="text" id="name" value="" style="width:200px;height:30px;float:left" class="layui-input" />
 
-            <button type="button" class="layui-btn" style="background-color:mediumslateblue;float:left;height:30px;width:50px;">
+            <button type="button" class="layui-btn" style="background-color:mediumslateblue;float:left;height:30px;width:50px;" onclick="ShowIndex()" id="show">
                 <i class="layui-icon">&#xe615;</i>
             </button>
         </div>
@@ -87,8 +128,17 @@
                 </tr>
             </thead>
             <tbody id="list">
+
             </tbody>
         </table>
+    </div>
+    <div style="text-align:center">
+        <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
+        <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
+        <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
+        <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+        当前页:<span style="color:blue" id="sp"></span>
+        总页数:<span style="color:red" id="counts"></span>
     </div>
 </div>
 
