@@ -7,6 +7,7 @@
 <script src="~/js/site.js"></script>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+<link href="~/css/D_Case.css" rel="stylesheet" />
 <script>
     $(function () {
         Selx();
@@ -165,12 +166,14 @@
         var name = $("#name").val();
         var reg = /^[\u4E00-\u9FA5]{2,4}$/;   /*定义验证表达式*/
         var phg = /^[0-9]{11}$/;   /*定义验证表达式*/
+        var pag = /^[0-9]{9}$/;
+        var strs = 0;
         if (reg.test(name)) {
-            name = $("#name").val();
+            strs = 1;
         } else if (phg.test(name)) {
-            name = list.phone;
-        } else {
-            name = list.idCard;
+            strs = 2;
+        } else if (pag.test(name)) {
+            strs = 3;
         }
         //var card = $("#name").val();
         //var phone = $("#name").val();
@@ -180,7 +183,7 @@
             url: "http://localhost:4965/api/JcyVIP/GetVIPInfos",
             dataType: "json",
             type: "get",
-            data: { stime: stime, etime: etime, id: id, name: name, phone: name, card: name, pageindex: pageIndex, pagesize: pageSize },
+            data: { stime: stime, etime: etime, id: id, name: name, flag: strs, pageindex: pageIndex, pagesize: pageSize },
             async: false,
             success: function (data) {
                 console.log(data);
@@ -199,7 +202,7 @@
                         "<td>" + this.integral + "</td>" +
                         "<td>" + this.startTime + "</td>" +
                         "<td>" + this.endTime + "</td>" +
-                        "<td>" + (this.vipState==1?"启用":"禁用") + "</td>" +
+                        "<td>" + (this.vipState == 1 ? "启用" : "禁用") + "</td>" +
                         "<td><a href='#' class='test2' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>充值</a>&nbsp;<a href='#' id='" + this.id + "' class='test3' style='color:darkslateblue;font-weight:bold'>设置会员等级</a>&nbsp;<a href='#' class='test4' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动</a>&nbsp;<a href='#' class='test5' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>退款</a>&nbsp;<a href='#' id='" + this.id + "' class='test6' style='color:darkslateblue;font-weight:bold'>等级变更记录</a></td></tr>";
                     $("#list").append(htmls);
                 })
@@ -209,53 +212,65 @@
             }
         })
     }
-    function one() {
-        ShowInfo();
-    }
 </script>
-<div style="text-align:center;width:1680px;height:700px;">
-    <div style="margin-top:1px;">
-        会员等级: <select name="interest" lay-filter="会员等级" id="dj" style="width:100px;height:38px;">
-            <option></option>
-        </select>
-        创建时间: <input type="datetime" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" style="width:150px;height:33px;">
-        <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
-        <button type="button" style="margin-left:auto" onclick="ShowInfo()" id="show" class="layui-btn">
-            <i class="layui-icon">&#xe615;</i>
-        </button>
-        <input type="checkbox" name="name" value="" /> 会员到期预警
+<div id="divBig">
+    <div id="div1">
+        <div style="margin-top:20px;height:20px;">
+            <div style="margin-top:1px;">
+                会员等级: <select name="interest" lay-filter="会员等级" id="dj" style="width:100px;height:38px;">
+                    <option></option>
+                </select>
+                创建时间: <input type="datetime" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" style="width:150px;height:33px;">
+                <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
+                <button type="button" style="margin-left:auto" onclick="ShowInfo()" id="show" class="layui-btn">
+                    <i class="layui-icon">&#xe615;</i>
+                </button>
+                <input type="checkbox" name="name" value="" /> 会员到期预警
+            </div>
+        </div>
     </div>
-    <table class="layui-table" style="height: 600px;">
-        <thead>
-            <tr style="background-color: lavender;">
-                <th>序号</th>
-                <th>卡号</th>
-                <th>会员类型</th>
-                <th>会员等级</th>
-                <th>会员姓名</th>
-                <th>手机号码</th>
-                <th>积累消费(元)</th>
-                <th>储值余额(元)</th>
-                <th>累计储值</th>
-                <th>积分</th>
-                <th>开卡时间</th>
-                <th>到期时间</th>
-                <th>会员状态</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody id="list">
+    <div id="div2">
+        <div>
+            <table class="layui-table" style="height: 600px;">
+                <thead>
+                    <tr style="background-color: lavender;">
+                        <th>序号</th>
+                        <th>卡号</th>
+                        <th>会员类型</th>
+                        <th>会员等级</th>
+                        <th>会员姓名</th>
+                        <th>手机号码</th>
+                        <th>积累消费(元)</th>
+                        <th>储值余额(元)</th>
+                        <th>累计储值</th>
+                        <th>积分</th>
+                        <th>开卡时间</th>
+                        <th>到期时间</th>
+                        <th>会员状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="list">
 
-        </tbody>
-    </table>
-    <div style="text-align:center">
-        <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
-        <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
-        <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
-        <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
-        当前页:<span style="color:blue" id="sp"></span>
-        总页数:<span style="color:red" id="counts"></span>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div id="div3">
+        <div style="text-align:center;margin-top:50px;">
+            <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
+            <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
+            <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
+            <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+            当前页:<span style="color:blue" id="sp"></span>
+            总页数:<span style="color:red" id="counts"></span>
+        </div>
     </div>
 </div>
+
+
+
+
 
 

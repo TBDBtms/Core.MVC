@@ -6,9 +6,8 @@
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <link href="~/css/cmd.css" rel="stylesheet" />
 <h1 style="color:red;margin-left:50px;margin-top:30px">工作台</h1>
-<br />
 <div>
-    <div style="float:left;margin-left:30px">
+    <div style="float:left;margin-left:30px;">
         <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
             <div class="layui-form-item" style="width:300px">
                 <label class="layui-form-label">开始时间：</label>
@@ -35,7 +34,7 @@
 
     <div>
         <div class="layui-input-block" style="width:300px;float:left">
-            <input type="text" id="aaa" placeholder="请输入患者信息" class="layui-input" />
+            <input type="text" id="aaa" placeholder="请输入患者姓名或手机号" class="layui-input" />
         </div>
         <div style="float:left">
             <button type="button" class="layui-btn" id="btnCX">查询</button>
@@ -43,9 +42,7 @@
     </div>
 </div>
 <div>
-    <div id="ddd" style="width:1600px;height:500px;float:left">
-        <div id="div1">
-        </div>
+    <div id="ddd" style="width:1600px;height:450px;float:left;margin-top:-26px">
         <div id="div2">
             <div id="d1">
 
@@ -59,7 +56,7 @@
         </div>
     </div>
     <br />
-        <div align="center" style="float:left;margin-top:260px;margin-left:583px">
+        <div align="center" style="float:left;margin-top:290px;margin-left:583px">
             <button type="button" style="margin-left:auto" id="SY" class="layui-btn">首页</button>
             <button type="button" style="margin-left:auto" id="SXY" class="layui-btn">上一页</button>
             <button type="button" style="margin-left:auto" onclick="XXY()" class="layui-btn">下一页</button>
@@ -192,12 +189,12 @@
                 $("#ddd").empty();
                 $(d.pageList).each(function () {
                     if (this.patientStateId == 0) {
-                        a = "<input type='button' class='aaa' value='接诊' style='width:150px;height:50px;background-color:brown' onclick='Updzhang(" + this.patientId + ")' />";
-                        b = "<input type='button' class='bbb' value='查看患者信息' style='width:150px;height:50px;background-color:brown' onclick='Huan(" + this.patientId + ")' />"; 
+                        a = "<input type='button' class='aaa' value='接诊' style='width:150px;height:50px;background-color:cornflowerblue' onclick='Updzhang(" + this.patientId + ")' />";
+                        b = "<input type='button' class='bbb' value='查看患者信息' style='width:150px;height:50px;background-color:cornflowerblue' onclick='Huan(" + this.patientId + ")' />"; 
                     }
                     else {
                         a = "";
-                        b = "<input type='button' class='bbb' value='查看患者信息' style='width:350px;height:50px;background-color:brown;margin-left:-180px' onclick='Huan(" + this.patientId + ")' />"; 
+                        b = "<input type='button' class='bbb' value='查看患者信息' style='width:350px;height:50px;background-color:cornflowerblue;margin-left:-180px' onclick='Huan(" + this.patientId + ")' />"; 
                     }
 
                     if (this.patientSex) {
