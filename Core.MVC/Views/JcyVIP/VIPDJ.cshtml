@@ -160,11 +160,11 @@
             }
 
             var htmls = {};
-            htmlms.sid = s;
             htmls.endTime = $("#times").val();
             htmls.vGradeId = hydj;
             htmls.vIPName = hymc;
             htmls.discount = zk;
+            htmls.id = $("#id").val();
               $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/UpdVIPgrade",
                 type: "post",
