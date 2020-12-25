@@ -38,7 +38,9 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a href="javascript:;">新开就诊</a>
                     <dl class="layui-nav-child">
+                        <dd><a href="javascript:location.href='/HzxLogin/Jzhospital';">接诊</a></dd>
                         <dd><a href="javascript:;">收费</a></dd>
+                        <dd><a href="javascript:location.href='/HzxLogin/ShowBinli';">所有病历</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -241,7 +243,7 @@
                 </li>
             </ul>
         </div>
-        <div style="float:left">
+        <div style="float:left" id="tbb">
             @RenderBody()
         </div>
     </div>
@@ -256,10 +258,18 @@
 
     });
     $().ready(function () {
-        var Uname = sessionStorage.getItem("Uname");
+    
         var Rname = sessionStorage.getItem("Rname");
+        if (Rname==null)
+        {
+            $("#tbb").remove();
+
+            location.href = "/HzxLogin/Login";
+         
+        }
         var Uid = sessionStorage.getItem("Uid");
         var Qma = sessionStorage.getItem("Qma");
+        var Uname = sessionStorage.getItem("Uname");
         $("#sp1").text(Uname + "" + Rname);
     });
     $("#wl").click(function () {

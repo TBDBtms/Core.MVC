@@ -16,12 +16,15 @@
     <p id="login">
         <h1>找回用户密码</h1>
         <input type="text" required="required" id="Uname" placeholder="用户名" name="p">
+        <span id="spname" style="color:red"></span>
         <input type="text" required="required" id="Uiphone" placeholder="手机号" name="p">
+        <span id="spiphone"></span>
         输入新密码<input type="password" required="required" id="Upass" placeholder="密码" name="p">
+        <span id="sppass" style="color:red"></span>
         <button class="but" type="submit" onclick="Xiu()">确认密码</button>
 
     </p>
-    <style>
+ <style>
 
         html {
             width: 100%;
@@ -34,7 +37,7 @@
             height: 100%;
             font-family: 'Open Sans',sans-serif;
             margin: 0;
-            background-color: #4A374A;
+            background-color:aliceblue;
         }
 
         #login {
@@ -95,11 +98,31 @@
 <script>
    
     function Xiu() {
-
+     
         var u = {};
         u.Upass = $("#Upass").val();
         u.Uname = $("#Uname").val();
         u.Uiphone = $("#Uiphone").val();
+        var Uname = $("#Uname").val();
+        var Upass = $("#Upass").val();
+        var Uiphone = $("#Uiphone").val();
+        var reg = /^[\u4E00-\u9FA5]{2,4}$/;
+        var regs = /^[0-9]{6}$/;
+        var regiphone = /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
+        if (!reg.test(Uname)) {
+            $("#spname").text("姓名只能是字符")
+            return;
+        }
+        if (!regs.test(Upass)) {
+            $("#sppass").text("密码只能是6位数字")
+            return;
+        }
+        if (!regiphone.test(Uiphone)) {
+            $("#spiphone").text("手机号格式不对")
+            return;
+        }
+
+
         if (confirm("确认修改吗？")) {
             $.ajax({
                 url: "http://localhost:4965/api/Hzx_Login/zhao",
