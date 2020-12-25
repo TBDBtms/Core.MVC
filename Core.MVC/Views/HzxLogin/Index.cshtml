@@ -76,12 +76,9 @@
     var pagesize = 5;
     var pageCount = 0;
     function Showy() {
-
         pageindex = 1;
         $("#sp").text(pageindex);
         Shows();
-
-
     }
     function pore() {
         if (pageindex == 1) {
@@ -91,8 +88,6 @@
         pageindex--;
         $("#sp").text(pageindex);
         Shows();
-
-
     }
     function Next() {
         if (pageindex == pageCount) {
@@ -130,8 +125,7 @@
       
     });
     function keshi()
-    {
-        
+    {    
         $.ajax({
             url: "http://localhost:4965/api/Hzx_Login/GetKeshis",
             type: "get",

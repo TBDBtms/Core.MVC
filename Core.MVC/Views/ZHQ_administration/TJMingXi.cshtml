@@ -7,7 +7,7 @@
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <div style="width:1400px;height:910px;margin-left:150px">
     <div style="width:209px;float:left;margin-top:15px">
-        <input type="text" id="txtName" placeholder="请输入药品名称/药品编号" class="layui-input" />
+        <input type="text" id="txtName" placeholder="请输入药品名称/药品编号" class="layui-input" onchange="lop()"/>
     </div>
     <div style="width:50px;float:left;margin-top:15px">
         <input type="button" value="查询" id="btnCX" class="layui-btn" />
@@ -87,6 +87,7 @@
     }
     function LoadTable() {
         var name = $("#txtName").val();
+        var js = sessionStorage.getItem("Rname");
         var i = 1;
         $.ajax({
             url: "http://localhost:4965/api/ZHQ_administration/GetPricing",
@@ -95,26 +96,34 @@
             dataType: "json",
             success: function (d) {
                 $("#tb").empty();
-                $(d.pageList).each(function () {
-                    var str = "<tr>" +
-                        "<td>" + i + "</td>" +
-                        "<td>" + this.pricingBH + "</td>" +
-                        "<td>" + this.pricingTime + "</td>" +
-                        "<td>" + this.pricingName + "</td>" +
-                        "<td>" + this.pricingGG + "</td>" +
-                        "<td>" + this.pricingKC + "</td>" +
-                        "<td style='color:red'>" + this.pricingCGJ + "</td>" +
-                        "<td style='color:green'>" + this.pricingLSJ + "</td>" +
-                        "<td style='color:blue'>" + this.pricingXLSJ + "</td>" +
-                        "<td>" + this.pricingRName + "</td>" +
-                        "</tr>";
-                    $("#tb").append(str);
-                    i++;
-                })
-                count = d.countnum;  //总条数
-                pagecount = Math.ceil(count * 1.0 / pagesize); //总页数
-                $("#sp").text(pageindex + "/" + pagecount);
+                if (js == "医生" || js == "院长") {
+                    $(d.pageList).each(function () {
+                        var str = "<tr>" +
+                            "<td>" + i + "</td>" +
+                            "<td>" + this.pricingBH + "</td>" +
+                            "<td>" + this.pricingTime + "</td>" +
+                            "<td>" + this.pricingName + "</td>" +
+                            "<td>" + this.pricingGG + "</td>" +
+                            "<td>" + this.pricingKC + "</td>" +
+                            "<td style='color:red'>" + this.pricingCGJ + "</td>" +
+                            "<td style='color:green'>" + this.pricingLSJ + "</td>" +
+                            "<td style='color:blue'>" + this.pricingXLSJ + "</td>" +
+                            "<td>" + this.pricingRName + "</td>" +
+                            "</tr>";
+                        $("#tb").append(str);
+                        i++;
+                    })
+                    count = d.countnum;  //总条数
+                    pagecount = Math.ceil(count * 1.0 / pagesize); //总页数
+                    $("#sp").text(pageindex + "/" + pagecount);
+                }
+         
+              
             }
         })
+    }
+
+    function lop() {
+        LoadTable();
     }
 </script>

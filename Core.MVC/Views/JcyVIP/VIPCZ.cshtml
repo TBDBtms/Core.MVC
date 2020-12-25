@@ -52,7 +52,8 @@
                     if (data > 0) {
                         alert('充值成功');
                         location.reload();
-                        window.close();
+                        let index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
                     } else {
                         alert('充值失败');
                         location.reload();
@@ -93,7 +94,7 @@
         </div>
         <br />
         <div>
-            <input type="button" name="name" value="取消" class="layui-btn" />
+            <input type="button" name="name" value="取消" class="layui-btn"  onclick="location.href='/JcyVIP/Index'"/>
             <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="Upd()" />
         </div>
     </div>

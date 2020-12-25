@@ -90,8 +90,9 @@
     var pagesize = 10;
     var count = 0;  //总条数
     var pagecount = 0;  //总页数
-    var bid = 0;
-    var wid = 0;
+    var pp;
+    var fl;
+    var jx;
     $(function () {
 
         LoadTable();
@@ -135,22 +136,34 @@
 
 
     function LoadTable() {
+        var js = sessionStorage.getItem("Rname");
         var num;
         var name = $("#txtName").val();
         var i = 1;
         $.ajax({
             url: "http://localhost:4965/api/ZHQ_administration/Getadministration",
-            data: { name: name, pageindex: pageindex, pagesize: pagesize, bid: bid, wid: wid },
+            data: { name: name, pageindex: pageindex, pagesize: pagesize, pp: pp, fl: fl, jx: jx },
             type: "get",
             dataType: "json",
             success: function (d) {
                 $("#pj").empty();
                 $(d.pageList).each(function () {
-                    if (this.drugJSKC <  50) {
-                        num = "<span style=color:red>数量较少</span>&nbsp;&nbsp;<span style=color:blue><a href='#'>申请提货</a></span>";
+                    if (js == "药品负责人" || js == "普通医护人员" || js == "医生") {
+                        if (this.drugJSKC <= 30) {
+                            num = "<span style=color:red>数量较少</span>&nbsp;&nbsp;<span style=color:blue><a href='#' id='" + this.drugId + "' class='sq'>申请提货</a></span>";
+                        } else if (this.drugJSKC <= 50) {
+                            num = "<span style=color:blue><a href='#' id='" + this.drugId + "' class='sq'>申请提货</a></span>";
+                        }
                     } else {
-                        num = "<span style=color:green>数量充足</span>";
+                        num = "";
                     }
+                    //if (js == "药品负责人" && this.drugJSKC <= 40) {
+                    //    num = "<span style=color:red>数量较少</span>&nbsp;&nbsp;<span style=color:blue><a href='#' id='" + this.drugId + "' class='sq'>申请提货</a></span>";
+                    //} else if (this.drugJSKC <= 20) {
+                    //    num = "<span style=color:red>数量较少</span>&nbsp;&nbsp;";
+                    //} else {
+                    //    num = "<span style=color:blue>数量充足</span>&nbsp;&nbsp;";
+                    //}
                     $("#pj").append("<div class='ppp' style='height:247px;width:223px;margin-left:20px;float:left;margin-top:13px'><div style='width:180px;height:173px;margin-top:15px;margin-left:20px' align='center'> <img src='" + this.imgUrl + "' style='width:179px; height: 173px; margin-top: -1px;'/></div><div style='height:23px;width:182px;margin-top:2px;margin-left:19px'><span><a href='#' id=" + this.drugId + " class='xq' > " + this.drugTYM + "</a ></span ></div ><div style='height: 6px; width: 183px;margin-left:17px'><span>品牌:" + this.brandName + "</span></div> <div style='height:23px;width:182px;margin-top:10px;margin-left:15px'><span style='color:red;font-size:21px'>" + this.drugLSJ + "元</span><span style='margin-left:20px'>" + num + "</span></div></div >");
 
                     });
@@ -171,7 +184,14 @@
             content: '/ZHQ_administration/GetFirstDrug?id=' + this.id,
         });
     });
-
+    $(document).on('click', '.sq', function () {
+        layer.open({
+            type: 2,
+            area: ['400px', '500px'],
+            shadeClose: true, //点击遮罩关闭
+            content: '/ZHQ_CK/CKSQ?id=' + this.id,
+        });
+    });
     function loadDrugFL() {
         $.ajax({
             url: "http://localhost:4965/api/ZHQ_administration/Getclassification",
@@ -181,8 +201,9 @@
             contextType: "application/x-www-form-urlencoded",
             success: function (d) {
                 $("#fl").empty();
+                $("#fl").append("<span style='margin-left:15px;font-size:15px;'><a href='#' style='color:blue' onclick='FL(0)'>查看全部分类</a></span>");
                 $(d).each(function () {
-                    var str = "<span style='margin-left: 15px; font - size: 15px'><a href='#' style='color:blue' onclick='gb(" + this.drugClassId + "," + 3 + ")'>" + this.drugClassName + "</a></span>";
+                    var str = "<span style='margin-left: 15px; font - size: 15px'><a href='#' style='color:blue' onclick='FL(" + this.drugClassId + ")'>" + this.drugClassName + "</a></span>";
                     $("#fl").append(str);
                 })
                 loadDrugJX();
@@ -200,8 +221,9 @@
             contextType: "application/x-www-form-urlencoded",
             success: function (d) {
                 $("#jx").empty();
+                $("#jx").append("<span style='margin-left:15px;font-size:15px;'><a href='#' style='color:blue' onclick='JX(0)'>查看全部剂型</a></span>");
                 $(d).each(function () {
-                    var str = "<span style='margin-left: 15px; font - size: 15px'><a href='#' style='color:blue' onclick='gb(" + this.dosage_formId + "," + 2 + ")'>" + this.dosage_formName + "</a></span>";
+                    var str = "<span style='margin-left: 15px; font - size: 15px'><a href='#' style='color:blue' onclick='JX(" + this.dosage_formId + ")'>" + this.dosage_formName + "</a></span>";
                     $("#jx").append(str);
                 })
                 loadDrugPB();
@@ -217,8 +239,9 @@
             contextType: "application/x-www-form-urlencoded",
             success: function (d) {
                 $("#pb").empty();
+                $("#pb").append("<span style='margin-left:15px;font-size:15px;'><a href='#' style='color:blue' onclick='PP(0)'>查看全部品牌</a></span>");
                 $(d).each(function () {
-                    var str = "<span style='margin-left:15px;font-size:15px;'><a href='#' style='color:blue' onclick='gb(" + this.brandId + "," + 1 + ")'>" + this.brandName + "</a></span>";
+                    var str = "<span style='margin-left:15px;font-size:15px;'><a href='#' style='color:blue' onclick='PP(" + this.brandId + ")'>" + this.brandName + "</a></span>";
                     $("#pb").append(str);
                 })
             }
@@ -227,12 +250,21 @@
 
     $("#btnCXSY").click(function () {
         pageindex = 1;
-        gb(0, 0);
+        fl = 0;
+        jx = 0;
+        pp = 0;
+        LoadTable();
     })
-    function gb(d1, d2) {
-        bid = d2;
-        wid = d1;
-        pageindex = 1;
+    function FL(flid) {
+        fl = flid;
+        LoadTable();
+    }
+    function JX(jxid) {
+        jx = jxid;
+        LoadTable();
+    }
+    function PP(ppid) {
+        pp = ppid;
         LoadTable();
     }
 </script>

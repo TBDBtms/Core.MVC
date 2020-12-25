@@ -22,8 +22,21 @@ namespace Core.MVC.Controllers
             return View();
         }
         public IActionResult RK()
+        { 
+            return View();
+        }
+        public IActionResult RKNO()
+        {
+            return View();
+        }
+        public IActionResult RKYES()
         {
             
+            return View();
+        }
+        public IActionResult ll()
+        {
+
             return View();
         }
     }

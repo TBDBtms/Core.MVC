@@ -100,12 +100,15 @@
                 $("#tb").empty();
                 $(d.pageList).each(function () {
                     var cz;
-                    if (js == "药品负责人") {
+                    if (js == "提货员") {
                       
                         if (this.drugKC <= this.drugKCXX) {
-                            cz = "<span><a href='#' style='color:blue' id='" + this.drugId + "' class='sq'>申请提货</a></span>"
+                            cz = "<span><a href='#' style='color:Red' id='" + this.drugId + "' class='sq'>申请提货</a></span>"
                         } else {
-                            cz = "<span><a href='#'>暂无操作</a></span>"
+                            cz = "<span><a href='#' style='color:blue' id='" + this.drugId + "' class='sq'>申请提货</a></span>"
+                        }
+                        if (this.drugKC == this.drugKCSX) {
+                            cz = "<span><a href='#' style='color:black'>暂无操作</a></span>"
                         }
                     } else {
                         cz = "<span><a href='#'>暂无操作</a></span>"
@@ -131,8 +134,6 @@
                 count = d.countnum;  //总条数
                 pagecount = Math.ceil(count * 1.0 / pagesize); //总页数
                 $("#sp").text(pageindex + "/" + pagecount);
-            
-
             }
         })
     }
