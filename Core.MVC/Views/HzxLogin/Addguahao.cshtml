@@ -25,9 +25,8 @@
                                 <label class="layui-form-label">诊疗费</label>
                                 <div style="width:300px;">
                                     <div class="layui-input-block">
-                                        <select lay-verify="required" id="Zlmoney">
-                                            <option value="0元">免诊疗费(0.00元)</option>
-                                            <option value="50元">诊疗费(50.00元)</option>
+                                        <select lay-verify="required" id="ZlId">
+                                          
                                         </select>
                                     </div>
                                 </div>
@@ -68,10 +67,8 @@
                             <label class="layui-form-label">挂号费</label>
                             <div style="width:300px;">
                                 <div class="layui-input-block">
-                                    <select lay-verify="required" id="Gmoney">
-                                        <option value="0元">免费(0.00元)</option>
-                                        <option value="10元">挂号费(10.00元)</option>
-                                        <option value="20元">专家挂号费(20.00元)</option>
+                                    <select lay-verify="required" id="Seid">
+                                      
                                     </select>
                                 </div>
                             </div>
@@ -230,13 +227,50 @@
     $().ready(function () {
 
         keshi();
-       
+        getzl();
+        getgua();
         getshen();
         getJtype();
         $("#CreatName").val(sessionStorage.getItem("Uname"));
 
 
     });
+    function getzl() {
+   
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetConsultations",
+            type: "get",
+            async: false,
+            dataType: "json",
+            success: function (d) {
+                $("#ZlId").empty();
+                $("#ZlId").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.sequenceId + "'>" + this.additional +"</option>";
+                    $("#ZlId").append(str);
+                });
+             
+            }
+        });
+    }
+    function getgua() {
+
+        $.ajax({
+            url: "http://localhost:4965/api/Hzx_Login/GetRegistrations",
+            type: "get",
+            async: false,
+            dataType: "json",
+            success: function (d) {
+                $("#Seid").empty();
+                $("#Seid").append("<option value='0'>请选择</option>");
+                $(d).each(function () {
+                    var str = "<option value='" + this.sequenceIds + "'>" + this.registra + "</option>";
+                    $("#Seid").append(str);
+                });
+            
+            }
+        });
+    }
     function getshi() {
         var Mid = $("#shen").val();
         $.ajax({
@@ -321,8 +355,8 @@
         g.ksids = $("#keshi").val();
         g.Jids = $("#jztype").val();
         g.Yname = $("#Yname").val();
-        g.Gmoney = $("#Gmoney").val();
-        g.Zlmoney = $("#Zlmoney").val();
+        g.Seid = $("#Seid").val();
+        g.ZlId = $("#ZlId").val();
         g.Gtime = $("#Gtime").val();
         g.Gpelete = $("#Gpelete").val();
         g.Hname = $("#Hname").val();

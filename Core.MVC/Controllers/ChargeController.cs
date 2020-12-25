@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.MVC.Controllers
 {
-    public class Zzh_ChargeController : Controller
+    public class ChargeController : Controller
     {
-        /// <summary>
-        /// 门诊日志
-        /// </summary>
-        /// <returns></returns>
-        public IActionResult GetCharge()
+        public IActionResult Show()
         {
             return View();
         }

@@ -6,8 +6,13 @@
 <link href="~/css/D_Case.css" rel="stylesheet" />
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <div id="divBig">
-    <div id="div1">      
-
+    <div id="div1">
+        <div class="layui-input-block" style="width:300px;float:left;margin-top: 50px;">
+            <input id="shuru" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="医嘱信息" class="layui-input">
+        </div>
+        <div class="layui-input-block" style="width:300px;float:left;margin-top: 50px;margin-left:0px">
+            <button type="button" class="layui-btn layui-btn-normal" onclick="CX()" style="float:left">查询</button>
+        </div>
     </div>
     <hr />
     <div id="div2">
@@ -31,11 +36,13 @@
         </table>
     </div>
     <div id="div3">
-        <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
-        <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
-        <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
-        <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
-        当前页/总页数:<span style="color:blue" id="sp"></span>
+        <div align="center" style="float:left;margin-left:640px">
+            <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
+            <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
+            <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
+            <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+            当前页/总页数:<span style="color:blue" id="sp"></span>
+        </div>
     </div>
 </div>
 
@@ -89,7 +96,7 @@
         Show();
     });
 
-    
+
 
     function Show() {
         var i = 1;
@@ -97,7 +104,7 @@
             url: "http://localhost:4965/api/DLH_Princ/GetDate",
             type: "get",
             dataType: "json",
-            data: {pageIndex: pageindex, pageSize: pagesize },
+            data: { pageIndex: pageindex, pageSize: pagesize },
             success: function (date) {
                 console.log(date);
                 $("#tbody_td").empty();
@@ -107,7 +114,7 @@
                         "<td>" + this.pastName + "</td>" +
                         "<td>" + this.pastTable + "</td>" +
                         "<td>" + this.uname + "</td>" +
-                        "<td><a style='color:blue' onclick='DelCase(" + this.pastId +")'>删除</a></td>" +
+                        "<td><a style='color:blue' onclick='DelCase(" + this.pastId + ")'>删除</a></td>" +
                         "</tr>";
                     $("#tbody_td").append(str);
                     i++;

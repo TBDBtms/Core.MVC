@@ -13,6 +13,13 @@
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script>
         $(function () {
+            var Rname = sessionStorage.getItem("Rname");
+
+            if (Rname == null) {
+                alert("请登录");
+                location.href = "/HzxLogin/Login";
+            }
+
             layui.use('form', function () {
                 form = layui.form;
                 var layData = ['form', 'laydate'];
@@ -67,7 +74,7 @@
             var str = {
                 PatientId: $("#hid").val(),
                 EndData: $("#eTime").val(),
-                MemberTypeId: $("#VIPgrade").val()
+                MemberId: $("#VIPgrade").val()
             }
             $.ajax({
                 url: "http://localhost:4965/api/Zzh_Patient/UpdPat",
@@ -76,7 +83,8 @@
                 data: str,
                 success: function (d) {
                     if (d > 0) {
-                        alert("编辑成功"); 
+                        let index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
                     }
                     else {
                         alert("编辑失败");

@@ -115,11 +115,22 @@
         var name = $("#name").val();
         var phone = $("#name").val();
         var Card = $("#IdCard").val();
+        var reg = /^[\u4E00-\u9FA5]{2,4}$/;   /*定义验证表达式*/
+        var phg = /^[0-9]{11}$/;   /*定义验证表达式*/
+        var pag = /^[0-9]{9}$/;
+        var strs = 0;
+        if (reg.test(name)) {
+            strs = 1;
+        } else if (phg.test(name)) {
+            strs = 2;
+        } else if (pag.test(name)) {
+            strs = 3;
+        }
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetCZ",
             dataType: "json",
             type: "get",
-            data: { id: id, name: name, phone, phone, card: Card },
+            data: { id: id, name: name, phone, phone, card: Card, flag: strs },
             async: false,
             success: function (data) {
                 $("#list1").empty();
