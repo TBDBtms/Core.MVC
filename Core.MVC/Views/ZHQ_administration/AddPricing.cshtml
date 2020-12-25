@@ -10,19 +10,20 @@
     <div style="width:209px;float:left;margin-top:15px">
         <input type="text" id="txtName" placeholder="请输入药品名称/药品编号" class="layui-input" />
     </div>
-    <div style="width:50px;float:left;margin-top:15px">
+    <div style="width:50px;float:left;margin-top:60px">
         <input type="button" value="查询" id="btnCX" class="layui-btn" />
     </div>
     <div style="width:50px;float:right;margin-top:15px;margin-right:42px">
         <input type="button" value="新增药品" class="layui-btn" onclick="location.href = '/ZHQ_administration/Addadministration'" />
     </div>
-    <div style="width:50px;float:right;margin-top:15px;margin-right:42px">
+    <div style="width:50px;float:right;margin-top:15px;margin-right:42px;margin-right:15px">
         <input type="button" value="调价明细" class="layui-btn" onclick="location.href='/ZHQ_administration/TJMingXi'" />
     </div>
     <table class="layui-table" style="text-align:center">
         <tr style="background-color:lavender">
             <th>序号</th>
             <th>药品编号</th>
+            <th>图片</th>
             <th>药品通用名</th>
             <th>药品分类</th>
             <th>药品规格</th>
@@ -108,11 +109,12 @@
                     if (js == "药品负责人" || js == "医生") {
                         str = "<a class='pc' href='#' id='" + this.drugId + "' style='color:blue'>调价</a>";
                     } else {
-                        str = "<a class='pc' href='#' id='" + this.drugId + "' style='color:blue'>暂无操作</a>";
+                        str = "<a href='#' id='" + this.drugId + "' style='color:red'>暂无操作</a>";
                     }
                     var str = "<tr>" +
                         "<td>" + i + "</td>" +
                         "<td>" + this.drugBM + "</td>" +
+                        "<td><img src='" + this.imgUrl + "' style='height:50px;width:50px'/></td>" +
                         "<td>" + this.drugTYM + "</td>" +
                         "<td>" + this.drugClassName + "</td>" +
                         "<td>" + this.drugGG + "</td>" +
