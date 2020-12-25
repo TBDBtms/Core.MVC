@@ -16,7 +16,6 @@
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
     <script>
-        var s=sessionStorage.setItem("id", id);
         var card;
         var name;
         var types;
@@ -154,8 +153,6 @@
             }
 
             var htmls = {};
-            htmls.id = $("#id").val();
-            var s = sessionStorage.getItem("id");
             htmlms.sid = s;
             htmls.endTime = $("#times").val();
             htmls.vGradeId = hydj;
@@ -224,6 +221,7 @@
                     </tr>
                 </thead>
                 <tbody id="list">
+
                 </tbody>
             </table>
         </div>
