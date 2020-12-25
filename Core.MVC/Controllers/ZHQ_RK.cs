@@ -34,5 +34,10 @@ namespace Core.MVC.Controllers
             
             return View();
         }
+        public IActionResult ll()
+        {
+
+            return View();
+        }
     }
 }
