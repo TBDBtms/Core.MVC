@@ -16,6 +16,7 @@
     <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
     <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
     <script>
+        var s=sessionStorage.setItem("id", id);
         var card;
         var name;
         var types;
@@ -60,6 +61,7 @@
                 }
             })
         }
+
         function ShowInfos() {
             $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
@@ -79,9 +81,11 @@
                 }
             })
         }
-        var hydj;
-        var hymc;
-        var zk;
+
+        var hydj="";
+        var hymc=0;
+        var zk = 0;
+
         function UpdInfos() {
             //var htmls = {
             //    endTime: $("#times").val(),
@@ -95,7 +99,7 @@
                     type: "get",
                     success: function (data) {
                         hydj = "VIP1";
-                        hymc= "普通会员";
+                        hymc= 1;
                         zk = "9.80";
                     }
                 })
@@ -107,7 +111,7 @@
                     type: "get",
                     success: function (data) {
                         hydj = "VIP2";
-                        hymc = "初级会员";
+                        hymc = 2;
                         zk = "9.50";
                     }
                 })
@@ -119,7 +123,7 @@
                     type: "get",
                     success: function (data) {
                         hydj = "VIP3";
-                        hymc = "高级会员";
+                        hymc = 3;
                         zk = "8.88";
                     }
                 })
@@ -131,7 +135,7 @@
                     type: "get",
                     success: function (data) {
                         hydj = "VIP4";
-                        hymc = "白银会员";
+                        hymc = 4;
                         zk = "8.50";
                     }
                 })
@@ -143,17 +147,21 @@
                     type: "get",
                     success: function (data) {
                         hydj = "VIP5";
-                        hymc = "黄金会员";
+                        hymc = 5;
                         zk = "8.00";
                     }
                 })
             }
+
             var htmls = {};
+            htmls.id = $("#id").val();
+            var s = sessionStorage.getItem("id");
+            htmlms.sid = s;
             htmls.endTime = $("#times").val();
-            htmls.vGradeName = hydj;
+            htmls.vGradeId = hydj;
             htmls.vIPName = hymc;
             htmls.discount = zk;
-            $.ajax({
+              $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/UpdVIPgrade",
                 type: "post",
                 dataType: "json",
@@ -178,12 +186,14 @@
                                     let index = parent.layer.getFrameIndex(window.name);
                                     parent.layer.close(index);
                                 } else {
-                                    alert('失败')
+                                    alert('成功')
+                                    let index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
                                 }
                             }
                         })
                     } else {
-                        alert('设置失败');
+                        alert('设置成功');
                         ShowInfos();
                     }
                 }
@@ -214,12 +224,11 @@
                     </tr>
                 </thead>
                 <tbody id="list">
-
                 </tbody>
             </table>
         </div>
         <div style="text-align:center">
-            <input type="button" name="name" value="取消" class="layui-btn" />
+            <input type="button" name="name" value="取消" class="layui-btn" onclick="location.href='/JcyVIP/Index'" />
             <input type="button" name="name" value="确定" class="layui-btn layui-btn-warm" onclick="UpdInfos()" />
         </div>
     </div>
