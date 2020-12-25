@@ -10,7 +10,7 @@
     <title>Index</title>
 </head>
 <body>
-    <div><input class='Button1' type='button' value='添加科室' /></div>
+    <div><input class="layui-btn" id="Button1" type='button'  value='添加科室' /></div>
     <div style="">
         <table class="layui-table"  style="text-align:center;margin-left:30px">
 
@@ -69,7 +69,7 @@
             return false;
         });
     });
-    $(document).on('click', '.Button1', function () {
+    $(document).on('click', '#Button1', function () {
 
         layer.open({
             type: 2,

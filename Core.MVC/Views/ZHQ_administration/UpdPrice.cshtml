@@ -35,6 +35,13 @@
     var czy;
     var name1;
     $(function () {
+        var Rname = sessionStorage.getItem("Rname");
+
+        if (Rname == null) {
+            alert("请登录");
+            location.href = "/HzxLogin/Login";
+        }
+
         init();
         name1 = sessionStorage.getItem("Uname");
     })
@@ -60,6 +67,11 @@
 
     $("#btnBC").click(function () {
         var price = $("#txtNum").val();
+        var sp = $("#sp").text();
+        if (price < sp) {
+            alert('要调整的价格不能低于采购价!');
+            return;
+        }
         xlsj = price;
          $.ajax({
              url: "http://localhost:4965/api/ZHQ_administration/UpdPrice2",

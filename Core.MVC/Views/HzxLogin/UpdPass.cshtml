@@ -94,7 +94,15 @@
 </html>
 <script>
     $().ready(function () {
+
         var Uname = sessionStorage.getItem("Uname");
+      
+            if (Uname == null) {
+                alert("请登录");
+                location.href = "/HzxLogin/Login";
+            }
+
+        
         $("#sp1").text(Uname);
 
     });
@@ -102,24 +110,33 @@
 
         var Uname = sessionStorage.getItem("Uname");
         var Upass = $("#Upass").val();
-        if (confirm("确认修改吗？")) {
-            $.ajax({
-                url: "http://localhost:4965/api/Hzx_Login/UpdPass",
-                data: { Uname: Uname, Upass: Upass },
-                type: "get",
-                dataType: "json",
-                success: function (d) {
-                    if (d > 0) {
-                        alert("修改成功，请重新登录");
-                        location.href = "/HzxLogin/Login";
-                    }
-                    else {
-                        alert("修改失败");
 
-                    }
-                }
+        var regs = /^[0-9]{6}$/;
 
-            });
+   
+        if (!regs.test(Upass)) {
+            alert("密码只能是6位数数字");
+            return;
         }
+            if (confirm("确认修改吗？")) {
+                $.ajax({
+                    url: "http://localhost:4965/api/Hzx_Login/UpdPass",
+                    data: { Uname: Uname, Upass: Upass },
+                    type: "get",
+                    dataType: "json",
+                    success: function (d) {
+                        if (d > 0) {
+                            alert("修改成功，请重新登录");
+                            location.href = "/HzxLogin/Login";
+                        }
+                        else {
+                            alert("修改失败");
+
+                        }
+                    }
+
+                });
+            }
+        
     }
 </script>

@@ -1,0 +1,197 @@
+﻿
+@{
+    ViewData["Title"] = "Show";
+    Layout = "~/Views/Home/_Layout.cshtml";
+}
+<link href="~/css/D_Case.css" rel="stylesheet" />
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div id="divBig">
+    <div id="div1">
+        <div class="layui-input-block" style="width:300px;float:left;margin-top: 50px;">
+            <input id="shuru" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="查询" onclick="CX()" class="layui-input">
+        </div>
+        <div class="layui-input-block" style="width:300px;float:left;margin-top: 50px;margin-left:0px">
+            <button type="button" class="layui-btn layui-btn-normal" onclick="CXS()" style="float:left">查询</button>
+        </div>
+    </div>
+    <div id="div2">
+        <table class="layui-table" lay-skin="line">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+                <tr style="background-color:#C2C5F6">
+                    <th>序号</th>
+                    <th>订单编号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>手机号码</th>
+                    <th>科室</th>
+                    <th>接诊医生</th>
+                    <th>药品</th>
+                    <th>价格</th>
+                    <th>数量</th>
+                    <th>诊疗费</th>
+                    <th>附加费</th>
+                    <th>挂号</th>
+                    <th>创建时间</th>
+                    <th>应收金额</th>
+                    <th>账号余额</th>
+                    <th>余额</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="tbody_td">
+            </tbody>
+        </table>
+    </div>
+    <div id="div3"style="margin-top:85px">
+        <div align="center" style="float:left;margin-left:640px">
+            <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
+            <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
+            <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
+            <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+            当前页/总页数:<span style="color:blue" id="sp"></span>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    var pageindex = 1;
+    var pagesize = 10;
+    var pageCount = 0;
+    function Showy() {
+
+        pageindex = 1;
+        $("#sp").text(pageindex);
+        Show();
+
+
+    }
+    function pore() {
+        if (pageindex == 1) {
+            alert("已经到首页了");
+            return;
+        }
+        pageindex--;
+        $("#sp").text(pageindex);
+        Show();
+
+
+    }
+    function Next() {
+        if (pageindex == pageCount) {
+            alert("已经到尾页了");
+            return;
+        }
+        pageindex++;
+        $("#sp").text(pageindex);
+        Show();
+
+    }
+    function wei() {
+        pageindex = pageCount;
+        $("#sp").text(pageindex);
+        Show();
+    }
+
+
+    var form;
+
+
+    $().ready(function () {
+        Show();
+    });
+
+    function CX() {
+
+        $("#shuru").keypress(function (even) {
+            if (even.which == 13) {
+                var title = $(this).val();
+                if (title) {
+                    Show();
+                }
+            }
+        });
+    }
+    function CXS() {
+        Show();
+    }
+    function Show() {
+        var i = 10000001;
+        var aaaa;
+        var name = $("#shuru").val();
+        $.ajax({
+            url: "http://localhost:4965/api/DLH_Charge/GetD_Charge_Statistics",
+            type: "get",
+            dataType: "json",
+            data: {  name: name, pageindex: pageindex, pagesize: pagesize},
+            success: function (date) {
+                $("#tbody_td").empty();
+                $(date.list).each(function () {
+
+                    var a = this.drugLSJ;
+                    var b = this.education;
+                    var c = this.moneyInfn;
+                    var d = this.moneyInfns;
+                    var e = this.education;
+                    var countss = a * b + c + d + e;
+                    var ye = this.svalueMoney;
+                    var mm = ye - countss;
+                    if (mm<=0) {
+                        "<td>余额不足<td>"
+                    } else {
+                        "<td>" + mm + "<td>"
+                    }
+                    aaaa = mm;
+                    //$("#h2").hide();
+                    //$("#h1").click(function () {
+                    //    $("#h1").hide();
+                    //    $("#h2").show();
+                    //});
+                    //if (this.)
+                    //var aa = "<button id='h1' type='button' class='layui-btn layui-btn-sm layui-btn-radius layui-btn-danger' >未付款</button>";
+                    //var bb = "<button id='h2' type='button' class='layui-btn layui-btn-sm layui-btn-radius layui-btn-normal'>已付款</button>";
+                    var str = "<tr>" +
+                        "<td>" + i + "</td>" +
+                        "<td>" + this.hkahao + "</td>" +
+                        "<td>" + this.patientName + "</td>" +
+                        "<td>" + (this.hsex?"男":"女") + "</td>" +
+                        "<td>" + this.hage + "</td>" +
+                        "<td>" + this.hiphone + "</td>" +
+                        "<td>" + this.kname + "</td>" +
+                        "<td>" + this.uname + "</td>" +
+                        "<td>" + this.drugTYM + "</td>" +
+                        "<td>" + this.drugLSJ + "</td>" +
+                        "<td>" + this.education + "</td>" +
+                        "<td>" + this.moneyInfn + "</td>" +
+                        "<td>" + this.moneyInfns + "</td>" +
+                        "<td>" + this.moneyInfnses + "</td>" +
+                        "<td>" + this.gtime + "</td>" +
+                        "<td>" + countss + "</td>" +
+                        "<td>" + this.svalueMoney + "</td>" +
+                        "<td>" + aaaa + "</td>" +
+                        "<td id=" + i + "><button id = 'h1' type = 'button' class='layui-btn layui-btn-sm layui-btn-radius layui-btn-danger' onclick='gb(" + i + ")'> 未付款</button ></td>" +
+                        "</tr>";
+                    $("#tbody_td").append(str);
+                    i++;
+                });
+                pageCount = Math.ceil(date.count * 1.0 / pagesize);
+                $("#sp").text(pageindex + "/" + pageCount);
+            }
+            
+        });
+
+    }
+    function gb(b) {
+        $("#" + b + "").empty();
+        var str = "<button id='h2' type='button' class='layui-btn layui-btn-sm layui-btn-radius layui-btn-normal'>已付款</button>";
+        $("#" + b + "").append(str);
+    }
+
+</script>
+

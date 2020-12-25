@@ -149,7 +149,7 @@
                         <label class="layui-form-label">省</label>
                         <div style="width:300px;">
                             <div class="layui-input-block">
-                                <select name="interest" lay-filter="aihao" id="txt_sheng" onchange="erji()">
+                                <select name="interest" lay-filter="lop" id="txt_sheng" onchange="erji()">
                                 </select>
                             </div>
                         </div>
@@ -310,6 +310,7 @@
     var form;
     layui.use(['form', 'layedit', 'laydate'], function () {
         form = layui.form
+        form.render('select')
             , layer = layui.layer
             , layedit = layui.layedit
             , laydate = layui.laydate;
@@ -321,18 +322,20 @@
         laydate.render({
             elem: '#date1'
         });
-        //监听提交
-        form.on('submit(formDemo)', function (data) {
-            layer.msg(JSON.stringify(data.field));
-            return false;
-        });
+
+        form.on('select(lop)', function (data) {
+
+            erji();
+        })
+    });
+    $(function () {
+
         Sheng();
-        City();
         CZR();
         GuanXi();
         HuiYuan();
         HuiXian();
-    });
+    })
     function GuanXi() {
         $.ajax({
             url: "http://localhost:4965/api/Zzh_Patient/GetFamilyTies",
@@ -390,21 +393,6 @@
             }
         })
     }
-    //市下拉
-    function City() {
-        $.ajax({
-            url: "http://localhost:4965/api/Zzh_Patient/GetCity",
-            type: "get",
-            dataType: "json",
-            success: function (d) {
-                $(d).each(function () {
-                    var html = "<option value='" + this.cityId + "'>" + this.cityName + "</option>";
-                    $("#txt_shi").append(html);
-                    form.render('select');
-                });
-            }
-        })
-    }
     //省市二级联动
     function erji() {
         var id = $("#txt_sheng").val();
@@ -413,7 +401,7 @@
             type: "get",
             dataType: "json",
             success: function (d) {
-                $("#txt_shi").val();
+                $("#txt_shi").empty();
                 $(d).each(function () {
                     var html = "<option value='" + this.cityId + "'>" + this.cityName + "</option>";
                     $("#txt_shi").append(html);
@@ -436,7 +424,7 @@
                 $("#txt_phone").val(d.patientPhone);
                 $("#txt_papers").val(d.patientpapers);
                 $("#txt_Source").val(d.patientSource);
-                $("#txt_HuiYuan").val(d.memberTypeId);
+                $("#txt_HuiYuan").val(d.memberId);
                 $("#date1").val(d.endData);
                 $("#txt_Nation").val(d.nation);
                 $("#txt_Marital").val(d.maritalStatus);
@@ -468,7 +456,7 @@
             PatientPhone: $("#txt_phone").val(),
             Patientpapers: $("#txt_papers").val(),
             PatientSource: $("#txt_Source").val(),
-            MemberTypeId: $("#txt_HuiYuan").val(),
+            MemberId: $("#txt_HuiYuan").val(),
             EndData: $("#date1").val(),
             Nation: $("#txt_Nation").val(),
             MaritalStatus: $("#txt_Marital").val(),
@@ -478,7 +466,7 @@
             PatientAddress: $("#txt_Address").val(),
             Position: $("#txt_Position").val(),
             CaoPeopleId: $("#txt_czr").val(),
-            DepartmentId: $("#txt_Departments").val(),
+            DId: $("#txt_Departments").val(),
             Remark: $("#txt_Remark").val(),
             FamilyTiesId: $("#txt_familyTies").val(),
             ReleFamilyName: $("#txt_releFamilyName").val(),
