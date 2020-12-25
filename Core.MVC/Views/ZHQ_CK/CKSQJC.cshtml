@@ -1,8 +1,9 @@
 ﻿
 @{
-    ViewData["Title"] = "RKSQJC";
+    ViewData["Title"] = "CKSQJC";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
+
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <link href="~/css/D_Case.css" rel="stylesheet" />
 <div id="divBig">
@@ -96,60 +97,43 @@
         var pj;
         var name = $("#shuru").val();
         $.ajax({
-            url: "http://localhost:4965/api/ZHQ_RK/GetRKSQ",
+            url: "http://localhost:4965/api/ZHQ_CK/GetCKSQ",
             data: { name: name, pageindex: pageindex, pagesize: pagesize },
             type: "get",
             dataType: "json",
             success: function (d) {
                 $("#tb").empty();
                 $(d.list).each(function () {
-                    if (js == "入库员" && this.rksqState == 1) {
+                    if (js == "出库员" && this.cksqState == 1) {
                         var str = "<tr>" +
                             "<td>" + i + "</td>" +
-                            "<td>" + this.rksqypName + "</td>" +
-                            "<td><img src='" + this.rksqImg + "' style='height:50px;width:50px'/></td>" +
-                            "<td>" + this.rksqNum + "</td>" +
+                            "<td>" + this.cksqypName + "</td>" +
+                            "<td><img src='" + this.cksqImg + "' style='height:50px;width:50px'/></td>" +
+                            "<td>" + this.cksqNum + "</td>" +
                             "<td>" + this.gtime + "</td>" +
-                            "<td>" + this.rksqlx + "</td>" +
-                            "<td>" + this.rksqcgj + "</td>" +
-                            "<td>" + this.rksqlsj + "</td>" +
-                            "<td>" + this.rksqName + "</td>" +
-                            "<td>" + this.rksqDesc + "</td>" +
-                            "<td><a style='color:blue' href='#' onclick='SQTG(" + this.rksqId + ",2)'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue' onclick='JUJ(" + this.rksqId + ")'>拒绝</a></td>" +
+                            "<td>" + this.cksqlx + "</td>" +
+                            "<td>" + this.cksqcgj + "</td>" +
+                            "<td>" + this.cksqlsj + "</td>" +
+                            "<td>" + this.cksqName + "</td>" +
+                            "<td>" + this.cksqDesc + "</td>" +
+                            "<td><a style='color:blue' href='#' onclick='SQTG(" + this.cksqId + ",2)'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue' onclick='JUJ(" + this.cksqId + ")'>拒绝</a></td>" +
                             "</tr>";
                         $("#tb").append(str);
                         i++;
                     }
-                    else if (js == "仓管" && this.rksqState == 2) {
+                    else if (js == "仓管" && this.cksqState == 2) {
                         var str = "<tr>" +
                             "<td>" + i + "</td>" +
-                            "<td>" + this.rksqypName + "</td>" +
-                            "<td><img src='" + this.rksqImg + "' style='height:50px;width:50px'/></td>" +
-                            "<td>" + this.rksqNum + "</td>" +
+                            "<td>" + this.cksqypName + "</td>" +
+                            "<td><img src='" + this.cksqImg + "' style='height:50px;width:50px'/></td>" +
+                            "<td>" + this.cksqNum + "</td>" +
                             "<td>" + this.gtime + "</td>" +
-                            "<td>" + this.rksqlx + "</td>" +
-                            "<td>" + this.rksqcgj + "</td>" +
-                            "<td>" + this.rksqlsj + "</td>" +
-                            "<td>" + this.rksqName + "</td>" +
-                            "<td>" + this.rksqDesc + "</td>" +
-                            "<td><a style='color:blue' href='#' onclick='SQTG(" + this.rksqId + ",3)'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue'  onclick='JUJ(" + this.rksqId + ")'>拒绝</a></td>" +
-                            "</tr>";
-                        $("#tb").append(str);
-                        i++;
-                    }
-                    else if (js == "质检员" && this.rksqState == 3) {
-                        var str = "<tr>" +
-                            "<td>" + i + "</td>" +
-                            "<td>" + this.rksqypName + "</td>" +
-                            "<td><img src='" + this.rksqImg + "' style='height:50px;width:50px'/></td>" +
-                            "<td>" + this.rksqNum + "</td>" +
-                            "<td>" + this.gtime + "</td>" +
-                            "<td>" + this.rksqlx + "</td>" +
-                            "<td>" + this.rksqcgj + "</td>" +
-                            "<td>" + this.rksqlsj + "</td>" +
-                            "<td>" + this.rksqName + "</td>" +
-                            "<td>" + this.rksqDesc + "</td>" +
-                            "<td><a style='color:blue' href='#' onclick='AddRK(" + this.rksqId + ")'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue'  onclick='JUJ(" + this.rksqId + ")'>质量不通过</a></td>" +
+                            "<td>" + this.cksqlx + "</td>" +
+                            "<td>" + this.cksqcgj + "</td>" +
+                            "<td>" + this.cksqlsj + "</td>" +
+                            "<td>" + this.cksqName + "</td>" +
+                            "<td>" + this.cksqDesc + "</td>" +
+                            "<td><a style='color:blue' href='#' onclick='SQTG(" + this.cksqId + ",3)'>通过</a>&nbsp;&nbsp;<a href='#' style='color:blue'  onclick='JUJ(" + this.cksqId + ")'>拒绝</a></td>" +
                             "</tr>";
                         $("#tb").append(str);
                         i++;
@@ -164,7 +148,7 @@
 
     function SQTG(id, tgstate) {
         $.ajax({
-            url: "http://localhost:4965/api/ZHQ_RK/UpdState",
+            url: "http://localhost:4965/api/ZHQ_CK/UpdState",
             data: { id: id, tgstate: tgstate },
             type: "get",
             dataType: "json",
@@ -179,26 +163,26 @@
         })
     }
 
-    function AddRK(id) {
-        $.ajax({
-            url: "http://localhost:4965/api/ZHQ_RK/AddRKB",
-            data: { id: id },
-            type: "get",
-            dataType: "json",
-            success: function (d) {
-                if (d > 0) {
-                    alert('操作成功');
-                    init();
-                } else {
-                    alert('操作失败')
-                }
-            }
-        })
-    }
+    //function AddRK(id) {
+    //    $.ajax({
+    //        url: "http://localhost:4965/api/ZHQ_RK/AddRKB",
+    //        data: { id: id },
+    //        type: "get",
+    //        dataType: "json",
+    //        success: function (d) {
+    //            if (d > 0) {
+    //                alert('操作成功');
+    //                init();
+    //            } else {
+    //                alert('操作失败')
+    //            }
+    //        }
+    //    })
+    //}
 
     function JUJ(id) {
         $.ajax({
-            url: "http://localhost:4965/api/ZHQ_RK/RKJU",
+            url: "http://localhost:4965/api/ZHQ_CK/CKJU",
             data: { id: id },
             type: "get",
             dataType: "json",
@@ -213,3 +197,4 @@
         })
     }
 </script>
+

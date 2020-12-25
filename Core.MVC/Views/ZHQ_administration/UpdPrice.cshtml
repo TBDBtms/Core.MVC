@@ -7,16 +7,19 @@
 
 <html>
 <head>
-    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+
     <meta name="viewport" content="width=device-width" />
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui-v2.4.5/layui/lay/modules/layer.js"></script>
+    <link href="~/layui-v2.4.5/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/layui-v2.4.5/layui/layui.js"></script>
 </head>
 <body>
     <div align="center">
         <input type="hidden" value="@ViewBag.id" />
         原价格:<span id="sp" style="color:red"></span><br />
-        请输入要修改的价格<input type="number" id="txtNum" />
-        <input type="button" value="保存" id="btnBC" />
+        请输入要修改的价格<input type="number" id="txtNum" /><br />
+        <input type="button" value="保存" id="btnBC" class="layui-btn" style="margin-top:10px"/>
     </div>
 
 </body>
@@ -30,8 +33,10 @@
     var lsj;
     var xlsj;
     var czy;
+    var name1;
     $(function () {
         init();
+        name1 = sessionStorage.getItem("Uname");
     })
 
     function init() {
@@ -48,7 +53,7 @@
                 gg = d.drugGG;
                 kcl = d.drugKC;
                 cgj = d.drugCGJ;
-                czy = "张航琦";
+                czy = name1;
             }
         })
     }
@@ -80,7 +85,8 @@
                         success: function (da) {
                             if (da > 0) {
                                 alert('操作成功');
-
+                                let index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
                             } else {
                                 alert('操作失败');
                             }
