@@ -17,6 +17,26 @@
             pageindex = 1;
             ShowInfothree();
         })
+
+        layui.use('form', function () {
+            form = layui.form;
+            var layData = ['form', 'laydate'];
+            layui.use(layData, function () {
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '#stime'
+                });
+                laydate.render({
+                    elem: '#etime'
+                });
+            });
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+
+        });
     })
     function text3() {
         $('.test2').on('click', function () {
@@ -62,6 +82,13 @@
             }
         })
     }
+    var qma = sessionStorage.getItem("Qma");
+    $().ready(function () {
+        keshi();
+        Shows();
+
+        var qma = Qma;
+    });
     function ShowInfothree() {
         var id = $("#dj2").val();
         var name = $("#name").val();
@@ -78,6 +105,7 @@
         } else if (pag.test(name)) {
             strs = 3;
         }
+        var qma = sessionStorage.getItem("Qma");
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetJF",
             dataType: "json",
@@ -95,7 +123,7 @@
                         "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.patientName + '</a>' + "</td>" +
                         "<td>" + this.phone + "</td>" +
                         "<td>" + this.integral + "</td>" +
-                        "<td><a href='#' class='test2' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动</a>&nbsp;<a href='#' class='test3' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动记录</a></td></tr>";
+                        "<td>" + (qma == "ABCD" ? "<a href='#' class='test2' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动</a>&nbsp;<a href='#' class='test3' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动记录</a>":"您的权限不够!!!") + "</td></tr>";
                     $("#list2").append(htmls);
                 })
                 pageCount = Math.ceil(data.count * 1.0 / pagesize);
@@ -138,14 +166,27 @@
 
     }
 </script>
-<div style="margin-top:1px;margin-left:200px;">
-    会员等级:
-    <select name="interest" lay-filter="会员等级" id="dj2" style="width:100px;height:38px;">
-    </select>
-    <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
-    <button type="button" style="margin-left:auto" onclick="ShowInfothree()" class="layui-btn" id="show">
-        <i class="layui-icon">&#xe615;</i>
-    </button>
+<div style="margin-top:15px;margin-left:200px;">
+    <form class="layui-form">
+        <div class="layui-form-item" style="float:left">
+            <label class="layui-form-label">会员等级:</label>
+            <div style="width:300px">
+                <div class="layui-input-block">
+                    <select lay-filter="aihao" id="dj2">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="layui-input-block" style="width:300px;float:left">
+        <input type="text" id="name" placeholder="卡号/姓名/手机号" class="layui-input" />
+    </div>
+    <div style="float:left">
+        <button type="button" style="margin-left:auto" onclick="ShowInfothree()" id="show" class="layui-btn">
+            <i class="layui-icon">&#xe615;</i>
+        </button>
+    </div>
 </div>
 <div style="text-align:center;width:1400px;height:600px;margin-left:200px;">
     <table class="layui-table" style="height: 600px;">
