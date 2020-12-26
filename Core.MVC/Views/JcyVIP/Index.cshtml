@@ -15,7 +15,28 @@
             pageindex = 1;
             ShowInfo();
         })
+
+        layui.use('form', function () {
+            form = layui.form;
+            var layData = ['form', 'laydate'];
+            layui.use(layData, function () {
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '#stime'
+                });
+                laydate.render({
+                    elem: '#etime'
+                });
+            });
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+                layer.msg(JSON.stringify(data.field));
+                return false;
+            });
+
+        });
     })
+    
     var pageindex = 1;
     var pagesize = 10;
     var pageCount = 0;
@@ -215,20 +236,43 @@
 </script>
 <div id="divBig">
     <div id="div1">
-        <div style="margin-top:20px;height:20px;">
-            <div style="margin-top:1px;">
-                会员等级: <select name="interest" lay-filter="会员等级" id="dj" style="width:100px;height:38px;">
-                    <option></option>
-                </select>
-                创建时间: <input type="datetime" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" style="width:150px;height:33px;">
-                <input type="text" id="name" lay-verify="required" placeholder="请输入" autocomplete="off" style="width:200px;height:33px;">
-                <button type="button" style="margin-left:auto" onclick="ShowInfo()" id="show" class="layui-btn">
-                    <i class="layui-icon">&#xe615;</i>
-                </button>
-                <input type="checkbox" name="name" value="" /> 会员到期预警
+        <form class="layui-form">
+            <div class="layui-form-item" style="float:left">
+                <label class="layui-form-label">会员类型</label>
+                <div style="width:300px">
+                    <div class="layui-input-block">
+                        <select lay-filter="aihao" id="dj">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="layui-inline" style="float:left;margin-left:15px;">
+            <div class="layui-input-inline">
+                <input type="text" id="stime" name="stime" model="datetime"
+                       format="yyyy-MM-dd" placeholder="yyyy-MM-dd" autocomplete="off"
+                       class="layui-input test-item" />
             </div>
         </div>
-
+        <div class="layui-inline" style="float: left; margin-left: 15px;">
+            <div class="layui-input-inline">
+                <input type="text" id="etime" name="etime" model="datetime"
+                       format="yyyy-MM-dd" placeholder="yyyy-MM-dd" autocomplete="off"
+                       class="layui-input test-item" />
+            </div>
+        </div>
+        <div class="layui-input-block" style="width:300px;float:left">
+            <input type="text" id="name" placeholder="卡号/姓名/手机号" class="layui-input" />
+        </div>
+        <div style="float:left">
+            <button type="button" style="margin-left:auto;background-color:mediumslateblue;" onclick="ShowInfo()" id="show"  class="layui-btn">
+                <i class="layui-icon">&#xe615;</i>
+            </button>
+        </div>
+        <div style="float:left;margin-top:10px;margin-left:15px;">
+            <input type="checkbox" name="name" value="" /> 会员到期预警
+        </div>
     </div>
     <div id="div2">
         <div>
@@ -259,10 +303,10 @@
     </div>
     <div id="div3">
         <div style="text-align:center;margin-top:50px;">
-            <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
-            <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
-            <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
-            <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+            <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" style="background-color: mediumslateblue;" />
+            <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" style="background-color: mediumslateblue;"/>
+            <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" style="background-color: mediumslateblue;"/>
+            <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" style="background-color: mediumslateblue;"/>
             当前页:<span style="color:blue" id="sp"></span>
             总页数:<span style="color:red" id="counts"></span>
         </div>
