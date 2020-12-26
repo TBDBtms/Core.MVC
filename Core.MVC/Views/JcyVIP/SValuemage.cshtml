@@ -130,6 +130,13 @@
         ShowInfotwo();
 
     }
+    var qma = sessionStorage.getItem("Qma");
+    $().ready(function () {
+        keshi();
+        Shows();
+
+        var qma = Qma;
+    });
     function ShowInfotwo() {
         var id = $("#dj1").val();
         var name = $("#name").val();
@@ -146,6 +153,7 @@
         } else if (pag.test(name)) {
             strs = 3;
         }
+        var qma = sessionStorage.getItem("Qma");
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetCZ",
             dataType: "json",
@@ -167,7 +175,7 @@
                         "<td>" + this.addGiveMoney + "</td>" +
                         "<td>" + this.svalueMoney + "</td>" +
                         "<td>" + this.amassPrice + "</td>" +
-                        "<td><a href='#' id='" + this.id + "' class='test2' style='color:darkslateblue;font-weight:bold'>充值</a>&nbsp;<a href='#' id='" + this.id + "' class='test3' style='color:darkslateblue;font-weight:bold'>退款</a>&nbsp;<a href='#' id='" + this.id + "' class='test4' style='color:darkslateblue;font-weight:bold'>充值/退款记录</a></td></tr>";
+                        "<td>" + (qma == "ABCD" ? "<a href='#' id='" + this.id + "' class='test2' style='color:darkslateblue;font-weight:bold'>充值</a>&nbsp;<a href='#' id='" + this.id + "' class='test3' style='color:darkslateblue;font-weight:bold'>退款</a>&nbsp;<a href='#' id='" + this.id + "' class='test4' style='color:darkslateblue;font-weight:bold'>充值/退款记录</a>":"您的权限不够!!!") + "</td></tr>";
                     $("#list1").append(htmls);
                 })
                 pageCount = Math.ceil(data.count * 1.0 / pagesize);

@@ -80,6 +80,14 @@
         ShowInfofour();
 
     }
+    var qma = sessionStorage.getItem("Qma");
+    $().ready(function () {
+        keshi();
+        Shows();
+
+        var qma = Qma;
+    });
+    var qma = sessionStorage.getItem("Qma");
     function ShowInfofour() {
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetMemberSet",
@@ -98,8 +106,8 @@
                         "<td>" + this.minIntegral + "</td>" +
                         "<td>" + this.upgrade + "</td>" +
                         "<td>" + this.remark + "</td>" +
-                        "<td>" + (this.states==1?"启用":"禁用") + "</td>" +
-                        "<td><a href='#' style='color:darkslateblue;font-weight:bold' class='test2' id='" + this.id + "'>编辑</a>&nbsp;<a href='#' style='color:darkslateblue;font-weight:bold' class='test' id='" + this.id + "'>新增会员类型</a>&nbsp;<a href='#' style='color:darkslateblue;font-weight:bold'  class='test1' id='" + this.id + "' >会员条件设置</a>&nbsp;</td></tr>";
+                        "<td>" + (this.states == 1 ? "启用" : "禁用") + "</td>" +
+                        "<td>" + (qma == "ABCD" ? "<a href='#' style='color:darkslateblue;font-weight:bold' class='test2' id='" + this.id + "'>编辑</a>&nbsp;<a href='#' style='color:darkslateblue;font-weight:bold' class='test' id='" + this.id + "'>新增会员类型</a>&nbsp;<a href='#' style='color:darkslateblue;font-weight:bold'  class='test1' id='" + this.id + "' >会员条件设置</a>&nbsp;":"您的权限不够!!!") + "</td></tr>";
                     $("#list3").append(htmls);
                 })
                 pageCount = Math.ceil(data.count * 1.0 / pagesize);

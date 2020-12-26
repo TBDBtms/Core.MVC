@@ -180,6 +180,13 @@
             }
         })
     }
+    var qma = sessionStorage.getItem("Qma");
+    $().ready(function () {
+        keshi();
+        Shows();
+
+        var qma = Qma;
+    });
     function ShowInfo() {
         var stime = $("#stime").val();
         var etime = $("#etime").val();
@@ -196,6 +203,8 @@
         } else if (pag.test(name)) {
             strs = 3;
         }
+        var qma = sessionStorage.getItem("Qma");
+
         //var card = $("#name").val();
         //var phone = $("#name").val();
         var pageIndex = pageindex;
@@ -224,7 +233,7 @@
                         "<td>" + this.startTime + "</td>" +
                         "<td>" + this.endTime + "</td>" +
                         "<td>" + (this.vipState == 1 ? "启用" : "禁用") + "</td>" +
-                        "<td><a href='#' class='test2' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>充值</a>&nbsp;<a href='#' id='" + this.id + "' class='test3' style='color:darkslateblue;font-weight:bold'>设置会员等级</a>&nbsp;<a href='#' class='test4' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动</a>&nbsp;<a href='#' class='test5' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>退款</a>&nbsp;<a href='#' id='" + this.id + "' class='test6' style='color:darkslateblue;font-weight:bold'>等级变更记录</a></td></tr>";
+                        "<td>" + (qma == "ABCD" ? "<a href='#' class='test2' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>充值</a>&nbsp;<a href='#' id='" + this.id + "' class='test3' style='color:darkslateblue;font-weight:bold'>设置会员等级</a>&nbsp;<a href='#' class='test4' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动</a>&nbsp;<a href='#' class='test5' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>退款</a>&nbsp;<a href='#' id='" + this.id + "' class='test6' style='color:darkslateblue;font-weight:bold'>等级变更记录</a>" :"您的权限不够!!!") + "</td></tr>";
                     $("#list").append(htmls);
                 })
                 pageCount = Math.ceil(data.count * 1.0 / pagesize);

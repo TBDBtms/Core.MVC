@@ -82,6 +82,13 @@
             }
         })
     }
+    var qma = sessionStorage.getItem("Qma");
+    $().ready(function () {
+        keshi();
+        Shows();
+
+        var qma = Qma;
+    });
     function ShowInfothree() {
         var id = $("#dj2").val();
         var name = $("#name").val();
@@ -98,6 +105,7 @@
         } else if (pag.test(name)) {
             strs = 3;
         }
+        var qma = sessionStorage.getItem("Qma");
         $.ajax({
             url: "http://localhost:4965/api/JcyVIP/GetJF",
             dataType: "json",
@@ -115,7 +123,7 @@
                         "<td>" + '<a href="javascript:;" style="color:darkslateblue">' + this.patientName + '</a>' + "</td>" +
                         "<td>" + this.phone + "</td>" +
                         "<td>" + this.integral + "</td>" +
-                        "<td><a href='#' class='test2' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动</a>&nbsp;<a href='#' class='test3' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动记录</a></td></tr>";
+                        "<td>" + (qma == "ABCD" ? "<a href='#' class='test2' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动</a>&nbsp;<a href='#' class='test3' id='" + this.id + "' style='color:darkslateblue;font-weight:bold'>积分变动记录</a>":"您的权限不够!!!") + "</td></tr>";
                     $("#list2").append(htmls);
                 })
                 pageCount = Math.ceil(data.count * 1.0 / pagesize);
