@@ -67,7 +67,7 @@
                         "<td>" + this.cTimes+"</td>" +
                         "<td>" + this.cMan + "</td>" +
                         "<td>" + (this.supState == 1 ? "启用" : "禁用") + "</td>" +
-                        "<td><a href='#' onclick='Upd(" + this.id + ")' style='color: darkslateblue;'>编辑</a>&nbsp;<a href='#' onclick='Del(" + this.id + ")' style='color: darkslateblue;'>删除</a></td></tr>";
+                        "<td><a href='#' onclick='Upd(" + this.id + ")' style='color:darkslateblue;font-weight:bold'>编辑</a>&nbsp;<a href='#' onclick='Del(" + this.id + ")' style='color:darkslateblue;font-weight:bold'>删除</a></td></tr>";
                     $("#list").append(htmls);
                 })
                 pageCount = Math.ceil(data.count * 1.0 / pagesize);
@@ -133,10 +133,10 @@
         </table>
     </div>
     <div style="text-align:center">
-        <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
-        <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
-        <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" />
-        <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
+        <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()"  style="background-color: mediumslateblue;"/>
+        <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()"  style="background-color: mediumslateblue;"/>
+        <input id="Button1" type="button" value="下一页" class="layui-btn" onclick="Next()" style="background-color: mediumslateblue;" />
+        <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" style="background-color: mediumslateblue;" />
         当前页:<span style="color:blue" id="sp"></span>
         总页数:<span style="color:red" id="counts"></span>
     </div>
