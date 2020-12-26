@@ -14,7 +14,7 @@
             <li>支付方式</li>
         </ul>
         <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show" style="width:111%; height:120%; margin-left: 132px">
+            <div class="layui-tab-item layui-show" style="width:111%; height:120%; margin-left: -29px">
                 <div>
                     <form class="layui-form">
                         <div class="layui-form-item">
@@ -22,13 +22,15 @@
                             <div style="width:300px;float:left;margin-left:-110px">
                                 <div class="layui-input-block">
                                     <select name="interest" lay-filter="aihao" id="LeiBie">
-                                        <option></option>
+                                        <option id="ddd"></option>
                                     </select>
                                 </div>
                             </div>
                             <div class="layui-input-block" style="width:300px;float:left">
-                                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="附加费查询" class="layui-input">
-
+                                <input id="FJCX" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="附加费查询" onclick="CXFJ()" class="layui-input">
+                            </div>
+                            <div class="layui-input-block" style="width:300px;float:left;margin-left:0px">
+                                <button type="button" class="layui-btn layui-btn-normal" onclick="CXS()" style="float:left">查询</button>
                             </div>
                             <div class="layui-input-block" style="width:300px;float:right">
                                 <input type="button" class="layui-btn" value="新增附加费用" onclick="FJAdd()" style="background-color:#C2C5F6;font-weight:bold;color:black" />
@@ -71,7 +73,7 @@
                     <form class="layui-form">
                         <div class="layui-form-item" style="margin-left:-39px">
                             <div class="layui-input-block" style="width:300px;float:left;margin-left:-92px">
-                                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="诊疗费查询" class="layui-input">
+                                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="诊疗费查询" class="layui-input" onclick="CXZL()" id="ZLCX">
                             </div>
                             <div class="layui-input-block" style="width:300px;float:right">
                                 <input type="button" class="layui-btn" value="新增诊疗费用" onclick="ZLAdd()" style="background-color:#C2C5F6;font-weight:bold;color:black" />
@@ -89,7 +91,7 @@
                         <thead>
                             <tr style="background-color:#C2C5F6">
                                 <th style="font-weight:bold">序号</th>
-                                <th style="font-weight:bold">附加费用名称</th>
+                                <th style="font-weight:bold">诊疗费用名称</th>
                                 <th style="font-weight:bold">金额(元)</th>
                                 <th style="font-weight:bold">成本价(元)</th>
                                 <th style="font-weight:bold">创建时间</th>
@@ -110,7 +112,7 @@
                     <form class="layui-form">
                         <div class="layui-form-item" style="margin-left:-241px">
                             <div class="layui-input-block" style="width:300px;float:left">
-                                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="挂号费查询" class="layui-input">
+                                <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="挂号费查询" class="layui-input" onclick="CXGH()" id="GHCX">
                             </div>
                             <div class="layui-input-block" style="width:300px;float:right">
                                 <input type="button" class="layui-btn" value="新增挂号费用" onclick="GHAdd()" style="background-color:#C2C5F6;font-weight:bold;color:black" />
@@ -226,7 +228,6 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -273,7 +274,7 @@
         Showzhenliaofeiyong();
         Showguahao();
     });
-
+    
 
     layui.use(['form', 'layedit', 'laydate'], 'form', function () {
         var form = layui.form;
@@ -306,27 +307,34 @@
             }
         });
     }
+
+    
+    function CXS() {
+        Showfujiafeiyong();
+    }
     function Showfujiafeiyong() {
+        var name = $("#FJCX").val();
         var i = 1;
         $.ajax({
             url: "http://localhost:4965/api/DLH_Fee/GetCostsInfos",
             type: "get",
             async: false,
             dataType: "json",
+            data: { name: name },
             success: function (d) {
                 $("#tbody_id").empty();
                 $(d).each(function () {
                     var str = "<tr>" +
                         "<td>" + i + "</td>" +
-                        "<td>" + this.additional + "</td>" +
+                        "<td>" + this.additionals + "</td>" +
                         "<td>" + this.recipeName + "</td>" +
-                        "<td>" + this.moneyInfn + "</td>" +
+                        "<td>" + this.moneyInfns + "</td>" +
                         "<td>" + this.cost + "</td>" +
                         "<td>" + this.time + "</td>" +
                         "<td>" + this.uname + "</td>" +
                         "<td>" + (this.vip ? "是" : "否") + "</td>" +
                         "<td>" + (this.cState ? "启用" : "未启用") + "</td>" +
-                        "<td><a onclick='Update(" + this.sequenceId + ")' style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='Del(" + this.sequenceId + ")'>删除</a></td></tr>";
+                        "<td><a onclick='Update(" + this.sequenceIdes + ")' style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='Del(" + this.sequenceIdes + ")'>删除</a></td></tr>";
                     $("#tbody_id").append(str);
                     i++;
                 })
@@ -359,20 +367,36 @@
         location.href = "/DLH_Fee/FJAdd";
     }
     ///==============================================诊疗费===============================
+
+    function CXZL() {
+
+        $("#ZLCX").keypress(function (even) {
+            if (even.which == 13) {
+                var title = $(this).val();
+                if (title) {
+                    Showzhenliaofeiyong();
+                }
+            }
+        });
+    }
+
+
     function Showzhenliaofeiyong() {
         var i = 1;
+        var name = $("#ZLCX").val();
         $.ajax({
             url: "http://localhost:4965/api/DLH_Fee/GetConsultations",
             type: "get",
             async: false,
             dataType: "json",
+            data: { name: name },
             success: function (d) {
                 $("#tbody_ZL").empty();
                 $(d).each(function () {
                     var str = "<tr>" +
                         "<td>" + i + "</td>" +
                         "<td>" + this.additional + "</td>" +
-                        "<td>" + this.moneyInfns + "</td>" +
+                        "<td>" + this.moneyInfn + "</td>" +
                         "<td>" + this.cost + "</td>" +
                         "<td>" + this.time + "</td>" +
                         "<td>" + this.uname + "</td>" +
@@ -410,12 +434,27 @@
         location.href="/DLH_Fee/ZLAdd"
     }
     ///=====================================================================挂号========================================================================
+
+    function CXGH() {
+
+        $("#GHCX").keypress(function (even) {
+            if (even.which == 13) {
+                var title = $(this).val();
+                if (title) {
+                    Showguahao();
+                }
+            }
+        });
+    }
+
     function Showguahao() {
         var i = 1;
+        var name = $("#GHCX").val();
         $.ajax({
             url: "http://localhost:4965/api/DLH_Fee/GetRegistrations",
             type: "get",
             async: false,
+            data: { name: name },
             dataType: "json",
             success: function (d) {
                 $("#tbody_GH").empty();
@@ -423,7 +462,7 @@
                     var str = "<tr>" +
                         "<td>" + i + "</td>" +
                         "<td>" + this.registra + "</td>" +
-                        "<td>" + this.moneyInfn + "</td>" +
+                        "<td>" + this.moneyInfnses + "</td>" +
                         "<td>" + this.cost + "</td>" +
                         "<td>" + this.time + "</td>" +
                         "<td>" + this.uname + "</td>" +
