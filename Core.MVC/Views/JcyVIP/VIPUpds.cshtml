@@ -63,6 +63,7 @@
                         alert('保存成功');
                         let index = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(index);
+                        location.reload();
                     } else {
                         alert('保存失败');
                     }
