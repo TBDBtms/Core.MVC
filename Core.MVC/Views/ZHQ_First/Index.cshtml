@@ -12,6 +12,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="icon" href="https://static.jianshukeji.com/hcode/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/highcharts.css" />
+    <script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/oldie.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/themes/dark-unica.js"></script>
     <style>
         #container {
             height: 400px;
@@ -31,11 +35,7 @@
             stroke-width: 2px;
         }
     </style>
-    <script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
-    <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com.cn/highcharts/modules/oldie.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="https://code.highcharts.com.cn/highcharts/themes/dark-unica.js"></script>
+
 </body>
 <div style="height:40px;">
     @*<div style="font-size: 25px;margin-top:10px">经营概况</div>*@
@@ -81,9 +81,6 @@
 
 
     $(function () {
-        setTimeout(function () {
-            layer.closeAll('loading');
-        }, 2000);
         showYU();
         ZXShow();
     })
@@ -228,7 +225,7 @@
                     }
                 })
 
-
+              
                 YX(arr);
             }
         })

@@ -33,7 +33,7 @@
             </tbody>
         </table>
     </div>
-    <div id="div3">
+    @*<div id="div3">
         <div align="center" style="float:left;margin-left:640px">
             <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
             <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
@@ -41,12 +41,12 @@
             <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
             当前页/总页数:<span style="color:blue" id="sp"></span>
         </div>
-    </div>
+    </div>*@
 </div>
 <script>
-    var pageindex = 1;
-    var pagesize = 10;
-    var pageCount = 0;
+    //var pageindex = 1;
+    //var pagesize = 10;
+    //var pageCount = 0;
     function Showy() {
 
         pageindex = 1;
@@ -97,12 +97,12 @@
         var name = $("#shuru").val();
         $.ajax({
             url: "http://localhost:4965/api/ZHQ_RK/GetRKSQ",
-            data: { name: name, pageindex: pageindex, pagesize: pagesize },
+            data: {},
             type: "get",
             dataType: "json",
             success: function (d){
                 $("#tb").empty();
-                $(d.list).each(function () {
+                $(d).each(function () {
                     if (js == "入库员" && this.rksqState == 1) {
                         var str = "<tr>" +
                             "<td>" + i + "</td>" +
@@ -155,8 +155,8 @@
                         i++;
                     }
                 });
-                pageCount = Math.ceil(d.count * 1.0 / pagesize);
-                $("#sp").text(pageindex + "/" + pageCount);
+                //pageCount = Math.ceil(d.count * 1.0 / pagesize);
+                //$("#sp").text(pageindex + "/" + pageCount);
             }
         })
     }

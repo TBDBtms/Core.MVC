@@ -22,7 +22,7 @@
     <tbody id="tb">
     </tbody>
 </table>
-<div id="div3">
+@*<div id="div3">
     <div align="center" style="float:left;margin-left:640px">
         <input id="Button1" type="button" value="首页" class="layui-btn" onclick="Showy()" />
         <input id="Button1" type="button" value="上一页" class="layui-btn" onclick="pore()" />
@@ -30,25 +30,25 @@
         <input id="Button1" type="button" value="尾页" class="layui-btn" onclick="wei()" />
         当前页/总页数:<span style="color:blue" id="sp"></span>
     </div>
-</div>
+</div>*@
 <script>
     $(function () {
         init();
     })
-    var pageindex = 1;
-    var pagesize = 10;
-    var pageCount = 0;
+    //var pageindex = 1;
+    //var pagesize = 10;
+    //var pageCount = 0;
     function init() {
         var i = 1;
         var js = sessionStorage.getItem("Rname");
         $.ajax({
             url: "http://localhost:4965/api/ZHQ_RK/GetRKSQ",
-            data: {pageindex: pageindex, pagesize: pagesize },
+            data: {},
             type: "get",
             dataType: "json",
             success: function (d) {
                 $("#tb").empty();
-                $(d.list).each(function () {
+                $(d).each(function () {
                     if (js == "仓管" && this.rksqState == 10) {
                         var str = "<tr>" +
                             "<td>" + i + "</td>" +
@@ -67,8 +67,8 @@
                         i++;
                     }
                 })
-                pageCount = Math.ceil(d.count * 1.0 / pagesize);
-                $("#sp").text(pageindex + "/" + pageCount);
+                //pageCount = Math.ceil(d.count * 1.0 / pagesize);
+                //$("#sp").text(pageindex + "/" + pageCount);
             }
         })
     }
@@ -91,41 +91,41 @@
         }
       
     }
-    function Showy() {
+    //function Showy() {
 
-        pageindex = 1;
-        $("#sp").text(pageindex);
-        init();
-
-
-    }
-    function pore() {
-        if (pageindex == 1) {
-            alert("已经到首页了");
-            return;
-        }
-        pageindex--;
-        $("#sp").text(pageindex);
-        init();
+    //    pageindex = 1;
+    //    $("#sp").text(pageindex);
+    //    init();
 
 
-    }
-    function Next() {
-        if (pageindex == pageCount) {
-            alert("已经到尾页了");
-            return;
-        }
-        pageindex++;
-        $("#sp").text(pageindex);
-        init();
+    //}
+    //function pore() {
+    //    if (pageindex == 1) {
+    //        alert("已经到首页了");
+    //        return;
+    //    }
+    //    pageindex--;
+    //    $("#sp").text(pageindex);
+    //    init();
 
-    }
-    function wei() {
-        pageindex = pageCount;
-        $("#sp").text(pageindex);
-        init();
 
-    }
+    //}
+    //function Next() {
+    //    if (pageindex == pageCount) {
+    //        alert("已经到尾页了");
+    //        return;
+    //    }
+    //    pageindex++;
+    //    $("#sp").text(pageindex);
+    //    init();
+
+    //}
+    //function wei() {
+    //    pageindex = pageCount;
+    //    $("#sp").text(pageindex);
+    //    init();
+
+    //}
 </script>
 
 
