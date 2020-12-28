@@ -25,7 +25,6 @@
             }
 
             Ones();
-            ShowIndex();
         })
         function Ones(id) {
              $.ajax({
@@ -37,6 +36,7 @@
                     console.log(data);
                     $("#card").text(data.idCard);
                     $("#name").text(data.patientName);
+                    ShowIndex();
                 }
             })
         }
@@ -47,12 +47,13 @@
                 type: "get",
                 data: { name:$("#name").text()},
                 success: function (data) {
+                    console.log(data);
                     $("#list").empty();
                     $(data).each(function () {
                         var str = "<tr>" +
                             "<td>" + this.chTime + "</td>" +
                             "<td>" + this.chType + "</td>" +
-                            "<td>" + this.vTypeName + "</td>" +
+                            "<td>" + $("#name").text() + "</td>" +
                             "<td>" + this.operator + "</td>" +
                             "</tr> ";
                         $("#list").append(str);

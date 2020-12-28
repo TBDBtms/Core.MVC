@@ -60,8 +60,8 @@
                 type: "get",
                 success: function (data) {
                     console.log(data);
-                    card = data.idCard;
-                    name = data.patientName;
+                    card = data.vIPCard;
+                    name = data.vIPName;
                     types = "人工操作";
                     man = "晋超宇";
                 }
@@ -89,7 +89,7 @@
         }
 
         var hydj="";
-        var hymc=0;
+        var hymc="";
         var zk = 0;
 
         function UpdInfos() {
@@ -98,71 +98,38 @@
             //    vGradeId: $("[name=chk]:checked").val(),
             //    Id: $("#id").val()
             //};
-            if ($("[name=chk]:checked").val()==1) {
-                $.ajax({
-                    url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
-                    dataType: "json",
-                    type: "get",
-                    success: function (data) {
-                        hydj = "VIP1";
-                        hymc= 1;
-                        zk = "9.80";
+            $.ajax({
+                url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
+                dataType: "json",
+                type: "get",
+                success: function (data) {
+                    if ($("[name==chk]:checked").val() == 1) {
+                        hydj = $(data).vGradeName.val("VIP1");
+                        hymc = $(data).vTypeName.val("普通会员");
+                        zk = $(data).discount.val(9.80);
+                    } else if ($("[name==chk]:checked").val() == 2) {
+                        hydj = $(data).vGradeName.val("VIP2");
+                        hymc = $(data).vTypeName.val("初级会员");
+                        zk = $(data).discount.val(9.50);
+                    } else if ($("[name==chk]:checked").val() == 3) {
+                        hydj = $(data).vGradeName.val("VIP3");
+                        hymc = $(data).vTypeName.val("高级会员");
+                        zk = $(data).discount.val(8.8);
+                    } else if ($("[name==chk]:checked").val() == 4) {
+                        hydj=$(data).vGradeName.val("VIP4");
+                        hymc=$(data).vTypeName.val("白银会员");
+                        zk=$(data).discount.val(8.5);
+                    } else if ($("[name==chk]:checked").val() == 5) {
+                        hydj = $(data).vGradeName.val("VIP5");
+                        hymc = $(data).vTypeName.val("黄金会员");
+                        zk = $(data).discount.val(8.3);
                     }
-                })
-            }
-            else if ($("[name=chk]:checked").val() == 2) {
-                $.ajax({
-                    url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
-                    dataType: "json",
-                    type: "get",
-                    success: function (data) {
-                        hydj = "VIP2";
-                        hymc = 2;
-                        zk = "9.50";
-                    }
-                })
-            }
-            else if ($("[name=chk]:checked").val() == 3) {
-                $.ajax({
-                    url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
-                    dataType: "json",
-                    type: "get",
-                    success: function (data) {
-                        hydj = "VIP3";
-                        hymc = 3;
-                        zk = "8.88";
-                    }
-                })
-            }
-            else if ($("[name=chk]:checked").val() == 4) {
-                $.ajax({
-                    url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
-                    dataType: "json",
-                    type: "get",
-                    success: function (data) {
-                        hydj = "VIP4";
-                        hymc = 4;
-                        zk = "8.50";
-                    }
-                })
-            }
-            if ($("[name=chk]:checked").val() == 5) {
-                $.ajax({
-                    url: "http://localhost:4965/api/JcyVIP/GetVIPgrade",
-                    dataType: "json",
-                    type: "get",
-                    success: function (data) {
-                        hydj = "VIP5";
-                        hymc = 5;
-                        zk = "8.00";
-                    }
-                })
-            }
-
+                }
+            })
             var htmls = {};
             htmls.endTime = $("#times").val();
-            htmls.vGradeId = hydj;
-            htmls.vIPName = hymc;
+            htmls.vTypeName = hydj;
+            htmls.vGradeName = hymc;
             htmls.discount = zk;
             htmls.id = $("#id").val();
               $.ajax({
@@ -171,7 +138,7 @@
                 dataType: "json",
                 data: htmls,
                 success: function (data) {
-                    console.log(data);
+                    console.log(htmls);
                     if (data > 0) {
                         var adds = {};
                         adds.vIPCard = card;
@@ -228,7 +195,6 @@
                     </tr>
                 </thead>
                 <tbody id="list">
-
                 </tbody>
             </table>
         </div>
