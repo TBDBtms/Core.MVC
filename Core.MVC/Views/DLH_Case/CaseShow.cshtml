@@ -10,11 +10,14 @@
 <div id="divBig">
     <div id="div1">
         <div class="layui-input-block" style="width:300px;float:left;margin-top: 50px;">
-            <input onclick="CX()" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="附加费查询" class="layui-input">
+            <input id="zd" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="诊断查询" class="layui-input">
+        </div>
+        <div class="layui-input-block" style="width:300px;float:left;margin-top: 50px;margin-left:0px">
+            <button type="button" class="layui-btn layui-btn-normal" onclick="CX()" style="float:left">查询</button>
         </div>
         <div class="layui-input-block" style="width:300px;float:right;margin-top: 50px;margin-right:50px" id="pc">
-            <button id="but_Add" class="layui-btn" type="button"  >
-                <i class="layui-icon" >&#xe608;</i> 添加
+            <button id="but_Add" class="layui-btn" type="button">
+                <i class="layui-icon">&#xe608;</i> 添加
             </button>
         </div>
     </div>
@@ -113,12 +116,10 @@
             anim: 2,
             content: ['/DLH_Case/CaseAdd', 'no'], //iframe的url，no代表不显示滚动条
             cancel: function (index, layero) {
-                if (confirm('确定要关闭么')) { //只有当点击confirm框的确定时，该层才会关闭
                     layer.close(index)
                     location.href = "CaseShow";
-                }
                 return false;
-            }    
+            }
         });
         Show();
     });
@@ -133,10 +134,8 @@
             anim: 2,
             content: ['/DLH_Case/CaseUpdate?cid=' + this.id, 'no'],
             cancel: function (index, layero) {
-                if (confirm('确定要关闭么')) { //只有当点击confirm框的确定时，该层才会关闭
                     layer.close(index)
                     location.href = "CaseShow";
-                }
                 return false;
             }    
         });
@@ -146,6 +145,7 @@
 
     function Show() {
         var i = 1;
+        var name = $("#zd").val();
         $.ajax({
             url: "http://localhost:4965/api/DLH_Case/GetCaseInfos",
             type: "get",
