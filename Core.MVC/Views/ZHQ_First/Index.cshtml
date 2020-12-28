@@ -6,16 +6,13 @@
 }
 
 <body>
-    <meta name="viewport" content="width=device-width" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="icon" href="https://static.jianshukeji.com/hcode/images/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/highcharts.css" />
-    <script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
-    <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com.cn/highcharts/modules/oldie.js"></script>
-    <script src="https://code.highcharts.com.cn/highcharts/themes/dark-unica.js"></script>
+    @*<meta name="viewport" content="width=device-width" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">*@
+    @*<meta charset="utf-8">	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">*@
+   
     <style>
         #container {
             height: 400px;
@@ -214,34 +211,50 @@
             success: function (d) {
                 var arr = [];
                 $(d).each(function () {
-
                     var de = [];
                     de.push(this.drugTYM);
                     de.push(this.drugXSNum);
                     de.push(false);
                     arr.push(de);
-                    if (arr.length == 10) {
-                        return;
-                    }
                 })
-
-              
                 YX(arr);
             }
         })
     }
+    //function YX(arr) {
+    //    Highcharts.chart('container', {
+    //        chart: {
+    //            styledMode: true
+    //        },
+    //        title: {
+
+    //            text: ''
+    //        },
+    //        //xAxis: {
+    //        //    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    //        //},
+    //        series: [{
+    //            type: 'pie',
+    //            allowPointSelect: true,
+    //            keys: ['name', 'y', 'selected', 'sliced'],
+    //            data: arr,
+    //            showInLegend: true
+    //        }]
+    //    });
+
+    //}
+
     function YX(arr) {
         Highcharts.chart('container', {
             chart: {
                 styledMode: true
             },
             title: {
-
                 text: '药品销售数量占比图'
             },
-            //xAxis: {
-            //    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            //},
+            xAxis: {
+                //categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
             series: [{
                 type: 'pie',
                 allowPointSelect: true,
@@ -250,6 +263,6 @@
                 showInLegend: true
             }]
         });
-
     }
+  
 </script>
