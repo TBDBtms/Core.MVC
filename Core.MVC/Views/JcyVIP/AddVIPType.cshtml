@@ -25,15 +25,20 @@
             }
       });
         function AddInfos() {
+            var str = 0;
             var strs = {};
-            strsv.GradeId = $("#id").val();
             strs.vGradeName = $("#djbd").val();
             strs.vipName = $("#names").val();
             strs.vipReset = $("#zk").val();
             strs.minIntegral = $("#zd").val();
             strs.upgrade = $("#sj").val();
-            strs.states = $("[name=zt]:checked").val();
             strs.remark = $("#remarks").val();
+            if ($("[name=zt]:checked") == true) {
+                str = 1;
+            } else {
+                str = 0;
+            }
+            strs.states = str;
             $.ajax({
                 url: "http://localhost:4965/api/JcyVIP/AddVIPType",
                 dataType: "json",
@@ -41,6 +46,7 @@
                 data: strs,
                 success: function (data) {
                     if (data > 0) {
+                        console.log();
                         alert('设置成功');
                         let index = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(index);
@@ -55,7 +61,6 @@
 </head>
 <body>
     <div>
-        <input type="hidden" id="id" value="@ViewBag.id" />
         <h3 style="text-align:center">新增会员类型</h3><br />
         <div>
             <div>
@@ -83,7 +88,7 @@
             </div>
             <div>
                 <input type="text" id="sj" value="" class="layui-text" />
-                <input type="radio" name="zt" value="" class="layui-text" />
+                <input type="radio" name="zt" value="" class="layui-text" />启用
             </div>
         </div>
         <div>

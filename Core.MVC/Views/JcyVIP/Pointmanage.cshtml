@@ -90,6 +90,7 @@
         var qma = Qma;
     });
     function ShowInfothree() {
+        var c = "";
         var id = $("#dj2").val();
         var name = $("#name").val();
         var phone = $("#name").val();
@@ -115,6 +116,19 @@
             success: function (data) {
                 $("#list2").empty();
                 $(data.list).each(function () {
+                    if (this.integral <= 1000) {
+                        c = "VIP1";
+                    } else if (this.integral >= 2000 && this.integral <= 3000) {
+                        c = "VIP2";
+                    } else if (this.integral >= 3000 && this.integral <= 4000) {
+                        c = "VIP3";
+                    } else if (this.integral >= 4000 && this.integral <= 5000) {
+                        c = "VIP4";
+                    } else if (this.integral >= 5000 && this.integral <= 6000) {
+                        c = "VIP5";
+                    } else if (this.integral >= 6000) {
+                        c = "VIPMAX";
+                    }
                     var htmls = "<tr>" +
                         "<td>" + this.id + "</td>" +
                         "<td>" + this.idCard + "</td>" +
