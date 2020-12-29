@@ -45,9 +45,9 @@ namespace Core.MVC.Controllers
             return View();
         }
 
-        public IActionResult GHModify(int cid)
+        public IActionResult GHModify(int aaa)
         {
-            ViewBag.GHId = cid;
+            ViewBag.GHId = aaa;
             return View();
         }
         #endregion

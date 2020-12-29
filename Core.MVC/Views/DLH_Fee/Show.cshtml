@@ -468,7 +468,7 @@
                         "<td>" + this.uname + "</td>" +
                         "<td>" + (this.vip ? "是" : "否") + "</td>" +
                         "<td>" + (this.cState ? "启用" : "未启用") + "</td>" +
-                        "<td><a onclick='UpdateGH(" + this.sequenceId + ")' style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='DelGH(" + this.sequenceId + ")'>删除</a></td></tr>";
+                        "<td><a onclick='UpdateGH(" + this.sequenceIds + ")' style='color:blue'>编辑</a>&nbsp&nbsp<a style='color:blue' onclick='DelGH(" + this.sequenceIds + ")'>删除</a></td></tr>";
                     $("#tbody_GH").append(str);
                     i++;
                 });
@@ -493,7 +493,7 @@
         }
     }
     function UpdateGH(id) {
-        location.href = "/DLH_Fee/GHModify?cid=" + id;
+        location.href = "/DLH_Fee/GHModify?aaa=" + id;
     }
 
     function GHAdd() {

@@ -146,9 +146,9 @@
             type: "get",
             dataType: "json",
             success: function (d) {
-                $("#text_Name").val(d.additional);
+                $("#text_Name").val(d.additionals);
                 $("#LeiBie").val(d.recipeKey);
-                $("#text_Money").val(d.moneyInfn);
+                $("#text_Money").val(d.moneyInfns);
                 $("#text_Money1").val(d.cost);
                 $("[name=sex]:checked").val(d.vip);
                 $("[name=shi]:checked").val(d.cState)

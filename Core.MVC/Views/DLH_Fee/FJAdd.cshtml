@@ -111,6 +111,13 @@
                 value: new Date(), // 指定值
             });
         });
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        form = layui.form
+        form.render('select')
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+    })
       
     $(function () {
         ShowPrescriptionInfos();
@@ -137,9 +144,9 @@
     
     function FJAddFJ() {
         var str = {
-            Additional:$("#text_Name").val(),
+            Additionals:$("#text_Name").val(),
             RecipeKey:$("#LeiBie").val(),
-            MoneyInfn:$("#text_Money").val(),
+            MoneyInfns:$("#text_Money").val(),
             Cost:$("#text_Money1").val(),
             CTime:$("#date1111").val(),
             CreatepersonKey:sessionStorage.getItem("Uid"),

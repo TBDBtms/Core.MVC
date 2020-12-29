@@ -108,7 +108,7 @@
             dataType: "json",
             success: function (d) {
                 $("#text_Name").val(d.registra);
-                $("#text_Money").val(d.moneyInfn);
+                $("#text_Money").val(d.moneyInfnses);
                 $("#text_Money1").val(d.cost);
                 $("[name=sex]:checked").val(d.vip);
                 $("[name=shi]:checked").val(d.cState)
@@ -122,13 +122,13 @@
     function GHAddGH() {
         var str = {
             Registra:$("#text_Name").val(),
-            MoneyInfn:$("#text_Money").val(),
+            MoneyInfnses:$("#text_Money").val(),
             Cost:$("#text_Money1").val(),
             GHTime:$("#date1111").val(),
             CreatepersonKey: sessionStorage.getItem("Uid"),
             Vip:$("[name=sex]:checked").val(),
             CState: $("[name=shi]:checked").val(),
-            SequenceId: $("#hid").val()
+            SequenceIds: $("#hid").val()
         };
         console.log(str);
         $.ajax({
